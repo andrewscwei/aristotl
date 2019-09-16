@@ -1,0 +1,109 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: node:10.16.0
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install APT packages
+          command: |
+            apt-get update && apt-get install jq zip -y
+            apt-get update && apt-get install -yq libgconf-2-4
+            apt-get update && apt-get install -y wget --no-install-recommends
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            apt-get update && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont --no-install-recommends
+            apt-get update && apt-get install nasm -y
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps-
+      - run:
+          name: Install NPM dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run:
+          name: Build
+          command: BUILD_NUMBER=$CIRCLE_SHA1 npm run build
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Pack
+          command: ./.circleci/pack.sh
+      - store_artifacts:
+          path: ~/repo/build
+      - store_artifacts:
+          path: ~/repo/package
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .circleci/
+            - build/
+            - config/
+            - node_modules/
+            - src/
+            - package.json
+            - tsconfig.json
+            - tslint.json
+            - package-lock.json
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Test
+          command: npm test
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install APT packages
+          command: apt-get update && apt-get install jq -y
+      - deploy:
+          name: Deploy
+          command: ./.circleci/deploy_to_netlify.sh
+
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+  build_test_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy:
+          context: netlify_deployment
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
