@@ -19,7 +19,7 @@ export default {
   // Prismic config.
   prismic: {
     // API endpoint.
-    apiEndpoint: 'https://react-static-starter-kit.cdn.prismic.io/api/v2',
+    apiEndpoint: 'https://aristotl.cdn.prismic.io/api/v2',
 
     // Secret access token.
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
