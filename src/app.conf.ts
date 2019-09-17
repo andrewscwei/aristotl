@@ -28,7 +28,7 @@ export default {
   // HTML metadata.
   meta: {
     // Title of the app.
-    title: 'React Static Starter Kit',
+    title: 'Aristotl',
 
     // Short description of the app.
     description: require('../package.json').description,

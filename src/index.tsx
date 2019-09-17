@@ -43,3 +43,4 @@ if (root!.hasChildNodes() && process.env.NODE_ENV !== 'development') {
 else {
   render(markup(), root);
 }
+

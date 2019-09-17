@@ -2,7 +2,7 @@ import cookie from 'cookie';
 import Prismic from 'prismic-javascript';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import ResolvedApi from 'prismic-javascript/d.ts/ResolvedApi';
-import { getLocalizedPath } from '../routes';
+import { getLocalizedPath } from './i18n';
 
 const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:prismic') : () => {};
 

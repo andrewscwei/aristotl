@@ -7,13 +7,14 @@ import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Action, bindActionCreators, Dispatch } from 'redux';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import Footer from '../components/Footer';
-import routes, { getLocaleFromPath } from '../routes';
+import routes from '../routes';
 import { AppState } from '../store';
 import { changeLocale, I18nState } from '../store/i18n';
-import globalStyles from '../styles/global';
+import GlobalStyles from '../styles/global';
 import * as theme from '../styles/theme';
+import { getLocaleFromPath } from '../utils/i18n';
 
 const debug = process.env.NODE_ENV === 'development' ? require('debug')('app') : () => {};
 
@@ -91,5 +92,3 @@ export default hot(connect((state: AppState): StateProps => ({
     changeLocale,
   }, dispatch),
 )(App));
-
-const GlobalStyles = createGlobalStyle<{}>`${globalStyles}`;

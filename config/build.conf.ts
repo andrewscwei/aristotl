@@ -18,6 +18,7 @@ const inputDir: string = path.join(cwd, 'src');
 const outputDir: string = path.join(cwd, 'build');
 const localesDir: string = path.join(cwd, 'config/locales');
 const locales = getLocalesFromDir(localesDir, appConf.locales[0], appConf.locales);
+const port = Number(process.env.PORT) || 8080;
 
 const config: Configuration = {
   devtool: isDev ? 'eval-source-map' : false,
@@ -134,6 +135,10 @@ const config: Configuration = {
   ...!isDev ? {} : {
     devServer: {
       historyApiFallback: true,
+      hot: true,
+      port,
+      publicPath: process.env.PUBLIC_PATH || '/',
+      stats: { colors: true },
     },
   } as any,
   resolve: {
