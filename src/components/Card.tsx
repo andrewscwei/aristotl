@@ -1,12 +1,15 @@
 import _ from 'lodash';
+import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors } from 'promptu';
+import { align, animations, container, selectors, utils } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
+import { linkResolver } from '../utils/prismic';
+import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
@@ -20,7 +23,7 @@ interface Props extends StateProps, DispatchProps {
   className?: string;
   id?: string;
   doc: Document;
-  isExpanded: boolean;
+  summaryEnabled: boolean;
   onActivate: () => void;
 }
 
@@ -30,23 +33,37 @@ interface State {
 
 class Card extends PureComponent<Props, State> {
   static defaultProps: Partial<Props> = {
+    summaryEnabled: false,
     onActivate: () => {},
-  };
-
-  state: State = {
-    isExpanded: false,
   };
 
   render() {
     const { ltxt } = this.props.i18n;
     const abbreviation = _.get(this.props.doc, 'data.abbreviation');
     const name = _.get(this.props.doc, 'data.name');
-    const description = _.get(this.props.doc, 'data.description');
+    const summary = _.get(this.props.doc, 'data.summary');
+    const type = _.get(this.props.doc, 'data.type.slug');
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className} isExpanded={this.props.isExpanded} onClick={() => this.props.onActivate()}>
-        <StyledAbbreviation>{abbreviation}</StyledAbbreviation>
-        <StyledName>{name}</StyledName>
+      <StyledRoot id={this.props.id} className={this.props.className} onClick={() => this.props.onActivate()}>
+        <StyledAbbreviation>
+          <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <h2>{abbreviation}</h2>
+        </StyledAbbreviation>
+        {type &&
+          <StyledType>
+            <Pixel isHollow={type === 'informal-fallacy'}/>
+            <span>{ltxt(type)}</span>
+            <Pixel isHollow={type === 'informal-fallacy'}/>
+          </StyledType>
+        }
+        {name && <StyledName>{name}</StyledName>}
+        {this.props.summaryEnabled && summary && <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
         <StyledDivider/>
       </StyledRoot>
     );
@@ -62,37 +79,72 @@ export default connect(
   }, dispatch),
 )(Card);
 
-const StyledAbbreviation = styled.h2`
+const StyledSummary = styled.div`
+  color: #ccc;
+  font-family: 'RobotoMono';
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-top: 1rem;
+  padding: 0 1rem;
   width: 100%;
-  font-size: 7rem;
+`;
+
+const StyledType = styled.div`
+  ${container.fhcl}
+  height: 2rem;
+  font-family: 'RobotoMono';
   font-weight: 400;
-  font-family: 'Playfair';
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: .4rem;
+
+  ${selectors.eblc} {
+    margin-right: .4rem;
+  }
+`;
+
+const StyledAbbreviation = styled.div`
+  ${container.box}
+  background: rgba(${utils.toRGBString('#fff')}, .04);
+  border-bottom: 1px solid rgba(${utils.toRGBString('#fff')}, .1);
+  border-top: 1px solid rgba(${utils.toRGBString('#fff')}, .1);
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  width: 100%;
+  overflow: visible;
+
+  h2 {
+    font-family: 'NovaMono';
+    font-size: 6rem;
+    font-weight: 400;
+  }
 `;
 
 const StyledName = styled.h1`
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 400;
+  color: #ccc;
+  font-family: 'RobotoMono';
+  padding: 0 1rem;
 `;
 
 const StyledDivider = styled.div`
   ${align.bl}
   ${animations.transition('background', 300, 'ease-out')}
   width: 2rem;
-  height: .4rem;
+  height: .2rem;
   background: #111;
   margin: 2rem;
 `;
 
-const StyledRoot = styled.button<{
-  isExpanded: boolean;
-}>`
-  ${container.fvtl}
+const StyledRoot = styled.button`
+  ${container.fvts}
   ${animations.transition('all', 300, 'ease-out')}
+  background: #000;
+  overflow: hidden;
+  padding: 1rem;
   text-align: left;
-  padding: 1rem 2rem 2rem;
-  background: #ccc;
-  color: #333;
 
   ${selectors.hwot} {
     background: #111;

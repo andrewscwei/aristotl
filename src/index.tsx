@@ -2,26 +2,22 @@
  * @file Entry file.
  */
 
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
+import isTouchDevice from 'is-touch-device';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
-import Worker from 'worker-loader!./workers/web';
 import App from './containers/App';
 import store from './store';
 
 if (process.env.NODE_ENV === 'development') {
-  window.localStorage.debug = 'app*,worker*';
+  window.localStorage.debug = 'app*';
 }
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app') : () => {};
-const worker = new Worker();
-
-worker.postMessage({ message: 'Hello, world!' });
-worker.addEventListener('message', (event) => {
-  debug(event.data.message);
-});
+// Detect touch device.
+if (isTouchDevice()) {
+  document.documentElement.classList.add('touch');
+}
 
 // Generator for base markup.
 const markup = () => (
@@ -43,4 +39,3 @@ if (root!.hasChildNodes() && process.env.NODE_ENV !== 'development') {
 else {
   render(markup(), root);
 }
-

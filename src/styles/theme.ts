@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 export const colors = {
-  background: '#eee',
+  background: '#111',
   white: '#ffffff',
   black: '#000000',
   darkBlue: '#180d50',
@@ -18,9 +18,10 @@ export const fonts = {
 
 export const layout = {
   searchBarWidthRatioAboveMobile: 30,
-  searchBarWidthRatioAboveTablet: 20,
+  searchBarWidthRatioAboveTablet: 15,
 };
 
 export const z = {
   foreground: 1,
+  overlays: 10,
 };

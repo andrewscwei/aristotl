@@ -61,6 +61,7 @@ const StyledInput = styled.textarea`
   width: 100%;
   text-align: right;
   color: #999;
+  font-family: 'RobotoMono';
   resize: none;
   border-right: 1px solid #ddd;
 `;
