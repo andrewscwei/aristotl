@@ -8,6 +8,7 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
+import { colors } from '../styles/theme';
 import { linkResolver } from '../utils/prismic';
 import Pixel from './Pixel';
 
@@ -45,14 +46,19 @@ class Card extends PureComponent<Props, State> {
     const type = _.get(this.props.doc, 'data.type.slug');
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className} onClick={() => this.props.onActivate()}>
+      <StyledRoot
+        id={this.props.id}
+        className={this.props.className}
+        summaryEnabled={this.props.summaryEnabled}
+        onClick={() => this.props.onActivate()}
+      >
         <StyledAbbreviation>
-          <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
-          <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
-          <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
-          <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
-          <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
-          <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString('#fff')}, .1)`}/>
+          <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+          <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+          <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+          <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+          <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+          <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <h2>{abbreviation}</h2>
         </StyledAbbreviation>
         {type &&
@@ -80,13 +86,19 @@ export default connect(
 )(Card);
 
 const StyledSummary = styled.div`
-  color: #ccc;
+  color: ${(props) => props.theme.colors.grey};
   font-family: 'RobotoMono';
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 300;
   margin-top: 1rem;
   padding: 0 1rem;
   width: 100%;
+  max-height: ${1.8 * 4}rem;
+  overflow: hidden;
+
+  p {
+    line-height: 1.8rem;
+  }
 `;
 
 const StyledType = styled.div`
@@ -96,7 +108,7 @@ const StyledType = styled.div`
   font-weight: 400;
   font-size: 1.1rem;
   text-transform: uppercase;
-  margin-bottom: .4rem;
+  margin-bottom: 1rem;
 
   ${selectors.eblc} {
     margin-right: .4rem;
@@ -105,9 +117,9 @@ const StyledType = styled.div`
 
 const StyledAbbreviation = styled.div`
   ${container.box}
-  background: rgba(${utils.toRGBString('#fff')}, .04);
-  border-bottom: 1px solid rgba(${utils.toRGBString('#fff')}, .1);
-  border-top: 1px solid rgba(${utils.toRGBString('#fff')}, .1);
+  background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
+  border-bottom: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
+  border-top: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
   margin-bottom: 1rem;
   padding: 0 1rem;
   width: 100%;
@@ -124,7 +136,7 @@ const StyledName = styled.h1`
   width: 100%;
   font-size: 1.4rem;
   font-weight: 400;
-  color: #ccc;
+  color: ${(props) => props.theme.colors.lightGrey};
   font-family: 'RobotoMono';
   padding: 0 1rem;
 `;
@@ -134,24 +146,29 @@ const StyledDivider = styled.div`
   ${animations.transition('background', 300, 'ease-out')}
   width: 2rem;
   height: .2rem;
-  background: #111;
+  background: ${(props) => props.theme.colors.offBlack};
   margin: 2rem;
 `;
 
-const StyledRoot = styled.button`
+const StyledRoot = styled.button<{
+  summaryEnabled: boolean;
+}>`
   ${container.fvts}
-  ${animations.transition('all', 300, 'ease-out')}
-  background: #000;
+  ${animations.transition(['background', 'color', 'transform'], 300, 'ease-out')}
+  background: ${(props) => props.theme.colors.black};
+  height: ${(props) => props.summaryEnabled ? '30rem' : '24rem'};
   overflow: hidden;
   padding: 1rem;
   text-align: left;
+  transform: translate3d(0, 0, 0);
+  width: ${(props) => props.summaryEnabled ? '22rem' : '20rem'};
 
   ${selectors.hwot} {
-    background: #111;
-    color: #fff;
+    background: ${(props) => props.theme.colors.offBlack};
+    color: ${(props) => props.theme.colors.white};
 
     ${StyledDivider} {
-      background: #fff;
+      background: ${(props) => props.theme.colors.white};
     }
   }
 `;

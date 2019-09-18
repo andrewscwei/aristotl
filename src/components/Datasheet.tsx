@@ -22,11 +22,13 @@ interface Props extends StateProps, DispatchProps {
   className?: string;
   id?: string;
   doc: Document;
+  scrollLock: boolean;
   onExit: () => void;
 }
 
 class Datasheet extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
+    scrollLock: false,
     onExit: () => {},
   };
 
@@ -34,8 +36,15 @@ class Datasheet extends PureComponent<Props> {
     root: createRef<HTMLDivElement>(),
   };
 
-  componentDidMount() {
-    if (this.nodeRefs.root.current) disableBodyScroll(this.nodeRefs.root.current);
+  componentDidUpdate(prevProps: Props) {
+    if (this.nodeRefs.root.current && (prevProps.scrollLock !== this.props.scrollLock)) {
+      if (this.props.scrollLock) {
+        disableBodyScroll(this.nodeRefs.root.current);
+      }
+      else {
+        enableBodyScroll(this.nodeRefs.root.current);
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -90,12 +99,8 @@ const StyledCloseButton = styled.button`
 `;
 
 const StyledRoot = styled.div`
-  ${align.fbl}
   -webkit-overflow-scrolling: touch;
   background: #fff;
-  height: 50rem;
   overflow-x: hidden;
   overflow-y: scroll;
-  width: 100%;
-  z-index: ${(props) => props.theme.z.overlays};
 `;

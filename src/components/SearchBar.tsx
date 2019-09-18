@@ -1,10 +1,12 @@
-import { align, container, media } from 'promptu';
+import { container, media, selectors } from 'promptu';
 import React, { ChangeEvent, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
+import Pixel from './Pixel';
+import { colors } from '../styles/theme';
 
 interface StateProps {
   i18n: I18nState;
@@ -38,7 +40,18 @@ class SearchBar extends PureComponent<Props, State> {
 
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
-        <StyledInput placeholder={ltxt('search-placeholder')} onChange={(event: ChangeEvent<HTMLTextAreaElement>) => this.onChange(event.currentTarget.value)}/>
+        <StyledPixels>
+          <Pixel tintColor={colors.black}/>
+          <Pixel tintColor={colors.black}/>
+          <Pixel tintColor={colors.black}/>
+        </StyledPixels>
+        <StyledInput>
+          <input
+            type='text'
+            placeholder={ltxt('search-placeholder')}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => this.onChange(event.currentTarget.value)}
+          />
+        </StyledInput>
       </StyledRoot>
     );
   }
@@ -53,31 +66,43 @@ export default connect(
   }, dispatch),
 )(SearchBar);
 
-const StyledInput = styled.textarea`
-  ${container.box}
+const StyledPixels = styled.div`
+  ${container.fvcc}
+  margin-right: .4rem;
+
+  ${selectors.eblc} {
+    margin-bottom: .4rem;
+  }
+`;
+
+const StyledInput = styled.div`
+  ${container.fvcl}
   ${(props) => props.theme.fonts.search}
-  background: transparent;
-  height: 100%;
-  width: 100%;
-  text-align: right;
-  color: #999;
+  background: ${(props) => props.theme.colors.black};
+  color: ${(props) => props.theme.colors.white};
   font-family: 'RobotoMono';
-  resize: none;
-  border-right: 1px solid #ddd;
+  font-size: 2rem;
+  height: 5rem;
+  max-width: 50rem;
+  padding: 0 1rem;
+  width: 100%;
+
+  input {
+    width: 100%;
+    background: transparent;
+  }
 `;
 
 const StyledRoot = styled.div`
-  ${container.fvcc}
-  padding: 6rem 0;
+  ${container.fhcl}
+  padding: 0;
   z-index: ${(props) => props.theme.z.foreground};
 
   @media ${media.gtmobile} {
-    ${align.ftl}
-    width: ${(props) => props.theme.layout.searchBarWidthRatioAboveMobile}%;
-    height: 100%;
+    width: 100%;
   }
 
   @media ${media.gttablet} {
-    width: ${(props) => props.theme.layout.searchBarWidthRatioAboveTablet}%;
+
   }
 `;

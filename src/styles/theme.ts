@@ -1,24 +1,20 @@
 import { css } from 'styled-components';
 
 export const colors = {
-  background: '#111',
-  white: '#ffffff',
-  black: '#000000',
+  background: '#ccc',
+  white: '#fff',
+  black: '#000',
+  offBlack: '#111',
+  darkGrey: '#333',
+  grey: '#666',
+  lightGrey: '#ccc',
   darkBlue: '#180d50',
 };
 
 export const fonts = {
-  search: css`
-    font-family: 'Playfair';
-    font-size: 16rem;
-    font-weight: 400;
-    line-height: 90%;
-  `,
 };
 
 export const layout = {
-  searchBarWidthRatioAboveMobile: 30,
-  searchBarWidthRatioAboveTablet: 15,
 };
 
 export const z = {

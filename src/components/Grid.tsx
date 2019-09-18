@@ -92,7 +92,7 @@ export default connect(
       location: 0,
       distance: 100,
       maxPatternLength: 32,
-      minMatchCharLength: 1,
+      minMatchCharLength: 2,
       keys: [
         'data.abbreviation',
         'data.name',
@@ -114,26 +114,8 @@ const StyledCard = styled(Card)`
 `;
 
 const StyledRoot = styled.div`
-  ${animations.transition('all', 300, 'ease-out')}
+  ${animations.transition(['transform'], 300, 'ease-out')}
   ${container.fhtl}
   flex-wrap: wrap;
-  padding: 5rem 10%;
-  width: 100%;
-
-  > * {
-    height: 24rem;
-    margin: 1rem;
-    width: 20rem;
-  }
-
-  @media ${media.gtmobile} {
-    padding-bottom: 5rem;
-    padding-left: ${(props) => props.theme.layout.searchBarWidthRatioAboveMobile + 2}%;
-    padding-right: 2%;
-    padding-top: 5rem;
-  }
-
-  @media ${media.gttablet} {
-    padding-left: ${(props) => props.theme.layout.searchBarWidthRatioAboveTablet + 2}%;
-  }
+  transform: translate3d(0, 0, 0);
 `;

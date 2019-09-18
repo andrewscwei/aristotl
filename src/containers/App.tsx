@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { ThemeProvider } from 'styled-components';
-import Footer from '../components/Footer';
 import routes from '../routes';
 import { AppState } from '../store';
 import { changeLocale, I18nState } from '../store/i18n';
@@ -78,7 +77,6 @@ class App extends PureComponent<Props, State> {
         <Fragment>
           <GlobalStyles/>
           <Switch location={route.location}>{this.generateRoutes()}</Switch>
-          <Footer/>
         </Fragment>
       </ThemeProvider>
     );
