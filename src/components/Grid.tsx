@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { animations, container, align } from 'promptu';
+import { align, animations, container } from 'promptu';
 import React, { PureComponent } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
@@ -11,6 +11,7 @@ interface Props {
   id?: string;
   docs: ReadonlyArray<Document>;
   input?: string;
+  isSummaryEnabled: boolean;
   onActivate: (doc: Document) => void;
 }
 
@@ -32,7 +33,7 @@ class Grid extends PureComponent<Props> {
         {this.props.docs.map((doc: Document, i: number) => (
           <CSSTransition key={`${this.props.input}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 300)} classNames='card'>
             <StyledCard index={i}>
-              <Card doc={doc} onActivate={() => this.onActivate(i)}/>
+              <Card doc={doc} summaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
             </StyledCard>
           </CSSTransition>
         ))}

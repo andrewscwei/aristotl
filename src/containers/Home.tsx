@@ -40,6 +40,7 @@ interface State {
   searchInput?: string;
   activeDoc?: Document;
   currentPageIndex: number;
+  isSummaryEnabled: boolean;
 }
 
 class Home extends PureComponent<Props, State> {
@@ -51,6 +52,7 @@ class Home extends PureComponent<Props, State> {
     searchInput: undefined,
     activeDoc: undefined,
     currentPageIndex: 0,
+    isSummaryEnabled: false,
   };
 
   get filteredDocs(): ReadonlyArray<Document> {
@@ -93,6 +95,12 @@ class Home extends PureComponent<Props, State> {
         return out;
       }
     }, 0);
+  }
+
+  onToggleSummaryMode() {
+    this.setState({
+      isSummaryEnabled: !this.state.isSummaryEnabled,
+    });
   }
 
   onSearchInputChange(input: string) {
@@ -141,8 +149,15 @@ class Home extends PureComponent<Props, State> {
                 totalInformal={this.countInformals(docsOnCurrentPage)}
                 totalFormal={this.countFormals(docsOnCurrentPage)}
               />
+              <StyledToggleSummaryButton onClick={() => this.onToggleSummaryMode()}>
+              </StyledToggleSummaryButton>
               <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
-              <StyledGrid input={`${this.state.searchInput}-${this.state.currentPageIndex}`} docs={docsOnCurrentPage} onActivate={(doc) => this.onPresentDatasheet(doc)}/>
+              <StyledGrid
+                input={`${this.state.searchInput}-${this.state.currentPageIndex}`}
+                docs={docsOnCurrentPage}
+                isSummaryEnabled={this.state.isSummaryEnabled}
+                onActivate={(doc) => this.onPresentDatasheet(doc)}
+              />
             </StyledRoot>
           )}
         </Transition>
@@ -181,6 +196,14 @@ export default connect(
   }, dispatch),
 )(Home);
 
+const StyledToggleSummaryButton = styled.button`
+  ${align.ftr}
+  width: 2rem;
+  height: 2rem;
+  background: #fff;
+  margin: 2rem;
+`;
+
 const StyledDatasheet = styled(Datasheet)<{
   transitionState: TransitionStatus;
 }>`
@@ -207,7 +230,7 @@ const StyledStatistics = styled(Statistics)`
 
 const StyledGrid = styled(Grid)`
   margin-left: -1rem;
-  max-width: 100rem;
+  max-width: 120rem;
 
   > * {
     margin: 1rem;

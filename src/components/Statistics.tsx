@@ -35,11 +35,11 @@ class Statistics extends PureComponent<Props> {
         </StyledCount>
         <StyledCount>
           <Pixel size={6} isHollow={false}/>
-          <span>{this.props.totalFormal}</span>
+          <span>{this.props.totalFormal === 0 ? '--' : this.props.totalFormal}</span>
         </StyledCount>
         <StyledCount>
           <Pixel size={6} isHollow={true}/>
-          <span>{this.props.totalInformal}</span>
+          <span>{this.props.totalInformal === 0 ? '--' : this.props.totalInformal}</span>
         </StyledCount>
       </StyledRoot>
     );
