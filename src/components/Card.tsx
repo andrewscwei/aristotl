@@ -96,17 +96,17 @@ const StyledSummary = styled.div<{
   isCompressed: boolean;
 }>`
   color: ${(props) => props.theme.colors.grey};
-  font-family: 'RobotoMono';
-  font-size: 1.4rem;
-  font-weight: 300;
   margin-top: 1rem;
-  max-height: ${1.8 * 4}rem;
+  max-height: ${1.8 * 6}rem;
   overflow: hidden;
   padding: 0 1rem;
   width: 100%;
 
   p {
     line-height: 1.8rem;
+    font-family: 'RobotoMono';
+    font-size: 1.4rem;
+    font-weight: 400;
   }
 `;
 
