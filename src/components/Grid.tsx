@@ -1,121 +1,93 @@
-import Fuse from 'fuse.js';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { animations, container, media } from 'promptu';
+import { animations, container, align } from 'promptu';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { AppState } from '../store';
-import { fetchDocs, reduceDocs } from '../store/prismic';
+import { timeoutByTransitionStatus } from '../styles/utils';
 import Card from './Card';
 
-interface StateProps {
-  docs: ReadonlyArray<Document>;
-  fusedDocs: Fuse<Document>;
-}
-
-interface DispatchProps {
-  fetchDocs: typeof fetchDocs;
-}
-
-interface Props extends StateProps, DispatchProps {
+interface Props {
   className?: string;
   id?: string;
-  searchInput?: string;
+  docs: ReadonlyArray<Document>;
+  input?: string;
   onActivate: (doc: Document) => void;
 }
 
-interface State {
-  activeIndex: number;
-}
-
-class Grid extends PureComponent<Props, State> {
+class Grid extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
+    docs: [],
     onActivate: () => {},
   };
 
-  state: State = {
-    activeIndex: -1,
-  };
-
-  get filteredDocs(): ReadonlyArray<Document> {
-    if (!this.props.searchInput || (this.props.searchInput === '')) {
-      return this.props.docs;
-    }
-    else {
-      return this.props.fusedDocs.search(this.props.searchInput);
-    }
-  }
-
-  constructor(props: Props) {
-    super(props);
-
-    this.props.fetchDocs('fallacy', undefined, {
-      orderings: '[my.fallacy.abbreviation]',
-      pageSize: 100,
-    });
-  }
-
   onActivate(cardIndex: number) {
-    const docs = this.filteredDocs;
+    if (cardIndex >= this.props.docs.length) throw new Error(`Invalid index ${cardIndex} provided`);
 
-    if (cardIndex >= docs.length) throw new Error(`Invalid index ${cardIndex} provided`);
-
-    this.setState({
-      activeIndex: cardIndex,
-    });
-
-    this.props.onActivate(docs[cardIndex]);
+    this.props.onActivate(this.props.docs[cardIndex]);
   }
 
   render() {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
-        {this.filteredDocs.map((doc: Document, i: number) => (
-          <StyledCard
-            key={i}
-            doc={doc}
-            onActivate={() => this.onActivate(i)}
-          />
+        {this.props.docs.map((doc: Document, i: number) => (
+          <CSSTransition key={`${this.props.input}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 300)} classNames='card'>
+            <StyledCard index={i}>
+              <Card doc={doc} onActivate={() => this.onActivate(i)}/>
+            </StyledCard>
+          </CSSTransition>
         ))}
       </StyledRoot>
     );
   }
 }
 
-export default connect(
-  (state: AppState): StateProps => ({
-    docs: reduceDocs(state.prismic, 'fallacy') || [],
-    fusedDocs: new Fuse(reduceDocs(state.prismic, 'fallacy') || [], {
-      shouldSort: true,
-      threshold: 0.6,
-      location: 0,
-      distance: 100,
-      maxPatternLength: 32,
-      minMatchCharLength: 2,
-      keys: [
-        'data.abbreviation',
-        'data.name',
-        'data.aliases.name',
-        'data.description.text',
-        'data.examples.example.text',
-        'data.type.slug',
-        'tags',
-      ],
-    }),
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchDocs,
-  }, dispatch),
-)(Grid);
+export default Grid;
 
-const StyledCard = styled(Card)`
+const StyledCard = styled.div<{
+  index: number;
+}>`
+  overflow: hidden;
 
+  &::after {
+    ${align.tl}
+    background: ${(props) => props.theme.colors.offBlack};
+    content: '';
+    height: 100%;
+    transform: translate3d(100%, 0, 0);
+    width: 100%;
+  }
+
+  &.card-enter {
+    &::after {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &.card-enter.card-enter-active {
+    &::after {
+      ${(props) => animations.transition('transform', 300, 'ease-in-out', 20 * props.index)}
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  &.card-exit {
+    &::after {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  &.card-exit.card-exit-active {
+    &::after {
+      ${(props) => animations.transition('transform', 0, 'ease-out', 0)}
+      transform: translate3d(0, 0, 0);
+    }
+  }
 `;
 
-const StyledRoot = styled.div`
+const StyledRoot = styled(TransitionGroup)`
   ${animations.transition(['transform'], 300, 'ease-out')}
   ${container.fhtl}
   flex-wrap: wrap;
   transform: translate3d(0, 0, 0);
 `;
+

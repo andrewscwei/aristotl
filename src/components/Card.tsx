@@ -116,7 +116,7 @@ const StyledType = styled.div`
 `;
 
 const StyledAbbreviation = styled.div`
-  ${container.box}
+  ${container.fvcl}
   background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
   border-bottom: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
   border-top: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
@@ -124,6 +124,7 @@ const StyledAbbreviation = styled.div`
   padding: 0 1rem;
   width: 100%;
   overflow: visible;
+  height: 9rem;
 
   h2 {
     font-family: 'NovaMono';
@@ -154,7 +155,7 @@ const StyledRoot = styled.button<{
   summaryEnabled: boolean;
 }>`
   ${container.fvts}
-  ${animations.transition(['background', 'color', 'transform'], 300, 'ease-out')}
+  ${animations.transition(['background', 'color'], 300, 'ease-out')}
   background: ${(props) => props.theme.colors.black};
   height: ${(props) => props.summaryEnabled ? '30rem' : '24rem'};
   overflow: hidden;

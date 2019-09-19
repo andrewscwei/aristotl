@@ -96,19 +96,27 @@ export function reduceDocs(state: PrismicState, type: string, locale: string = _
  *
  * @returns Async action.
  */
-export function fetchDocs(type: string, uid?: string, options: Partial<QueryOptions> = {}) {
+export function fetchDocs(type: string, uid?: string, options: Partial<QueryOptions> = {}, pages: number = 1) {
   return async (dispatch: Dispatch<PrismicAction>) => {
     const api = await getAPI();
     const previewToken = loadPreviewToken();
-    const opts = {
+    const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
       orderings : '[document.first_publication_date desc]',
       ref: previewToken || api.master(),
       ...options,
     };
 
-    const res = uid ? await api.query(Prismic.Predicates.at(`my.${type}.uid`, uid), opts) : await api.query(Prismic.Predicates.at('document.type', type), opts);
-    const docs = res.results;
+    let docs: Array<Document> = [];
+    const startingPage = opts.page || 1;
+
+    for (let i = 0; i < pages; i++) {
+      const res = uid
+        ? await api.query(Prismic.Predicates.at(`my.${type}.uid`, uid), { ...opts, page: Number(startingPage) + i })
+        : await api.query(Prismic.Predicates.at('document.type', type), { ...opts, page: Number(startingPage) + i });
+
+      docs = docs.concat(res.results);
+    }
 
     if (opts.ref === previewToken) {
       debug(`Previewing docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs);

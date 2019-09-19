@@ -83,7 +83,6 @@ const StyledInput = styled.div`
   font-family: 'RobotoMono';
   font-size: 2rem;
   height: 5rem;
-  max-width: 50rem;
   padding: 0 1rem;
   width: 100%;
 
@@ -96,13 +95,7 @@ const StyledInput = styled.div`
 const StyledRoot = styled.div`
   ${container.fhcl}
   padding: 0;
+  max-width: 40rem;
+  width: 100%;
   z-index: ${(props) => props.theme.z.foreground};
-
-  @media ${media.gtmobile} {
-    width: 100%;
-  }
-
-  @media ${media.gttablet} {
-
-  }
 `;

@@ -1,6 +1,8 @@
+import Fuse from 'fuse.js';
+import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, media } from 'promptu';
-import React, { PureComponent } from 'react';
+import { align, animations, container } from 'promptu';
+import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Transition } from 'react-transition-group';
@@ -9,37 +11,94 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import Datasheet from '../components/Datasheet';
 import Grid from '../components/Grid';
+import Modal from '../components/Modal';
+import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
+import Statistics from '../components/Statistics';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
-import { fetchDocs } from '../store/prismic';
+import { fetchDocs, reduceDocs } from '../store/prismic';
 import { valueByTransitionStatus } from '../styles/utils';
 
 const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:home') : () => {};
 
 interface StateProps {
   i18n: I18nState;
+  docs: ReadonlyArray<Document>;
+  fusedDocs: Fuse<Document>;
 }
 
 interface DispatchProps {
   fetchDocs: typeof fetchDocs;
 }
 
-interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {}
+interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
+  docsPerPage: number;
+}
 
 interface State {
   searchInput?: string;
   activeDoc?: Document;
+  currentPageIndex: number;
 }
 
 class Home extends PureComponent<Props, State> {
+  static defaultProps: Partial<Props> = {
+    docsPerPage: 20,
+  };
+
   state = {
     searchInput: undefined,
     activeDoc: undefined,
+    currentPageIndex: 0,
   };
 
+  get filteredDocs(): ReadonlyArray<Document> {
+    const searchInput = this.state.searchInput;
+
+    if ((searchInput !== undefined) && (searchInput !== '')) {
+      return this.props.fusedDocs.search(searchInput);
+    }
+    else {
+      return this.props.docs;
+    }
+  }
+
+  constructor(props: Props) {
+    super(props);
+
+    this.props.fetchDocs('fallacy', undefined, {
+      orderings: '[my.fallacy.abbreviation]',
+      pageSize: 100,
+    }, 2);
+  }
+
+  countInformals(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      if (_.get(curr, 'data.type.slug') === 'informal-fallacy') {
+        return out + 1;
+      }
+      else {
+        return out;
+      }
+    }, 0);
+  }
+
+  countFormals(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      if (_.get(curr, 'data.type.slug') === 'formal-fallacy') {
+        return out + 1;
+      }
+      else {
+        return out;
+      }
+    }, 0);
+  }
+
   onSearchInputChange(input: string) {
-    this.setState({ searchInput: input });
+    this.setState({
+      searchInput: input,
+    });
   }
 
   onPresentDatasheet(doc?: Document) {
@@ -58,26 +117,39 @@ class Home extends PureComponent<Props, State> {
     });
   }
 
+  onPageChange(pageIndex: number) {
+    this.setState({
+      currentPageIndex: pageIndex,
+    });
+  }
+
   render() {
+    const docs = this.filteredDocs;
+    const pages = _.chunk(docs, this.props.docsPerPage);
+    const docsOnCurrentPage = pages[this.state.currentPageIndex] || [];
+
     return (
-      <StyledRoot>
+      <Fragment>
         <Transition in={this.state.activeDoc === undefined} timeout={300} mountOnEnter={false}>
           {(state) => (
-            <StyledMain transitionState={state}>
+            <StyledRoot transitionState={state}>
               <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
-              <StyledGrid searchInput={this.state.searchInput} onActivate={(doc) => this.onPresentDatasheet(doc)}/>
-            </StyledMain>
+              <StyledStatistics
+                totalResults={docs.length}
+                subtotalResultsStart={this.state.currentPageIndex * this.props.docsPerPage + 1}
+                subtotalResultsEnd={docsOnCurrentPage.length + this.state.currentPageIndex * this.props.docsPerPage}
+                totalInformal={this.countInformals(docsOnCurrentPage)}
+                totalFormal={this.countFormals(docsOnCurrentPage)}
+              />
+              <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
+              <StyledGrid input={`${this.state.searchInput}-${this.state.currentPageIndex}`} docs={docsOnCurrentPage} onActivate={(doc) => this.onPresentDatasheet(doc)}/>
+            </StyledRoot>
           )}
         </Transition>
-        <Transition in={this.state.activeDoc !== undefined} timeout={300}>
-          {(state) => (
-            <StyledDatasheetModal transitionState={state}>
-              <StyledDatasheetModalBackground transitionState={state}/>
-              <StyledDatasheet transitionState={state} doc={this.state.activeDoc} onExit={() => this.onDismissDatasheet()}/>
-            </StyledDatasheetModal>
-          )}
-        </Transition>
-      </StyledRoot>
+        <Modal in={this.state.activeDoc !== undefined}>
+          {(state) => <StyledDatasheet transitionState={state} doc={this.state.activeDoc} onExit={() => this.onDismissDatasheet()}/>}
+        </Modal>
+      </Fragment>
     );
   }
 }
@@ -85,45 +157,52 @@ class Home extends PureComponent<Props, State> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
+    docs: reduceDocs(state.prismic, 'fallacy') || [],
+    fusedDocs: new Fuse(reduceDocs(state.prismic, 'fallacy') || [], {
+      shouldSort: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 2,
+      keys: [
+        'data.abbreviation',
+        'data.name',
+        'data.aliases.name',
+        'data.description.text',
+        'data.examples.example.text',
+        'data.type.slug',
+        'tags',
+      ],
+    }),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     fetchDocs,
   }, dispatch),
 )(Home);
 
-const StyledDatasheetModalBackground = styled.div<{
-  transitionState: TransitionStatus;
-}>`
-  ${align.ftl}
-  ${animations.transition('opacity', 300, 'ease-out')}
-  background: ${(props) => props.theme.colors.black};
-  height: 100%;
-  opacity: ${(props) => valueByTransitionStatus(props.transitionState, [0, 0.4])};
-  width: 100%;
-  `;
-
 const StyledDatasheet = styled(Datasheet)<{
   transitionState: TransitionStatus;
 }>`
   ${align.tr}
-  ${animations.transition(['opacity', 'transform'], 300, 'ease-out')}
+  ${animations.transition(['opacity', 'transform'], 300, 'ease-in-out')}
   width: 100%;
   max-width: 90rem;
   height: 100%;
   transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
 `;
 
-const StyledDatasheetModal = styled.div<{
-  transitionState: TransitionStatus;
-}>`
-  ${align.ftl}
-  height: 100%;
-  pointer-events: ${(props) => valueByTransitionStatus(props.transitionState, ['none', 'auto'])};
-  width: 100%;
+const StyledSearchBar = styled(SearchBar)`
+  margin-bottom: 1rem;
 `;
 
-const StyledSearchBar = styled(SearchBar)`
-  margin-bottom: 5rem;
+const StyledPaginator = styled(Paginator)`
+  width: 100%;
+  margin: 2rem 0;
+`;
+
+const StyledStatistics = styled(Statistics)`
+  margin-left: 1rem;
 `;
 
 const StyledGrid = styled(Grid)`
@@ -135,23 +214,18 @@ const StyledGrid = styled(Grid)`
   }
 `;
 
-const StyledMain = styled.div<{
+const StyledRoot = styled.div<{
   transitionState: TransitionStatus;
 }>`
-  ${animations.transition(['opacity', 'transform'], 300)}
+  ${animations.transition(['opacity', 'transform'], 300, 'ease-in-out')}
+  ${container.fvtl}
   padding: 5rem 3rem;
   background: ${(props) => props.theme.colors.offBlack};
-  height: auto;
   min-height: 100%;
   opacity: ${(props) => valueByTransitionStatus(props.transitionState, [0.4, 1])};
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(props.transitionState, ['none', 'auto'])};
   transform-origin: center;
-  transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(0, 0, 0) scale(.8)', 'translate3d(0, 0, 0) scale(1)'])};
-  width: 100%;
-`;
-
-const StyledRoot = styled.div`
-  height: 100%;
+  transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(0, 0, 0) scale(.96)', 'translate3d(0, 0, 0) scale(1)'])};
   width: 100%;
 `;
