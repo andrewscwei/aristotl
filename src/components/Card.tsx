@@ -144,7 +144,7 @@ const StyledName = styled.h1`
 
 const StyledDivider = styled.div`
   ${align.bl}
-  ${animations.transition('background', 300, 'ease-out')}
+  ${animations.transition('background', 200, 'ease-out')}
   width: 2rem;
   height: .2rem;
   background: ${(props) => props.theme.colors.offBlack};
@@ -155,7 +155,7 @@ const StyledRoot = styled.button<{
   summaryEnabled: boolean;
 }>`
   ${container.fvts}
-  ${animations.transition(['background', 'color'], 300, 'ease-out')}
+  ${animations.transition(['all'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.black};
   height: ${(props) => props.summaryEnabled ? '30rem' : '24rem'};
   overflow: hidden;

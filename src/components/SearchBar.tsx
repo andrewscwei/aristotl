@@ -1,4 +1,4 @@
-import { container, media, selectors } from 'promptu';
+import { container, media, selectors, align } from 'promptu';
 import React, { ChangeEvent, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -68,6 +68,8 @@ export default connect(
 
 const StyledPixels = styled.div`
   ${container.fvcc}
+  ${align.cl}
+  left: -1rem;
   margin-right: .4rem;
 
   ${selectors.eblc} {

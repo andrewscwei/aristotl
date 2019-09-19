@@ -31,7 +31,7 @@ class Grid extends PureComponent<Props> {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => (
-          <CSSTransition key={`${this.props.input}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 300)} classNames='card'>
+          <CSSTransition key={`${this.props.input}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
             <StyledCard index={i}>
               <Card doc={doc} summaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
             </StyledCard>
@@ -66,7 +66,7 @@ const StyledCard = styled.div<{
 
   &.card-enter.card-enter-active {
     &::after {
-      ${(props) => animations.transition('transform', 300, 'ease-in-out', 20 * props.index)}
+      ${(props) => animations.transition('transform', 150, 'ease-in-out', 20 * props.index)}
       transform: translate3d(100%, 0, 0);
     }
   }
@@ -86,7 +86,7 @@ const StyledCard = styled.div<{
 `;
 
 const StyledRoot = styled(TransitionGroup)`
-  ${animations.transition(['transform'], 300, 'ease-out')}
+  ${animations.transition(['transform'], 150, 'ease-out')}
   ${container.fhtl}
   flex-wrap: wrap;
   transform: translate3d(0, 0, 0);

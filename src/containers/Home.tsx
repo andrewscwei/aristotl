@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container } from 'promptu';
+import { align, animations, container, selectors } from 'promptu';
 import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
@@ -9,6 +9,7 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import ActionButton from '../components/ActionButton';
 import Datasheet from '../components/Datasheet';
 import Grid from '../components/Grid';
 import Modal from '../components/Modal';
@@ -18,6 +19,7 @@ import Statistics from '../components/Statistics';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { fetchDocs, reduceDocs } from '../store/prismic';
+import { colors } from '../styles/theme';
 import { valueByTransitionStatus } from '../styles/utils';
 
 const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:home') : () => {};
@@ -97,10 +99,12 @@ class Home extends PureComponent<Props, State> {
     }, 0);
   }
 
-  onToggleSummaryMode() {
-    this.setState({
-      isSummaryEnabled: !this.state.isSummaryEnabled,
-    });
+  enableSummaryMode() {
+    this.setState({ isSummaryEnabled: true });
+  }
+
+  disableSummaryMode() {
+    this.setState({ isSummaryEnabled: false });
   }
 
   onSearchInputChange(input: string) {
@@ -138,10 +142,21 @@ class Home extends PureComponent<Props, State> {
 
     return (
       <Fragment>
-        <Transition in={this.state.activeDoc === undefined} timeout={300} mountOnEnter={false}>
+        <Transition in={this.state.activeDoc === undefined} timeout={200} mountOnEnter={false}>
           {(state) => (
             <StyledRoot transitionState={state}>
-              <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
+              <StyledHeader>
+                <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
+                <StyledToggleSummaryButton
+                  symbol='i'
+                  isTogglable={true}
+                  tintColor={colors.white}
+                  hoverTintColor={colors.red}
+                  activeTintColor={colors.red}
+                  onToggleOn={() => this.enableSummaryMode()}
+                  onToggleOff={() => this.disableSummaryMode()}
+                />
+              </StyledHeader>
               <StyledStatistics
                 totalResults={docs.length}
                 subtotalResultsStart={this.state.currentPageIndex * this.props.docsPerPage + 1}
@@ -149,8 +164,6 @@ class Home extends PureComponent<Props, State> {
                 totalInformal={this.countInformals(docsOnCurrentPage)}
                 totalFormal={this.countFormals(docsOnCurrentPage)}
               />
-              <StyledToggleSummaryButton onClick={() => this.onToggleSummaryMode()}>
-              </StyledToggleSummaryButton>
               <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
               <StyledGrid
                 input={`${this.state.searchInput}-${this.state.currentPageIndex}`}
@@ -161,8 +174,14 @@ class Home extends PureComponent<Props, State> {
             </StyledRoot>
           )}
         </Transition>
-        <Modal in={this.state.activeDoc !== undefined}>
-          {(state) => <StyledDatasheet transitionState={state} doc={this.state.activeDoc} onExit={() => this.onDismissDatasheet()}/>}
+        <Modal in={this.state.activeDoc !== undefined} onExit={() => this.onDismissDatasheet()}>
+          {(state, onExit) => (
+            <StyledDatasheet
+              transitionState={state}
+              doc={this.state.activeDoc}
+              onExit={() => onExit()}
+            />
+          )}
         </Modal>
       </Fragment>
     );
@@ -184,8 +203,6 @@ export default connect(
         'data.abbreviation',
         'data.name',
         'data.aliases.name',
-        'data.description.text',
-        'data.examples.example.text',
         'data.type.slug',
         'tags',
       ],
@@ -196,27 +213,30 @@ export default connect(
   }, dispatch),
 )(Home);
 
-const StyledToggleSummaryButton = styled.button`
-  ${align.ftr}
-  width: 2rem;
-  height: 2rem;
-  background: #fff;
-  margin: 2rem;
-`;
-
 const StyledDatasheet = styled(Datasheet)<{
   transitionState: TransitionStatus;
 }>`
   ${align.tr}
-  ${animations.transition(['opacity', 'transform'], 300, 'ease-in-out')}
+  ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   width: 100%;
-  max-width: 90rem;
+  max-width: 60rem;
   height: 100%;
   transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
 `;
 
+const StyledToggleSummaryButton = styled(ActionButton)`
+
+`;
+
 const StyledSearchBar = styled(SearchBar)`
+
+`;
+
+const StyledHeader = styled.header`
+  ${container.fhcl}
+  width: 100%;
   margin-bottom: 1rem;
+  justify-content: space-between;
 `;
 
 const StyledPaginator = styled(Paginator)`
@@ -240,7 +260,7 @@ const StyledGrid = styled(Grid)`
 const StyledRoot = styled.div<{
   transitionState: TransitionStatus;
 }>`
-  ${animations.transition(['opacity', 'transform'], 300, 'ease-in-out')}
+  ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
   ${container.fvtl}
   padding: 5rem 3rem;
   background: ${(props) => props.theme.colors.offBlack};
@@ -249,6 +269,6 @@ const StyledRoot = styled.div<{
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(props.transitionState, ['none', 'auto'])};
   transform-origin: center;
-  transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(0, 0, 0) scale(.96)', 'translate3d(0, 0, 0) scale(1)'])};
+  transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(0, 0, 0) scale(.8)', 'translate3d(0, 0, 0) scale(1)'])};
   width: 100%;
 `;
