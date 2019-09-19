@@ -64,7 +64,7 @@ class Home extends PureComponent<Props, State> {
                 <StyledHeader>
                   <SearchBar
                     id='search'
-                    onChange={(input: string) => this.setState({ searchInput: input })}
+                    onChange={(input: string) => this.setState({ searchInput: input, currentPageIndex: 0 })}
                   />
                   <ActionButton
                     symbol='i'
