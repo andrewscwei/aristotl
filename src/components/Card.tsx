@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors, utils, media } from 'promptu';
+import { align, animations, container, selectors, utils } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -22,18 +22,15 @@ interface DispatchProps {
 
 interface Props extends StateProps, DispatchProps {
   className?: string;
-  id?: string;
   doc: Document;
+  isCompressed: boolean;
   isSummaryEnabled: boolean;
   onActivate: () => void;
 }
 
-interface State {
-
-}
-
-class Card extends PureComponent<Props, State> {
+class Card extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
+    isCompressed: false,
     isSummaryEnabled: false,
     onActivate: () => {},
   };
@@ -46,8 +43,8 @@ class Card extends PureComponent<Props, State> {
     const type = _.get(this.props.doc, 'data.type.slug');
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className} onClick={() => this.props.onActivate()}>
-        <StyledAbbreviation>
+      <StyledRoot className={this.props.className} isCompressed={this.props.isCompressed} onClick={() => this.props.onActivate()}>
+        <StyledAbbreviation isCompressed={this.props.isCompressed}>
           <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
@@ -57,14 +54,14 @@ class Card extends PureComponent<Props, State> {
           <h2>{abbreviation}</h2>
         </StyledAbbreviation>
         {type &&
-          <StyledType>
+          <StyledType isCompressed={this.props.isCompressed}>
             <Pixel isHollow={type === 'informal-fallacy'}/>
             <span>{ltxt(type)}</span>
             <Pixel isHollow={type === 'informal-fallacy'}/>
           </StyledType>
         }
-        {name && <StyledName>{name}</StyledName>}
-        {this.props.isSummaryEnabled && summary && <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
+        {name && <StyledName isCompressed={this.props.isCompressed}>{name}</StyledName>}
+        {this.props.isSummaryEnabled && summary && <StyledSummary isCompressed={this.props.isCompressed} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
         <StyledDivider/>
       </StyledRoot>
     );
@@ -80,55 +77,64 @@ export default connect(
   }, dispatch),
 )(Card);
 
-const StyledSummary = styled.div`
+const StyledSummary = styled.div<{
+  isCompressed: boolean;
+}>`
   color: ${(props) => props.theme.colors.grey};
   font-family: 'RobotoMono';
   font-size: 1.4rem;
   font-weight: 300;
   margin-top: 1rem;
-  padding: 0 1rem;
-  width: 100%;
   max-height: ${1.8 * 4}rem;
   overflow: hidden;
+  padding: 0 1rem;
+  width: 100%;
 
   p {
     line-height: 1.8rem;
   }
 `;
 
-const StyledType = styled.div`
+const StyledType = styled.div<{
+  isCompressed: boolean;
+}>`
   ${container.fhcl}
-  height: 2rem;
   font-family: 'RobotoMono';
-  font-weight: 400;
   font-size: 1.1rem;
-  text-transform: uppercase;
+  font-weight: 400;
+  height: 2rem;
   margin-bottom: 1rem;
+  margin-left: 1rem;
+  text-transform: uppercase;
 
   ${selectors.eblc} {
     margin-right: .4rem;
   }
 `;
 
-const StyledAbbreviation = styled.div`
+const StyledAbbreviation = styled.div<{
+  isCompressed: boolean;
+}>`
   ${container.fvcl}
   background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
   border-bottom: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
   border-top: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
+  height: 9rem;
   margin-bottom: 1rem;
+  overflow: visible;
   padding: 0 1rem;
   width: 100%;
-  overflow: visible;
-  height: 9rem;
 
   h2 {
     font-family: 'NovaMono';
-    font-size: 6rem;
+    font-size: ${(props) => props.isCompressed ? '4rem' : '6rem'};
     font-weight: 400;
   }
 `;
 
-const StyledName = styled.h1`
+const StyledName = styled.h1<{
+  isCompressed: boolean;
+}>`
   width: 100%;
   font-size: 1.4rem;
   font-weight: 400;
@@ -146,7 +152,9 @@ const StyledDivider = styled.div`
   margin: 2rem;
 `;
 
-const StyledRoot = styled.button`
+const StyledRoot = styled.button<{
+  isCompressed: boolean;
+}>`
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.black};

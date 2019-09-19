@@ -50,8 +50,6 @@ const StyledCard = styled.div<{
 }>`
   ${animations.transition('all', 200, 'ease-out')}
   overflow: hidden;
-  height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
-  width: ${(props) => props.isSummaryEnabled ? '22rem' : '20rem'};
 
   &::after {
     ${align.tl}

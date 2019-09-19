@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors } from 'promptu';
+import { align, animations, container, selectors, media } from 'promptu';
 import React, { createRef, Fragment, PureComponent } from 'react';
 import Hammer from 'react-hammerjs';
 import { RouteComponentProps } from 'react-router';
@@ -153,12 +153,30 @@ const StyledStatistics = styled(Statistics)`
 `;
 
 const StyledGrid = styled(Grid)`
-  margin-left: -1rem;
+  margin-left: -.5rem;
   max-width: 120rem;
-  width: calc(100% + 2rem);
+  width: calc(100% + 1rem);
 
   > * {
-    margin: 1rem;
+    height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
+    margin: .5rem;
+    width: calc(50% - 1rem);
+  }
+
+  @media ${media.gtw(400)} {
+    margin-left: -1rem;
+
+    > * {
+      margin: 1rem;
+      width: calc(50% - 2rem);
+    }
+  }
+
+  @media ${media.gtw(500)} {
+    > * {
+      height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
+      width: ${(props) => props.isSummaryEnabled ? '22rem' : '20rem'};
+    }
   }
 `;
 
@@ -167,13 +185,17 @@ const StyledRoot = styled.div<{
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
   ${container.fvtl}
-  padding: 5rem 3rem;
   background: ${(props) => props.theme.colors.offBlack};
   min-height: 100%;
   opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0.4, 1])};
+  padding: 5rem 2rem;
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
   transform-origin: center;
   transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0) scale(.8)', 'translate3d(0, 0, 0) scale(1)'])};
   width: 100%;
+
+  @media ${media.gtw(500)} {
+    padding: 5rem 3rem;
+  }
 `;
