@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors, utils } from 'promptu';
+import { align, animations, container, selectors, utils, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -24,7 +24,7 @@ interface Props extends StateProps, DispatchProps {
   className?: string;
   id?: string;
   doc: Document;
-  summaryEnabled: boolean;
+  isSummaryEnabled: boolean;
   onActivate: () => void;
 }
 
@@ -34,7 +34,7 @@ interface State {
 
 class Card extends PureComponent<Props, State> {
   static defaultProps: Partial<Props> = {
-    summaryEnabled: false,
+    isSummaryEnabled: false,
     onActivate: () => {},
   };
 
@@ -46,12 +46,7 @@ class Card extends PureComponent<Props, State> {
     const type = _.get(this.props.doc, 'data.type.slug');
 
     return (
-      <StyledRoot
-        id={this.props.id}
-        className={this.props.className}
-        summaryEnabled={this.props.summaryEnabled}
-        onClick={() => this.props.onActivate()}
-      >
+      <StyledRoot id={this.props.id} className={this.props.className} onClick={() => this.props.onActivate()}>
         <StyledAbbreviation>
           <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
@@ -69,7 +64,7 @@ class Card extends PureComponent<Props, State> {
           </StyledType>
         }
         {name && <StyledName>{name}</StyledName>}
-        {this.props.summaryEnabled && summary && <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
+        {this.props.isSummaryEnabled && summary && <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
         <StyledDivider/>
       </StyledRoot>
     );
@@ -151,18 +146,16 @@ const StyledDivider = styled.div`
   margin: 2rem;
 `;
 
-const StyledRoot = styled.button<{
-  summaryEnabled: boolean;
-}>`
+const StyledRoot = styled.button`
   ${container.fvts}
-  ${animations.transition(['all'], 100, 'ease-in-out')}
+  ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.black};
-  height: ${(props) => props.summaryEnabled ? '30rem' : '24rem'};
+  height: 100%;
   overflow: hidden;
   padding: 1rem;
   text-align: left;
   transform: translate3d(0, 0, 0);
-  width: ${(props) => props.summaryEnabled ? '22rem' : '20rem'};
+  width: 100%;
 
   ${selectors.hwot} {
     background: ${(props) => props.theme.colors.offBlack};

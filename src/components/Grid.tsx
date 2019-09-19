@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container } from 'promptu';
+import { align, animations, container, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
@@ -10,7 +10,7 @@ interface Props {
   className?: string;
   id?: string;
   docs: ReadonlyArray<Document>;
-  input?: string;
+  salt?: string;
   isSummaryEnabled: boolean;
   onActivate: (doc: Document) => void;
 }
@@ -31,9 +31,9 @@ class Grid extends PureComponent<Props> {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => (
-          <CSSTransition key={`${this.props.input}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
-            <StyledCard index={i}>
-              <Card doc={doc} summaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
+          <CSSTransition key={`${this.props.salt}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
+            <StyledCard index={i} isSummaryEnabled={this.props.isSummaryEnabled}>
+              <Card doc={doc} isSummaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
             </StyledCard>
           </CSSTransition>
         ))}
@@ -46,8 +46,12 @@ export default Grid;
 
 const StyledCard = styled.div<{
   index: number;
+  isSummaryEnabled: boolean;
 }>`
+  ${animations.transition('all', 200, 'ease-out')}
   overflow: hidden;
+  height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
+  width: ${(props) => props.isSummaryEnabled ? '22rem' : '20rem'};
 
   &::after {
     ${align.tl}
@@ -91,4 +95,3 @@ const StyledRoot = styled(TransitionGroup)`
   flex-wrap: wrap;
   transform: translate3d(0, 0, 0);
 `;
-

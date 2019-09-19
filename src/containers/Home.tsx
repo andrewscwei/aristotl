@@ -174,7 +174,7 @@ class Home extends PureComponent<Props, State> {
                 />
                 <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
                 <StyledGrid
-                  input={`${this.state.searchInput}-${this.state.currentPageIndex}`}
+                  salt={`${this.state.searchInput}-${this.state.currentPageIndex}`}
                   docs={docsOnCurrentPage}
                   isSummaryEnabled={this.state.isSummaryEnabled}
                   onActivate={(doc) => this.onPresentDatasheet(doc)}
@@ -257,6 +257,7 @@ const StyledStatistics = styled(Statistics)`
 const StyledGrid = styled(Grid)`
   margin-left: -1rem;
   max-width: 120rem;
+  width: calc(100% + 2rem);
 
   > * {
     margin: 1rem;
