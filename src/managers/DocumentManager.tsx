@@ -28,7 +28,7 @@ interface Props extends StateProps, DispatchProps {
 class DocumentManager extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     pageIndex: 0,
-    docsPerPage: 20,
+    docsPerPage: 50,
   };
 
   constructor(props: Props) {
