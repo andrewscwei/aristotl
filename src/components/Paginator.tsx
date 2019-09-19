@@ -1,4 +1,4 @@
-import { container, selectors } from 'promptu';
+import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/theme';
@@ -40,7 +40,7 @@ class Paginator extends PureComponent<Props> {
           >
             <Pixel
               isHollow={this.props.activePageIndex !== i}
-              size={this.props.activePageIndex === i ? 10 : 6}
+              size={8}
               tintColor={this.props.tintColor}
             />
           </StyledButton>
@@ -55,13 +55,19 @@ export default Paginator;
 const StyledButton = styled.button<{
   isActive: boolean;
 }>`
+  ${animations.transition('transform', 200, 'ease-out')}
+  transform: translate3d(0, 0, 0) ${(props) => props.isActive ? 'scale(1.5)' : 'scale(1)'};
   pointer-events: ${(props) => props.isActive ? 'none' : 'auto'};
+
+  ${selectors.hwot} {
+    transform: translate3d(0, 0, 0) scale(1.5);
+  }
 `;
 
 const StyledRoot = styled.div`
   ${container.fhcc}
 
   ${selectors.eblc} {
-    margin-right: .6rem;
+    margin-right: .8rem;
   }
 `;
