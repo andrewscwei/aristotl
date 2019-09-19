@@ -1,7 +1,6 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors, media } from 'promptu';
+import { align, animations, container, media, selectors } from 'promptu';
 import React, { createRef, Fragment, PureComponent } from 'react';
-import Hammer from 'react-hammerjs';
 import { RouteComponentProps } from 'react-router';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
@@ -14,6 +13,7 @@ import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
 import DocumentManager from '../managers/DocumentManager';
+import NavControlManager from '../managers/NavControlManager';
 import { colors } from '../styles/theme';
 import { valueByTransitionStatus } from '../styles/utils';
 
@@ -25,6 +25,7 @@ interface State {
   activeDoc?: Document;
   currentPageIndex: number;
   isSummaryEnabled: boolean;
+  isSearching: boolean;
   searchInput?: string;
 }
 
@@ -32,6 +33,7 @@ class Home extends PureComponent<Props, State> {
   state = {
     activeDoc: undefined,
     currentPageIndex: 0,
+    isSearching: false,
     isSummaryEnabled: false,
     searchInput: undefined,
   };
@@ -40,18 +42,16 @@ class Home extends PureComponent<Props, State> {
     paginator: createRef<Paginator>(),
   };
 
-  onSwipe(direction: number) {
+  next() {
     const paginator = this.nodeRefs.paginator.current;
-
     if (!paginator) return;
+    paginator.next();
+  }
 
-    switch (direction) {
-    case 2: // Left
-      paginator.next();
-      break;
-    case 4: // Right
-      paginator.prev();
-    }
+  prev() {
+    const paginator = this.nodeRefs.paginator.current;
+    if (!paginator) return;
+    paginator.prev();
   }
 
   render() {
@@ -59,11 +59,13 @@ class Home extends PureComponent<Props, State> {
       <Fragment>
         <Transition in={this.state.activeDoc === undefined} timeout={200} mountOnEnter={false}>
           {(status) => (
-            <Hammer onSwipe={(event) => this.onSwipe(event.direction)} direction='DIRECTION_HORIZONTAL'>
+            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDoc} onPrev={() => this.prev()} onNext={() => this.next()}>
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
                     id='search'
+                    onFocusIn={() => this.setState({ isSearching: true })}
+                    onFocusOut={() => this.setState({ isSearching: false })}
                     onChange={(input: string) => this.setState({ searchInput: input, currentPageIndex: 0 })}
                   />
                   <ActionButton
@@ -102,7 +104,7 @@ class Home extends PureComponent<Props, State> {
                   )}
                 </DocumentManager>
               </StyledRoot>
-            </Hammer>
+            </NavControlManager>
           )}
         </Transition>
         <Modal in={this.state.activeDoc !== undefined} onExit={() => this.setState({ activeDoc: undefined })}>

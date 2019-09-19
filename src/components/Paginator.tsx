@@ -21,27 +21,6 @@ class Paginator extends PureComponent<Props> {
     onActivate: (index: number) => {},
   };
 
-  componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
-  }
-
-  onKeyUp = (event: KeyboardEvent) => {
-    if (document.activeElement instanceof HTMLInputElement) return;
-
-    switch (event.keyCode) {
-      case 39:
-        this.next();
-        break;
-      case 37:
-        this.prev();
-        break;
-    }
-  }
-
   prev() {
     this.props.onActivate((this.props.activePageIndex + this.props.maxPages - 1) % this.props.maxPages);
   }

@@ -1,12 +1,12 @@
-import { container, media, selectors, align } from 'promptu';
+import { align, container, selectors } from 'promptu';
 import React, { ChangeEvent, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
-import Pixel from './Pixel';
 import { colors } from '../styles/theme';
+import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
@@ -20,20 +20,16 @@ interface Props extends StateProps, DispatchProps {
   className?: string;
   id?: string;
   onChange: (input: string) => void;
+  onFocusIn: () => void;
+  onFocusOut: () => void;
 }
 
-interface State {
-
-}
-
-class SearchBar extends PureComponent<Props, State> {
+class SearchBar extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     onChange: () => {},
+    onFocusIn: () => {},
+    onFocusOut: () => {},
   };
-
-  onChange(input: string) {
-    this.props.onChange(input);
-  }
 
   render() {
     const { ltxt } = this.props.i18n;
@@ -49,7 +45,9 @@ class SearchBar extends PureComponent<Props, State> {
           <input
             type='text'
             placeholder={ltxt('search-placeholder')}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => this.onChange(event.currentTarget.value)}
+            onFocus={() => this.props.onFocusIn()}
+            onBlur={() => this.props.onFocusOut()}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.onChange(event.currentTarget.value)}
           />
         </StyledInput>
       </StyledRoot>
