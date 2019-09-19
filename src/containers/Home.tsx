@@ -193,7 +193,7 @@ const StyledRoot = styled.div<{
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
   transform-origin: center;
-  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0) scale(.8)', 'translate3d(0, 0, 0) scale(1)'])};
+  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'])};
   width: 100%;
 
   @media ${media.gtw(500)} {
