@@ -77,12 +77,12 @@ class Home extends PureComponent<Props, State> {
                   />
                 </StyledHeader>
                 <DocumentManager pageIndex={this.state.currentPageIndex} searchInput={this.state.searchInput}>
-                  {(docs, maxPages, startIndex, endIndex, numFormals, numInformals) => (
+                  {(docs, totalDocs, maxPages, startIndex, endIndex, numFormals, numInformals) => (
                     <Fragment>
                       <StyledStatistics
-                        totalResults={docs.length}
+                        totalResults={totalDocs}
                         subtotalResultsStart={startIndex + 1}
-                        subtotalResultsEnd={endIndex + 1}
+                        subtotalResultsEnd={endIndex}
                         totalFormal={numFormals}
                         totalInformal={numInformals}
                       />

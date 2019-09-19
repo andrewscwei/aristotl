@@ -22,13 +22,13 @@ interface Props extends StateProps, DispatchProps {
   pageIndex: number;
   docsPerPage: number;
   searchInput?: string;
-  children: (docs: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
+  children: (docs: ReadonlyArray<Document>, totalDocs: number, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
 }
 
 class DocumentManager extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     pageIndex: 0,
-    docsPerPage: 50,
+    docsPerPage: 20,
   };
 
   constructor(props: Props) {
@@ -84,7 +84,7 @@ class DocumentManager extends PureComponent<Props> {
 
     return (
       <Fragment>
-        {this.props.children(docsOnCurrentPage, numPages, startIndex, endIndex, this.countFormals(docsOnCurrentPage), this.countInformals(docsOnCurrentPage))}
+        {this.props.children(docsOnCurrentPage, this.props.docs.length, numPages, startIndex, endIndex, this.countFormals(docsOnCurrentPage), this.countInformals(docsOnCurrentPage))}
       </Fragment>
     );
   }
