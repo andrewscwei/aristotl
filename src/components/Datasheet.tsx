@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align } from 'promptu';
 import React, { PureComponent } from 'react';
@@ -8,6 +9,7 @@ import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
+import { linkResolver } from '../utils/prismic';
 import ActionButton from './ActionButton';
 
 interface StateProps {
@@ -46,6 +48,9 @@ class Datasheet extends PureComponent<Props> {
           hoverTintColor={colors.red}
           onActivate={() => this.props.onExit()}
         />
+        {abbreviation && <StyledAbbreviation>{abbreviation}</StyledAbbreviation>}
+        {name && <StyledName>{name}</StyledName>}
+        {description && <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/>}
       </StyledRoot>
     );
   }
@@ -65,9 +70,19 @@ const StyledCloseButton = styled(ActionButton)`
   margin: 3rem;
 `;
 
+const StyledDescription = styled.div`
+`;
+
+const StyledAbbreviation = styled.h2`
+`;
+
+const StyledName = styled.h1`
+`;
+
 const StyledRoot = styled.div`
   -webkit-overflow-scrolling: touch;
   background: #fff;
   overflow-x: hidden;
   overflow-y: scroll;
+  color: ${(props) => props.theme.colors.black};
 `;

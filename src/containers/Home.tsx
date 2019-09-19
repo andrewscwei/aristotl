@@ -220,6 +220,7 @@ export default connect(
         'data.abbreviation',
         'data.name',
         'data.aliases.name',
+        'data.summary.text',
         'data.type.slug',
         'tags',
       ],
@@ -235,7 +236,7 @@ const StyledDatasheet = styled(Datasheet)<{
 }>`
   ${align.tr}
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
-  width: 100%;
+  width: 90%;
   max-width: 60rem;
   height: 100%;
   transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
