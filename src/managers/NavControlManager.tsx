@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { Fragment, PureComponent, ReactNode } from 'react';
 import Hammer from 'react-hammerjs';
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   children?: ReactNode;
   onPrev: () => void;
   onNext: () => void;
+  onEscape: () => void;
 }
 
 class NavControlManager extends PureComponent<Props> {
@@ -13,6 +14,7 @@ class NavControlManager extends PureComponent<Props> {
     isEnabled: false,
     onPrev: () => {},
     onNext: () => {},
+    onEscape: () => {},
   };
 
   componentDidMount() {
@@ -32,6 +34,9 @@ class NavControlManager extends PureComponent<Props> {
         break;
       case 37:
         this.props.onPrev();
+        break;
+      case 27:
+        this.props.onEscape();
         break;
     }
   }

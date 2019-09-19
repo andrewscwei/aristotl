@@ -4,6 +4,7 @@ import React, { createRef, PureComponent, ReactNode } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
+import NavControlManager from '../managers/NavControlManager';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 interface Props {
@@ -41,10 +42,12 @@ class Modal extends PureComponent<Props> {
     return (
       <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200)}>
         {(state) => (
-          <StyledRoot ref={this.nodeRefs.root} transitionStatus={state}>
-            <StyledBackground onClick={() => this.props.onExit()} transitionStatus={state}/>
-            {this.props.children(state, this.props.onExit)}
-          </StyledRoot>
+          <NavControlManager isEnabled={this.props.in} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
+            <StyledRoot ref={this.nodeRefs.root} transitionStatus={state}>
+              <StyledBackground onClick={() => this.props.onExit()} transitionStatus={state}/>
+              {this.props.children(state, this.props.onExit)}
+            </StyledRoot>
+          </NavControlManager>
         )}
       </Transition>
     );
