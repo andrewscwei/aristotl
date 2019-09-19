@@ -8,7 +8,7 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 
 interface Props {
   in: boolean;
-  children: (transitionState: TransitionStatus, onExit: () => void) => ReactNode;
+  children: (transitionStatus: TransitionStatus, onExit: () => void) => ReactNode;
   onExit: () => void;
 }
 
@@ -41,8 +41,8 @@ class Modal extends PureComponent<Props> {
     return (
       <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200)}>
         {(state) => (
-          <StyledRoot ref={this.nodeRefs.root} transitionState={state}>
-            <StyledBackground onClick={() => this.props.onExit()} transitionState={state}/>
+          <StyledRoot ref={this.nodeRefs.root} transitionStatus={state}>
+            <StyledBackground onClick={() => this.props.onExit()} transitionStatus={state}/>
             {this.props.children(state, this.props.onExit)}
           </StyledRoot>
         )}
@@ -54,20 +54,20 @@ class Modal extends PureComponent<Props> {
 export default Modal;
 
 const StyledBackground = styled.div<{
-  transitionState: TransitionStatus;
+  transitionStatus: TransitionStatus;
 }>`
   ${animations.transition('opacity', 200, 'ease-out')}
   background: ${(props) => props.theme.colors.black};
   height: 100%;
-  opacity: ${(props) => valueByTransitionStatus(props.transitionState, [0, 0.4])};
+  opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0, 0.4])};
   width: 100%;
 `;
 
 const StyledRoot = styled.div<{
-  transitionState: TransitionStatus;
+  transitionStatus: TransitionStatus;
 }>`
   ${align.ftl}
   height: 100%;
-  pointer-events: ${(props) => valueByTransitionStatus(props.transitionState, ['none', 'auto'])};
+  pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
   width: 100%;
 `;
