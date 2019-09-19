@@ -51,6 +51,7 @@
     "@types/prismic-dom": "^2.1.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-hammerjs": "^1.0.1",
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-redux": "^7.1.2",
     "@types/react-router-config": "^5.0.0",
@@ -115,5 +116,7 @@
     "whatwg-fetch": "^3.0.0",
     "worker-loader": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-hammerjs": "^1.0.1"
+  }
 }

@@ -1,8 +1,9 @@
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors } from 'promptu';
+import { align, animations, container } from 'promptu';
 import React, { Fragment, PureComponent } from 'react';
+import Hammer from 'react-hammerjs';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Transition } from 'react-transition-group';
@@ -135,6 +136,20 @@ class Home extends PureComponent<Props, State> {
     });
   }
 
+  onSwipe(direction: number, totalPages: number) {
+    switch (direction) {
+    case 2: // Left
+      this.setState({
+        currentPageIndex: (this.state.currentPageIndex + 1) % totalPages,
+      });
+      break;
+    case 4: // Right
+      this.setState({
+        currentPageIndex: (this.state.currentPageIndex + totalPages - 1) % totalPages,
+      });
+    }
+  }
+
   render() {
     const docs = this.filteredDocs;
     const pages = _.chunk(docs, this.props.docsPerPage);
@@ -144,34 +159,36 @@ class Home extends PureComponent<Props, State> {
       <Fragment>
         <Transition in={this.state.activeDoc === undefined} timeout={200} mountOnEnter={false}>
           {(state) => (
-            <StyledRoot transitionState={state}>
-              <StyledHeader>
-                <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
-                <StyledToggleSummaryButton
-                  symbol='i'
-                  isTogglable={true}
-                  tintColor={colors.white}
-                  hoverTintColor={colors.red}
-                  activeTintColor={colors.red}
-                  onToggleOn={() => this.enableSummaryMode()}
-                  onToggleOff={() => this.disableSummaryMode()}
+            <Hammer onSwipe={(event) => this.onSwipe(event.direction, pages.length)} direction={'DIRECTION_ALL' as any}>
+              <StyledRoot transitionState={state}>
+                <StyledHeader>
+                  <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
+                  <StyledToggleSummaryButton
+                    symbol='i'
+                    isTogglable={true}
+                    tintColor={colors.white}
+                    hoverTintColor={colors.red}
+                    activeTintColor={colors.red}
+                    onToggleOn={() => this.enableSummaryMode()}
+                    onToggleOff={() => this.disableSummaryMode()}
+                  />
+                </StyledHeader>
+                <StyledStatistics
+                  totalResults={docs.length}
+                  subtotalResultsStart={this.state.currentPageIndex * this.props.docsPerPage + 1}
+                  subtotalResultsEnd={docsOnCurrentPage.length + this.state.currentPageIndex * this.props.docsPerPage}
+                  totalInformal={this.countInformals(docsOnCurrentPage)}
+                  totalFormal={this.countFormals(docsOnCurrentPage)}
                 />
-              </StyledHeader>
-              <StyledStatistics
-                totalResults={docs.length}
-                subtotalResultsStart={this.state.currentPageIndex * this.props.docsPerPage + 1}
-                subtotalResultsEnd={docsOnCurrentPage.length + this.state.currentPageIndex * this.props.docsPerPage}
-                totalInformal={this.countInformals(docsOnCurrentPage)}
-                totalFormal={this.countFormals(docsOnCurrentPage)}
-              />
-              <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
-              <StyledGrid
-                input={`${this.state.searchInput}-${this.state.currentPageIndex}`}
-                docs={docsOnCurrentPage}
-                isSummaryEnabled={this.state.isSummaryEnabled}
-                onActivate={(doc) => this.onPresentDatasheet(doc)}
-              />
-            </StyledRoot>
+                <StyledPaginator activePageIndex={this.state.currentPageIndex} maxPages={pages.length} onActivate={(index) => this.onPageChange(index)}/>
+                <StyledGrid
+                  input={`${this.state.searchInput}-${this.state.currentPageIndex}`}
+                  docs={docsOnCurrentPage}
+                  isSummaryEnabled={this.state.isSummaryEnabled}
+                  onActivate={(doc) => this.onPresentDatasheet(doc)}
+                />
+              </StyledRoot>
+            </Hammer>
           )}
         </Transition>
         <Modal in={this.state.activeDoc !== undefined} onExit={() => this.onDismissDatasheet()}>
