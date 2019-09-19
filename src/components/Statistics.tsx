@@ -1,7 +1,6 @@
-import { animations, container, selectors } from 'promptu';
+import { container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
 interface Props {

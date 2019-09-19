@@ -34,11 +34,9 @@ class Paginator extends PureComponent<Props> {
 
     switch (event.keyCode) {
       case 39:
-      case 40:
         this.next();
         break;
       case 37:
-      case 38:
         this.prev();
         break;
     }

@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container } from 'promptu';
+import { align, animations, container, selectors } from 'promptu';
 import React, { Fragment, PureComponent } from 'react';
 import Hammer from 'react-hammerjs';
 import { connect } from 'react-redux';
@@ -159,19 +159,11 @@ class Home extends PureComponent<Props, State> {
       <Fragment>
         <Transition in={this.state.activeDoc === undefined} timeout={200} mountOnEnter={false}>
           {(state) => (
-            <Hammer onSwipe={(event) => this.onSwipe(event.direction, pages.length)} direction={'DIRECTION_ALL' as any}>
+            <Hammer onSwipe={(event) => this.onSwipe(event.direction, pages.length)} direction='DIRECTION_HORIZONTAL'>
               <StyledRoot transitionState={state}>
                 <StyledHeader>
-                  <StyledSearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
-                  <StyledToggleSummaryButton
-                    symbol='i'
-                    isTogglable={true}
-                    tintColor={colors.white}
-                    hoverTintColor={colors.red}
-                    activeTintColor={colors.red}
-                    onToggleOn={() => this.enableSummaryMode()}
-                    onToggleOff={() => this.disableSummaryMode()}
-                  />
+                  <SearchBar id='search' onChange={(input: string) => this.onSearchInputChange(input)}/>
+                  <ActionButton symbol='i' isTogglable={true} tintColor={colors.white} hoverTintColor={colors.red} activeTintColor={colors.red} onToggleOn={() => this.enableSummaryMode()} onToggleOff={() => this.disableSummaryMode()}/>
                 </StyledHeader>
                 <StyledStatistics
                   totalResults={docs.length}
@@ -242,19 +234,15 @@ const StyledDatasheet = styled(Datasheet)<{
   transform: ${(props) => valueByTransitionStatus(props.transitionState, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
 `;
 
-const StyledToggleSummaryButton = styled(ActionButton)`
-
-`;
-
-const StyledSearchBar = styled(SearchBar)`
-
-`;
-
 const StyledHeader = styled.header`
   ${container.fhcl}
   width: 100%;
   margin-bottom: 1rem;
   justify-content: space-between;
+
+  ${selectors.eblc} {
+    margin-right: 2rem;
+  }
 `;
 
 const StyledPaginator = styled(Paginator)`
