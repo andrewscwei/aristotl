@@ -63,6 +63,13 @@ class App extends PureComponent<Props, State> {
   onKeyUp = (event: KeyboardEvent) => {
     const searchBar = document.querySelector('#search input[type="text"]');
 
+    switch (event.keyCode) {
+    case 37:
+    case 38:
+    case 39:
+    case 40: return;
+    }
+
     if (!searchBar || !(searchBar instanceof HTMLInputElement)) return;
     if (searchBar === document.activeElement) return;
 

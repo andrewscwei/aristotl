@@ -30,6 +30,8 @@ class Paginator extends PureComponent<Props> {
   }
 
   onKeyUp = (event: KeyboardEvent) => {
+    if (document.activeElement instanceof HTMLInputElement) return;
+
     switch (event.keyCode) {
       case 39:
       case 40:

@@ -22,7 +22,7 @@ class Modal extends PureComponent<Props> {
     root: createRef<HTMLDivElement>(),
   };
 
-  componentWillMount() {
+  componentWillUnmount() {
     if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
   }
 
