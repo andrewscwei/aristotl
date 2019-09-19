@@ -43,7 +43,11 @@ class Card extends PureComponent<Props> {
     const type = _.get(this.props.doc, 'data.type.slug');
 
     return (
-      <StyledRoot className={this.props.className} isCompressed={this.props.isCompressed} onClick={() => this.props.onActivate()}>
+      <StyledRoot
+        className={this.props.className}
+        isCompressed={this.props.isCompressed}
+        onClick={() => this.props.onActivate()}
+      >
         <StyledAbbreviation isCompressed={this.props.isCompressed}>
           <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
@@ -53,6 +57,7 @@ class Card extends PureComponent<Props> {
           <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <h2>{abbreviation}</h2>
         </StyledAbbreviation>
+
         {type &&
           <StyledType isCompressed={this.props.isCompressed}>
             <Pixel isHollow={type === 'informal-fallacy'}/>
@@ -60,8 +65,18 @@ class Card extends PureComponent<Props> {
             <Pixel isHollow={type === 'informal-fallacy'}/>
           </StyledType>
         }
-        {name && <StyledName isCompressed={this.props.isCompressed}>{name}</StyledName>}
-        {this.props.isSummaryEnabled && summary && <StyledSummary isCompressed={this.props.isCompressed} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>}
+
+        {name &&
+          <StyledName isCompressed={this.props.isCompressed}>{name}</StyledName>
+        }
+
+        {this.props.isSummaryEnabled && summary &&
+          <StyledSummary
+            isCompressed={this.props.isCompressed}
+            dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}
+          />
+        }
+
         <StyledDivider/>
       </StyledRoot>
     );
@@ -158,12 +173,16 @@ const StyledRoot = styled.button<{
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.black};
-  height: 100%;
   overflow: hidden;
   padding: 1rem;
   text-align: left;
   transform: translate3d(0, 0, 0);
+  height: 100%;
   width: 100%;
+
+  > * {
+    flex: 0 0 auto;
+  }
 
   ${selectors.hwot} {
     background: ${(props) => props.theme.colors.offBlack};

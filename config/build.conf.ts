@@ -135,9 +135,9 @@ const config: Configuration = {
   ...!isDev ? {} : {
     devServer: {
       historyApiFallback: true,
+      host: '0.0.0.0',
       hot: true,
       port,
-      publicPath: process.env.PUBLIC_PATH || '/',
       stats: { colors: true },
     },
   } as any,

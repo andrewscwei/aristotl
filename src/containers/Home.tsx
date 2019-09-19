@@ -159,12 +159,13 @@ const StyledGrid = styled(Grid)`
 
   > * {
     height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
-    margin: .5rem;
+    margin: 1rem .5rem;
     width: calc(50% - 1rem);
   }
 
   @media ${media.gtw(400)} {
     margin-left: -1rem;
+    width: calc(100% + 2rem);
 
     > * {
       margin: 1rem;
@@ -172,7 +173,7 @@ const StyledGrid = styled(Grid)`
     }
   }
 
-  @media ${media.gtw(500)} {
+  @media ${media.gtw(560)} {
     > * {
       height: ${(props) => props.isSummaryEnabled ? '30rem' : '24rem'};
       width: ${(props) => props.isSummaryEnabled ? '22rem' : '20rem'};
@@ -196,6 +197,6 @@ const StyledRoot = styled.div<{
   width: 100%;
 
   @media ${media.gtw(500)} {
-    padding: 5rem 3rem;
+    padding: 5rem 5rem;
   }
 `;
