@@ -3,5 +3,8 @@
   "not-found": "404",
   "search-placeholder": "Search",
   "informal-fallacy": "Informal",
-  "formal-fallacy": "Formal"
+  "formal-fallacy": "Formal",
+  "name": "Name",
+  "description": "Description",
+  "aliases": "Alias(es)"
 }

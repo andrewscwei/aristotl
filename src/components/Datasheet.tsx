@@ -36,9 +36,12 @@ class Datasheet extends PureComponent<Props> {
   };
 
   render() {
+    console.log(this.props.doc);
+
     const { ltxt } = this.props.i18n;
     const abbreviation = _.get(this.props.doc, 'data.abbreviation');
     const name = _.get(this.props.doc, 'data.name');
+    const aliases = _.compact(_.map(_.get(this.props.doc, 'data.aliases'), ((v) => v.name)));
     const description = _.get(this.props.doc, 'data.description');
 
     return (
@@ -61,11 +64,35 @@ class Datasheet extends PureComponent<Props> {
           </StyledAbbreviation>
         }
 
-        {name &&
-          <StyledName>{name}</StyledName>
-        }
+        <section>
+          <StyledLabel>{ltxt('name')}</StyledLabel>
+          <StyledContent>
+            {!_.isEmpty(name) &&
+              <StyledName>{name}</StyledName> ||
+              <StyledName>--</StyledName>
+            }
+          </StyledContent>
+        </section>
 
-        {description && <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/>}
+        <section>
+          <StyledLabel>{ltxt('aliases')}</StyledLabel>
+          <StyledContent>
+            {!_.isEmpty(aliases) &&
+              <em>{aliases.join(', ')}</em> ||
+              <em>--</em>
+            }
+          </StyledContent>
+        </section>
+
+        <section>
+          <StyledLabel>{ltxt('description')}</StyledLabel>
+          <StyledContent>
+            {!_.isEmpty(description) &&
+              <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/> ||
+              <StyledDescription><p>--</p></StyledDescription>
+            }
+          </StyledContent>
+        </section>
       </StyledRoot>
     );
   }
@@ -80,14 +107,32 @@ export default connect(
   }, dispatch),
 )(Datasheet);
 
+const StyledContent = styled.div`
+  padding: 1rem 1rem;
+  max-width: 40rem;
+  font-family: 'RobotoMono';
+  font-weight: 400;
+  font-size: 1.4rem;
+`;
+
+const StyledLabel = styled.div`
+  ${container.fhcl}
+  background: ${(props) => props.theme.colors.black};
+  color: ${(props) => props.theme.colors.white};
+  font-family: 'NovaMono';
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: .4rem 1rem;
+  text-transform: uppercase;
+  width: 100%;
+`;
+
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}
   margin: 3rem;
 `;
 
 const StyledDescription = styled.div`
-  max-width: 40rem;
-
   p {
     font-size: 1.4rem;
     font-family: 'RobotoMono';
@@ -96,31 +141,28 @@ const StyledDescription = styled.div`
 `;
 
 const StyledAbbreviation = styled.div`
-  ${align.tr}
   ${container.fhcr}
-  background: ${(props) => props.theme.colors.black};
-  height: 3rem;
-  margin: 2.5rem 3rem;
+  background: ${(props) => props.theme.colors.lightGrey};
+  height: 10rem;
   padding: 0 1rem;
-  width: calc(100% - 9rem);
+  width: 100%;
 
   h2 {
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
     font-family: 'NovaMono';
-    font-size: 2.6rem;
-    text-align: right;
+    width: 100%;
+    font-size: 7rem;
+    text-align: center;
   }
 `;
 
 const StyledName = styled.h1`
   font-family: 'RobotoMono';
-  font-weight: 400;
-  font-size: 3.6rem;
-  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 700;
   line-height: 120%;
+  text-transform: uppercase;
   width: 100%;
-  max-width: 40rem;
-  margin-bottom: 2rem;
 `;
 
 const StyledRoot = styled.div`
@@ -130,4 +172,9 @@ const StyledRoot = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 8rem 3rem;
+
+  > section {
+    ${container.fvtl}
+    margin-top: 2rem;
+  }
 `;
