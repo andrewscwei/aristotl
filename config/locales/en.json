@@ -6,5 +6,9 @@
   "formal-fallacy": "Formal",
   "name": "Name",
   "description": "Description",
-  "aliases": "Alias(es)"
+  "aliases": "Alias(es)",
+  "type": "Type / Subtype",
+  "references": "Reference(s)",
+  "examples": "Example(s)",
+  "related": "Related"
 }

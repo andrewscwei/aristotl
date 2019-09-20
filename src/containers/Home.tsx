@@ -129,7 +129,7 @@ const StyledDatasheet = styled(Datasheet)<{
   ${align.tr}
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   width: 90%;
-  max-width: 60rem;
+  max-width: 50rem;
   height: 100%;
   transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
 `;

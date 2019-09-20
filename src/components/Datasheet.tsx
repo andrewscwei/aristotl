@@ -85,12 +85,36 @@ class Datasheet extends PureComponent<Props> {
         </section>
 
         <section>
+          <StyledLabel>{ltxt('type')}</StyledLabel>
+          <StyledContent>
+          </StyledContent>
+        </section>
+
+        <section>
           <StyledLabel>{ltxt('description')}</StyledLabel>
           <StyledContent>
             {!_.isEmpty(description) &&
               <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/> ||
               <StyledDescription><p>--</p></StyledDescription>
             }
+          </StyledContent>
+        </section>
+
+        <section>
+          <StyledLabel>{ltxt('examples')}</StyledLabel>
+          <StyledContent>
+          </StyledContent>
+        </section>
+
+        <section>
+          <StyledLabel>{ltxt('related')}</StyledLabel>
+          <StyledContent>
+          </StyledContent>
+        </section>
+
+        <section>
+          <StyledLabel>{ltxt('references')}</StyledLabel>
+          <StyledContent>
           </StyledContent>
         </section>
       </StyledRoot>
@@ -143,7 +167,7 @@ const StyledDescription = styled.div`
 const StyledAbbreviation = styled.div`
   ${container.fhcr}
   background: ${(props) => props.theme.colors.lightGrey};
-  height: 10rem;
+  height: 20rem;
   padding: 0 1rem;
   width: 100%;
 
@@ -151,7 +175,7 @@ const StyledAbbreviation = styled.div`
     color: ${(props) => props.theme.colors.black};
     font-family: 'NovaMono';
     width: 100%;
-    font-size: 7rem;
+    font-size: 12rem;
     text-align: center;
   }
 `;
