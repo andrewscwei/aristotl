@@ -1,8 +1,9 @@
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, container } from 'promptu';
-import React, { PureComponent } from 'react';
+import React, { createRef, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
@@ -35,6 +36,36 @@ class Datasheet extends PureComponent<Props> {
     onExit: () => {},
   };
 
+  nodeRefs = {
+    root: createRef<HTMLDivElement>(),
+  };
+
+  componentDidMount() {
+    if (this.nodeRefs.root.current) {
+      if (this.props.scrollLock) {
+        disableBodyScroll(this.nodeRefs.root.current);
+      }
+      else {
+        enableBodyScroll(this.nodeRefs.root.current);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if ((this.nodeRefs.root.current) && (prevProps.scrollLock !== this.props.scrollLock)) {
+      if (this.props.scrollLock) {
+        disableBodyScroll(this.nodeRefs.root.current);
+      }
+      else {
+        enableBodyScroll(this.nodeRefs.root.current);
+      }
+    }
+  }
+
   render() {
     console.log(this.props.doc);
 
@@ -45,7 +76,7 @@ class Datasheet extends PureComponent<Props> {
     const description = _.get(this.props.doc, 'data.description');
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className}>
+      <StyledRoot id={this.props.id} className={this.props.className} ref={this.nodeRefs.root}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}

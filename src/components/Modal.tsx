@@ -1,6 +1,5 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { align, animations } from 'promptu';
-import React, { createRef, PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
@@ -19,30 +18,11 @@ class Modal extends PureComponent<Props> {
     onExit: () => {},
   };
 
-  nodeRefs = {
-    root: createRef<HTMLDivElement>(),
-  };
-
-  componentWillUnmount() {
-    if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if ((this.nodeRefs.root.current) && (prevProps.in !== this.props.in)) {
-      if (this.props.in) {
-        disableBodyScroll(this.nodeRefs.root.current);
-      }
-      else {
-        enableBodyScroll(this.nodeRefs.root.current);
-      }
-    }
-  }
-
   render() {
     return (
       <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200)}>
         {(status) => (
-          <StyledRoot ref={this.nodeRefs.root} transitionStatus={status}>
+          <StyledRoot transitionStatus={status}>
             <NavControlManager isEnabled={this.props.in} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
               <div>
                 <StyledBackground onClick={() => this.props.onExit()} transitionStatus={status}/>

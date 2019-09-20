@@ -111,6 +111,7 @@ class Home extends PureComponent<Props, State> {
         <Modal in={this.state.activeDoc !== undefined} onExit={() => this.setState({ activeDoc: undefined })}>
           {(status, onExit) => (
             <StyledDatasheet
+              scrollLock={this.state.activeDoc !== undefined}
               transitionStatus={status}
               doc={this.state.activeDoc}
               onExit={() => onExit()}
