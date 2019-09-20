@@ -96,9 +96,16 @@ class Home extends PureComponent<Props, State> {
                         onActivate={(index) => this.setState({ currentPageIndex: index })}
                       />
                       <StyledGrid
+                        key={Date.now()}
                         docs={docs}
                         isSummaryEnabled={this.state.isSummaryEnabled}
                         onActivate={(doc) => this.setState({ activeDoc: doc })}
+                      />
+                      <StyledPaginator
+                        ref={this.nodeRefs.paginator}
+                        activePageIndex={this.state.currentPageIndex}
+                        maxPages={maxPages}
+                        onActivate={(index) => this.setState({ currentPageIndex: index })}
                       />
                     </Fragment>
                   )}

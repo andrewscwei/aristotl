@@ -1,9 +1,10 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, media } from 'promptu';
+import { align, animations, container } from 'promptu';
 import React, { PureComponent } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
+import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
-import { timeoutByTransitionStatus } from '../styles/utils';
+import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 import Card from './Card';
 
 interface Props {
@@ -29,13 +30,25 @@ class Grid extends PureComponent<Props> {
   render() {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
-        {this.props.docs.map((doc: Document, i: number) => (
-          <CSSTransition key={`${Date.now()}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
-            <StyledCard index={i} isSummaryEnabled={this.props.isSummaryEnabled}>
-              <Card doc={doc} isSummaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
-            </StyledCard>
-          </CSSTransition>
-        ))}
+        {this.props.docs.map((doc: Document, i: number) => {
+          const duration = 150;
+          const delay = i * 20;
+
+          return (
+            <Transition in={true} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
+              {(status) => (
+                <StyledCard
+                  delay={delay}
+                  duration={duration}
+                  isSummaryEnabled={this.props.isSummaryEnabled}
+                  transitionStatus={status}
+                >
+                  <Card doc={doc} isSummaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
+                </StyledCard>
+              )}
+            </Transition>
+          );
+        })}
       </StyledRoot>
     );
   }
@@ -44,49 +57,26 @@ class Grid extends PureComponent<Props> {
 export default Grid;
 
 const StyledCard = styled.div<{
-  index: number;
+  delay: number;
+  duration: number;
   isSummaryEnabled: boolean;
+  transitionStatus: TransitionStatus;
 }>`
   ${animations.transition('all', 200, 'ease-out')}
   overflow: hidden;
 
   &::after {
     ${align.tl}
+    ${(props) => animations.transition('transform', props.duration, 'ease-in-out', props.delay)}
     background: ${(props) => props.theme.colors.offBlack};
     content: '';
     height: 100%;
-    transform: translate3d(100%, 0, 0);
+    transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)'], true)};
     width: 100%;
-  }
-
-  &.card-enter {
-    &::after {
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  &.card-enter.card-enter-active {
-    &::after {
-      ${(props) => animations.transition('transform', 150, 'ease-in-out', 20 * props.index)}
-      transform: translate3d(100%, 0, 0);
-    }
-  }
-
-  &.card-exit {
-    &::after {
-      transform: translate3d(100%, 0, 0);
-    }
-  }
-
-  &.card-exit.card-exit-active {
-    &::after {
-      ${(props) => animations.transition('transform', 0, 'ease-out', 0)}
-      transform: translate3d(0, 0, 0);
-    }
   }
 `;
 
-const StyledRoot = styled(TransitionGroup)`
+const StyledRoot = styled.div`
   ${animations.transition(['transform'], 150, 'ease-out')}
   ${container.fhtl}
   flex-wrap: wrap;
