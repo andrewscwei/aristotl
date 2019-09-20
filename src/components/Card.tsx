@@ -23,14 +23,12 @@ interface DispatchProps {
 interface Props extends StateProps, DispatchProps {
   className?: string;
   doc: Document;
-  isCompressed: boolean;
   isSummaryEnabled: boolean;
   onActivate: () => void;
 }
 
 class Card extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
-    isCompressed: false,
     isSummaryEnabled: false,
     onActivate: () => {},
   };
@@ -45,10 +43,9 @@ class Card extends PureComponent<Props> {
     return (
       <StyledRoot
         className={this.props.className}
-        isCompressed={this.props.isCompressed}
         onClick={() => this.props.onActivate()}
       >
-        <StyledAbbreviation isCompressed={this.props.isCompressed}>
+        <StyledAbbreviation>
           <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
           <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
@@ -59,7 +56,7 @@ class Card extends PureComponent<Props> {
         </StyledAbbreviation>
 
         {type &&
-          <StyledType isCompressed={this.props.isCompressed}>
+          <StyledType>
             <Pixel isHollow={type === 'informal-fallacy'}/>
             <span>{ltxt(type)}</span>
             <Pixel isHollow={type === 'informal-fallacy'}/>
@@ -67,14 +64,11 @@ class Card extends PureComponent<Props> {
         }
 
         {name &&
-          <StyledName isCompressed={this.props.isCompressed}>{name}</StyledName>
+          <StyledName>{name}</StyledName>
         }
 
         {this.props.isSummaryEnabled && summary &&
-          <StyledSummary
-            isCompressed={this.props.isCompressed}
-            dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}
-          />
+          <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>
         }
 
         <StyledDivider/>
@@ -92,9 +86,7 @@ export default connect(
   }, dispatch),
 )(Card);
 
-const StyledSummary = styled.div<{
-  isCompressed: boolean;
-}>`
+const StyledSummary = styled.div`
   color: ${(props) => props.theme.colors.grey};
   margin-top: 1rem;
   max-height: ${1.8 * 6}rem;
@@ -110,9 +102,7 @@ const StyledSummary = styled.div<{
   }
 `;
 
-const StyledType = styled.div<{
-  isCompressed: boolean;
-}>`
+const StyledType = styled.div`
   ${container.fhcl}
   font-family: 'RobotoMono';
   font-size: 1.1rem;
@@ -127,9 +117,7 @@ const StyledType = styled.div<{
   }
 `;
 
-const StyledAbbreviation = styled.div<{
-  isCompressed: boolean;
-}>`
+const StyledAbbreviation = styled.div`
   ${container.fvcl}
   background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
   border-bottom: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
@@ -142,14 +130,12 @@ const StyledAbbreviation = styled.div<{
 
   h2 {
     font-family: 'NovaMono';
-    font-size: ${(props) => props.isCompressed ? '4rem' : '6rem'};
+    font-size: 6rem;
     font-weight: 400;
   }
 `;
 
-const StyledName = styled.h1<{
-  isCompressed: boolean;
-}>`
+const StyledName = styled.h1`
   width: 100%;
   font-size: 1.4rem;
   font-weight: 400;
@@ -167,9 +153,7 @@ const StyledDivider = styled.div`
   margin: 2rem;
 `;
 
-const StyledRoot = styled.button<{
-  isCompressed: boolean;
-}>`
+const StyledRoot = styled.button`
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.black};
