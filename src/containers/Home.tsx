@@ -259,9 +259,9 @@ const StyledGrid = styled(Grid)`
   width: calc(100% + 1rem);
 
   > * {
-    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+    height: ${(props) => props.isSummaryEnabled ? '32rem' : '24rem'};
     margin: 1rem .5rem;
-    width: calc(50% - 1rem);
+    width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 1rem)'};
   }
 
   @media ${media.gtw(400)} {
@@ -269,12 +269,20 @@ const StyledGrid = styled(Grid)`
     width: calc(100% + 2rem);
 
     > * {
+      height: ${(props) => props.isSummaryEnabled ? '32rem' : '24rem'};
       margin: 1rem;
+      width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 2rem)'};
+    }
+  }
+
+  @media ${media.gtw(540)} {
+    > * {
+      height: ${(props) => props.isSummaryEnabled ? '32rem' : '24rem'};
       width: calc(50% - 2rem);
     }
   }
 
-  @media ${media.gtw(560)} {
+  @media ${media.gtw(660)} {
     > * {
       height: ${(props) => props.isSummaryEnabled ? '32rem' : '24rem'};
       width: ${(props) => props.isSummaryEnabled ? '26rem' : '20rem'};

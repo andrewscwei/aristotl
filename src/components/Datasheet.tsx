@@ -174,9 +174,7 @@ class Datasheet extends PureComponent<Props> {
             {exampleMarkups.length <= 0 ? '--' :
               <StyledList>
                 {exampleMarkups.map((v, i) => (
-                  <li key={`example-${i}`}>
-                    <blockquote dangerouslySetInnerHTML={{ __html: v }}/>
-                  </li>
+                  <li key={`example-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
                 ))}
               </StyledList>
             }
@@ -230,8 +228,14 @@ const ConnectedDatasheet = connect(
 export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDatasheet {...props} nodeRef={ref}/>);
 
 const StyledList = styled.ul`
+  ${container.fvtl}
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
   li {
     margin-left: 2rem;
+    width: calc(100% - 2rem);
     list-style: square;
   }
 
@@ -242,21 +246,27 @@ const StyledList = styled.ul`
 
 const StyledContent = styled.div`
   padding: 1rem 1rem;
+  width: 100%;
   max-width: 40rem;
   font-family: 'RobotoMono';
   font-weight: 400;
   font-size: 1.4rem;
 
-  blockquote {
+  p + pre {
+    margin-top: 1rem;
+  }
+
+  pre {
     ${container.box}
     background: ${(props) => props.theme.colors.lightGrey};
     padding: 1rem;
     margin: 0;
+    width: 100%;
   }
 
   a {
     ${animations.transition('color', 200, 'ease-out')}
-    color: inherit;
+    color: ${(props) => props.theme.colors.red};
     cursor: pointer;
 
     ${selectors.hwot} {
