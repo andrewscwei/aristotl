@@ -172,11 +172,11 @@ class Datasheet extends PureComponent<Props> {
           <StyledLabel>{ltxt('examples')}</StyledLabel>
           <StyledContent>
             {exampleMarkups.length <= 0 ? '--' :
-              <StyledList>
+              <ul>
                 {exampleMarkups.map((v, i) => (
                   <li key={`example-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
                 ))}
-              </StyledList>
+              </ul>
             }
           </StyledContent>
         </StyledSection>
@@ -185,13 +185,13 @@ class Datasheet extends PureComponent<Props> {
           <StyledLabel>{ltxt('related')}</StyledLabel>
           <StyledContent>
             {relatedDocs.length <= 0 ? '--' :
-              <StyledList>
+              <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
                     <a onClick={() => this.props.onDocChange(v)}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
-              </StyledList>
+              </ul>
             }
           </StyledContent>
         </StyledSection>
@@ -200,11 +200,11 @@ class Datasheet extends PureComponent<Props> {
           <StyledLabel>{ltxt('references')}</StyledLabel>
           <StyledContent>
             {referenceMarkups.length <= 0 ? '--' :
-              <StyledList>
+              <ul>
                 {referenceMarkups.map((v, i) => (
                   <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
                 ))}
-              </StyledList>
+              </ul>
             }
           </StyledContent>
         </StyledSection>
@@ -227,23 +227,6 @@ const ConnectedDatasheet = connect(
 
 export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDatasheet {...props} nodeRef={ref}/>);
 
-const StyledList = styled.ul`
-  ${container.fvtl}
-  width: 100%;
-  margin: 0;
-  padding: 0;
-
-  li {
-    margin-left: 2rem;
-    width: calc(100% - 2rem);
-    list-style: square;
-  }
-
-  ${selectors.eblc} {
-    margin-bottom: 1rem;
-  }
-`;
-
 const StyledContent = styled.div`
   padding: 1rem 1rem;
   width: 100%;
@@ -252,7 +235,28 @@ const StyledContent = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
 
-  p + pre {
+  ul, ol {
+    ${container.fvtl}
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-left: 3rem;
+    }
+
+    ${selectors.eblc} {
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul li {
+    list-style: square;
+  }
+
+  p + pre,
+  p + ol,
+  p + ul {
     margin-top: 1rem;
   }
 
