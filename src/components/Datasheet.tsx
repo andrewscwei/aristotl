@@ -1,9 +1,8 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, selectors } from 'promptu';
-import React, { createRef, PureComponent } from 'react';
+import React, { forwardRef, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
@@ -26,31 +25,22 @@ interface DispatchProps {
 
 }
 
-interface Props extends StateProps, DispatchProps {
+interface OwnProps {
   className?: string;
   doc: Document;
   id?: string;
+  nodeRef?: Ref<HTMLDivElement>;
   onDocChange: (doc: Document) => void;
   onExit: () => void;
 }
+
+interface Props extends StateProps, DispatchProps, OwnProps {}
 
 class Datasheet extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     onDocChange: () => {},
     onExit: () => {},
   };
-
-  nodeRefs = {
-    root: createRef<HTMLDivElement>(),
-  };
-
-  componentDidMount() {
-    if (this.nodeRefs.root.current) disableBodyScroll(this.nodeRefs.root.current);
-  }
-
-  componentWillUnmount() {
-    if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
-  }
 
   getAbbreviation(): string | undefined {
     const fragment = _.get(this.props.doc, 'data.abbreviation');
@@ -134,9 +124,8 @@ class Datasheet extends PureComponent<Props> {
     const referenceMarkups = this.getReferencesMarkups();
     const relatedDocs = this.getRelatedDocs();
 
-    this.getRelatedDocs();
     return (
-      <StyledRoot id={this.props.id} className={this.props.className} ref={this.nodeRefs.root}>
+      <StyledRoot id={this.props.id} className={this.props.className} ref={this.props.nodeRef}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
@@ -226,7 +215,7 @@ class Datasheet extends PureComponent<Props> {
   }
 }
 
-export default connect(
+const ConnectedDatasheet = connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
     docs: reduceDocs(state.prismic, 'fallacy') || [],
@@ -237,6 +226,8 @@ export default connect(
 
   }, dispatch),
 )(Datasheet);
+
+export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDatasheet {...props} nodeRef={ref}/>);
 
 const StyledList = styled.ul`
   li {

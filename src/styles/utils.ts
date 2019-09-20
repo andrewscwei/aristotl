@@ -13,15 +13,10 @@ export function timeoutByTransitionStatus(value: number, autoMount: boolean = fa
   }
 }
 
-export function valueByTransitionStatus(transitionStatus: TransitionStatus, values: Array<any>, autoMount: boolean = false): any {
+export function valueByTransitionStatus(values: Array<any>, transitionStatus?: TransitionStatus, autoMount: boolean = false): any {
   switch (values.length) {
   case 1: {
-    switch (transitionStatus) {
-    case 'entering': return values[0];
-    case 'entered': return values[0];
-    case 'exiting': return values[0];
-    case 'exited': return values[0];
-    }
+    return values[0];
   }
   case 2: {
     if (autoMount) {
@@ -30,23 +25,26 @@ export function valueByTransitionStatus(transitionStatus: TransitionStatus, valu
       case 'entered': return values[1];
       case 'exiting': return values[0];
       case 'exited': return values[0];
-      }
+      default: return values[1];
     }
-    else {
-      switch (transitionStatus) {
+  }
+  else {
+    switch (transitionStatus) {
       case 'entering': return values[1];
       case 'entered': return values[1];
       case 'exiting': return values[0];
       case 'exited': return values[0];
-      }
+      default: return values[1];
     }
   }
-  case 4: {
-    switch (transitionStatus) {
+}
+case 4: {
+  switch (transitionStatus) {
     case 'entering': return values[2];
     case 'entered': return values[3];
     case 'exiting': return values[0];
     case 'exited': return values[1];
+    default: return values[3];
     }
   }
   default:

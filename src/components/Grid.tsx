@@ -71,7 +71,7 @@ const StyledCard = styled.div<{
     background: ${(props) => props.theme.colors.offBlack};
     content: '';
     height: 100%;
-    transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)'], true)};
+    transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)'], props.transitionStatus, true)};
     width: 100%;
   }
 `;

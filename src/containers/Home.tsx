@@ -15,7 +15,7 @@ import Statistics from '../components/Statistics';
 import DocumentManager from '../managers/DocumentManager';
 import NavControlManager from '../managers/NavControlManager';
 import { colors } from '../styles/theme';
-import { valueByTransitionStatus } from '../styles/utils';
+import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -57,7 +57,7 @@ class Home extends PureComponent<Props, State> {
   render() {
     return (
       <Fragment>
-        <Transition in={this.state.activeDoc === undefined} timeout={200} mountOnEnter={false}>
+        <Transition in={this.state.activeDoc === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
             <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDoc} onPrev={() => this.prev()} onNext={() => this.next()}>
               <StyledRoot transitionStatus={status}>
@@ -108,16 +108,23 @@ class Home extends PureComponent<Props, State> {
             </NavControlManager>
           )}
         </Transition>
-        <Modal in={this.state.activeDoc !== undefined} onExit={() => this.setState({ activeDoc: undefined })}>
-          {(status, onExit) => (
-            <StyledDatasheet
-              transitionStatus={status}
-              doc={this.state.activeDoc}
-              onDocChange={(doc) => this.setState({ activeDoc: doc })}
-              onExit={() => onExit()}
-            />
+        <Transition in={this.state.activeDoc !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+          {(status) => (
+            <StyledModal transitionStatus={status} onExit={() => this.setState({ activeDoc: undefined })}>
+              {(onExit, ref) => {
+                return (
+                  <StyledDatasheet
+                    doc={this.state.activeDoc!}
+                    ref={ref}
+                    transitionStatus={status}
+                    onDocChange={(doc) => this.setState({ activeDoc: doc })}
+                    onExit={() => onExit()}
+                  />
+                );
+              }}
+            </StyledModal>
           )}
-        </Modal>
+        </Transition>
       </Fragment>
     );
   }
@@ -125,15 +132,20 @@ class Home extends PureComponent<Props, State> {
 
 export default Home;
 
+const StyledModal = styled(Modal)<{
+  transitionStatus?: TransitionStatus;
+}>`
+`;
+
 const StyledDatasheet = styled(Datasheet)<{
-  transitionStatus: TransitionStatus;
+  transitionStatus?: TransitionStatus;
 }>`
   ${align.tr}
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   width: 90%;
   max-width: 50rem;
   height: 100%;
-  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'], true)};
+  transform: ${(props) => valueByTransitionStatus(['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'], props.transitionStatus, true)};
 `;
 
 const StyledHeader = styled.header`
@@ -192,12 +204,12 @@ const StyledRoot = styled.div<{
   ${container.fvtl}
   background: ${(props) => props.theme.colors.offBlack};
   min-height: 100%;
-  opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0.4, 1])};
+  opacity: ${(props) => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
   padding: 5rem 2rem 10rem;
   perspective: 80rem;
-  pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
+  pointer-events: ${(props) => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
   transform-origin: center;
-  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'])};
+  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'], props.transitionStatus)};
   width: 100%;
 
   @media ${media.gtw(500)} {
