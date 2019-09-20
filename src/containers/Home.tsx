@@ -1,13 +1,10 @@
-import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, media, selectors } from 'promptu';
 import qs from 'query-string';
 import React, { createRef, Fragment, PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
-import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
 import Datasheet from '../components/Datasheet';
@@ -18,20 +15,10 @@ import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
 import DocumentManager from '../managers/DocumentManager';
 import NavControlManager from '../managers/NavControlManager';
-import { AppState } from '../store';
-import { reduceDocs } from '../store/prismic';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
-interface StateProps {
-  docs: ReadonlyArray<Document>;
-}
-
-interface DispatchProps {
-
-}
-
-interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
+interface Props extends RouteComponentProps<{}> {
 
 }
 
@@ -61,7 +48,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if ((prevProps.location.search !== this.props.location.search) || (prevProps.docs !== this.props.docs)) {
+    if (prevProps.location.search !== this.props.location.search) {
       this.updateStateFromQueryParams();
     }
   }
@@ -79,27 +66,22 @@ class Home extends PureComponent<Props, State> {
   }
 
   updateStateFromQueryParams() {
-    const { doc, search, page } = qs.parse(this.props.location.search);
-    const docId = typeof doc === 'string' ? doc : undefined;
+    const { search, page } = qs.parse(this.props.location.search);
     const searchInput = typeof search === 'string' ? search : undefined;
     const currentPageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
 
     this.setState({
-      activeDoc: _.find(this.props.docs, { id: docId }),
       searchInput,
       currentPageIndex,
     });
   }
 
-  generateQueryParams(query: { doc?: Document, searchInput?: string, pageIndex?: number }): string {
-    const { doc, searchInput, pageIndex } = query;
+  generateQueryParams(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
+    const searchInput = (nextState.searchInput === undefined) ? this.state.searchInput : nextState.searchInput;
+    const pageIndex = (nextState.pageIndex === undefined) ? this.state.currentPageIndex : nextState.pageIndex;
     const params = [];
 
-    if (doc !== undefined) {
-      params.push(`doc=${doc.id}`);
-    }
-
-    if (searchInput !== undefined && searchInput !== '') {
+    if (searchInput === undefined && searchInput !== '') {
       params.push(`search=${searchInput}`);
     }
 
@@ -116,36 +98,43 @@ class Home extends PureComponent<Props, State> {
   }
 
   onActiveDocChange(doc?: Document) {
-    this.props.history.push({
-      pathname: '/',
-      search: this.generateQueryParams({
-        doc,
-        searchInput: this.state.searchInput,
-        pageIndex: this.state.currentPageIndex,
-      }),
+    this.setState({
+      activeDoc: doc,
     });
   }
 
-  onSearchInputChange(input: string) {
-    this.props.history.push({
-      pathname: '/',
-      search: this.generateQueryParams({
-        doc: this.state.activeDoc,
+  onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
+    if (shouldUpdateHistory) {
+      this.props.history.push({
+        pathname: '/',
+        search: this.generateQueryParams({
+          searchInput: input,
+          pageIndex: 0,
+        }),
+      });
+    }
+    else {
+      this.setState({
         searchInput: input,
-        pageIndex: 0,
-      }),
-    });
+      });
+    }
   }
 
-  onPageIndexChange(index: number) {
-    this.props.history.push({
-      pathname: '/',
-      search: this.generateQueryParams({
-        doc: this.state.activeDoc,
-        searchInput: this.state.searchInput,
-        pageIndex: index,
-      }),
-    });
+  onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
+    if (shouldUpdateHistory) {
+      this.props.history.push({
+        pathname: '/',
+        search: this.generateQueryParams({
+          searchInput: this.state.searchInput,
+          pageIndex: index,
+        }),
+      });
+    }
+    else {
+      this.setState({
+        currentPageIndex: index,
+      });
+    }
   }
 
   render() {
@@ -225,18 +214,12 @@ class Home extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  (state: AppState): StateProps => ({
-    docs: reduceDocs(state.prismic, 'fallacy') || [],
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-
-  }, dispatch),
-)(Home);
+export default Home;
 
 const StyledModal = styled(Modal)<{
   transitionStatus?: TransitionStatus;
 }>`
+
 `;
 
 const StyledDatasheet = styled(Datasheet)<{
