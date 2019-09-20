@@ -64,6 +64,7 @@ class Home extends PureComponent<Props, State> {
                 <StyledHeader>
                   <SearchBar
                     id='search'
+                    autoFocus={!this.state.activeDoc}
                     onFocusIn={() => this.setState({ isSearching: true })}
                     onFocusOut={() => this.setState({ isSearching: false })}
                     onChange={(input: string) => this.setState({ searchInput: input, currentPageIndex: 0 })}

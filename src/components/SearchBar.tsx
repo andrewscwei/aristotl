@@ -1,5 +1,5 @@
 import { align, container, selectors } from 'promptu';
-import React, { ChangeEvent, PureComponent } from 'react';
+import React, { ChangeEvent, createRef, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
@@ -19,6 +19,7 @@ interface DispatchProps {
 interface Props extends StateProps, DispatchProps {
   className?: string;
   id?: string;
+  autoFocus: boolean;
   onChange: (input: string) => void;
   onFocusIn: () => void;
   onFocusOut: () => void;
@@ -26,10 +27,39 @@ interface Props extends StateProps, DispatchProps {
 
 class SearchBar extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
+    autoFocus: true,
     onChange: () => {},
     onFocusIn: () => {},
     onFocusOut: () => {},
   };
+
+  nodeRefs = {
+    input: createRef<HTMLInputElement>(),
+  };
+
+  componentDidMount() {
+    window.addEventListener('keyup', this.onKeyUp);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.onKeyUp);
+  }
+
+  onKeyUp = (event: KeyboardEvent) => {
+    if (!this.props.autoFocus) return;
+    if (!this.nodeRefs.input.current) return;
+
+    switch (event.keyCode) {
+    case 37:
+    case 38:
+    case 39:
+    case 40: return;
+    }
+
+    if (this.nodeRefs.input.current === document.activeElement) return;
+
+    this.nodeRefs.input.current.focus();
+  }
 
   render() {
     const { ltxt } = this.props.i18n;
@@ -44,6 +74,7 @@ class SearchBar extends PureComponent<Props> {
         <StyledInput>
           <input
             type='text'
+            ref={this.nodeRefs.input}
             placeholder={ltxt('search-placeholder')}
             onFocus={() => this.props.onFocusIn()}
             onBlur={() => this.props.onFocusOut()}

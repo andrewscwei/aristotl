@@ -32,14 +32,6 @@ interface Props extends StateProps, DispatchProps {
 interface State {}
 
 class App extends PureComponent<Props, State> {
-  componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
-  }
-
   syncLocaleWithUrl() {
     const { route, changeLocale, i18n } = this.props;
     const newLocale = getLocaleFromPath(route.location.pathname);
@@ -58,22 +50,6 @@ class App extends PureComponent<Props, State> {
     return routes.map((route, index) => (
       <Route exact={route.exact} path={route.path} key={`route-${index}`} component={route.component}/>
     ));
-  }
-
-  onKeyUp = (event: KeyboardEvent) => {
-    const searchBar = document.querySelector('#search input[type="text"]');
-
-    switch (event.keyCode) {
-    case 37:
-    case 38:
-    case 39:
-    case 40: return;
-    }
-
-    if (!searchBar || !(searchBar instanceof HTMLInputElement)) return;
-    if (searchBar === document.activeElement) return;
-
-    searchBar.focus();
   }
 
   render() {
