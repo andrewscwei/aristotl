@@ -35,7 +35,7 @@ class Grid extends PureComponent<Props> {
           const delay = i * 20;
 
           return (
-            <Transition in={true} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
+            <Transition in={true} key={doc.id} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
               {(status) => (
                 <StyledCard
                   delay={delay}

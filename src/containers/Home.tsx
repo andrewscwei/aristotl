@@ -101,12 +101,6 @@ class Home extends PureComponent<Props, State> {
                         isSummaryEnabled={this.state.isSummaryEnabled}
                         onActivate={(doc) => this.setState({ activeDoc: doc })}
                       />
-                      <StyledPaginator
-                        ref={this.nodeRefs.paginator}
-                        activePageIndex={this.state.currentPageIndex}
-                        maxPages={maxPages}
-                        onActivate={(index) => this.setState({ currentPageIndex: index })}
-                      />
                     </Fragment>
                   )}
                 </DocumentManager>
@@ -200,7 +194,7 @@ const StyledRoot = styled.div<{
   background: ${(props) => props.theme.colors.offBlack};
   min-height: 100%;
   opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0.4, 1])};
-  padding: 5rem 2rem;
+  padding: 5rem 2rem 10rem;
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
   transform-origin: center;
@@ -208,6 +202,6 @@ const StyledRoot = styled.div<{
   width: 100%;
 
   @media ${media.gtw(500)} {
-    padding: 5rem 5rem;
+    padding: 5rem 5rem 15rem;
   }
 `;

@@ -7,6 +7,7 @@ import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import Pixel from './Pixel';
+import ActionButton from './ActionButton';
 
 interface StateProps {
   i18n: I18nState;
@@ -45,6 +46,12 @@ class SearchBar extends PureComponent<Props> {
     window.removeEventListener('keyup', this.onKeyUp);
   }
 
+  clear() {
+    if (!this.nodeRefs.input.current) return;
+    this.nodeRefs.input.current.value = '';
+    this.props.onChange('');
+  }
+
   onKeyUp = (event: KeyboardEvent) => {
     if (!this.props.autoFocus) return;
     if (!this.nodeRefs.input.current) return;
@@ -81,6 +88,13 @@ class SearchBar extends PureComponent<Props> {
             onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.onChange(event.currentTarget.value)}
           />
         </StyledInput>
+        <StyledActionButton
+          symbol='c'
+          isTogglable={true}
+          tintColor={colors.white}
+          hoverTintColor={colors.red}
+          onActivate={() => this.clear()}
+        />
       </StyledRoot>
     );
   }
@@ -109,12 +123,10 @@ const StyledPixels = styled.div`
 const StyledInput = styled.div`
   ${container.fvcl}
   ${(props) => props.theme.fonts.search}
-  background: ${(props) => props.theme.colors.black};
   color: ${(props) => props.theme.colors.white};
   font-family: 'RobotoMono';
   font-size: 2rem;
   height: 5rem;
-  padding: 0 1rem;
   width: 100%;
 
   input {
@@ -123,10 +135,15 @@ const StyledInput = styled.div`
   }
 `;
 
+const StyledActionButton = styled(ActionButton)`
+  margin-left; 1rem;
+`;
+
 const StyledRoot = styled.div`
   ${container.fhcl}
-  padding: 0;
+  background: ${(props) => props.theme.colors.black};
   max-width: 40rem;
+  padding: 0 1rem;
   width: 100%;
   z-index: ${(props) => props.theme.z.foreground};
 `;
