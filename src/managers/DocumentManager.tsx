@@ -38,6 +38,16 @@ class DocumentManager extends PureComponent<Props> {
       orderings: '[my.fallacy.abbreviation]',
       pageSize: 100,
     }, 2);
+
+    this.props.fetchDocs('fallacy_type', undefined, {
+      orderings: '[my.fallacy_type.name]',
+      pageSize: 100,
+    });
+
+    this.props.fetchDocs('fallacy_subtype', undefined, {
+      orderings: '[my.fallacy_subtype.name]',
+      pageSize: 100,
+    });
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {

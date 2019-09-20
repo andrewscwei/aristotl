@@ -9,6 +9,7 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
+import { reduceDocs } from '../store/prismic';
 import { colors } from '../styles/theme';
 import { linkResolver } from '../utils/prismic';
 import ActionButton from './ActionButton';
@@ -16,6 +17,8 @@ import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
+  fallacyTypes: ReadonlyArray<Document>;
+  fallacySubtypes: ReadonlyArray<Document>;
 }
 
 interface DispatchProps {
@@ -67,8 +70,6 @@ class Datasheet extends PureComponent<Props> {
   }
 
   render() {
-    console.log(this.props.doc);
-
     const { ltxt } = this.props.i18n;
     const abbreviation = _.get(this.props.doc, 'data.abbreviation');
     const name = _.get(this.props.doc, 'data.name');
@@ -156,6 +157,8 @@ class Datasheet extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
+    fallacyTypes: reduceDocs(state.prismic, 'fallacy_type') || [],
+    fallacySubtypes: reduceDocs(state.prismic, 'fallacy_subtype') || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 
