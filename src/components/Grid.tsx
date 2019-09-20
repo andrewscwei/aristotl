@@ -10,7 +10,6 @@ interface Props {
   className?: string;
   id?: string;
   docs: ReadonlyArray<Document>;
-  salt?: string;
   isSummaryEnabled: boolean;
   onActivate: (doc: Document) => void;
 }
@@ -31,7 +30,7 @@ class Grid extends PureComponent<Props> {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => (
-          <CSSTransition key={`${this.props.salt}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
+          <CSSTransition key={`${Date.now()}-${i}`} timeout={timeoutByTransitionStatus(i * 20 + 150)} classNames='card'>
             <StyledCard index={i} isSummaryEnabled={this.props.isSummaryEnabled}>
               <Card doc={doc} isSummaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
             </StyledCard>
