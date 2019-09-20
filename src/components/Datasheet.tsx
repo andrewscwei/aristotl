@@ -31,12 +31,14 @@ interface Props extends StateProps, DispatchProps {
   doc: Document;
   id?: string;
   scrollLock: boolean;
+  onDocChange: (doc: Document) => void;
   onExit: () => void;
 }
 
 class Datasheet extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     scrollLock: false,
+    onDocChange: () => {},
     onExit: () => {},
   };
 
@@ -204,7 +206,7 @@ class Datasheet extends PureComponent<Props> {
               <StyledList>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
-                    <a>{_.get(v, 'data.name')}</a>
+                    <a onClick={() => this.props.onDocChange(v)}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
               </StyledList>

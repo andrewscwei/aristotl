@@ -114,6 +114,7 @@ class Home extends PureComponent<Props, State> {
               scrollLock={this.state.activeDoc !== undefined}
               transitionStatus={status}
               doc={this.state.activeDoc}
+              onDocChange={(doc) => this.setState({ activeDoc: doc })}
               onExit={() => onExit()}
             />
           )}
