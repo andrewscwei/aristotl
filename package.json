@@ -117,6 +117,7 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
+    "query-string": "^6.8.3",
     "react-hammerjs": "^1.0.1"
   }
 }

@@ -18,9 +18,10 @@ interface DispatchProps {
 }
 
 interface Props extends StateProps, DispatchProps {
+  autoFocus: boolean;
   className?: string;
   id?: string;
-  autoFocus: boolean;
+  input?: string;
   onChange: (input: string) => void;
   onFocusIn: () => void;
   onFocusOut: () => void;
@@ -81,6 +82,7 @@ class SearchBar extends PureComponent<Props> {
         <StyledInput>
           <input
             type='text'
+            value={this.props.input || ''}
             ref={this.nodeRefs.input}
             placeholder={ltxt('search-placeholder')}
             onFocus={() => this.props.onFocusIn()}
