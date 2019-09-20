@@ -30,14 +30,12 @@ interface Props extends StateProps, DispatchProps {
   className?: string;
   doc: Document;
   id?: string;
-  scrollLock: boolean;
   onDocChange: (doc: Document) => void;
   onExit: () => void;
 }
 
 class Datasheet extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
-    scrollLock: false,
     onDocChange: () => {},
     onExit: () => {},
   };
@@ -46,15 +44,12 @@ class Datasheet extends PureComponent<Props> {
     root: createRef<HTMLDivElement>(),
   };
 
-  componentDidUpdate(prevProps: Props) {
-    if ((this.nodeRefs.root.current) && (prevProps.scrollLock !== this.props.scrollLock)) {
-      if (this.props.scrollLock) {
-        disableBodyScroll(this.nodeRefs.root.current);
-      }
-      else {
-        enableBodyScroll(this.nodeRefs.root.current);
-      }
-    }
+  componentDidMount() {
+    if (this.nodeRefs.root.current) disableBodyScroll(this.nodeRefs.root.current);
+  }
+
+  componentWillUnmount() {
+    if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
   }
 
   getAbbreviation(): string | undefined {

@@ -20,7 +20,7 @@ class Modal extends PureComponent<Props> {
 
   render() {
     return (
-      <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200)}>
+      <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
         {(status) => (
           <StyledRoot transitionStatus={status}>
             <NavControlManager isEnabled={this.props.in} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
@@ -44,7 +44,7 @@ const StyledBackground = styled.div<{
   ${animations.transition('opacity', 200, 'ease-out')}
   background: ${(props) => props.theme.colors.black};
   height: 100%;
-  opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0, 0.4])};
+  opacity: ${(props) => valueByTransitionStatus(props.transitionStatus, [0, 0.4], true)};
   width: 100%;
 `;
 
@@ -53,6 +53,6 @@ const StyledRoot = styled.div<{
 }>`
   ${align.ftl}
   height: 100%;
-  pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'])};
+  pointer-events: ${(props) => valueByTransitionStatus(props.transitionStatus, ['none', 'auto'], true)};
   width: 100%;
 `;

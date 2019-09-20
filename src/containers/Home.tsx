@@ -111,7 +111,6 @@ class Home extends PureComponent<Props, State> {
         <Modal in={this.state.activeDoc !== undefined} onExit={() => this.setState({ activeDoc: undefined })}>
           {(status, onExit) => (
             <StyledDatasheet
-              scrollLock={this.state.activeDoc !== undefined}
               transitionStatus={status}
               doc={this.state.activeDoc}
               onDocChange={(doc) => this.setState({ activeDoc: doc })}
@@ -134,7 +133,7 @@ const StyledDatasheet = styled(Datasheet)<{
   width: 90%;
   max-width: 50rem;
   height: 100%;
-  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'])};
+  transform: ${(props) => valueByTransitionStatus(props.transitionStatus, ['translate3d(100%, 0, 0)', 'translate3d(0, 0, 0)'], true)};
 `;
 
 const StyledHeader = styled.header`
