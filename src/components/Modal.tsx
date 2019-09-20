@@ -41,13 +41,15 @@ class Modal extends PureComponent<Props> {
   render() {
     return (
       <Transition in={this.props.in} timeout={timeoutByTransitionStatus(200)}>
-        {(state) => (
-          <NavControlManager isEnabled={this.props.in} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
-            <StyledRoot ref={this.nodeRefs.root} transitionStatus={state}>
-              <StyledBackground onClick={() => this.props.onExit()} transitionStatus={state}/>
-              {this.props.children(state, this.props.onExit)}
-            </StyledRoot>
-          </NavControlManager>
+        {(status) => (
+          <StyledRoot ref={this.nodeRefs.root} transitionStatus={status}>
+            <NavControlManager isEnabled={this.props.in} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
+              <div>
+                <StyledBackground onClick={() => this.props.onExit()} transitionStatus={status}/>
+                {this.props.children(status, this.props.onExit)}
+              </div>
+            </NavControlManager>
+          </StyledRoot>
         )}
       </Transition>
     );

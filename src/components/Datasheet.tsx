@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align } from 'promptu';
+import { align, container } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -11,6 +11,7 @@ import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { linkResolver } from '../utils/prismic';
 import ActionButton from './ActionButton';
+import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
@@ -48,8 +49,22 @@ class Datasheet extends PureComponent<Props> {
           hoverTintColor={colors.red}
           onActivate={() => this.props.onExit()}
         />
-        {abbreviation && <StyledAbbreviation>{abbreviation}</StyledAbbreviation>}
-        {name && <StyledName>{name}</StyledName>}
+
+        {abbreviation &&
+          <StyledAbbreviation>
+            <Pixel alignment='tr' tintColor={colors.black}/>
+            <Pixel alignment='br' tintColor={colors.black}/>
+            <Pixel alignment='cr' tintColor={colors.black}/>
+            <Pixel alignment='tc' tintColor={colors.black}/>
+            <Pixel alignment='bc' tintColor={colors.black}/>
+            <h2>{abbreviation}</h2>
+          </StyledAbbreviation>
+        }
+
+        {name &&
+          <StyledName>{name}</StyledName>
+        }
+
         {description && <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/>}
       </StyledRoot>
     );
@@ -71,18 +86,48 @@ const StyledCloseButton = styled(ActionButton)`
 `;
 
 const StyledDescription = styled.div`
+  max-width: 40rem;
+
+  p {
+    font-size: 1.4rem;
+    font-family: 'RobotoMono';
+    font-weight: 400;
+  }
 `;
 
-const StyledAbbreviation = styled.h2`
+const StyledAbbreviation = styled.div`
+  ${align.tr}
+  ${container.fhcr}
+  background: ${(props) => props.theme.colors.black};
+  height: 3rem;
+  margin: 2.5rem 3rem;
+  padding: 0 1rem;
+  width: calc(100% - 9rem);
+
+  h2 {
+    color: ${(props) => props.theme.colors.white};
+    font-family: 'NovaMono';
+    font-size: 2.6rem;
+    text-align: right;
+  }
 `;
 
 const StyledName = styled.h1`
+  font-family: 'RobotoMono';
+  font-weight: 400;
+  font-size: 3.6rem;
+  text-transform: uppercase;
+  line-height: 120%;
+  width: 100%;
+  max-width: 40rem;
+  margin-bottom: 2rem;
 `;
 
 const StyledRoot = styled.div`
   -webkit-overflow-scrolling: touch;
   background: #fff;
+  color: ${(props) => props.theme.colors.black};
   overflow-x: hidden;
   overflow-y: scroll;
-  color: ${(props) => props.theme.colors.black};
+  padding: 8rem 3rem;
 `;
