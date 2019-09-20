@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
-import Pixel from './Pixel';
 import ActionButton from './ActionButton';
+import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
@@ -136,7 +136,7 @@ const StyledInput = styled.div`
 `;
 
 const StyledActionButton = styled(ActionButton)`
-  margin-left; 1rem;
+  margin-left: 1rem;
 `;
 
 const StyledRoot = styled.div`
