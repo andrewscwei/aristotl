@@ -193,7 +193,6 @@ const StyledRoot = styled.div`
   -webkit-overflow-scrolling: touch;
   background: #fff;
   color: ${(props) => props.theme.colors.black};
-  overflow-x: hidden;
   overflow-y: scroll;
   padding: 8rem 3rem;
 
