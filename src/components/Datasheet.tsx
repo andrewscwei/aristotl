@@ -28,8 +28,8 @@ interface DispatchProps {
 
 interface Props extends StateProps, DispatchProps {
   className?: string;
-  id?: string;
   doc: Document;
+  id?: string;
   scrollLock: boolean;
   onExit: () => void;
 }
@@ -44,21 +44,6 @@ class Datasheet extends PureComponent<Props> {
     root: createRef<HTMLDivElement>(),
   };
 
-  componentDidMount() {
-    if (this.nodeRefs.root.current) {
-      if (this.props.scrollLock) {
-        disableBodyScroll(this.nodeRefs.root.current);
-      }
-      else {
-        enableBodyScroll(this.nodeRefs.root.current);
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.nodeRefs.root.current) enableBodyScroll(this.nodeRefs.root.current);
-  }
-
   componentDidUpdate(prevProps: Props) {
     if ((this.nodeRefs.root.current) && (prevProps.scrollLock !== this.props.scrollLock)) {
       if (this.props.scrollLock) {
@@ -70,21 +55,89 @@ class Datasheet extends PureComponent<Props> {
     }
   }
 
+  getAbbreviation(): string | undefined {
+    const fragment = _.get(this.props.doc, 'data.abbreviation');
+    return _.isEmpty(fragment) ? undefined : fragment;
+  }
+
+  getName(): string | undefined {
+    const fragment = _.get(this.props.doc, 'data.name');
+    return _.isEmpty(fragment) ? undefined : fragment;
+  }
+
+  getAliases(): ReadonlyArray<string> {
+    const fragments = _.get(this.props.doc, 'data.aliases');
+    const names = _.reduce(fragments, (out, curr: any) => {
+      if (!_.isEmpty(curr.name)) out.push(curr.name);
+      return out;
+    }, Array<string>());
+
+    return names;
+  }
+
+  getType(): Document | undefined {
+    const docId = _.get(this.props.doc, 'data.type.id');
+    if (!docId) return undefined;
+    return _.find(this.props.fallacyTypes, { id: docId });
+  }
+
+  getSubtype(): Document | undefined {
+    const docId = _.get(this.props.doc, 'data.subtype.id');
+    if (!docId) return undefined;
+    return _.find(this.props.fallacySubtypes, { id: docId });
+  }
+
+  getDescriptionMarkup(): string | undefined {
+    const fragment = _.get(this.props.doc, 'data.description');
+    if (_.isEmpty(fragment)) return undefined;
+    return PrismicDOM.RichText.asHtml(fragment, linkResolver);
+  }
+
+  getExampleMarkups(): ReadonlyArray<string> {
+    const fragments = _.reduce(_.get(this.props.doc, 'data.examples'), (out, curr: any) => {
+      if (!_.isEmpty(curr.example)) out.push(curr.example);
+      return out;
+    }, Array<string>());
+    const markups = _.map(fragments, (v) => PrismicDOM.RichText.asHtml(v, linkResolver));
+
+    return markups;
+  }
+
+  getRelatedDocs(): ReadonlyArray<Document> {
+    const fragments = _.get(this.props.doc, 'data.related');
+    const docIds = _.reduce(fragments, (out, curr: any) => {
+      const id = _.get(curr, 'fallacy.id');
+      if (id) out.push(id);
+      return out;
+    }, Array<string>());
+    const docs = _.intersectionWith(this.props.docs, docIds, (doc, id) => doc.id === id);
+
+    return docs;
+  }
+
+  getReferencesMarkups(): ReadonlyArray<string> {
+    const fragments = _.reduce(_.get(this.props.doc, 'data.references'), (out, curr: any) => {
+      if (!_.isEmpty(curr.reference)) out.push(curr.reference);
+      return out;
+    }, Array<string>());
+    const markups = _.map(fragments, (v) => PrismicDOM.RichText.asHtml(v, linkResolver));
+
+    return markups;
+  }
+
   render() {
     const { ltxt } = this.props.i18n;
-    const abbreviation = _.get(this.props.doc, 'data.abbreviation');
-    const name = _.get(this.props.doc, 'data.name');
-    const aliases = _.compact(_.map(_.get(this.props.doc, 'data.aliases'), ((v) => v.name)));
-    const description = _.get(this.props.doc, 'data.description');
-    const type = _.find(this.props.fallacyTypes, { id: _.get(this.props.doc, 'data.type.id') });
-    const subtype = _.find(this.props.fallacySubtypes, { id: _.get(this.props.doc, 'data.subtype.id') });
-    const references = _.map(_.get(this.props.doc, 'data.references'), (v) => v.reference);
-    const hasReferences = _.get(references, '0.length') !== 0;
-    const examples = _.map(_.get(this.props.doc, 'data.examples'), (v) => v.example);
-    const hasExamples = _.get(examples, '0.length') !== 0;
-    const related = _.intersectionWith(this.props.docs, _.map(_.get(this.props.doc, 'data.related'), (v) => v.fallacy), (a, b) => a.id === b.id);
-    const hasRelated = related.length > 0;
+    const abbreviation = this.getAbbreviation();
+    const name = this.getName();
+    const aliases = this.getAliases();
+    const type = this.getType();
+    const subtype = this.getSubtype();
+    const descriptionMarkup = this.getDescriptionMarkup();
+    const exampleMarkups = this.getExampleMarkups();
+    const referenceMarkups = this.getReferencesMarkups();
+    const relatedDocs = this.getRelatedDocs();
 
+    this.getRelatedDocs();
     return (
       <StyledRoot id={this.props.id} className={this.props.className} ref={this.nodeRefs.root}>
         <StyledCloseButton
@@ -94,91 +147,83 @@ class Datasheet extends PureComponent<Props> {
           onActivate={() => this.props.onExit()}
         />
 
-        {abbreviation &&
-          <StyledAbbreviation>
-            <Pixel alignment='tr' tintColor={colors.black}/>
-            <Pixel alignment='br' tintColor={colors.black}/>
-            <Pixel alignment='cr' tintColor={colors.black}/>
-            <Pixel alignment='tc' tintColor={colors.black}/>
-            <Pixel alignment='bc' tintColor={colors.black}/>
-            <h2>{abbreviation}</h2>
-          </StyledAbbreviation>
-        }
+        <StyledAbbreviation>
+          <Pixel alignment='tr' tintColor={colors.black}/>
+          <Pixel alignment='br' tintColor={colors.black}/>
+          <Pixel alignment='cr' tintColor={colors.black}/>
+          <Pixel alignment='tc' tintColor={colors.black}/>
+          <Pixel alignment='bc' tintColor={colors.black}/>
+          <h2>{abbreviation || '--'}</h2>
+        </StyledAbbreviation>
 
-        <section>
+        <StyledSection>
           <StyledLabel>{ltxt('name')}</StyledLabel>
           <StyledContent>
-            {!_.isEmpty(name) &&
-              <StyledName>{name}</StyledName> ||
-              <StyledName>--</StyledName>
-            }
+            <StyledName>{name || '--'}</StyledName>
           </StyledContent>
-        </section>
+        </StyledSection>
 
-        <section>
+        <StyledSection>
           <StyledLabel>{ltxt('aliases')}</StyledLabel>
           <StyledContent>
-            {!_.isEmpty(aliases) &&
-              <em>{aliases.join(', ')}</em> ||
-              <em>--</em>
-            }
+            {aliases.length > 0 ? <em>{aliases.join(', ')}</em> : '--'}
           </StyledContent>
-        </section>
+        </StyledSection>
 
-        <section>
+        <StyledSection>
           <StyledLabel>{ltxt('type')}</StyledLabel>
-          <StyledContent>{`${_.get(type, 'data.name', '--')} / ${_.get(subtype, 'data.name', '--')}`}</StyledContent>
-        </section>
-
-        <section>
-          <StyledLabel>{ltxt('description')}</StyledLabel>
           <StyledContent>
-            {!_.isEmpty(description) &&
-              <StyledDescription dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(description, linkResolver) }}/> ||
-              <StyledDescription><p>--</p></StyledDescription>
-            }
+            {type ? <a>{_.get(type, 'data.name')}</a> : '--'} / {subtype ? <a>{_.get(subtype, 'data.name')}</a> : '--'}
           </StyledContent>
-        </section>
+        </StyledSection>
 
-        <section>
+        <StyledSection>
+          <StyledLabel>{ltxt('description')}</StyledLabel>
+          <StyledContent dangerouslySetInnerHTML={{ __html: descriptionMarkup || '--' }}/>
+        </StyledSection>
+
+        <StyledSection>
           <StyledLabel>{ltxt('examples')}</StyledLabel>
           <StyledContent>
-            {hasExamples && <StyledExampleList>
-              {examples.map((v, i) => (
-                <div key={`example-${i}`} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(v, linkResolver) || '--' }}/>
-              ))}
-            </StyledExampleList> ||
-              <p>--</p>
+            {exampleMarkups.length <= 0 ? '--' :
+              <StyledList>
+                {exampleMarkups.map((v, i) => (
+                  <li key={`example-${i}`}>
+                    <blockquote dangerouslySetInnerHTML={{ __html: v }}/>
+                  </li>
+                ))}
+              </StyledList>
             }
           </StyledContent>
-        </section>
+        </StyledSection>
 
-        <section>
+        <StyledSection>
           <StyledLabel>{ltxt('related')}</StyledLabel>
           <StyledContent>
-            {hasRelated &&
-              <StyledRelatedList>
-                {related.map((v: any, i) => (
-                  <li key={`related-${i}`}><a>{v.data.name}</a></li>
+            {relatedDocs.length <= 0 ? '--' :
+              <StyledList>
+                {relatedDocs.map((v: any, i) => (
+                  <li key={`related-${i}`}>
+                    <a>{_.get(v, 'data.name')}</a>
+                  </li>
                 ))}
-              </StyledRelatedList> ||
-              <p>--</p>
+              </StyledList>
             }
           </StyledContent>
-        </section>
+        </StyledSection>
 
-        <section>
+        <StyledSection>
           <StyledLabel>{ltxt('references')}</StyledLabel>
           <StyledContent>
-            {hasReferences && <StyledReferenceList>
-              {references.map((v, i) => (
-                <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(v, linkResolver) || '--' }}/>
-              ))}
-            </StyledReferenceList> ||
-              <p>--</p>
+            {referenceMarkups.length <= 0 ? '--' :
+              <StyledList>
+                {referenceMarkups.map((v, i) => (
+                  <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
+                ))}
+              </StyledList>
             }
           </StyledContent>
-        </section>
+        </StyledSection>
       </StyledRoot>
     );
   }
@@ -196,53 +241,10 @@ export default connect(
   }, dispatch),
 )(Datasheet);
 
-const StyledRelatedList = styled.ul`
+const StyledList = styled.ul`
   li {
     margin-left: 2rem;
     list-style: square;
-
-    a {
-      ${animations.transition('color', 200, 'ease-out')}
-      color: inherit;
-
-      ${selectors.hwot} {
-        color: ${(props) => props.theme.colors.red};
-        text-decoration: underline;
-      }
-    }
-  }
-
-  ${selectors.eblc} {
-    margin-bottom: 1rem;
-  }
-`;
-
-const StyledExampleList = styled.div`
-  > div {
-    ${container.box}
-    background: ${(props) => props.theme.colors.lightGrey};
-    padding: 1rem;
-  }
-
-  ${selectors.eblc} {
-    margin-bottom: 1rem;
-  }
-`;
-
-const StyledReferenceList = styled.ul`
-  li {
-    margin-left: 2rem;
-    list-style: square;
-
-    a {
-      ${animations.transition('color', 200, 'ease-out')}
-      color: inherit;
-
-      ${selectors.hwot} {
-        color: ${(props) => props.theme.colors.red};
-        text-decoration: underline;
-      }
-    }
   }
 
   ${selectors.eblc} {
@@ -256,6 +258,24 @@ const StyledContent = styled.div`
   font-family: 'RobotoMono';
   font-weight: 400;
   font-size: 1.4rem;
+
+  blockquote {
+    ${container.box}
+    background: ${(props) => props.theme.colors.lightGrey};
+    padding: 1rem;
+    margin: 0;
+  }
+
+  a {
+    ${animations.transition('color', 200, 'ease-out')}
+    color: inherit;
+    cursor: pointer;
+
+    ${selectors.hwot} {
+      color: ${(props) => props.theme.colors.red};
+      text-decoration: underline;
+    }
+  }
 `;
 
 const StyledLabel = styled.div`
@@ -273,14 +293,6 @@ const StyledLabel = styled.div`
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}
   margin: 3rem;
-`;
-
-const StyledDescription = styled.div`
-  p {
-    font-size: 1.4rem;
-    font-family: 'RobotoMono';
-    font-weight: 400;
-  }
 `;
 
 const StyledAbbreviation = styled.div`
@@ -308,15 +320,15 @@ const StyledName = styled.h1`
   width: 100%;
 `;
 
+const StyledSection = styled.div`
+  ${container.fvtl}
+  margin-top: 2rem;
+`;
+
 const StyledRoot = styled.div`
   -webkit-overflow-scrolling: touch;
   background: #fff;
   color: ${(props) => props.theme.colors.black};
   overflow-y: scroll;
   padding: 8rem 3rem;
-
-  > section {
-    ${container.fvtl}
-    margin-top: 2rem;
-  }
 `;
