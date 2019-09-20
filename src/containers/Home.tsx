@@ -96,7 +96,7 @@ class Home extends PureComponent<Props, State> {
                         onActivate={(index) => this.setState({ currentPageIndex: index })}
                       />
                       <StyledGrid
-                        key={Date.now()}
+                        key={`${this.state.searchInput}-${this.state.currentPageIndex}`}
                         docs={docs}
                         isSummaryEnabled={this.state.isSummaryEnabled}
                         onActivate={(doc) => this.setState({ activeDoc: doc })}
