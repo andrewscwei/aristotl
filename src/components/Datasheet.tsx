@@ -17,6 +17,7 @@ import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
+  docs: ReadonlyArray<Document>;
   fallacyTypes: ReadonlyArray<Document>;
   fallacySubtypes: ReadonlyArray<Document>;
 }
@@ -78,9 +79,11 @@ class Datasheet extends PureComponent<Props> {
     const type = _.find(this.props.fallacyTypes, { id: _.get(this.props.doc, 'data.type.id') });
     const subtype = _.find(this.props.fallacySubtypes, { id: _.get(this.props.doc, 'data.subtype.id') });
     const references = _.map(_.get(this.props.doc, 'data.references'), (v) => v.reference);
-    const examples = _.map(_.get(this.props.doc, 'data.examples'), (v) => v.example);
     const hasReferences = _.get(references, '0.length') !== 0;
+    const examples = _.map(_.get(this.props.doc, 'data.examples'), (v) => v.example);
     const hasExamples = _.get(examples, '0.length') !== 0;
+    const related = _.intersectionWith(this.props.docs, _.map(_.get(this.props.doc, 'data.related'), (v) => v.fallacy), (a, b) => a.id === b.id);
+    const hasRelated = related.length > 0;
 
     return (
       <StyledRoot id={this.props.id} className={this.props.className} ref={this.nodeRefs.root}>
@@ -153,6 +156,14 @@ class Datasheet extends PureComponent<Props> {
         <section>
           <StyledLabel>{ltxt('related')}</StyledLabel>
           <StyledContent>
+            {hasRelated &&
+              <StyledRelatedList>
+                {related.map((v: any, i) => (
+                  <li key={`related-${i}`}><button>{v.data.name}</button></li>
+                ))}
+              </StyledRelatedList> ||
+              <p>--</p>
+            }
           </StyledContent>
         </section>
 
@@ -176,6 +187,7 @@ class Datasheet extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
+    docs: reduceDocs(state.prismic, 'fallacy') || [],
     fallacyTypes: reduceDocs(state.prismic, 'fallacy_type') || [],
     fallacySubtypes: reduceDocs(state.prismic, 'fallacy_subtype') || [],
   }),
@@ -183,6 +195,17 @@ export default connect(
 
   }, dispatch),
 )(Datasheet);
+
+const StyledRelatedList = styled.ul`
+  li {
+    margin-left: 2rem;
+    list-style: square;
+  }
+
+  ${selectors.eblc} {
+    margin-bottom: 1rem;
+  }
+`;
 
 const StyledExampleList = styled.div`
   > div {
