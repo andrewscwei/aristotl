@@ -2,7 +2,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, container } from 'promptu';
+import { align, container, selectors, animations } from 'promptu';
 import React, { createRef, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -75,6 +75,12 @@ class Datasheet extends PureComponent<Props> {
     const name = _.get(this.props.doc, 'data.name');
     const aliases = _.compact(_.map(_.get(this.props.doc, 'data.aliases'), ((v) => v.name)));
     const description = _.get(this.props.doc, 'data.description');
+    const type = _.find(this.props.fallacyTypes, { id: _.get(this.props.doc, 'data.type.id') });
+    const subtype = _.find(this.props.fallacySubtypes, { id: _.get(this.props.doc, 'data.subtype.id') });
+    const references = _.map(_.get(this.props.doc, 'data.references'), (v) => v.reference);
+    const examples = _.map(_.get(this.props.doc, 'data.examples'), (v) => v.example);
+    const hasReferences = _.get(references, '0.length') !== 0;
+    const hasExamples = _.get(examples, '0.length') !== 0;
 
     return (
       <StyledRoot id={this.props.id} className={this.props.className} ref={this.nodeRefs.root}>
@@ -118,8 +124,7 @@ class Datasheet extends PureComponent<Props> {
 
         <section>
           <StyledLabel>{ltxt('type')}</StyledLabel>
-          <StyledContent>
-          </StyledContent>
+          <StyledContent>{`${_.get(type, 'data.name', '--')} / ${_.get(subtype, 'data.name', '--')}`}</StyledContent>
         </section>
 
         <section>
@@ -135,6 +140,13 @@ class Datasheet extends PureComponent<Props> {
         <section>
           <StyledLabel>{ltxt('examples')}</StyledLabel>
           <StyledContent>
+            {hasExamples && <StyledExampleList>
+              {examples.map((v, i) => (
+                <div key={`example-${i}`} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(v, linkResolver) || '--' }}/>
+              ))}
+            </StyledExampleList> ||
+              <p>--</p>
+            }
           </StyledContent>
         </section>
 
@@ -147,6 +159,13 @@ class Datasheet extends PureComponent<Props> {
         <section>
           <StyledLabel>{ltxt('references')}</StyledLabel>
           <StyledContent>
+            {hasReferences && <StyledReferenceList>
+              {references.map((v, i) => (
+                <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(v, linkResolver) || '--' }}/>
+              ))}
+            </StyledReferenceList> ||
+              <p>--</p>
+            }
           </StyledContent>
         </section>
       </StyledRoot>
@@ -164,6 +183,39 @@ export default connect(
 
   }, dispatch),
 )(Datasheet);
+
+const StyledExampleList = styled.div`
+  > div {
+    ${container.box}
+    background: ${(props) => props.theme.colors.lightGrey};
+    padding: 1rem;
+  }
+
+  ${selectors.eblc} {
+    margin-bottom: 1rem;
+  }
+`;
+
+const StyledReferenceList = styled.ul`
+  li {
+    margin-left: 2rem;
+    list-style: square;
+
+    a {
+      ${animations.transition('color', 200, 'ease-out')}
+      color: inherit;
+
+      ${selectors.hwot} {
+        color: ${(props) => props.theme.colors.red};
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ${selectors.eblc} {
+    margin-bottom: 1rem;
+  }
+`;
 
 const StyledContent = styled.div`
   padding: 1rem 1rem;
