@@ -2,7 +2,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, container, selectors, animations } from 'promptu';
+import { align, animations, container, selectors } from 'promptu';
 import React, { createRef, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -159,7 +159,7 @@ class Datasheet extends PureComponent<Props> {
             {hasRelated &&
               <StyledRelatedList>
                 {related.map((v: any, i) => (
-                  <li key={`related-${i}`}><button>{v.data.name}</button></li>
+                  <li key={`related-${i}`}><a>{v.data.name}</a></li>
                 ))}
               </StyledRelatedList> ||
               <p>--</p>
@@ -200,6 +200,16 @@ const StyledRelatedList = styled.ul`
   li {
     margin-left: 2rem;
     list-style: square;
+
+    a {
+      ${animations.transition('color', 200, 'ease-out')}
+      color: inherit;
+
+      ${selectors.hwot} {
+        color: ${(props) => props.theme.colors.red};
+        text-decoration: underline;
+      }
+    }
   }
 
   ${selectors.eblc} {
