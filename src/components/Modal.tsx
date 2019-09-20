@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { align, animations } from 'promptu';
-import React, { createRef, PureComponent, ReactNode, Ref } from 'react';
+import React, { createRef, Fragment, PureComponent, ReactNode, Ref } from 'react';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
 import NavControlManager from '../managers/NavControlManager';
@@ -8,7 +8,7 @@ import { valueByTransitionStatus } from '../styles/utils';
 
 interface Props {
   transitionStatus?: TransitionStatus;
-  children: (onExit: () => void, ref: Ref<HTMLDivElement>) => ReactNode;
+  children?: (onExit: () => void, ref: Ref<HTMLDivElement>) => ReactNode;
   onExit: () => void;
 }
 
@@ -32,12 +32,12 @@ class Modal extends PureComponent<Props> {
   render() {
     return (
       <StyledRoot transitionStatus={this.props.transitionStatus}>
-        <NavControlManager isEnabled={true} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
-          <div>
-            <StyledBackground onClick={() => this.props.onExit()} transitionStatus={this.props.transitionStatus}/>
-            {this.props.children(this.props.onExit, this.nodeRefs.modal)}
-          </div>
-        </NavControlManager>
+        <Fragment>
+          <StyledBackground onClick={() => this.props.onExit()} transitionStatus={this.props.transitionStatus}/>
+          <NavControlManager isEnabled={true} onEscape={() => this.props.onExit()} onPrev={() => this.props.onExit()}>
+            {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.modal)}
+          </NavControlManager>
+        </Fragment>
       </StyledRoot>
     );
   }

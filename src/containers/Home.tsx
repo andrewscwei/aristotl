@@ -30,7 +30,7 @@ interface State {
 }
 
 class Home extends PureComponent<Props, State> {
-  state = {
+  state: State = {
     activeDoc: undefined,
     currentPageIndex: 0,
     isSearching: false,
