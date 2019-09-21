@@ -243,6 +243,7 @@ const StyledContent = styled.div`
 
     li {
       margin-left: 3rem;
+      max-width: 100%;
     }
 
     ${selectors.eblc} {
