@@ -274,6 +274,7 @@ const StyledPaginator = styled(Paginator)`
 
 const StyledStatistics = styled(Statistics)`
   margin-left: 1rem;
+  user-select: none;
 `;
 
 const StyledGrid = styled(Grid)`

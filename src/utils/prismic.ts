@@ -1,4 +1,6 @@
 import cookie from 'cookie';
+import _ from 'lodash';
+import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import ResolvedApi from 'prismic-javascript/d.ts/ResolvedApi';
@@ -61,4 +63,89 @@ export function savePreviewToken(token: string) {
 export function loadPreviewToken(): string | undefined {
   const token = cookie.parse(document.cookie)[Prismic.previewCookie];
   return token;
+}
+
+export function getText(doc?: Document, path: string = ''): string | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+  if (typeof fragment === 'string') return fragment;
+
+  return PrismicDOM.RichText.asText(fragment);
+}
+
+export function getMarkup(doc?: Document, path: string = ''): string | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+
+  return PrismicDOM.RichText.asHtml(fragment, linkResolver);
+}
+
+export function getTexts(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+  const fragments = _.get(doc, path);
+
+  if (!_.isArray(fragments)) return undefined;
+
+  const texts = _.reduce(fragments, (out, curr: any) => {
+    const text = _.get(curr, subpath);
+    if (!text) return out;
+
+    if (typeof text === 'string') {
+      out.push(text);
+    }
+    else {
+      out.push(PrismicDOM.RichText.asText(text));
+    }
+
+    return out;
+  }, Array<string>());
+
+  return texts;
+}
+
+export function getMarkups(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+  const fragments = _.get(doc, path);
+
+  if (!_.isArray(fragments)) return undefined;
+
+  const markups = _.reduce(fragments, (out, curr: any) => {
+    const text = _.get(curr, subpath);
+    if (!text) return out;
+
+    out.push(PrismicDOM.RichText.asHtml(text, linkResolver));
+
+    return out;
+  }, Array<string>());
+
+  return markups;
+}
+
+export function getDoc(doc?: Document, path: string = '', lookupDocs?: ReadonlyArray<Document>): Document | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+  if (!fragment.id) return undefined;
+
+  if (!lookupDocs) return fragment;
+
+  return _.find(lookupDocs, (v) => v.id === fragment.id);
+}
+
+export function getDocs(doc?: Document, path: string = '', subpath: string = '', lookupDocs?: ReadonlyArray<Document>): ReadonlyArray<Document> | undefined {
+  const fragments = _.get(doc, path);
+
+  if (!fragments) return undefined;
+
+  const docs = _.reduce(fragments, (out, curr: any) => {
+    const doc = _.get(curr, subpath);
+    if (doc) out.push(doc);
+    return out;
+  }, Array<Document>());
+
+  if (!lookupDocs) return docs;
+
+  const matchedDocs = _.intersectionWith(lookupDocs, docs, (lookupDoc, doc) => lookupDoc.id === doc.id);
+
+  return matchedDocs;
 }

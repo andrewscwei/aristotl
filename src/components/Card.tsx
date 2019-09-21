@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, selectors, utils } from 'promptu';
 import React, { PureComponent } from 'react';
@@ -9,7 +7,7 @@ import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
-import { linkResolver } from '../utils/prismic';
+import { getDocs, getMarkup, getText } from '../utils/prismic';
 import Pixel from './Pixel';
 
 interface StateProps {
@@ -35,10 +33,10 @@ class Card extends PureComponent<Props> {
 
   render() {
     const { ltxt } = this.props.i18n;
-    const abbreviation = _.get(this.props.doc, 'data.abbreviation');
-    const name = _.get(this.props.doc, 'data.name');
-    const summary = _.get(this.props.doc, 'data.summary');
-    const type = _.get(this.props.doc, 'data.type.slug');
+    const abbreviation = getText(this.props.doc, 'data.abbreviation');
+    const name = getText(this.props.doc, 'data.name');
+    const summary = getMarkup(this.props.doc, 'data.summary');
+    const typeDocs = getDocs(this.props.doc, 'data.types', 'type');
 
     return (
       <StyledRoot
@@ -55,20 +53,21 @@ class Card extends PureComponent<Props> {
           <h2>{abbreviation}</h2>
         </StyledAbbreviation>
 
-        {type &&
-          <StyledType>
-            <Pixel isHollow={type === 'informal-fallacy'}/>
-            <span>{ltxt(type)}</span>
-            <Pixel isHollow={type === 'informal-fallacy'}/>
-          </StyledType>
-        }
+        <StyledTypes>
+          {typeDocs && typeDocs.map((v: any) => (
+            <StyledType>
+              <Pixel isHollow={v.slug === 'informal-fallacy'}/>
+              <span>{ltxt(v.slug)}</span>
+            </StyledType>
+          ))}
+        </StyledTypes>
 
         {name &&
           <StyledName>{name}</StyledName>
         }
 
         {this.props.isSummaryEnabled && summary &&
-          <StyledSummary dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(summary, linkResolver) }}/>
+          <StyledSummary dangerouslySetInnerHTML={{ __html: summary }}/>
         }
 
         <StyledDivider/>
@@ -93,6 +92,7 @@ const StyledSummary = styled.div`
   overflow: hidden;
   padding: 0 1rem;
   width: 100%;
+  user-select: text;
 
   p {
     line-height: 1.8rem;
@@ -117,6 +117,10 @@ const StyledType = styled.div`
   }
 `;
 
+const StyledTypes = styled.div`
+  ${container.fhcl}
+`;
+
 const StyledAbbreviation = styled.div`
   ${container.fvcl}
   background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
@@ -127,6 +131,7 @@ const StyledAbbreviation = styled.div`
   overflow: visible;
   padding: 0 1rem;
   width: 100%;
+  user-select: text;
 
   h2 {
     font-family: 'NovaMono';
@@ -142,6 +147,7 @@ const StyledName = styled.h1`
   color: ${(props) => props.theme.colors.lightGrey};
   font-family: 'RobotoMono';
   padding: 0 1rem;
+  user-select: text;
 `;
 
 const StyledDivider = styled.div`

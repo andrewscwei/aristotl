@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import PrismicDOM from 'prismic-dom';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, selectors } from 'promptu';
 import React, { forwardRef, PureComponent, Ref } from 'react';
@@ -10,13 +9,13 @@ import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { reduceDocs } from '../store/prismic';
 import { colors } from '../styles/theme';
-import { linkResolver } from '../utils/prismic';
+import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
 import ActionButton from './ActionButton';
 import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
-  docs: ReadonlyArray<Document>;
+  fallacies: ReadonlyArray<Document>;
   definitions: ReadonlyArray<Document>;
 }
 
@@ -42,7 +41,7 @@ class Datasheet extends PureComponent<Props> {
 
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
-    return _.find(this.props.docs, (v) => v.id === this.props.docId);
+    return _.find(this.props.fallacies, (v) => v.id === this.props.docId);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -51,99 +50,17 @@ class Datasheet extends PureComponent<Props> {
     }
   }
 
-  getAbbreviation(): string | undefined {
-    const fragment = _.get(this.doc, 'data.abbreviation');
-    return _.isEmpty(fragment) ? undefined : fragment;
-  }
-
-  getName(): string | undefined {
-    const fragment = _.get(this.doc, 'data.name');
-    return _.isEmpty(fragment) ? undefined : fragment;
-  }
-
-  getAliases(): ReadonlyArray<string> {
-    const fragments = _.get(this.doc, 'data.aliases');
-    const names = _.reduce(fragments, (out, curr: any) => {
-      if (!_.isEmpty(curr.name)) out.push(curr.name);
-      return out;
-    }, Array<string>());
-
-    return names;
-  }
-
-  getTypeDocs(): ReadonlyArray<Document> {
-    const fragments = _.get(this.doc, 'data.types');
-    const docIds = _.reduce(fragments, (out, curr: any) => {
-      const id = _.get(curr, 'type.id');
-      if (id) out.push(id);
-      return out;
-    }, Array<string>());
-    const docs = _.intersectionWith(this.props.definitions, docIds, (doc, id) => doc.id === id);
-
-    return docs || [];
-  }
-
-  getSubtypeDocs(): ReadonlyArray<Document> {
-    const fragments = _.get(this.doc, 'data.subtypes');
-    const docIds = _.reduce(fragments, (out, curr: any) => {
-      const id = _.get(curr, 'subtype.id');
-      if (id) out.push(id);
-      return out;
-    }, Array<string>());
-    const docs = _.intersectionWith(this.props.definitions, docIds, (doc, id) => doc.id === id);
-
-    return docs || [];
-  }
-
-  getDescriptionMarkup(): string | undefined {
-    const fragment = _.get(this.doc, 'data.description');
-    if (_.isEmpty(fragment)) return undefined;
-    return PrismicDOM.RichText.asHtml(fragment, linkResolver);
-  }
-
-  getExampleMarkups(): ReadonlyArray<string> {
-    const fragments = _.reduce(_.get(this.doc, 'data.examples'), (out, curr: any) => {
-      if (!_.isEmpty(curr.example)) out.push(curr.example);
-      return out;
-    }, Array<string>());
-    const markups = _.map(fragments, (v) => PrismicDOM.RichText.asHtml(v, linkResolver));
-
-    return markups;
-  }
-
-  getRelatedDocs(): ReadonlyArray<Document> {
-    const fragments = _.get(this.doc, 'data.related');
-    const docIds = _.reduce(fragments, (out, curr: any) => {
-      const id = _.get(curr, 'fallacy.id');
-      if (id) out.push(id);
-      return out;
-    }, Array<string>());
-    const docs = _.intersectionWith(this.props.docs, docIds, (doc, id) => doc.id === id);
-
-    return docs;
-  }
-
-  getReferencesMarkups(): ReadonlyArray<string> {
-    const fragments = _.reduce(_.get(this.doc, 'data.references'), (out, curr: any) => {
-      if (!_.isEmpty(curr.reference)) out.push(curr.reference);
-      return out;
-    }, Array<string>());
-    const markups = _.map(fragments, (v) => PrismicDOM.RichText.asHtml(v, linkResolver));
-
-    return markups;
-  }
-
   render() {
     const { ltxt } = this.props.i18n;
-    const abbreviation = this.getAbbreviation();
-    const name = this.getName();
-    const aliases = this.getAliases();
-    const typeDocs = this.getTypeDocs();
-    const subtypeDocs = this.getSubtypeDocs();
-    const descriptionMarkup = this.getDescriptionMarkup();
-    const exampleMarkups = this.getExampleMarkups();
-    const referenceMarkups = this.getReferencesMarkups();
-    const relatedDocs = this.getRelatedDocs();
+    const abbreviation = getText(this.doc, 'data.abbreviation');
+    const name = getText(this.doc, 'data.name');
+    const aliases = getTexts(this.doc, 'data.aliases', 'name');
+    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitions);
+    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'subtype', this.props.definitions);
+    const descriptionMarkup = getMarkup(this.doc, 'data.description');
+    const exampleMarkups = getMarkups(this.doc, 'data.examples', 'example');
+    const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
+    const relatedDocs = getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacies);
 
     return (
       <StyledRoot className={this.props.className} ref={this.props.nodeRef}>
@@ -173,14 +90,14 @@ class Datasheet extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('aliases')}</StyledLabel>
           <StyledContent>
-            {aliases.length > 0 ? <em>{aliases.join(', ')}</em> : '--'}
+            {aliases ? <em>{aliases.join(', ')}</em> : '--'}
           </StyledContent>
         </StyledSection>
 
         <StyledSection>
           <StyledLabel>{ltxt('types')}</StyledLabel>
           <StyledContent>
-            {typeDocs.length <= 0 ? '--' :
+            {!typeDocs || typeDocs.length <= 0 ? '--' :
               <ul>
                 {typeDocs.map((v, i) => (
                   <li key={`type=${i}`}><a>{_.get(v, 'data.name')}</a></li>
@@ -193,7 +110,7 @@ class Datasheet extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('subtypes')}</StyledLabel>
           <StyledContent>
-            {subtypeDocs.length <= 0 ? '--' :
+            {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
               <ul>
                 {subtypeDocs.map((v, i) => (
                   <li key={`subtype=${i}`}><a>{_.get(v, 'data.name')}</a></li>
@@ -211,7 +128,7 @@ class Datasheet extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('examples')}</StyledLabel>
           <StyledContent>
-            {exampleMarkups.length <= 0 ? '--' :
+            {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
               <ul>
                 {exampleMarkups.map((v, i) => (
                   <li key={`example-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
@@ -224,7 +141,7 @@ class Datasheet extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('related')}</StyledLabel>
           <StyledContent>
-            {relatedDocs.length <= 0 ? '--' :
+            {!relatedDocs || relatedDocs.length <= 0 ? '--' :
               <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
@@ -239,7 +156,7 @@ class Datasheet extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('references')}</StyledLabel>
           <StyledContent>
-            {referenceMarkups.length <= 0 ? '--' :
+            {!referenceMarkups || referenceMarkups.length <= 0 ? '--' :
               <ul>
                 {referenceMarkups.map((v, i) => (
                   <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
@@ -256,7 +173,7 @@ class Datasheet extends PureComponent<Props> {
 const ConnectedDatasheet = connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
-    docs: reduceDocs(state.prismic, 'fallacy') || [],
+    fallacies: reduceDocs(state.prismic, 'fallacy') || [],
     definitions: reduceDocs(state.prismic, 'definition') || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
@@ -386,4 +303,5 @@ const StyledRoot = styled.div`
   color: ${(props) => props.theme.colors.black};
   overflow-y: scroll;
   padding: 8rem 3rem;
+  user-select: text;
 `;
