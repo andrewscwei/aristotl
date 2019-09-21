@@ -46,6 +46,12 @@ class Datasheet extends PureComponent<Props> {
     return _.find(this.props.docs, (v) => v.id === this.props.docId);
   }
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.docId !== this.props.docId) {
+      _.set(this.props, 'nodeRef.current.scrollTop', 0);
+    }
+  }
+
   getAbbreviation(): string | undefined {
     const fragment = _.get(this.doc, 'data.abbreviation');
     return _.isEmpty(fragment) ? undefined : fragment;

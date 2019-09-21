@@ -45,12 +45,17 @@ class Home extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
+    this.mapHashToState();
     this.mapQueryStringToState();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.location.search !== this.props.location.search) {
       this.mapQueryStringToState();
+    }
+
+    if (prevProps.location.hash !== this.props.location.hash) {
+      this.mapHashToState();
     }
   }
 
@@ -64,6 +69,15 @@ class Home extends PureComponent<Props, State> {
     const paginator = this.nodeRefs.paginator.current;
     if (!paginator) return;
     paginator.prev();
+  }
+
+  mapHashToState() {
+    if (!this.props.location.hash.startsWith('#')) return;
+    const docId = this.props.location.hash.substring(1);
+
+    this.setState({
+      activeDocId: docId,
+    });
   }
 
   mapQueryStringToState() {
@@ -89,7 +103,16 @@ class Home extends PureComponent<Props, State> {
   }
 
   presentDocById(docId?: string) {
-    this.setState({ activeDocId: docId });
+    if (!docId) {
+      debug('Dismissing doc...', 'OK');
+      this.props.history.push('/');
+      this.setState({ activeDocId: undefined });
+    }
+    else {
+      debug('Presenting doc...', 'OK', docId);
+      this.props.history.push(`#${docId}`);
+      this.setState({ activeDocId: docId });
+    }
   }
 
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
