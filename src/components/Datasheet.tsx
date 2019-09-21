@@ -17,8 +17,7 @@ import Pixel from './Pixel';
 interface StateProps {
   i18n: I18nState;
   docs: ReadonlyArray<Document>;
-  fallacyTypes: ReadonlyArray<Document>;
-  fallacySubtypes: ReadonlyArray<Document>;
+  definitions: ReadonlyArray<Document>;
 }
 
 interface DispatchProps {
@@ -72,16 +71,28 @@ class Datasheet extends PureComponent<Props> {
     return names;
   }
 
-  getType(): Document | undefined {
-    const docId = _.get(this.doc, 'data.type.id');
-    if (!docId) return undefined;
-    return _.find(this.props.fallacyTypes, { id: docId });
+  getTypeDocs(): ReadonlyArray<Document> {
+    const fragments = _.get(this.doc, 'data.types');
+    const docIds = _.reduce(fragments, (out, curr: any) => {
+      const id = _.get(curr, 'type.id');
+      if (id) out.push(id);
+      return out;
+    }, Array<string>());
+    const docs = _.intersectionWith(this.props.definitions, docIds, (doc, id) => doc.id === id);
+
+    return docs || [];
   }
 
-  getSubtype(): Document | undefined {
-    const docId = _.get(this.doc, 'data.subtype.id');
-    if (!docId) return undefined;
-    return _.find(this.props.fallacySubtypes, { id: docId });
+  getSubtypeDocs(): ReadonlyArray<Document> {
+    const fragments = _.get(this.doc, 'data.subtypes');
+    const docIds = _.reduce(fragments, (out, curr: any) => {
+      const id = _.get(curr, 'subtype.id');
+      if (id) out.push(id);
+      return out;
+    }, Array<string>());
+    const docs = _.intersectionWith(this.props.definitions, docIds, (doc, id) => doc.id === id);
+
+    return docs || [];
   }
 
   getDescriptionMarkup(): string | undefined {
@@ -127,8 +138,8 @@ class Datasheet extends PureComponent<Props> {
     const abbreviation = this.getAbbreviation();
     const name = this.getName();
     const aliases = this.getAliases();
-    const type = this.getType();
-    const subtype = this.getSubtype();
+    const typeDocs = this.getTypeDocs();
+    const subtypeDocs = this.getSubtypeDocs();
     const descriptionMarkup = this.getDescriptionMarkup();
     const exampleMarkups = this.getExampleMarkups();
     const referenceMarkups = this.getReferencesMarkups();
@@ -167,9 +178,28 @@ class Datasheet extends PureComponent<Props> {
         </StyledSection>
 
         <StyledSection>
-          <StyledLabel>{ltxt('type')}</StyledLabel>
+          <StyledLabel>{ltxt('types')}</StyledLabel>
           <StyledContent>
-            {type ? <a>{_.get(type, 'data.name')}</a> : '--'} / {subtype ? <a>{_.get(subtype, 'data.name')}</a> : '--'}
+            {typeDocs.length <= 0 ? '--' :
+              <ul>
+                {typeDocs.map((v, i) => (
+                  <li key={`type=${i}`}><a>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
+
+        <StyledSection>
+          <StyledLabel>{ltxt('subtypes')}</StyledLabel>
+          <StyledContent>
+            {subtypeDocs.length <= 0 ? '--' :
+              <ul>
+                {subtypeDocs.map((v, i) => (
+                  <li key={`subtype=${i}`}><a>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
           </StyledContent>
         </StyledSection>
 
@@ -227,8 +257,7 @@ const ConnectedDatasheet = connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
     docs: reduceDocs(state.prismic, 'fallacy') || [],
-    fallacyTypes: reduceDocs(state.prismic, 'fallacy_type') || [],
-    fallacySubtypes: reduceDocs(state.prismic, 'fallacy_subtype') || [],
+    definitions: reduceDocs(state.prismic, 'definition') || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 
@@ -257,7 +286,7 @@ const StyledContent = styled.div`
     }
 
     ${selectors.eblc} {
-      margin-bottom: 1rem;
+      margin-bottom: .5rem;
     }
   }
 
@@ -265,9 +294,22 @@ const StyledContent = styled.div`
     list-style: square;
   }
 
+  p + p,
   p + pre,
   p + ol,
-  p + ul {
+  p + ul,
+  pre + p,
+  pre + pre,
+  pre + ol,
+  pre + ul,
+  ol + p,
+  ol + pre,
+  ol + ol,
+  ol + ul,
+  ul + p,
+  ul + pre,
+  ul + ul,
+  ul + ol {
     margin-top: 1rem;
   }
 

@@ -39,13 +39,8 @@ class DocumentManager extends PureComponent<Props> {
       pageSize: 100,
     }, 2);
 
-    this.props.fetchDocs('fallacy_type', undefined, {
-      orderings: '[my.fallacy_type.name]',
-      pageSize: 100,
-    });
-
-    this.props.fetchDocs('fallacy_subtype', undefined, {
-      orderings: '[my.fallacy_subtype.name]',
+    this.props.fetchDocs('definition', undefined, {
+      orderings: '[my.definition.name]',
       pageSize: 100,
     });
   }

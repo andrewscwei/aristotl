@@ -7,6 +7,7 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
 import Datasheet from '../components/Datasheet';
+import Definition from '../components/Definition';
 import Grid from '../components/Grid';
 import Modal from '../components/Modal';
 import Paginator from '../components/Paginator';
@@ -25,6 +26,7 @@ interface Props extends RouteComponentProps<{}> {
 
 interface State {
   activeDocId?: string;
+  activeDefinitionId?: string;
   currentPageIndex: number;
   isSummaryEnabled: boolean;
   isSearching: boolean;
@@ -34,6 +36,7 @@ interface State {
 class Home extends PureComponent<Props, State> {
   state: State = {
     activeDocId: undefined,
+    activeDefinitionId: undefined,
     currentPageIndex: 0,
     isSearching: false,
     isSummaryEnabled: false,
@@ -102,17 +105,16 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  presentDocById(docId?: string) {
-    if (!docId) {
-      debug('Dismissing doc...', 'OK');
-      // this.props.history.replace('/');
-      this.setState({ activeDocId: undefined });
-    }
-    else {
-      debug('Presenting doc...', 'OK', docId);
-      // this.props.history.replace(`#${docId}`);
-      this.setState({ activeDocId: docId });
-    }
+  presentDocById(docId: string) {
+    debug('Presenting doc...', 'OK', docId);
+    // this.props.history.replace(`#${docId}`);
+    this.setState({ activeDocId: docId });
+  }
+
+  dismissDoc() {
+    debug('Dismissing doc...', 'OK');
+    // this.props.history.replace('/');
+    this.setState({ activeDocId: undefined });
   }
 
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
@@ -206,7 +208,7 @@ class Home extends PureComponent<Props, State> {
         </Transition>
         <Transition in={this.state.activeDocId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
           {(status) => (
-            <Modal transitionStatus={status} onExit={() => this.presentDocById(undefined)}>
+            <Modal transitionStatus={status} onExit={() => this.dismissDoc()}>
               {(onExit, ref) => {
                 return (
                   <StyledDatasheet
@@ -221,12 +223,26 @@ class Home extends PureComponent<Props, State> {
             </Modal>
           )}
         </Transition>
+        <Transition in={false} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+          {(status) => (
+            <Modal transitionStatus={status} onExit={() => {}}>
+              {(onExit, ref) => {
+                return (
+                  <Fragment></Fragment>
+                );
+              }}
+            </Modal>
+          )}
+        </Transition>
       </Fragment>
     );
   }
 }
 
 export default Home;
+
+const StyledDefinition = styled(Definition)`
+`;
 
 const StyledDatasheet = styled(Datasheet)<{
   transitionStatus?: TransitionStatus;
