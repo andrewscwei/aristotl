@@ -105,12 +105,12 @@ class Home extends PureComponent<Props, State> {
   presentDocById(docId?: string) {
     if (!docId) {
       debug('Dismissing doc...', 'OK');
-      this.props.history.push('/');
+      this.props.history.replace('/');
       this.setState({ activeDocId: undefined });
     }
     else {
       debug('Presenting doc...', 'OK', docId);
-      this.props.history.push(`#${docId}`);
+      this.props.history.replace(`#${docId}`);
       this.setState({ activeDocId: docId });
     }
   }
