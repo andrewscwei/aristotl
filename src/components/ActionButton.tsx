@@ -5,12 +5,12 @@ import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
 interface Props {
-  className?: string;
-  symbol: string;
-  tintColor?: string;
   activeTintColor?: string;
+  className?: string;
   hoverTintColor?: string;
   isTogglable: boolean;
+  symbol: string;
+  tintColor?: string;
   onActivate: () => void;
   onToggleOn: () => void;
   onToggleOff: () => void;
@@ -55,12 +55,12 @@ class ActionButton extends PureComponent<Props, State> {
 
     return (
       <StyledRoot
+        activeTintColor={this.props.activeTintColor}
         className={this.props.className}
-        onClick={() => this.onClick()}
+        hoverTintColor={this.props.hoverTintColor}
         isActive={this.state.isActive}
         tintColor={tintColor}
-        hoverTintColor={this.props.hoverTintColor}
-        activeTintColor={this.props.activeTintColor}
+        onClick={() => this.onClick()}
       >
         <StyledPixel size={3} alignment='tl'/>
         <StyledPixel size={3} alignment='tr'/>

@@ -25,19 +25,19 @@ interface Props extends RouteComponentProps<{}> {
 }
 
 interface State {
-  activeDocId?: string;
   activeDefinitionId?: string;
-  currentPageIndex: number;
-  isSummaryEnabled: boolean;
+  activeFallacyId?: string;
   isSearching: boolean;
+  isSummaryEnabled: boolean;
+  pageIndex: number;
   searchInput?: string;
 }
 
 class Home extends PureComponent<Props, State> {
   state: State = {
-    activeDocId: undefined,
+    activeFallacyId: undefined,
     activeDefinitionId: undefined,
-    currentPageIndex: 0,
+    pageIndex: 0,
     isSearching: false,
     isSummaryEnabled: false,
     searchInput: undefined,
@@ -79,24 +79,24 @@ class Home extends PureComponent<Props, State> {
     const docId = this.props.location.hash.substring(1);
 
     this.setState({
-      activeDocId: docId,
+      activeFallacyId: docId,
     });
   }
 
   mapQueryStringToState() {
     const { search, page } = qs.parse(this.props.location.search);
     const searchInput = typeof search === 'string' ? search : undefined;
-    const currentPageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
+    const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
 
     this.setState({
       searchInput,
-      currentPageIndex,
+      pageIndex,
     });
   }
 
   mapStateToQueryString(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
     const searchInput = (nextState.searchInput === undefined) ? this.state.searchInput : nextState.searchInput;
-    const pageIndex = (nextState.pageIndex === undefined) ? this.state.currentPageIndex : nextState.pageIndex;
+    const pageIndex = (nextState.pageIndex === undefined) ? this.state.pageIndex : nextState.pageIndex;
     const params = [];
 
     if (searchInput === undefined && searchInput !== '') params.push(`search=${searchInput}`);
@@ -105,16 +105,16 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  presentDocById(docId: string) {
-    debug('Presenting doc...', 'OK', docId);
-    // this.props.history.replace(`#${docId}`);
-    this.setState({ activeDocId: docId });
+  presentFallacyById(id: string) {
+    debug('Presenting fallacy...', 'OK', id);
+    // this.props.history.replace(`#${id}`);
+    this.setState({ activeFallacyId: id });
   }
 
-  dismissDoc() {
-    debug('Dismissing doc...', 'OK');
+  dismissFallacy() {
+    debug('Dismissing fallacy...', 'OK');
     // this.props.history.replace('/');
-    this.setState({ activeDocId: undefined });
+    this.setState({ activeFallacyId: undefined });
   }
 
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
@@ -130,6 +130,7 @@ class Home extends PureComponent<Props, State> {
     else {
       this.setState({
         searchInput: input,
+        pageIndex: 0,
       });
     }
   }
@@ -146,7 +147,7 @@ class Home extends PureComponent<Props, State> {
     }
     else {
       this.setState({
-        currentPageIndex: index,
+        pageIndex: index,
       });
     }
   }
@@ -154,32 +155,32 @@ class Home extends PureComponent<Props, State> {
   render() {
     return (
       <Fragment>
-        <Transition in={this.state.activeDocId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+        <Transition in={this.state.activeFallacyId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
-            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDocId} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
+            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeFallacyId} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
               <StyledRoot transitionStatus={status}>
-                <StyledHeader>
-                  <SearchBar
-                    id='search'
-                    input={this.state.searchInput}
-                    autoFocus={!this.state.activeDocId}
-                    onFocusIn={() => this.setState({ isSearching: true })}
-                    onFocusOut={() => this.setState({ isSearching: false })}
-                    onChange={(input: string) => this.onSearchInputChange(input)}
-                  />
-                  <ActionButton
-                    symbol='i'
-                    isTogglable={true}
-                    tintColor={colors.white}
-                    hoverTintColor={colors.red}
-                    activeTintColor={colors.red}
-                    onToggleOn={() => this.setState({ isSummaryEnabled: true })}
-                    onToggleOff={() => this.setState({ isSummaryEnabled: false })}
-                  />
-                </StyledHeader>
-                <DocumentManager pageIndex={this.state.currentPageIndex} searchInput={this.state.searchInput}>
+                <DocumentManager pageIndex={this.state.pageIndex} searchInput={this.state.searchInput}>
                   {(docs, totalDocs, maxPages, startIndex, endIndex, numFormals, numInformals) => (
                     <Fragment>
+                      <StyledHeader>
+                        <SearchBar
+                          id='search'
+                          input={this.state.searchInput}
+                          autoFocus={!this.state.activeFallacyId}
+                          onFocusIn={() => this.setState({ isSearching: true })}
+                          onFocusOut={() => this.setState({ isSearching: false })}
+                          onChange={(input: string) => this.onSearchInputChange(input)}
+                        />
+                        <ActionButton
+                          symbol='i'
+                          isTogglable={true}
+                          tintColor={colors.white}
+                          hoverTintColor={colors.red}
+                          activeTintColor={colors.red}
+                          onToggleOn={() => this.setState({ isSummaryEnabled: true })}
+                          onToggleOff={() => this.setState({ isSummaryEnabled: false })}
+                        />
+                      </StyledHeader>
                       <StyledStatistics
                         totalResults={totalDocs}
                         subtotalResultsStart={startIndex + 1}
@@ -189,15 +190,15 @@ class Home extends PureComponent<Props, State> {
                       />
                       <StyledPaginator
                         ref={this.nodeRefs.paginator}
-                        activePageIndex={this.state.currentPageIndex}
+                        activePageIndex={this.state.pageIndex}
                         maxPages={maxPages}
                         onActivate={(index) => this.onPageIndexChange(index)}
                       />
                       <StyledGrid
-                        key={`${this.state.searchInput}-${this.state.currentPageIndex}`}
+                        key={`${this.state.searchInput}-${this.state.pageIndex}`}
                         docs={docs}
                         isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => this.presentDocById(doc.id)}
+                        onActivate={(doc) => this.presentFallacyById(doc.id)}
                       />
                     </Fragment>
                   )}
@@ -206,16 +207,16 @@ class Home extends PureComponent<Props, State> {
             </NavControlManager>
           )}
         </Transition>
-        <Transition in={this.state.activeDocId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+        <Transition in={this.state.activeFallacyId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
           {(status) => (
-            <Modal transitionStatus={status} onExit={() => this.dismissDoc()}>
+            <Modal transitionStatus={status} onExit={() => this.dismissFallacy()}>
               {(onExit, ref) => {
                 return (
                   <StyledDatasheet
-                    docId={this.state.activeDocId}
+                    docId={this.state.activeFallacyId}
                     ref={ref}
                     transitionStatus={status}
-                    onDocChange={(docId) => this.presentDocById(docId)}
+                    onDocChange={(docId) => this.presentFallacyById(docId)}
                     onExit={() => onExit()}
                   />
                 );
