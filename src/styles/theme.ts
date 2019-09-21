@@ -9,7 +9,7 @@ export const colors = {
   grey: '#666',
   lightGrey: '#ccc',
   darkBlue: '#180d50',
-  red: '#ff4d4d',
+  red: '#ce5c15',
 };
 
 export const fonts = {

@@ -43,28 +43,28 @@ class Home extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.updateStateFromQueryParams();
+    this.mapQueryStringToState();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.location.search !== this.props.location.search) {
-      this.updateStateFromQueryParams();
+      this.mapQueryStringToState();
     }
   }
 
-  next() {
+  toNextPage() {
     const paginator = this.nodeRefs.paginator.current;
     if (!paginator) return;
     paginator.next();
   }
 
-  prev() {
+  toPreviousPage() {
     const paginator = this.nodeRefs.paginator.current;
     if (!paginator) return;
     paginator.prev();
   }
 
-  updateStateFromQueryParams() {
+  mapQueryStringToState() {
     const { search, page } = qs.parse(this.props.location.search);
     const searchInput = typeof search === 'string' ? search : undefined;
     const currentPageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
@@ -75,38 +75,26 @@ class Home extends PureComponent<Props, State> {
     });
   }
 
-  generateQueryParams(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
+  mapStateToQueryString(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
     const searchInput = (nextState.searchInput === undefined) ? this.state.searchInput : nextState.searchInput;
     const pageIndex = (nextState.pageIndex === undefined) ? this.state.currentPageIndex : nextState.pageIndex;
     const params = [];
 
-    if (searchInput === undefined && searchInput !== '') {
-      params.push(`search=${searchInput}`);
-    }
+    if (searchInput === undefined && searchInput !== '') params.push(`search=${searchInput}`);
+    if (pageIndex !== undefined && pageIndex > 0) params.push(`page=${pageIndex + 1}`);
 
-    if (pageIndex !== undefined && pageIndex > 0) {
-      params.push(`page=${pageIndex + 1}`);
-    }
-
-    if (params.length > 0) {
-      return `?${params.join('&')}`;
-    }
-    else {
-      return '';
-    }
+    return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  onActiveDocChange(docId?: string) {
-    this.setState({
-      activeDocId: docId,
-    });
+  presentDocById(docId?: string) {
+    this.setState({ activeDocId: docId });
   }
 
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
     if (shouldUpdateHistory) {
       this.props.history.push({
         pathname: '/',
-        search: this.generateQueryParams({
+        search: this.mapStateToQueryString({
           searchInput: input,
           pageIndex: 0,
         }),
@@ -123,7 +111,7 @@ class Home extends PureComponent<Props, State> {
     if (shouldUpdateHistory) {
       this.props.history.push({
         pathname: '/',
-        search: this.generateQueryParams({
+        search: this.mapStateToQueryString({
           searchInput: this.state.searchInput,
           pageIndex: index,
         }),
@@ -141,7 +129,7 @@ class Home extends PureComponent<Props, State> {
       <Fragment>
         <Transition in={this.state.activeDocId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
-            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDocId} onPrev={() => this.prev()} onNext={() => this.next()}>
+            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDocId} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
@@ -182,7 +170,7 @@ class Home extends PureComponent<Props, State> {
                         key={`${this.state.searchInput}-${this.state.currentPageIndex}`}
                         docs={docs}
                         isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => this.onActiveDocChange(doc.id)}
+                        onActivate={(doc) => this.presentDocById(doc.id)}
                       />
                     </Fragment>
                   )}
@@ -193,14 +181,14 @@ class Home extends PureComponent<Props, State> {
         </Transition>
         <Transition in={this.state.activeDocId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
           {(status) => (
-            <StyledModal transitionStatus={status} onExit={() => this.onActiveDocChange(undefined)}>
+            <StyledModal transitionStatus={status} onExit={() => this.presentDocById(undefined)}>
               {(onExit, ref) => {
                 return (
                   <StyledDatasheet
                     docId={this.state.activeDocId}
                     ref={ref}
                     transitionStatus={status}
-                    onDocChange={(docId) => this.onActiveDocChange(docId)}
+                    onDocChange={(docId) => this.presentDocById(docId)}
                     onExit={() => onExit()}
                   />
                 );
