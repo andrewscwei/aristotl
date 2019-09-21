@@ -27,10 +27,9 @@ interface DispatchProps {
 
 interface OwnProps {
   className?: string;
-  doc: Document;
-  id?: string;
+  docId?: string;
   nodeRef?: Ref<HTMLDivElement>;
-  onDocChange: (doc: Document) => void;
+  onDocChange: (docId: string) => void;
   onExit: () => void;
 }
 
@@ -42,18 +41,23 @@ class Datasheet extends PureComponent<Props> {
     onExit: () => {},
   };
 
+  get doc(): Document | undefined {
+    if (!this.props.docId) return undefined;
+    return _.find(this.props.docs, (v) => v.id === this.props.docId);
+  }
+
   getAbbreviation(): string | undefined {
-    const fragment = _.get(this.props.doc, 'data.abbreviation');
+    const fragment = _.get(this.doc, 'data.abbreviation');
     return _.isEmpty(fragment) ? undefined : fragment;
   }
 
   getName(): string | undefined {
-    const fragment = _.get(this.props.doc, 'data.name');
+    const fragment = _.get(this.doc, 'data.name');
     return _.isEmpty(fragment) ? undefined : fragment;
   }
 
   getAliases(): ReadonlyArray<string> {
-    const fragments = _.get(this.props.doc, 'data.aliases');
+    const fragments = _.get(this.doc, 'data.aliases');
     const names = _.reduce(fragments, (out, curr: any) => {
       if (!_.isEmpty(curr.name)) out.push(curr.name);
       return out;
@@ -63,25 +67,25 @@ class Datasheet extends PureComponent<Props> {
   }
 
   getType(): Document | undefined {
-    const docId = _.get(this.props.doc, 'data.type.id');
+    const docId = _.get(this.doc, 'data.type.id');
     if (!docId) return undefined;
     return _.find(this.props.fallacyTypes, { id: docId });
   }
 
   getSubtype(): Document | undefined {
-    const docId = _.get(this.props.doc, 'data.subtype.id');
+    const docId = _.get(this.doc, 'data.subtype.id');
     if (!docId) return undefined;
     return _.find(this.props.fallacySubtypes, { id: docId });
   }
 
   getDescriptionMarkup(): string | undefined {
-    const fragment = _.get(this.props.doc, 'data.description');
+    const fragment = _.get(this.doc, 'data.description');
     if (_.isEmpty(fragment)) return undefined;
     return PrismicDOM.RichText.asHtml(fragment, linkResolver);
   }
 
   getExampleMarkups(): ReadonlyArray<string> {
-    const fragments = _.reduce(_.get(this.props.doc, 'data.examples'), (out, curr: any) => {
+    const fragments = _.reduce(_.get(this.doc, 'data.examples'), (out, curr: any) => {
       if (!_.isEmpty(curr.example)) out.push(curr.example);
       return out;
     }, Array<string>());
@@ -91,7 +95,7 @@ class Datasheet extends PureComponent<Props> {
   }
 
   getRelatedDocs(): ReadonlyArray<Document> {
-    const fragments = _.get(this.props.doc, 'data.related');
+    const fragments = _.get(this.doc, 'data.related');
     const docIds = _.reduce(fragments, (out, curr: any) => {
       const id = _.get(curr, 'fallacy.id');
       if (id) out.push(id);
@@ -103,7 +107,7 @@ class Datasheet extends PureComponent<Props> {
   }
 
   getReferencesMarkups(): ReadonlyArray<string> {
-    const fragments = _.reduce(_.get(this.props.doc, 'data.references'), (out, curr: any) => {
+    const fragments = _.reduce(_.get(this.doc, 'data.references'), (out, curr: any) => {
       if (!_.isEmpty(curr.reference)) out.push(curr.reference);
       return out;
     }, Array<string>());
@@ -125,7 +129,7 @@ class Datasheet extends PureComponent<Props> {
     const relatedDocs = this.getRelatedDocs();
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className} ref={this.props.nodeRef}>
+      <StyledRoot className={this.props.className} ref={this.props.nodeRef}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
@@ -188,7 +192,7 @@ class Datasheet extends PureComponent<Props> {
               <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
-                    <a onClick={() => this.props.onDocChange(v)}>{_.get(v, 'data.name')}</a>
+                    <a onClick={() => this.props.onDocChange(v.id)}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
               </ul>

@@ -1,4 +1,3 @@
-import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, media, selectors } from 'promptu';
 import qs from 'query-string';
 import React, { createRef, Fragment, PureComponent } from 'react';
@@ -23,7 +22,7 @@ interface Props extends RouteComponentProps<{}> {
 }
 
 interface State {
-  activeDoc?: Document;
+  activeDocId?: string;
   currentPageIndex: number;
   isSummaryEnabled: boolean;
   isSearching: boolean;
@@ -32,7 +31,7 @@ interface State {
 
 class Home extends PureComponent<Props, State> {
   state: State = {
-    activeDoc: undefined,
+    activeDocId: undefined,
     currentPageIndex: 0,
     isSearching: false,
     isSummaryEnabled: false,
@@ -97,9 +96,9 @@ class Home extends PureComponent<Props, State> {
     }
   }
 
-  onActiveDocChange(doc?: Document) {
+  onActiveDocChange(docId?: string) {
     this.setState({
-      activeDoc: doc,
+      activeDocId: docId,
     });
   }
 
@@ -140,15 +139,15 @@ class Home extends PureComponent<Props, State> {
   render() {
     return (
       <Fragment>
-        <Transition in={this.state.activeDoc === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+        <Transition in={this.state.activeDocId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
-            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDoc} onPrev={() => this.prev()} onNext={() => this.next()}>
+            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeDocId} onPrev={() => this.prev()} onNext={() => this.next()}>
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
                     id='search'
                     input={this.state.searchInput}
-                    autoFocus={!this.state.activeDoc}
+                    autoFocus={!this.state.activeDocId}
                     onFocusIn={() => this.setState({ isSearching: true })}
                     onFocusOut={() => this.setState({ isSearching: false })}
                     onChange={(input: string) => this.onSearchInputChange(input)}
@@ -183,7 +182,7 @@ class Home extends PureComponent<Props, State> {
                         key={`${this.state.searchInput}-${this.state.currentPageIndex}`}
                         docs={docs}
                         isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => this.onActiveDocChange(doc)}
+                        onActivate={(doc) => this.onActiveDocChange(doc.id)}
                       />
                     </Fragment>
                   )}
@@ -192,16 +191,16 @@ class Home extends PureComponent<Props, State> {
             </NavControlManager>
           )}
         </Transition>
-        <Transition in={this.state.activeDoc !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+        <Transition in={this.state.activeDocId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
           {(status) => (
             <StyledModal transitionStatus={status} onExit={() => this.onActiveDocChange(undefined)}>
               {(onExit, ref) => {
                 return (
                   <StyledDatasheet
-                    doc={this.state.activeDoc!}
+                    docId={this.state.activeDocId}
                     ref={ref}
                     transitionStatus={status}
-                    onDocChange={(doc) => this.onActiveDocChange(doc)}
+                    onDocChange={(docId) => this.onActiveDocChange(docId)}
                     onExit={() => onExit()}
                   />
                 );
