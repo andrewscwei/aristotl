@@ -17,6 +17,8 @@ import NavControlManager from '../managers/NavControlManager';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
+const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:home') : () => {};
+
 interface Props extends RouteComponentProps<{}> {
 
 }
@@ -181,7 +183,7 @@ class Home extends PureComponent<Props, State> {
         </Transition>
         <Transition in={this.state.activeDocId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
           {(status) => (
-            <StyledModal transitionStatus={status} onExit={() => this.presentDocById(undefined)}>
+            <Modal transitionStatus={status} onExit={() => this.presentDocById(undefined)}>
               {(onExit, ref) => {
                 return (
                   <StyledDatasheet
@@ -193,7 +195,7 @@ class Home extends PureComponent<Props, State> {
                   />
                 );
               }}
-            </StyledModal>
+            </Modal>
           )}
         </Transition>
       </Fragment>
@@ -202,12 +204,6 @@ class Home extends PureComponent<Props, State> {
 }
 
 export default Home;
-
-const StyledModal = styled(Modal)<{
-  transitionStatus?: TransitionStatus;
-}>`
-
-`;
 
 const StyledDatasheet = styled(Datasheet)<{
   transitionStatus?: TransitionStatus;
