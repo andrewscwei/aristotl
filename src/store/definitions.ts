@@ -63,7 +63,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
   return newState;
 }
 
-export function fetchAll(options: Partial<QueryOptions> = {}, pages: number = 1) {
+export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages: number = 1) {
   return async (dispatch: Dispatch<DefinitionsAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),

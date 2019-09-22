@@ -47,7 +47,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       const { docId } = action.payload;
 
       const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.slice(i, 1);
+      if (i >= 0) newState.activeDocIds.splice(i, 1);
 
       newState.activeDocIds.push(docId);
 
@@ -56,7 +56,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
     case FallaciesActionType.DOC_DISMISSED: {
       const { docId } = action.payload;
       const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.slice(i, 1);
+      if (i >= 0) newState.activeDocIds.splice(i, 1);
 
       break;
     }
@@ -65,7 +65,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
   return newState;
 }
 
-export function fetchAll(options: Partial<QueryOptions> = {}, pages: number = 2) {
+export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: number = 2) {
   return async (dispatch: Dispatch<FallaciesAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),

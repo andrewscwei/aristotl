@@ -7,6 +7,7 @@ import NavControlManager from '../managers/NavControlManager';
 import { valueByTransitionStatus } from '../styles/utils';
 
 interface Props {
+  isFocused: boolean;
   transitionStatus?: TransitionStatus;
   children?: (onExit: () => void, ref: Ref<HTMLDivElement>) => ReactNode;
   onExit: () => void;
@@ -14,6 +15,7 @@ interface Props {
 
 class Modal extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
+    isFocused: true,
     onExit: () => {},
   };
 
@@ -32,9 +34,12 @@ class Modal extends PureComponent<Props> {
   render() {
     return (
       <StyledRoot transitionStatus={this.props.transitionStatus}>
-        <NavControlManager isEnabled={true} onEscape={() => this.props.onExit()}>
+        <NavControlManager isEnabled={this.props.isFocused} onEscape={() => this.props.onExit()}>
           <div>
-            <StyledBackground onClick={() => this.props.onExit()} transitionStatus={this.props.transitionStatus}/>
+            <StyledBackground
+              transitionStatus={this.props.transitionStatus}
+              onClick={() => this.props.onExit()}
+            />
             {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.modal)}
           </div>
         </NavControlManager>
@@ -49,9 +54,8 @@ const StyledBackground = styled.div<{
   transitionStatus?: TransitionStatus;
 }>`
   ${animations.transition('opacity', 200, 'ease-out')}
-  background: ${(props) => props.theme.colors.black};
   height: 100%;
-  opacity: ${(props) => valueByTransitionStatus([0, 0.4], props.transitionStatus, true)};
+  opacity: 0;
   width: 100%;
 `;
 

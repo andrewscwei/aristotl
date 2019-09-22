@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors } from 'promptu';
+import { align, animations, container, selectors, utils } from 'promptu';
 import React, { forwardRef, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -296,7 +296,7 @@ const StyledSection = styled.div`
 
 const StyledRoot = styled.div`
   -webkit-overflow-scrolling: touch;
-  background: #fff;
+  background: ${(props) => props.theme.colors.white};
   color: ${(props) => props.theme.colors.black};
   overflow-y: scroll;
   padding: 8rem 3rem;

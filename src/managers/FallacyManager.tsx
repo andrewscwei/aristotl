@@ -5,7 +5,7 @@ import React, { Fragment, PureComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { AppState } from '../store';
-import { fetchAll } from '../store/fallacies';
+import { fetchFallacies } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 
 interface StateProps {
@@ -15,7 +15,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  fetchAll: typeof fetchAll;
+  fetchFallacies: typeof fetchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps {
@@ -33,7 +33,7 @@ class FallacyManager extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
-    this.props.fetchAll();
+    this.props.fetchFallacies();
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
@@ -107,6 +107,6 @@ export default connect(
     }),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchAll,
+    fetchFallacies,
   }, dispatch),
 )(FallacyManager);
