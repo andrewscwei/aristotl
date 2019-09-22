@@ -7,7 +7,6 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
-import { reduceDocs } from '../store/prismic';
 import { colors } from '../styles/theme';
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
 import ActionButton from './ActionButton';
@@ -15,8 +14,6 @@ import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
-  fallacies: ReadonlyArray<Document>;
-  definitions: ReadonlyArray<Document>;
 }
 
 interface DispatchProps {
@@ -25,7 +22,9 @@ interface DispatchProps {
 
 interface OwnProps {
   className?: string;
+  definitions: ReadonlyArray<Document>;
   docId?: string;
+  fallacies: ReadonlyArray<Document>;
   nodeRef?: Ref<HTMLDivElement>;
   onDocChange: (docId: string) => void;
   onExit: () => void;
@@ -173,8 +172,6 @@ class Datasheet extends PureComponent<Props> {
 const ConnectedDatasheet = connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
-    fallacies: reduceDocs(state.prismic, 'fallacy') || [],
-    definitions: reduceDocs(state.prismic, 'definition') || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 

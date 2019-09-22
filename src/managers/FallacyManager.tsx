@@ -5,8 +5,8 @@ import React, { Fragment, PureComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { AppState } from '../store';
+import { fetchAll } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
-import { fetchDocs, reduceDocs } from '../store/prismic';
 
 interface StateProps {
   i18n: I18nState;
@@ -15,17 +15,17 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  fetchDocs: typeof fetchDocs;
+  fetchAll: typeof fetchAll;
 }
 
 interface Props extends StateProps, DispatchProps {
   pageIndex: number;
   docsPerPage: number;
   searchInput?: string;
-  children: (docs: ReadonlyArray<Document>, totalDocs: number, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
+  children: (docs: ReadonlyArray<Document>, results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
 }
 
-class DocumentManager extends PureComponent<Props> {
+class FallacyManager extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     pageIndex: 0,
     docsPerPage: 20,
@@ -33,16 +33,7 @@ class DocumentManager extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
-
-    this.props.fetchDocs('fallacy', undefined, {
-      orderings: '[my.fallacy.abbreviation]',
-      pageSize: 100,
-    }, 2);
-
-    this.props.fetchDocs('definition', undefined, {
-      orderings: '[my.definition.name]',
-      pageSize: 100,
-    });
+    this.props.fetchAll();
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
@@ -79,17 +70,17 @@ class DocumentManager extends PureComponent<Props> {
   }
 
   render() {
-    const docs = this.getFilteredDocs();
+    const results = this.getFilteredDocs();
     const pageIndex = this.props.pageIndex;
-    const pages = _.chunk(docs, this.props.docsPerPage);
+    const pages = _.chunk(results, this.props.docsPerPage);
     const numPages = pages.length;
-    const docsOnCurrentPage = pages[pageIndex] || [];
+    const currResults = pages[pageIndex] || [];
     const startIndex = this.props.docsPerPage * pageIndex;
-    const endIndex = docsOnCurrentPage.length + startIndex;
+    const endIndex = currResults.length + startIndex;
 
     return (
       <Fragment>
-        {this.props.children(docsOnCurrentPage, this.props.docs.length, numPages, startIndex, endIndex, this.countFormals(docsOnCurrentPage), this.countInformals(docsOnCurrentPage))}
+        {this.props.children(this.props.docs, results, currResults, numPages, startIndex, endIndex, this.countFormals(currResults), this.countInformals(currResults))}
       </Fragment>
     );
   }
@@ -98,8 +89,8 @@ class DocumentManager extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
-    docs: reduceDocs(state.prismic, 'fallacy') || [],
-    fusedDocs: new Fuse(reduceDocs(state.prismic, 'fallacy') || [], {
+    docs: state.fallacies[__I18N_CONFIG__.defaultLocale] || [],
+    fusedDocs: new Fuse(state.fallacies[__I18N_CONFIG__.defaultLocale] || [], {
       shouldSort: true,
       threshold: 0.6,
       location: 0,
@@ -116,6 +107,6 @@ export default connect(
     }),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchDocs,
+    fetchAll,
   }, dispatch),
-)(DocumentManager);
+)(FallacyManager);

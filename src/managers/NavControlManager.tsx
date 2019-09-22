@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import Hammer from 'react-hammerjs';
 
 interface Props {

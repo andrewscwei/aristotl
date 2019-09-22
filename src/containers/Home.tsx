@@ -13,7 +13,8 @@ import Modal from '../components/Modal';
 import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
-import DocumentManager from '../managers/DocumentManager';
+import DefinitionManager from '../managers/DefinitionManager';
+import FallacyManager from '../managers/FallacyManager';
 import NavControlManager from '../managers/NavControlManager';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
@@ -154,88 +155,92 @@ class Home extends PureComponent<Props, State> {
 
   render() {
     return (
-      <Fragment>
-        <Transition in={this.state.activeFallacyId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
-          {(status) => (
-            <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeFallacyId} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
-              <StyledRoot transitionStatus={status}>
-                <DocumentManager pageIndex={this.state.pageIndex} searchInput={this.state.searchInput}>
-                  {(docs, totalDocs, maxPages, startIndex, endIndex, numFormals, numInformals) => (
-                    <Fragment>
-                      <StyledHeader>
-                        <SearchBar
-                          id='search'
-                          input={this.state.searchInput}
-                          autoFocus={!this.state.activeFallacyId}
-                          onFocusIn={() => this.setState({ isSearching: true })}
-                          onFocusOut={() => this.setState({ isSearching: false })}
-                          onChange={(input: string) => this.onSearchInputChange(input)}
+      <DefinitionManager>
+        {(definitions) => (
+          <FallacyManager pageIndex={this.state.pageIndex} searchInput={this.state.searchInput}>
+            {(fallacies, results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals) => (
+              <Fragment>
+                <Transition in={this.state.activeFallacyId === undefined} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+                  {(status) => (
+                    <NavControlManager isEnabled={!this.state.isSearching && !this.state.activeFallacyId} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
+                      <StyledRoot transitionStatus={status}>
+                        <StyledHeader>
+                          <SearchBar
+                            id='search'
+                            input={this.state.searchInput}
+                            autoFocus={!this.state.activeFallacyId}
+                            onFocusIn={() => this.setState({ isSearching: true })}
+                            onFocusOut={() => this.setState({ isSearching: false })}
+                            onChange={(input: string) => this.onSearchInputChange(input)}
+                          />
+                          <ActionButton
+                            symbol='i'
+                            isTogglable={true}
+                            tintColor={colors.white}
+                            hoverTintColor={colors.red}
+                            activeTintColor={colors.red}
+                            onToggleOn={() => this.setState({ isSummaryEnabled: true })}
+                            onToggleOff={() => this.setState({ isSummaryEnabled: false })}
+                          />
+                        </StyledHeader>
+                        <StyledStatistics
+                          totalResults={results.length}
+                          subtotalResultsStart={startIndex + 1}
+                          subtotalResultsEnd={endIndex}
+                          totalFormal={numFormals}
+                          totalInformal={numInformals}
                         />
-                        <ActionButton
-                          symbol='i'
-                          isTogglable={true}
-                          tintColor={colors.white}
-                          hoverTintColor={colors.red}
-                          activeTintColor={colors.red}
-                          onToggleOn={() => this.setState({ isSummaryEnabled: true })}
-                          onToggleOff={() => this.setState({ isSummaryEnabled: false })}
+                        <StyledPaginator
+                          ref={this.nodeRefs.paginator}
+                          activePageIndex={this.state.pageIndex}
+                          maxPages={maxPages}
+                          onActivate={(index) => this.onPageIndexChange(index)}
                         />
-                      </StyledHeader>
-                      <StyledStatistics
-                        totalResults={totalDocs}
-                        subtotalResultsStart={startIndex + 1}
-                        subtotalResultsEnd={endIndex}
-                        totalFormal={numFormals}
-                        totalInformal={numInformals}
-                      />
-                      <StyledPaginator
-                        ref={this.nodeRefs.paginator}
-                        activePageIndex={this.state.pageIndex}
-                        maxPages={maxPages}
-                        onActivate={(index) => this.onPageIndexChange(index)}
-                      />
-                      <StyledGrid
-                        key={`${this.state.searchInput}-${this.state.pageIndex}`}
-                        docs={docs}
-                        isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => this.presentFallacyById(doc.id)}
-                      />
-                    </Fragment>
+                        <StyledGrid
+                          key={`${this.state.searchInput}-${this.state.pageIndex}`}
+                          docs={currResults}
+                          isSummaryEnabled={this.state.isSummaryEnabled}
+                          onActivate={(doc) => this.presentFallacyById(doc.id)}
+                        />
+                      </StyledRoot>
+                    </NavControlManager>
                   )}
-                </DocumentManager>
-              </StyledRoot>
-            </NavControlManager>
-          )}
-        </Transition>
-        <Transition in={this.state.activeFallacyId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-          {(status) => (
-            <Modal transitionStatus={status} onExit={() => this.dismissFallacy()}>
-              {(onExit, ref) => {
-                return (
-                  <StyledDatasheet
-                    docId={this.state.activeFallacyId}
-                    ref={ref}
-                    transitionStatus={status}
-                    onDocChange={(docId) => this.presentFallacyById(docId)}
-                    onExit={() => onExit()}
-                  />
-                );
-              }}
-            </Modal>
-          )}
-        </Transition>
-        <Transition in={false} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-          {(status) => (
-            <Modal transitionStatus={status} onExit={() => {}}>
-              {(onExit, ref) => {
-                return (
-                  <Fragment></Fragment>
-                );
-              }}
-            </Modal>
-          )}
-        </Transition>
-      </Fragment>
+                </Transition>
+                <Transition in={this.state.activeFallacyId !== undefined} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+                  {(status) => (
+                    <Modal transitionStatus={status} onExit={() => this.dismissFallacy()}>
+                      {(onExit, ref) => {
+                        return (
+                          <StyledDatasheet
+                            definitions={definitions}
+                            docId={this.state.activeFallacyId}
+                            fallacies={fallacies}
+                            ref={ref}
+                            transitionStatus={status}
+                            onDocChange={(docId) => this.presentFallacyById(docId)}
+                            onExit={() => onExit()}
+                          />
+                        );
+                      }}
+                    </Modal>
+                  )}
+                </Transition>
+                <Transition in={false} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+                  {(status) => (
+                    <Modal transitionStatus={status} onExit={() => {}}>
+                      {(onExit, ref) => {
+                        return (
+                          <Fragment></Fragment>
+                        );
+                      }}
+                    </Modal>
+                  )}
+                </Transition>
+              </Fragment>
+            )}
+          </FallacyManager>
+        )}
+      </DefinitionManager>
     );
   }
 }
@@ -243,6 +248,7 @@ class Home extends PureComponent<Props, State> {
 export default Home;
 
 const StyledDefinition = styled(Definition)`
+
 `;
 
 const StyledDatasheet = styled(Datasheet)<{
