@@ -54,8 +54,8 @@ class Card extends PureComponent<Props> {
         </StyledAbbreviation>
 
         <StyledTypes>
-          {typeDocs && typeDocs.map((v: any) => (
-            <StyledType>
+          {typeDocs && typeDocs.map((v: any, i) => (
+            <StyledType key={`type-${i}`}>
               <Pixel isHollow={v.slug === 'informal-fallacy'}/>
               <span>{ltxt(v.slug)}</span>
             </StyledType>
