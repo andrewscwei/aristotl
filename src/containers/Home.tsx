@@ -1,18 +1,17 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, media, selectors, utils } from 'promptu';
+import { animations, container, media, selectors } from 'promptu';
 import qs from 'query-string';
 import React, { createRef, Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Transition, TransitionGroup } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
-import Definition from '../components/Definition';
-import Fallacy from '../components/Fallacy';
+import DefinitionStackModal from '../components/DefinitionStackModal';
+import FallacyStackModal from '../components/FallacyStackModal';
 import Grid from '../components/Grid';
-import Modal from '../components/Modal';
 import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
@@ -20,7 +19,7 @@ import FallacyManager from '../managers/FallacyManager';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
+import { presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
@@ -35,7 +34,6 @@ interface StateProps {
 interface DispatchProps {
   presentFallacyById: typeof presentFallacyById;
   fetchDefinitions: typeof fetchDefinitions;
-  dismissFallacyById: typeof dismissFallacyById;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -122,18 +120,6 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  presentFallacyById(id: string) {
-    debug('Presenting fallacy...', 'OK', id);
-    // this.props.history.replace(`#${id}`);
-    this.props.presentFallacyById(id);
-  }
-
-  dismissFallacyById(id: string) {
-    debug('Dismissing fallacy...', 'OK', id);
-    // this.props.history.replace('/');
-    this.props.dismissFallacyById(id);
-  }
-
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
     if (shouldUpdateHistory) {
       this.props.history.push({
@@ -172,7 +158,7 @@ class Home extends PureComponent<Props, State> {
   render() {
     return (
       <FallacyManager pageIndex={this.state.pageIndex} searchInput={this.state.searchInput}>
-        {(fallacies, results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals) => (
+        {(results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals) => (
           <Fragment>
             <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
               {(status) => (
@@ -214,62 +200,14 @@ class Home extends PureComponent<Props, State> {
                       key={`${this.state.searchInput}-${this.state.pageIndex}`}
                       docs={currResults}
                       isSummaryEnabled={this.state.isSummaryEnabled}
-                      onActivate={(doc) => this.presentFallacyById(doc.id)}
+                      onActivate={(doc) => this.props.presentFallacyById(doc.id)}
                     />
                   </StyledRoot>
                 </NavControlManager>
               )}
             </Transition>
-            <StyledFallacyStack isFocused={this.props.activeFallacyIds.length > 0}>
-              <TransitionGroup>
-                {(this.props.activeFallacyIds.map((fallacyId, i) => (
-                  <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-                    {(status) => (
-                      <Modal
-                        isFocused={i === (this.props.activeFallacyIds.length - 1)}
-                        transitionStatus={status}
-                        onExit={() => this.dismissFallacyById(fallacyId)}
-                      >
-                        {(onExit, ref) => {
-                          return (
-                            <StyledFallacy
-                              definitions={this.props.definitions}
-                              docId={fallacyId}
-                              fallacies={fallacies}
-                              ref={ref}
-                              stackIndex={this.props.activeFallacyIds.length - i - 1}
-                              transitionStatus={status}
-                              onDocChange={(docId) => this.presentFallacyById(docId)}
-                              onExit={() => onExit()}
-                            />
-                          );
-                        }}
-                      </Modal>
-                    )}
-                  </Transition>
-                )))}
-              </TransitionGroup>
-            </StyledFallacyStack>
-            <StyledDefinitionStack isFocused={this.props.activeFallacyIds.length > 0}>
-              <TransitionGroup>
-                {(this.props.activeDefinitionIds.map((definitionId) => (
-                  <Transition key={definitionId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-                    {(status) => (
-                      <Modal transitionStatus={status} onExit={() => {}}>
-                        {(onExit, ref) => {
-                          return (
-                            <StyledDefinition
-                              docId={definitionId}
-                              definitions={this.props.definitions}
-                            />
-                          );
-                        }}
-                      </Modal>
-                    )}
-                  </Transition>
-                )))}
-              </TransitionGroup>
-            </StyledDefinitionStack>
+            <FallacyStackModal/>
+            <DefinitionStackModal/>
           </Fragment>
         )}
       </FallacyManager>
@@ -284,43 +222,10 @@ export default connect(
     definitions: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    dismissFallacyById,
     fetchDefinitions,
     presentFallacyById,
   }, dispatch),
 )(Home);
-
-const StyledDefinition = styled(Definition)`
-
-`;
-
-const StyledDefinitionStack = styled.div<{
-  isFocused: boolean;
-}>`
-
-`;
-
-const StyledFallacyStack = styled.div<{
-  isFocused: boolean;
-}>`
-  ${animations.transition('background', 200, 'ease-out')}
-  background: ${(props) => `rgba(${utils.toHexString(props.theme.colors.black)}, ${props.isFocused ? 0.4 : 0})`};
-  pointer-events: ${(props) => props.isFocused ? 'auto' : 'none'};
-`;
-
-const StyledFallacy = styled(Fallacy)<{
-  stackIndex: number;
-  transitionStatus?: TransitionStatus;
-}>`
-  ${align.tr}
-  ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
-  height: 100%;
-  max-width: 50rem;
-  opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
-  pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
-  transform: ${(props) => valueByTransitionStatus(['translate3d(100%, 0, 0)', `translate3d(${-props.stackIndex * 2}rem, 0, 0)`], props.transitionStatus, true)};
-  width: 90%;
-`;
 
 const StyledHeader = styled.header`
   ${container.fhcl}

@@ -22,7 +22,7 @@ interface Props extends StateProps, DispatchProps {
   pageIndex: number;
   docsPerPage: number;
   searchInput?: string;
-  children: (docs: ReadonlyArray<Document>, results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
+  children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
 }
 
 class FallacyManager extends PureComponent<Props> {
@@ -80,7 +80,7 @@ class FallacyManager extends PureComponent<Props> {
 
     return (
       <Fragment>
-        {this.props.children(this.props.docs, results, currResults, numPages, startIndex, endIndex, this.countFormals(currResults), this.countInformals(currResults))}
+        {this.props.children(results, currResults, numPages, startIndex, endIndex, this.countFormals(currResults), this.countInformals(currResults))}
       </Fragment>
     );
   }

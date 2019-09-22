@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors, utils } from 'promptu';
+import { align, animations, container, selectors } from 'promptu';
 import React, { forwardRef, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -13,6 +13,8 @@ import ActionButton from './ActionButton';
 import Pixel from './Pixel';
 
 interface StateProps {
+  definitionDict: ReadonlyArray<Document>;
+  fallacyDict: ReadonlyArray<Document>;
   i18n: I18nState;
 }
 
@@ -22,9 +24,7 @@ interface DispatchProps {
 
 interface OwnProps {
   className?: string;
-  definitions: ReadonlyArray<Document>;
   docId?: string;
-  fallacies: ReadonlyArray<Document>;
   nodeRef?: Ref<HTMLDivElement>;
   onDocChange: (docId: string) => void;
   onExit: () => void;
@@ -40,7 +40,7 @@ class Fallacy extends PureComponent<Props> {
 
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
-    return _.find(this.props.fallacies, (v) => v.id === this.props.docId);
+    return _.find(this.props.fallacyDict, (v) => v.id === this.props.docId);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -54,12 +54,12 @@ class Fallacy extends PureComponent<Props> {
     const abbreviation = getText(this.doc, 'data.abbreviation');
     const name = getText(this.doc, 'data.name');
     const aliases = getTexts(this.doc, 'data.aliases', 'name');
-    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitions);
-    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'subtype', this.props.definitions);
+    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitionDict);
+    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'subtype', this.props.definitionDict);
     const descriptionMarkup = getMarkup(this.doc, 'data.description');
     const exampleMarkups = getMarkups(this.doc, 'data.examples', 'example');
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
-    const relatedDocs = getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacies);
+    const relatedDocs = getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacyDict);
 
     return (
       <StyledRoot className={this.props.className} ref={this.props.nodeRef}>
@@ -171,6 +171,8 @@ class Fallacy extends PureComponent<Props> {
 
 const ConnectedDatasheet = connect(
   (state: AppState): StateProps => ({
+    definitionDict: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
+    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
     i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
