@@ -290,7 +290,7 @@ const StyledRoot = styled.div<{
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
   ${container.fvtl}
-  background: ${(props) => props.theme.colors.offBlack};
+  background: ${(props) => props.theme.colors.black};
   min-height: 100%;
   opacity: ${(props) => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
   padding: 5rem 2rem 10rem;

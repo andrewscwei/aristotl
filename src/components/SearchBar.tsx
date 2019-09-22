@@ -143,7 +143,7 @@ const StyledActionButton = styled(ActionButton)`
 
 const StyledRoot = styled.div`
   ${container.fhcl}
-  background: ${(props) => props.theme.colors.black};
+  background: ${(props) => props.theme.colors.offBlack};
   max-width: 40rem;
   padding: 0 1rem;
   width: 100%;

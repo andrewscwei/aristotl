@@ -155,14 +155,14 @@ const StyledDivider = styled.div`
   ${animations.transition('background', 200, 'ease-out')}
   width: 2rem;
   height: .2rem;
-  background: ${(props) => props.theme.colors.offBlack};
+  background: ${(props) => props.theme.colors.darkGrey};
   margin: 2rem;
 `;
 
 const StyledRoot = styled.button`
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
-  background: ${(props) => props.theme.colors.black};
+  background: ${(props) => props.theme.colors.offBlack};
   height: 100%;
   overflow: hidden;
   padding: 1rem;
@@ -175,7 +175,7 @@ const StyledRoot = styled.button`
   }
 
   ${selectors.hwot} {
-    background: ${(props) => props.theme.colors.offBlack};
+    background: ${(props) => props.theme.colors.black};
     color: ${(props) => props.theme.colors.white};
 
     ${StyledDivider} {
