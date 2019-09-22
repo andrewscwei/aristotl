@@ -32,7 +32,7 @@ interface OwnProps {
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
-class Datasheet extends PureComponent<Props> {
+class Fallacy extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     onDocChange: () => {},
     onExit: () => {},
@@ -176,7 +176,7 @@ const ConnectedDatasheet = connect(
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 
   }, dispatch),
-)(Datasheet);
+)(Fallacy);
 
 export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDatasheet {...props} nodeRef={ref}/>);
 

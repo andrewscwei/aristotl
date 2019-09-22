@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { align, animations } from 'promptu';
-import React, { createRef, Fragment, PureComponent, ReactNode, Ref } from 'react';
+import React, { createRef, PureComponent, ReactNode, Ref } from 'react';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
 import NavControlManager from '../managers/NavControlManager';

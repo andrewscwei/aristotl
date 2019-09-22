@@ -9,7 +9,7 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
-import Datasheet from '../components/Datasheet';
+import Fallacy from '../components/Fallacy';
 import Definition from '../components/Definition';
 import Grid from '../components/Grid';
 import Modal from '../components/Modal';
@@ -176,7 +176,7 @@ class Home extends PureComponent<Props, State> {
           <Fragment>
             <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
               {(status) => (
-                <NavControlManager isEnabled={!this.state.isSearching && this.props.activeDefinitionIds.length === 0 && this.props.activeFallacyIds.length > 0} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
+                <NavControlManager isEnabled={!this.state.isSearching && this.props.activeDefinitionIds.length === 0 && this.props.activeFallacyIds.length === 0} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
                   <StyledRoot transitionStatus={status}>
                     <StyledHeader>
                       <SearchBar
@@ -221,44 +221,55 @@ class Home extends PureComponent<Props, State> {
               )}
             </Transition>
             <StyledFallacyStack isFocused={this.props.activeFallacyIds.length > 0}>
-              {(this.props.activeFallacyIds.map((fallacyId, i) => (
-                <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-                  {(status) => (
-                    <Modal
-                      isFocused={i === (this.props.activeFallacyIds.length - 1)}
-                      transitionStatus={status}
-                      onExit={() => this.dismissFallacyById(fallacyId)}
-                    >
-                      {(onExit, ref) => {
-                        return (
-                          <StyledDatasheet
-                            definitions={this.props.definitions}
-                            docId={fallacyId}
-                            fallacies={fallacies}
-                            ref={ref}
-                            stackIndex={this.props.activeFallacyIds.length - i - 1}
-                            transitionStatus={status}
-                            onDocChange={(docId) => this.presentFallacyById(docId)}
-                            onExit={() => onExit()}
-                          />
-                        );
-                      }}
-                    </Modal>
-                  )}
-                </Transition>
-              )))}
+              <TransitionGroup>
+                {(this.props.activeFallacyIds.map((fallacyId, i) => (
+                  <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+                    {(status) => (
+                      <Modal
+                        isFocused={i === (this.props.activeFallacyIds.length - 1)}
+                        transitionStatus={status}
+                        onExit={() => this.dismissFallacyById(fallacyId)}
+                      >
+                        {(onExit, ref) => {
+                          return (
+                            <StyledFallacy
+                              definitions={this.props.definitions}
+                              docId={fallacyId}
+                              fallacies={fallacies}
+                              ref={ref}
+                              stackIndex={this.props.activeFallacyIds.length - i - 1}
+                              transitionStatus={status}
+                              onDocChange={(docId) => this.presentFallacyById(docId)}
+                              onExit={() => onExit()}
+                            />
+                          );
+                        }}
+                      </Modal>
+                    )}
+                  </Transition>
+                )))}
+              </TransitionGroup>
             </StyledFallacyStack>
-            <Transition in={false} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-              {(status) => (
-                <Modal transitionStatus={status} onExit={() => {}}>
-                  {(onExit, ref) => {
-                    return (
-                      <Fragment></Fragment>
-                    );
-                  }}
-                </Modal>
-              )}
-            </Transition>
+            <StyledDefinitionStack isFocused={this.props.activeFallacyIds.length > 0}>
+              <TransitionGroup>
+                {(this.props.activeDefinitionIds.map((definitionId) => (
+                  <Transition key={definitionId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+                    {(status) => (
+                      <Modal transitionStatus={status} onExit={() => {}}>
+                        {(onExit, ref) => {
+                          return (
+                            <StyledDefinition
+                              docId={definitionId}
+                              definitions={this.props.definitions}
+                            />
+                          );
+                        }}
+                      </Modal>
+                    )}
+                  </Transition>
+                )))}
+              </TransitionGroup>
+            </StyledDefinitionStack>
           </Fragment>
         )}
       </FallacyManager>
@@ -283,7 +294,13 @@ const StyledDefinition = styled(Definition)`
 
 `;
 
-const StyledFallacyStack = styled(TransitionGroup)<{
+const StyledDefinitionStack = styled.div<{
+  isFocused: boolean;
+}>`
+
+`;
+
+const StyledFallacyStack = styled.div<{
   isFocused: boolean;
 }>`
   ${animations.transition('background', 200, 'ease-out')}
@@ -291,7 +308,7 @@ const StyledFallacyStack = styled(TransitionGroup)<{
   pointer-events: ${(props) => props.isFocused ? 'auto' : 'none'};
 `;
 
-const StyledDatasheet = styled(Datasheet)<{
+const StyledFallacy = styled(Fallacy)<{
   stackIndex: number;
   transitionStatus?: TransitionStatus;
 }>`

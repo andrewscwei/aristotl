@@ -16,7 +16,8 @@ interface DispatchProps {
 
 interface Props extends StateProps, DispatchProps {
   className?: string;
-  doc: Document;
+  definitions: ReadonlyArray<Document>;
+  docId: string;
 }
 
 class Definition extends PureComponent<Props> {
