@@ -89,8 +89,8 @@ class FallacyManager extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
-    docs: state.fallacies[__I18N_CONFIG__.defaultLocale] || [],
-    fusedDocs: new Fuse(state.fallacies[__I18N_CONFIG__.defaultLocale] || [], {
+    docs: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
+    fusedDocs: new Fuse(state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [], {
       shouldSort: true,
       threshold: 0.6,
       location: 0,

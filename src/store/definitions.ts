@@ -9,7 +9,9 @@ export enum DefinitionsActionType {
 }
 
 export interface DefinitionsState {
-  [locale: string]: ReadonlyArray<Document>;
+  docs: {
+    [locale: string]: ReadonlyArray<Document>;
+  };
 }
 
 export interface DefinitionsAction extends Action<DefinitionsActionType> {
@@ -17,7 +19,7 @@ export interface DefinitionsAction extends Action<DefinitionsActionType> {
 }
 
 const initialState: DefinitionsState = {
-
+  docs: {},
 };
 
 export default function reducer(state = initialState, action: DefinitionsAction): DefinitionsState {
@@ -26,12 +28,13 @@ export default function reducer(state = initialState, action: DefinitionsAction)
     const newState: DefinitionsState = _.cloneDeep(state);
     const { locale, docs: newDocs } = action.payload;
 
-    if (!newState[locale]) newState[locale] = [];
+    if (!newState.docs) newState.docs = {};
+    if (!newState.docs[locale]) newState.docs[locale] = [];
 
-    const oldDocs = newState[locale];
+    const oldDocs = newState.docs[locale];
     const mergedDocs = _.unionWith([...newDocs, ...oldDocs], (doc1, doc2) => (doc1.id === doc2.id));
 
-    newState[locale] = mergedDocs;
+    newState.docs[locale] = mergedDocs;
 
     return newState;
   default:

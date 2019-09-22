@@ -9,7 +9,9 @@ export enum FallaciesActionType {
 }
 
 export interface FallaciesState {
-  [locale: string]: ReadonlyArray<Document>;
+  docs: {
+    [locale: string]: ReadonlyArray<Document>;
+  };
 }
 
 export interface FallaciesAction extends Action<FallaciesActionType> {
@@ -17,6 +19,7 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 }
 
 const initialState: FallaciesState = {
+  docs: {},
 };
 
 export default function reducer(state = initialState, action: FallaciesAction): FallaciesState {
@@ -25,12 +28,13 @@ export default function reducer(state = initialState, action: FallaciesAction): 
     const newState: FallaciesState = _.cloneDeep(state);
     const { locale, docs: newDocs } = action.payload;
 
-    if (!newState[locale]) newState[locale] = [];
+    if (!newState.docs) newState.docs = {};
+    if (!newState.docs[locale]) newState.docs[locale] = [];
 
-    const oldDocs = newState[locale];
+    const oldDocs = newState.docs[locale];
     const mergedDocs = _.unionWith([...newDocs, ...oldDocs], (doc1, doc2) => (doc1.id === doc2.id));
 
-    newState[locale] = mergedDocs;
+    newState.docs[locale] = mergedDocs;
 
     return newState;
   default:

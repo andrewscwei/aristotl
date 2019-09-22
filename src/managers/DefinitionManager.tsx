@@ -34,7 +34,7 @@ class DefinitionManager extends PureComponent<Props> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    docs: state.definitions[__I18N_CONFIG__.defaultLocale] || [],
+    docs: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     fetchAll,
