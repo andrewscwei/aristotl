@@ -26,8 +26,13 @@ interface Props extends StateProps, DispatchProps {
 
 }
 
+const DX = [...Array(10).keys()].map(() => _.random(0, 1) === 0 ? 3 : -3);
+const DY = [...Array(10).keys()].map(() => _.random(0, 1) === 0 ? 3 : -3);
+
 class DefinitionStackModal extends PureComponent<Props> {
   render() {
+    const r = _.random(0, 20, true);
+
     return (
       <StyledRoot isFocused={this.props.activeDefinitionIds.length > 0}>
         <TransitionGroup>
@@ -76,7 +81,10 @@ const StyledDefinition = styled(Definition)<{
   max-width: 50rem;
   opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
   pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
-  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', `translate3d(${-props.stackIndex * (_.random(0, 1) === 0 ? 3 : -3)}rem, ${-props.stackIndex * (_.random(0, 1) === 0 ? 3 : -3)}rem, 0) scale(1)`], props.transitionStatus, true)};
+  transform: ${(props) => valueByTransitionStatus([
+    'translate3d(0, 0, 0) scale(.9)',
+    `translate3d(${-props.stackIndex * DX[props.stackIndex % 10]}rem, ${-props.stackIndex * DY[props.stackIndex % 10]}rem, 0) scale(1)`,
+  ], props.transitionStatus, true)};
   width: 90%;
 `;
 
