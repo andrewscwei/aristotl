@@ -166,14 +166,28 @@ const StyledContent = styled.div`
     width: 100%;
   }
 
-  a {
+  a:not([href]) {
     ${animations.transition('color', 200, 'ease-out')}
     color: ${(props) => props.theme.colors.brown};
     cursor: pointer;
+    font-weight: 700;
 
     ${selectors.hwot} {
       color: inherit;
       text-decoration: underline;
+    }
+  }
+
+  a[href] {
+    ${animations.transition('opacity', 200, 'ease-out')}
+    color: inherit;
+    cursor: pointer;
+    font-weight: inherit;
+    text-decoration: underline;
+
+    ${selectors.hwot} {
+      color: inherit;
+      opacity: 0.6;
     }
   }
 `;
