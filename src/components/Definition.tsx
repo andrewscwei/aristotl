@@ -11,6 +11,7 @@ import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
 import ActionButton from './ActionButton';
+import RichText from './RichText';
 
 interface StateProps {
   definitionDict: ReadonlyArray<Document>;
@@ -60,10 +61,10 @@ class Definition extends PureComponent<Props> {
         <StyledTitle>{name}</StyledTitle>
         {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}
         <StyledContent>
-          {descriptionMarkup && <div dangerouslySetInnerHTML={{ __html: descriptionMarkup }}/>}
+          {descriptionMarkup && <RichText markup={descriptionMarkup}/>}
           {(referenceMarkups && referenceMarkups.length > 0) &&
             <Fragment>
-              <hr/>
+              <StyledDivider/>
               <ul>
                 {referenceMarkups.map((v, i) => (
                   <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
@@ -160,8 +161,8 @@ const StyledContent = styled.div`
   pre {
     ${container.box}
     background: ${(props) => props.theme.colors.lightGrey};
-    padding: 1rem;
     margin: 0;
+    padding: 1rem;
     width: 100%;
   }
 
@@ -175,14 +176,14 @@ const StyledContent = styled.div`
       text-decoration: underline;
     }
   }
+`;
 
-  hr {
-    width: 100%;
-    height: 1px;
-    border: none;
-    background: ${(props) => props.theme.colors.darkBlue};
-    margin: 2rem 0;
-  }
+const StyledDivider = styled.hr`
+  background: ${(props) => props.theme.colors.darkBlue};
+  border: none;
+  height: 1px;
+  margin: 2rem 0;
+  width: 100%;
 `;
 
 const StyledRoot = styled.div`

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { align, animations, utils } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -75,7 +76,7 @@ const StyledDefinition = styled(Definition)<{
   max-width: 50rem;
   opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
   pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
-  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', `translate3d(${-props.stackIndex * 2}rem, 0, 0) scale(1)`], props.transitionStatus, true)};
+  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', `translate3d(${-props.stackIndex * (_.random(0, 1) === 0 ? 3 : -3)}rem, ${-props.stackIndex * (_.random(0, 1) === 0 ? 3 : -3)}rem, 0) scale(1)`], props.transitionStatus, true)};
   width: 90%;
 `;
 
