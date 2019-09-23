@@ -9,7 +9,7 @@ import { valueByTransitionStatus } from '../styles/utils';
 interface Props {
   isFocused: boolean;
   transitionStatus?: TransitionStatus;
-  children?: (onExit: () => void, ref: Ref<HTMLDivElement>) => ReactNode;
+  children?: (onExit: () => void, scrollTargetRef: Ref<HTMLDivElement>) => ReactNode;
   onExit: () => void;
 }
 
@@ -20,15 +20,15 @@ class Modal extends PureComponent<Props> {
   };
 
   nodeRefs = {
-    modal: createRef<HTMLDivElement>(),
+    scrollTarget: createRef<HTMLDivElement>(),
   };
 
   componentDidMount() {
-    if (this.nodeRefs.modal.current) disableBodyScroll(this.nodeRefs.modal.current);
+    if (this.nodeRefs.scrollTarget.current) disableBodyScroll(this.nodeRefs.scrollTarget.current);
   }
 
   componentWillUnmount() {
-    if (this.nodeRefs.modal.current) enableBodyScroll(this.nodeRefs.modal.current);
+    if (this.nodeRefs.scrollTarget.current) enableBodyScroll(this.nodeRefs.scrollTarget.current);
   }
 
   render() {
@@ -39,7 +39,7 @@ class Modal extends PureComponent<Props> {
             transitionStatus={this.props.transitionStatus}
             onClick={() => this.props.onExit()}
           />
-          {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.modal)}
+          {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.scrollTarget)}
         </StyledRoot>
       </NavControlManager>
     );

@@ -26,7 +26,7 @@ interface DispatchProps {
 interface OwnProps {
   className?: string;
   docId?: string;
-  nodeRef?: Ref<HTMLDivElement>;
+  scrollTargetRef?: Ref<HTMLDivElement>;
 }
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
@@ -39,7 +39,7 @@ class Definition extends PureComponent<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.docId !== this.props.docId) {
-      _.set(this.props, 'nodeRef.current.scrollTop', 0);
+      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0);
     }
   }
 
@@ -51,7 +51,7 @@ class Definition extends PureComponent<Props> {
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
 
     return (
-      <StyledRoot className={this.props.className} ref={this.props.nodeRef}>
+      <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.darkBlue}
@@ -89,7 +89,7 @@ const ConnectedDefinition = connect(
   }, dispatch),
 )(Definition);
 
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} nodeRef={ref}/>);
+export default forwardRef((props: OwnProps, scrollTargetRef: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={scrollTargetRef}/>);
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}

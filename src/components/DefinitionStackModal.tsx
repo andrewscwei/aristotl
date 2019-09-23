@@ -39,11 +39,11 @@ class DefinitionStackModal extends PureComponent<Props> {
                   transitionStatus={status}
                   onExit={() => this.props.dismissDefinitionById(definitionId)}
                 >
-                  {(onExit, ref) => {
+                  {(onExit, scrollTargetRef) => {
                     return (
                       <StyledDefinition
                         docId={definitionId}
-                        ref={ref}
+                        scrollTargetRef={scrollTargetRef}
                         stackIndex={this.props.activeDefinitionIds.length - i - 1}
                         transitionStatus={status}
                       />

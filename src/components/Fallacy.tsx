@@ -30,7 +30,7 @@ interface DispatchProps {
 interface OwnProps {
   className?: string;
   docId?: string;
-  nodeRef?: Ref<HTMLDivElement>;
+  scrollTargetRef?: Ref<HTMLDivElement>;
 }
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
@@ -43,7 +43,7 @@ class Fallacy extends PureComponent<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.docId !== this.props.docId) {
-      _.set(this.props, 'nodeRef.current.scrollTop', 0);
+      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0);
     }
   }
 
@@ -67,7 +67,7 @@ class Fallacy extends PureComponent<Props> {
     const relatedDocs = getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacyDict);
 
     return (
-      <StyledRoot className={this.props.className} ref={this.props.nodeRef}>
+      <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
@@ -191,7 +191,7 @@ const ConnectedFallacy = connect(
   }, dispatch),
 )(Fallacy);
 
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} nodeRef={ref}/>);
+export default forwardRef((props: OwnProps, scrollTargetRef: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} scrollTargetRef={scrollTargetRef}/>);
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}

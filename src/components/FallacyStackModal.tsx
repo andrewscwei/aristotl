@@ -39,11 +39,11 @@ class FallacyStackModal extends PureComponent<Props> {
                   transitionStatus={status}
                   onExit={() => this.props.dismissFallacyById(fallacyId)}
                 >
-                  {(onExit, ref) => {
+                  {(onExit, scrollTargetRef) => {
                     return (
                       <StyledFallacy
                         docId={fallacyId}
-                        ref={ref}
+                        scrollTargetRef={scrollTargetRef}
                         stackIndex={this.props.activeFallacyIds.length - i - 1}
                         transitionStatus={status}
                       />
