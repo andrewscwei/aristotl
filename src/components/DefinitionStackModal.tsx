@@ -49,7 +49,8 @@ class DefinitionStackModal extends PureComponent<Props> {
                       <StyledDefinition
                         docId={definitionId}
                         ref={scrollTargetRef}
-                        stackIndex={this.props.activeDefinitionIds.length - i - 1}
+                        maxStacks={this.props.activeDefinitionIds.length}
+                        stackIndex={i}
                         transitionStatus={status}
                       />
                     );
@@ -75,15 +76,16 @@ export default connect(
 
 const StyledDefinition = styled(Definition)<{
   stackIndex: number;
+  maxStacks: number;
   transitionStatus?: TransitionStatus;
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   max-width: 50rem;
-  opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
-  pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
+  opacity: ${(props) => (props.stackIndex === (props.maxStacks - 1)) ? 1 : 0.6};
+  pointer-events: ${(props) => (props.stackIndex === (props.maxStacks - 1)) ? 'auto' : 'none'};
   transform: ${(props) => valueByTransitionStatus([
     'translate3d(0, 0, 0) scale(.9)',
-    `translate3d(${-props.stackIndex * DX[props.stackIndex % 10]}rem, ${-props.stackIndex * DY[props.stackIndex % 10]}rem, 0) scale(1)`,
+    `translate3d(${(props.maxStacks - 1 - props.stackIndex) * DX[props.stackIndex % 10]}rem, ${(props.maxStacks - 1 - props.stackIndex) * DY[props.stackIndex % 10]}rem, 0) scale(1)`,
   ], props.transitionStatus, true)};
   width: 90%;
 `;
