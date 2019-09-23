@@ -91,12 +91,11 @@ export default connect(
     i18n: state.i18n,
     docs: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
     fusedDocs: new Fuse(state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [], {
+      matchAllTokens: true,
+      maxPatternLength: 24,
+      minMatchCharLength: 0,
       shouldSort: true,
-      threshold: 0.6,
-      location: 0,
-      distance: 100,
-      maxPatternLength: 32,
-      minMatchCharLength: 2,
+      tokenize: true,
       keys: [
         'data.abbreviation',
         'data.name',

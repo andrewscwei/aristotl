@@ -85,6 +85,7 @@ class SearchBar extends PureComponent<Props> {
             value={this.props.input || ''}
             ref={this.nodeRefs.input}
             placeholder={ltxt('search-placeholder')}
+            maxLength={24}
             onFocus={() => this.props.onFocusIn()}
             onBlur={() => this.props.onFocusOut()}
             onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.onChange(event.currentTarget.value)}
