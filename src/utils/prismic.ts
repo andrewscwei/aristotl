@@ -153,10 +153,11 @@ export function getMarkups(doc?: Document, path: string = '', subpath: string = 
   if (!_.isArray(fragments)) return undefined;
 
   const markups = _.reduce(fragments, (out, curr: any) => {
-    const text = _.get(curr, subpath);
-    if (!text) return out;
+    const markup = _.get(curr, subpath);
+    if (!markup) return out;
+    if (markup.length === 0) return out;
 
-    out.push(PrismicDOM.RichText.asHtml(text, linkResolver));
+    out.push(PrismicDOM.RichText.asHtml(markup, linkResolver));
 
     return out;
   }, Array<string>());
