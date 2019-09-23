@@ -18,4 +18,8 @@ export default createGlobalStyle`
     font-family: 'RobotoMono';
     font-weight: 400;
   }
+
+  #app {
+    height: auto;
+  }
 `;
