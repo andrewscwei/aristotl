@@ -89,7 +89,7 @@ const ConnectedDefinition = connect(
   }, dispatch),
 )(Definition);
 
-export default forwardRef((props: OwnProps, scrollTargetRef: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={scrollTargetRef}/>);
+export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={ref}/>);
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}

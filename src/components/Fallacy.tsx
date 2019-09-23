@@ -191,7 +191,7 @@ const ConnectedFallacy = connect(
   }, dispatch),
 )(Fallacy);
 
-export default forwardRef((props: OwnProps, scrollTargetRef: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} scrollTargetRef={scrollTargetRef}/>);
+export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} scrollTargetRef={ref}/>);
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}

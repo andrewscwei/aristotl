@@ -43,7 +43,7 @@ class DefinitionStackModal extends PureComponent<Props> {
                     return (
                       <StyledDefinition
                         docId={definitionId}
-                        scrollTargetRef={scrollTargetRef}
+                        ref={scrollTargetRef}
                         stackIndex={this.props.activeDefinitionIds.length - i - 1}
                         transitionStatus={status}
                       />
