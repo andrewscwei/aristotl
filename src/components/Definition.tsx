@@ -51,16 +51,16 @@ class Definition extends PureComponent<Props> {
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
 
     return (
-      <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
+      <StyledRoot className={this.props.className}>
         <StyledCloseButton
           symbol='-'
           tintColor={colors.darkBlue}
-          hoverTintColor={colors.brown}
+          hoverTintColor={colors.red}
           onActivate={() => { if (this.props.docId) this.props.dismissDefinitionById(this.props.docId); }}
         />
         <StyledTitle>{name}</StyledTitle>
         {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}
-        <StyledContent>
+        <StyledContent ref={this.props.scrollTargetRef}>
           {descriptionMarkup && <RichText markup={descriptionMarkup}/>}
           {(referenceMarkups && referenceMarkups.length > 0) &&
             <Fragment>
@@ -169,7 +169,7 @@ const StyledContent = styled.div`
 
   a:not([href]) {
     ${animations.transition('color', 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.brown};
+    color: ${(props) => props.theme.colors.red};
     cursor: pointer;
     font-weight: 700;
 

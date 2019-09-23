@@ -71,7 +71,7 @@ class Fallacy extends PureComponent<Props> {
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
-          hoverTintColor={colors.brown}
+          hoverTintColor={colors.red}
           onActivate={() => { if (this.props.docId) this.props.dismissFallacyById(this.props.docId); }}
         />
 
@@ -255,7 +255,7 @@ const StyledContent = styled.div`
 
   a:not([href]) {
     ${animations.transition('color', 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.brown};
+    color: ${(props) => props.theme.colors.red};
     cursor: pointer;
     font-weight: 700;
 

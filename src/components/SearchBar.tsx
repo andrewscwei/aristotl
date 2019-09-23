@@ -95,7 +95,7 @@ class SearchBar extends PureComponent<Props> {
           symbol='c'
           isTogglable={true}
           tintColor={colors.white}
-          hoverTintColor={colors.brown}
+          hoverTintColor={colors.red}
           onActivate={() => this.clear()}
         />
       </StyledRoot>
