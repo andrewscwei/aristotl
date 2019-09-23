@@ -127,7 +127,7 @@ const StyledContent = styled.div`
 
     li {
       margin-left: 3rem;
-      max-width: 100%;
+      width: calc(100% - 3rem);
     }
 
     ${selectors.eblc} {
