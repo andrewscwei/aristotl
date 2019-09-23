@@ -1,5 +1,5 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { align, animations } from 'promptu';
+import { align, animations, container } from 'promptu';
 import React, { createRef, PureComponent, ReactNode, Ref } from 'react';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
@@ -33,17 +33,15 @@ class Modal extends PureComponent<Props> {
 
   render() {
     return (
-      <StyledRoot transitionStatus={this.props.transitionStatus}>
-        <NavControlManager isEnabled={this.props.isFocused} onEscape={() => this.props.onExit()}>
-          <div>
-            <StyledBackground
-              transitionStatus={this.props.transitionStatus}
-              onClick={() => this.props.onExit()}
-            />
-            {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.modal)}
-          </div>
-        </NavControlManager>
-      </StyledRoot>
+      <NavControlManager isEnabled={this.props.isFocused} onEscape={() => this.props.onExit()}>
+        <StyledRoot transitionStatus={this.props.transitionStatus}>
+          <StyledBackground
+            transitionStatus={this.props.transitionStatus}
+            onClick={() => this.props.onExit()}
+          />
+          {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.modal)}
+        </StyledRoot>
+      </NavControlManager>
     );
   }
 }
@@ -53,6 +51,7 @@ export default Modal;
 const StyledBackground = styled.div<{
   transitionStatus?: TransitionStatus;
 }>`
+  ${align.tl}
   ${animations.transition('opacity', 200, 'ease-out')}
   height: 100%;
   opacity: 0;
@@ -63,6 +62,7 @@ const StyledRoot = styled.div<{
   transitionStatus?: TransitionStatus;
 }>`
   ${align.ftl}
+  ${container.fvcc}
   height: 100%;
   pointer-events: ${(props) => valueByTransitionStatus(['none', 'auto'], props.transitionStatus, true)};
   width: 100%;

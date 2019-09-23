@@ -4,6 +4,8 @@ import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
+const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:definitions') : () => {};
+
 export enum DefinitionsActionType {
   DOC_PRESENTED = 'definitions-presented',
   DOC_DISMISSED = 'definitions-dismissed',
@@ -44,9 +46,8 @@ export default function reducer(state = initialState, action: DefinitionsAction)
     }
     case DefinitionsActionType.DOC_PRESENTED: {
       const { docId } = action.payload;
-
       const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.slice(i, 1);
+      if (i >= 0) newState.activeDocIds.splice(i, 1);
 
       newState.activeDocIds.push(docId);
 
@@ -55,7 +56,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
     case DefinitionsActionType.DOC_DISMISSED: {
       const { docId } = action.payload;
       const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.slice(i, 1);
+      if (i >= 0) newState.activeDocIds.splice(i, 1);
 
       break;
     }
@@ -85,6 +86,8 @@ export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages: num
 }
 
 export function presentDefinitionById(id: string) {
+  debug('Presenting definition...', 'OK', id);
+
   return (dispatch: Dispatch<DefinitionsAction>) => {
     dispatch({
       type: DefinitionsActionType.DOC_PRESENTED,
@@ -96,6 +99,8 @@ export function presentDefinitionById(id: string) {
 }
 
 export function dismissDefinitionById(id: string) {
+  debug('Dismissing definition...', 'OK', id);
+
   return (dispatch: Dispatch<DefinitionsAction>) => {
     dispatch({
       type: DefinitionsActionType.DOC_DISMISSED,

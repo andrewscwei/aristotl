@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, selectors } from 'promptu';
-import React, { forwardRef, PureComponent, Ref } from 'react';
+import React, { forwardRef, MouseEvent, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
+import { presentDefinitionById } from '../store/definitions';
+import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
@@ -19,25 +21,20 @@ interface StateProps {
 }
 
 interface DispatchProps {
-
+  presentFallacyById: typeof presentFallacyById;
+  dismissFallacyById: typeof dismissFallacyById;
+  presentDefinitionById: typeof presentDefinitionById;
 }
 
 interface OwnProps {
   className?: string;
   docId?: string;
   nodeRef?: Ref<HTMLDivElement>;
-  onDocChange: (docId: string) => void;
-  onExit: () => void;
 }
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
 class Fallacy extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    onDocChange: () => {},
-    onExit: () => {},
-  };
-
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
     return _.find(this.props.fallacyDict, (v) => v.id === this.props.docId);
@@ -47,6 +44,13 @@ class Fallacy extends PureComponent<Props> {
     if (prevProps.docId !== this.props.docId) {
       _.set(this.props, 'nodeRef.current.scrollTop', 0);
     }
+  }
+
+  onTypeSelect(docId: string) {
+    return (event: MouseEvent) => {
+      event.preventDefault();
+      this.props.presentDefinitionById(docId);
+    };
   }
 
   render() {
@@ -67,7 +71,7 @@ class Fallacy extends PureComponent<Props> {
           symbol='-'
           tintColor={colors.black}
           hoverTintColor={colors.red}
-          onActivate={() => this.props.onExit()}
+          onActivate={() => { if (this.props.docId) this.props.dismissFallacyById(this.props.docId); }}
         />
 
         <StyledAbbreviation>
@@ -99,7 +103,7 @@ class Fallacy extends PureComponent<Props> {
             {!typeDocs || typeDocs.length <= 0 ? '--' :
               <ul>
                 {typeDocs.map((v, i) => (
-                  <li key={`type=${i}`}><a>{_.get(v, 'data.name')}</a></li>
+                  <li key={`type=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
                 ))}
               </ul>
             }
@@ -112,7 +116,7 @@ class Fallacy extends PureComponent<Props> {
             {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
               <ul>
                 {subtypeDocs.map((v, i) => (
-                  <li key={`subtype=${i}`}><a>{_.get(v, 'data.name')}</a></li>
+                  <li key={`subtype=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
                 ))}
               </ul>
             }
@@ -144,7 +148,7 @@ class Fallacy extends PureComponent<Props> {
               <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
-                    <a onClick={() => this.props.onDocChange(v.id)}>{_.get(v, 'data.name')}</a>
+                    <a onClick={() => this.props.presentFallacyById(v.id)}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
               </ul>
@@ -169,18 +173,25 @@ class Fallacy extends PureComponent<Props> {
   }
 }
 
-const ConnectedDatasheet = connect(
+const ConnectedFallacy = connect(
   (state: AppState): StateProps => ({
     definitionDict: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
     fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
     i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-
+    presentFallacyById,
+    dismissFallacyById,
+    presentDefinitionById,
   }, dispatch),
 )(Fallacy);
 
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDatasheet {...props} nodeRef={ref}/>);
+export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} nodeRef={ref}/>);
+
+const StyledCloseButton = styled(ActionButton)`
+  ${align.tl}
+  margin: 3rem;
+`;
 
 const StyledContent = styled.div`
   padding: 1rem 1rem;
@@ -261,9 +272,9 @@ const StyledLabel = styled.div`
   width: 100%;
 `;
 
-const StyledCloseButton = styled(ActionButton)`
-  ${align.tl}
-  margin: 3rem;
+const StyledSection = styled.div`
+  ${container.fvtl}
+  margin-top: 2rem;
 `;
 
 const StyledAbbreviation = styled.div`
@@ -289,11 +300,6 @@ const StyledName = styled.h1`
   line-height: 120%;
   text-transform: uppercase;
   width: 100%;
-`;
-
-const StyledSection = styled.div`
-  ${container.fvtl}
-  margin-top: 2rem;
 `;
 
 const StyledRoot = styled.div`

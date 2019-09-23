@@ -8,15 +8,17 @@ import styled from 'styled-components';
 import Fallacy from '../components/Fallacy';
 import Modal from '../components/Modal';
 import { AppState } from '../store';
-import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
+import { dismissFallacyById } from '../store/fallacies';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
+
+const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fallacy-stack-modal') : () => {};
 
 interface StateProps {
   activeFallacyIds: Array<string>;
+  activeDefinitionIds: Array<string>;
 }
 
 interface DispatchProps {
-  presentFallacyById: typeof presentFallacyById;
   dismissFallacyById: typeof dismissFallacyById;
 }
 
@@ -33,7 +35,7 @@ class FallacyStackModal extends PureComponent<Props> {
             <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
               {(status) => (
                 <Modal
-                  isFocused={i === (this.props.activeFallacyIds.length - 1)}
+                  isFocused={i === (this.props.activeFallacyIds.length - 1) && this.props.activeDefinitionIds.length === 0}
                   transitionStatus={status}
                   onExit={() => this.props.dismissFallacyById(fallacyId)}
                 >
@@ -44,8 +46,6 @@ class FallacyStackModal extends PureComponent<Props> {
                         ref={ref}
                         stackIndex={this.props.activeFallacyIds.length - i - 1}
                         transitionStatus={status}
-                        onDocChange={(docId) => this.props.presentFallacyById(docId)}
-                        onExit={() => onExit()}
                       />
                     );
                   }}
@@ -62,10 +62,10 @@ class FallacyStackModal extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     activeFallacyIds: state.fallacies.activeDocIds,
+    activeDefinitionIds: state.definitions.activeDocIds,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     dismissFallacyById,
-    presentFallacyById,
   }, dispatch),
 )(FallacyStackModal);
 
@@ -86,7 +86,11 @@ const StyledFallacy = styled(Fallacy)<{
 const StyledRoot = styled.div<{
   isFocused: boolean;
 }>`
+  ${align.ftl}
   ${animations.transition('background', 200, 'ease-out')}
   background: ${(props) => `rgba(${utils.toHexString(props.theme.colors.black)}, ${props.isFocused ? 0.4 : 0})`};
+  height: 100%;
   pointer-events: ${(props) => props.isFocused ? 'auto' : 'none'};
+  width: 100%;
+  z-index: ${(props) => props.theme.z.overlays};
 `;
