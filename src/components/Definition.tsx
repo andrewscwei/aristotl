@@ -160,7 +160,8 @@ const StyledContent = styled.div`
 
   pre {
     ${container.box}
-    background: ${(props) => props.theme.colors.lightGrey};
+    background: ${(props) => props.theme.colors.darkPink};
+    color: ${(props) => props.theme.colors.black};
     margin: 0;
     padding: 1rem;
     width: 100%;

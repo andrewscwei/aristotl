@@ -11,6 +11,7 @@ export const colors = {
   brown: '#b37819',
   darkBlue: '#0b0c86',
   pink: '#deb19a',
+  darkPink: '#d09475',
 };
 
 export const fonts = {
