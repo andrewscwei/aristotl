@@ -102,6 +102,7 @@ export default connect(
         'data.name',
         'data.aliases.name',
         'data.summary.text',
+        'data.description.text',
         'tags',
       ],
     }),

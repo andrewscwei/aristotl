@@ -13,6 +13,7 @@ import { colors } from '../styles/theme';
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
 import ActionButton from './ActionButton';
 import Pixel from './Pixel';
+import RichText from './RichText';
 
 interface StateProps {
   definitionDict: ReadonlyArray<Document>;
@@ -70,7 +71,7 @@ class Fallacy extends PureComponent<Props> {
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
-          hoverTintColor={colors.red}
+          hoverTintColor={colors.brown}
           onActivate={() => { if (this.props.docId) this.props.dismissFallacyById(this.props.docId); }}
         />
 
@@ -125,7 +126,9 @@ class Fallacy extends PureComponent<Props> {
 
         <StyledSection>
           <StyledLabel>{ltxt('description')}</StyledLabel>
-          <StyledContent dangerouslySetInnerHTML={{ __html: descriptionMarkup || '--' }}/>
+          <StyledContent>
+            {descriptionMarkup ? <RichText markup={descriptionMarkup}/> : '--'}
+          </StyledContent>
         </StyledSection>
 
         <StyledSection>
@@ -134,7 +137,9 @@ class Fallacy extends PureComponent<Props> {
             {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
               <ul>
                 {exampleMarkups.map((v, i) => (
-                  <li key={`example-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
+                  <li key={`example-${i}`}>
+                    <RichText markup={v}/>
+                  </li>
                 ))}
               </ul>
             }
@@ -250,11 +255,11 @@ const StyledContent = styled.div`
 
   a {
     ${animations.transition('color', 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.red};
+    color: ${(props) => props.theme.colors.brown};
     cursor: pointer;
 
     ${selectors.hwot} {
-      color: ${(props) => props.theme.colors.red};
+      color: ${(props) => props.theme.colors.brown};
       text-decoration: underline;
     }
   }

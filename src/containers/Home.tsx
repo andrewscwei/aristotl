@@ -177,8 +177,8 @@ class Home extends PureComponent<Props, State> {
                         symbol='i'
                         isTogglable={true}
                         tintColor={colors.white}
-                        hoverTintColor={colors.red}
-                        activeTintColor={colors.red}
+                        hoverTintColor={colors.brown}
+                        activeTintColor={colors.brown}
                         onToggleOn={() => this.setState({ isSummaryEnabled: true })}
                         onToggleOff={() => this.setState({ isSummaryEnabled: false })}
                       />

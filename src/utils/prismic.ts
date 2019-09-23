@@ -12,9 +12,8 @@ export function linkResolver(doc: Document): string {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
 
   switch (doc.type) {
-  case 'home': return getLocalizedPath('/', locale);
-  case 'blog_post': return getLocalizedPath(`/blog/${doc.uid}`, locale);
   case 'definition': return `#definitions/${doc.id}`;
+  case 'fallacy': return `#fallacies/${doc.id}`;
   default: return '/';
   }
 }

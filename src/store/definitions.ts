@@ -9,6 +9,7 @@ const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:def
 export enum DefinitionsActionType {
   DOC_PRESENTED = 'definitions-presented',
   DOC_DISMISSED = 'definitions-dismissed',
+  DOC_DISMISSED_ALL = 'definitions-dismissed-all',
   DOC_LOADED = 'definitions-loaded',
 }
 
@@ -60,7 +61,13 @@ export default function reducer(state = initialState, action: DefinitionsAction)
 
       break;
     }
+    case DefinitionsActionType.DOC_DISMISSED_ALL: {
+      newState.activeDocIds = [];
+
+      break;
+    }
   }
+
   return newState;
 }
 
@@ -106,6 +113,18 @@ export function dismissDefinitionById(id: string) {
       type: DefinitionsActionType.DOC_DISMISSED,
       payload: {
         docId: id,
+      },
+    });
+  };
+}
+
+export function dismissAllDefinitions() {
+  debug('Dismissing all definitions...', 'OK');
+
+  return (dispatch: Dispatch<DefinitionsAction>) => {
+    dispatch({
+      type: DefinitionsActionType.DOC_DISMISSED_ALL,
+      payload: {
       },
     });
   };

@@ -4,7 +4,7 @@ import React, { MouseEvent, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { AppState } from '../store';
-import { presentDefinitionById } from '../store/definitions';
+import { dismissAllDefinitions, presentDefinitionById } from '../store/definitions';
 import { presentFallacyById } from '../store/fallacies';
 
 interface StateProps {
@@ -13,6 +13,7 @@ interface StateProps {
 
 interface DispatchProps {
   presentDefinitionById: typeof presentDefinitionById;
+  dismissAllDefinitions: typeof dismissAllDefinitions;
   presentFallacyById: typeof presentFallacyById;
 }
 
@@ -31,6 +32,7 @@ class RichText extends PureComponent<Props> {
   onActivateFallacy(docId: string) {
     return (event: MouseEvent) => {
       event.preventDefault();
+      this.props.dismissAllDefinitions();
       this.props.presentFallacyById(docId);
     };
   }
@@ -74,6 +76,7 @@ export default connect(
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     presentDefinitionById,
+    dismissAllDefinitions,
     presentFallacyById,
   }, dispatch),
 )(RichText);

@@ -85,7 +85,7 @@ const StyledRoot = styled.div<{
 }>`
   ${align.ftl}
   ${animations.transition('background', 200, 'ease-out')}
-  background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.black)}, ${props.isFocused ? 0.4 : 0})`};
+  background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.black)}, ${props.isFocused ? 0.6 : 0})`};
   height: 100%;
   pointer-events: ${(props) => props.isFocused ? 'auto' : 'none'};
   width: 100%;

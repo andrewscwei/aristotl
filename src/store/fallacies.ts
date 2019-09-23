@@ -7,6 +7,7 @@ import { fetchDocsByType, localeResolver } from '../utils/prismic';
 export enum FallaciesActionType {
   DOC_PRESENTED = 'fallacies-presented',
   DOC_DISMISSED = 'fallacies-dismissed',
+  DOC_DISMISSED_ALL = 'fallacies-dismissed-all',
   DOC_LOADED = 'fallacies-loaded',
 }
 
@@ -60,6 +61,11 @@ export default function reducer(state = initialState, action: FallaciesAction): 
 
       break;
     }
+    case FallaciesActionType.DOC_DISMISSED_ALL: {
+      newState.activeDocIds = [];
+
+      break;
+    }
   }
 
   return newState;
@@ -103,6 +109,17 @@ export function dismissFallacyById(id: string) {
       type: FallaciesActionType.DOC_DISMISSED,
       payload: {
         docId: id,
+      },
+    });
+  };
+}
+
+export function dismissAllFallacies() {
+  return (dispatch: Dispatch<FallaciesAction>) => {
+    dispatch({
+      type: FallaciesActionType.DOC_DISMISSED_ALL,
+      payload: {
+
       },
     });
   };
