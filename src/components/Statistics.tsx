@@ -110,6 +110,10 @@ const StyledCount = styled.div`
   font-weight: 400;
   color: ${(props) => props.theme.colors.white};
 
+  > * {
+    flex: 0 0 auto;
+  }
+
   ${selectors.eblc} {
     margin-right: .6rem;
   }
@@ -126,6 +130,10 @@ const StyledFilterButton = styled.button<{
   color: ${(props) => props.theme.colors.white};
   opacity: ${(props) => props.isActive ? 1.0 : 0.4};
 
+  > * {
+    flex: 0 0 auto;
+  }
+
   ${selectors.eblc} {
     margin-right: .6rem;
   }
@@ -136,9 +144,14 @@ const StyledFilterButton = styled.button<{
 `;
 
 const StyledRoot = styled.div`
-  ${container.fhcc}
+  ${container.fhcl}
+  flex-wrap: wrap;
 
   ${selectors.eblc} {
     margin-right: 3rem;
+  }
+
+  > * {
+    flex: 0 0 auto;
   }
 `;
