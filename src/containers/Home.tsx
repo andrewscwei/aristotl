@@ -18,20 +18,25 @@ import Statistics from '../components/Statistics';
 import FallacyManager from '../managers/FallacyManager';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
+import { fetch as fetchCopyright } from '../store/copyright';
 import { fetchDefinitions } from '../store/definitions';
 import { presentFallacyById } from '../store/fallacies';
+import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
+import { getMarkup } from '../utils/prismic';
 
 interface StateProps {
   activeDefinitionIds: Array<string>;
   activeFallacyIds: Array<string>;
-  definitions: ReadonlyArray<Document>;
+  copyrightDoc?: Readonly<Document>;
+  i18n: I18nState;
 }
 
 interface DispatchProps {
   presentFallacyById: typeof presentFallacyById;
   fetchDefinitions: typeof fetchDefinitions;
+  fetchCopyright: typeof fetchCopyright;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -69,6 +74,7 @@ class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    this.props.fetchCopyright();
     this.props.fetchDefinitions();
   }
 
@@ -164,6 +170,8 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
+    const { ltxt } = this.props.i18n;
+
     return (
       <FallacyManager
         pageIndex={this.state.pageIndex}
@@ -228,6 +236,7 @@ class Home extends PureComponent<Props, State> {
                       isSummaryEnabled={this.state.isSummaryEnabled}
                       onActivate={(doc) => this.props.presentFallacyById(doc.id)}
                     />
+                    <StyledFooter dangerouslySetInnerHTML={{ __html: this.props.copyrightDoc && getMarkup(this.props.copyrightDoc, 'data.description') || '' }}/>
                   </StyledRoot>
                 </NavControlManager>
               )}
@@ -245,13 +254,39 @@ export default connect(
   (state: AppState): StateProps => ({
     activeDefinitionIds: state.definitions.activeDocIds,
     activeFallacyIds: state.fallacies.activeDocIds,
-    definitions: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
+    copyrightDoc: state.copyright[__I18N_CONFIG__.defaultLocale],
+    i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
+    fetchCopyright,
     fetchDefinitions,
     presentFallacyById,
   }, dispatch),
 )(Home);
+
+const StyledFooter = styled.footer`
+  color: ${(props) => props.theme.colors.grey};
+  font-family: 'RobotoMono';
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 10rem;
+  user-select: text;
+  width: 100%;
+
+  p {
+    line-height: 130%;
+  }
+
+  a {
+    ${animations.transition(['color', 'opacity'], 200, 'ease-out')}
+    color: ${(props) => props.theme.colors.red};
+
+    ${selectors.hwot} {
+      color: inherit;
+      text-transform: uppercase;
+    }
+  }
+`;
 
 const StyledHeader = styled.header`
   ${container.fhcl}
@@ -277,6 +312,7 @@ const StyledStatistics = styled(Statistics)`
 const StyledGrid = styled(Grid)`
   margin-left: -.5rem;
   max-width: 120rem;
+  min-height: 100vh;
   width: calc(100% + 1rem);
 
   > * {
@@ -319,7 +355,7 @@ const StyledRoot = styled.div<{
   background: ${(props) => props.theme.colors.black};
   min-height: 100%;
   opacity: ${(props) => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
-  padding: 5rem 2rem 10rem;
+  padding: 5rem 2rem 3rem;
   perspective: 80rem;
   pointer-events: ${(props) => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
   transform-origin: center;
@@ -327,6 +363,6 @@ const StyledRoot = styled.div<{
   width: 100%;
 
   @media ${media.gtw(500)} {
-    padding: 5rem 5rem 15rem;
+    padding: 5rem 5rem 3rem;
   }
 `;
