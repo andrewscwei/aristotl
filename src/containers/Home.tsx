@@ -23,8 +23,6 @@ import { presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:home') : () => {};
-
 interface StateProps {
   activeDefinitionIds: Array<string>;
   activeFallacyIds: Array<string>;
@@ -45,6 +43,11 @@ interface State {
   isSummaryEnabled: boolean;
   pageIndex: number;
   searchInput?: string;
+  areFormalsEnabled: boolean;
+  areInformalsEnabled: boolean;
+  areAlphasEnabled: boolean;
+  areBetasEnabled: boolean;
+  areGammasEnabled: boolean;
 }
 
 class Home extends PureComponent<Props, State> {
@@ -53,6 +56,11 @@ class Home extends PureComponent<Props, State> {
     isSummaryEnabled: false,
     pageIndex: 0,
     searchInput: undefined,
+    areFormalsEnabled: false,
+    areInformalsEnabled: false,
+    areAlphasEnabled: false,
+    areBetasEnabled: false,
+    areGammasEnabled: false,
   };
 
   nodeRefs = {
@@ -157,7 +165,17 @@ class Home extends PureComponent<Props, State> {
 
   render() {
     return (
-      <FallacyManager pageIndex={this.state.pageIndex} searchInput={this.state.searchInput}>
+      <FallacyManager
+        pageIndex={this.state.pageIndex}
+        searchInput={this.state.searchInput}
+        filters={{
+          formal: this.state.areFormalsEnabled,
+          informal: this.state.areInformalsEnabled,
+          alpha: this.state.areAlphasEnabled,
+          beta: this.state.areBetasEnabled,
+          gamma: this.state.areGammasEnabled,
+        }}
+      >
         {(results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals) => (
           <Fragment>
             <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
@@ -187,8 +205,13 @@ class Home extends PureComponent<Props, State> {
                       totalResults={results.length}
                       subtotalResultsStart={startIndex + 1}
                       subtotalResultsEnd={endIndex}
-                      totalFormal={numFormals}
-                      totalInformal={numInformals}
+                      totalFormals={numFormals}
+                      totalInformals={numInformals}
+                      onToggleFormals={(enabled) => this.setState({ areFormalsEnabled: enabled })}
+                      onToggleInformals={(enabled) => this.setState({ areInformalsEnabled: enabled })}
+                      onToggleAlphas={(enabled) => this.setState({ areAlphasEnabled: enabled })}
+                      onToggleBetas={(enabled) => this.setState({ areBetasEnabled: enabled })}
+                      onToggleGammas={(enabled) => this.setState({ areGammasEnabled: enabled })}
                     />
                     <StyledPaginator
                       ref={this.nodeRefs.paginator}

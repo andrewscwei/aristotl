@@ -8,6 +8,8 @@ import { AppState } from '../store';
 import { fetchFallacies } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 
+const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fallacy-manager') : () => {};
+
 interface StateProps {
   i18n: I18nState;
   docs: ReadonlyArray<Document>;
@@ -19,8 +21,15 @@ interface DispatchProps {
 }
 
 interface Props extends StateProps, DispatchProps {
-  pageIndex: number;
+  filters: {
+    formal: boolean;
+    informal: boolean;
+    alpha: boolean;
+    beta: boolean;
+    gamma: boolean;
+  };
   docsPerPage: number;
+  pageIndex: number;
   searchInput?: string;
   children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
 }
@@ -34,6 +43,12 @@ class FallacyManager extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.props.fetchFallacies();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.filters !== this.props.filters) {
+      debug('Changing filters...', 'OK', this.props.filters);
+    }
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
