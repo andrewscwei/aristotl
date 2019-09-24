@@ -9,6 +9,7 @@
   "aliases": "Alias(es)",
   "types": "Type(s)",
   "subtypes": "Subype(s)",
+  "inheritance": "Inheritance",
   "references": "Reference(s)",
   "examples": "Example(s)",
   "related": "Related"

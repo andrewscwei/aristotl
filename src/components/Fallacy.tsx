@@ -54,13 +54,21 @@ class Fallacy extends PureComponent<Props> {
     };
   }
 
+  onFallacySelect(docId: string) {
+    return (event: MouseEvent) => {
+      event.preventDefault();
+      this.props.presentFallacyById(docId);
+    };
+  }
+
   render() {
     const { ltxt } = this.props.i18n;
     const abbreviation = getText(this.doc, 'data.abbreviation');
     const name = getText(this.doc, 'data.name');
     const aliases = getTexts(this.doc, 'data.aliases', 'name');
     const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitionDict);
-    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'subtype', this.props.definitionDict);
+    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'fallacy', this.props.fallacyDict);
+    const inheritanceDocs = getDocs(this.doc, 'data.inheritance', 'fallacy', this.props.fallacyDict);
     const descriptionMarkup = getMarkup(this.doc, 'data.description');
     const exampleMarkups = getMarkups(this.doc, 'data.examples', 'example');
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
@@ -94,7 +102,7 @@ class Fallacy extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('aliases')}</StyledLabel>
           <StyledContent>
-            {aliases ? <em>{aliases.join(', ')}</em> : '--'}
+            {!aliases || aliases.length <= 0 ? '--' : <em>{aliases.join(', ')}</em>}
           </StyledContent>
         </StyledSection>
 
@@ -112,12 +120,25 @@ class Fallacy extends PureComponent<Props> {
         </StyledSection>
 
         <StyledSection>
+          <StyledLabel>{ltxt('inheritance')}</StyledLabel>
+          <StyledContent>
+            {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
+              <ul>
+                {inheritanceDocs.map((v, i) => (
+                  <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
+
+        <StyledSection>
           <StyledLabel>{ltxt('subtypes')}</StyledLabel>
           <StyledContent>
             {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
               <ul>
                 {subtypeDocs.map((v, i) => (
-                  <li key={`subtype=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                  <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.id)}>{_.get(v, 'data.name')}</a></li>
                 ))}
               </ul>
             }
