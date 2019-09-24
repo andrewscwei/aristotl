@@ -53,13 +53,26 @@ class FallacyManager extends PureComponent<Props> {
 
   getFilteredDocs(): ReadonlyArray<Document> {
     const searchInput = this.props.searchInput;
+    const searchResults = _.isEmpty(searchInput) ? this.props.docs : this.props.fusedDocs.search(searchInput!);
+    const filteredResults = _.filter(searchResults, (v) => {
+      const types = _.get(v, 'data.types');
+      const inheritance = _.get(v, 'data.inheritance');
+      const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+      const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+      const isAlpha = inheritance.length === 0;
+      const isBeta = inheritance.length === 1;
+      const isGamma = inheritance.length === 2;
 
-    if ((searchInput !== undefined) && (searchInput !== '')) {
-      return this.props.fusedDocs.search(searchInput);
-    }
-    else {
-      return this.props.docs;
-    }
+      if (isFormal && !this.props.filters.formal) return false;
+      if (isInformal && !this.props.filters.informal) return false;
+      if (isAlpha && !this.props.filters.alpha) return false;
+      if (isBeta && !this.props.filters.beta) return false;
+      if (isGamma && !this.props.filters.gamma) return false;
+
+      return true;
+    });
+
+    return filteredResults;
   }
 
   countInformals(docs: ReadonlyArray<Document>): number {
