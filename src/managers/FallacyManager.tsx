@@ -31,7 +31,7 @@ interface Props extends StateProps, DispatchProps {
   docsPerPage: number;
   pageIndex: number;
   searchInput?: string;
-  children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number) => ReactNode;
+  children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number, numAlphas: number, numBetas: number, numGammas: number) => ReactNode;
 }
 
 class FallacyManager extends PureComponent<Props> {
@@ -64,23 +64,43 @@ class FallacyManager extends PureComponent<Props> {
 
   countInformals(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
-      if (_.get(curr, 'data.type.slug') === 'informal-fallacy') {
-        return out + 1;
-      }
-      else {
-        return out;
-      }
+      const fragments = _.get(curr, 'data.types');
+      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+      if (match) out += 1;
+      return out;
     }, 0);
   }
 
   countFormals(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
-      if (_.get(curr, 'data.type.slug') === 'formal-fallacy') {
-        return out + 1;
-      }
-      else {
-        return out;
-      }
+      const fragments = _.get(curr, 'data.types');
+      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+      if (match) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countAlphas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length === 0) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countBetas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length === 1) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countGammas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length === 2) out += 1;
+      return out;
     }, 0);
   }
 
@@ -95,7 +115,18 @@ class FallacyManager extends PureComponent<Props> {
 
     return (
       <Fragment>
-        {this.props.children(results, currResults, numPages, startIndex, endIndex, this.countFormals(currResults), this.countInformals(currResults))}
+        {this.props.children(
+          results,
+          currResults,
+          numPages,
+          startIndex,
+          endIndex,
+          this.countFormals(currResults),
+          this.countInformals(currResults),
+          this.countAlphas(currResults),
+          this.countBetas(currResults),
+          this.countGammas(currResults),
+        )}
       </Fragment>
     );
   }

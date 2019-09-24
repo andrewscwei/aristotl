@@ -176,7 +176,7 @@ class Home extends PureComponent<Props, State> {
           gamma: this.state.areGammasEnabled,
         }}
       >
-        {(results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals) => (
+        {(results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals, numAlphas, numBetas, numGammas) => (
           <Fragment>
             <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
               {(status) => (
@@ -207,6 +207,9 @@ class Home extends PureComponent<Props, State> {
                       subtotalResultsEnd={endIndex}
                       totalFormals={numFormals}
                       totalInformals={numInformals}
+                      totalAlphas={numAlphas}
+                      totalBetas={numBetas}
+                      totalGammas={numGammas}
                       onToggleFormals={(enabled) => this.setState({ areFormalsEnabled: enabled })}
                       onToggleInformals={(enabled) => this.setState({ areInformalsEnabled: enabled })}
                       onToggleAlphas={(enabled) => this.setState({ areAlphasEnabled: enabled })}
