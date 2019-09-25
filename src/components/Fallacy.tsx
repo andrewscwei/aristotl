@@ -243,8 +243,20 @@ const StyledContent = styled.div`
     }
   }
 
-  ul li {
+  ul {
     list-style: square;
+
+    ul {
+      list-style: circle;
+    }
+  }
+
+  ol {
+    list-style: decimal;
+
+    ol {
+      list-style: lower-roman;
+    }
   }
 
   p + p,
