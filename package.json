@@ -20,6 +20,7 @@
   "reactSnap": {
     "source": "build",
     "include": [
+      "/",
       "/preview",
       "/404.html"
     ],
