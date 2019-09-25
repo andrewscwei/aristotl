@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, utils } from 'promptu';
 import React, { PureComponent } from 'react';

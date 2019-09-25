@@ -183,7 +183,7 @@ export function getDocs(doc?: Document, path: string = '', subpath: string = '',
 
   const docs = _.reduce(fragments, (out, curr: any) => {
     const doc = _.get(curr, subpath);
-    if (doc) out.push(doc);
+    if (doc && doc.id) out.push(doc);
     return out;
   }, Array<Document>());
 
