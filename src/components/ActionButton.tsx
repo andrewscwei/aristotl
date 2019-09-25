@@ -36,6 +36,7 @@ class ActionButton extends PureComponent<Props, State> {
     if (this.props.isTogglable) {
       if (this.state.isActive) {
         this.setState({ isActive: false });
+        this.setState({ isActive: false });
         this.props.onToggleOff();
       }
       else {

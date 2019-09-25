@@ -9,14 +9,15 @@ import { valueByTransitionStatus } from '../styles/utils';
 interface Props {
   isFocused: boolean;
   transitionStatus?: TransitionStatus;
-  children?: (onExit: () => void, scrollTargetRef: Ref<HTMLDivElement>) => ReactNode;
-  onExit: () => void;
+  children?: (scrollTargetRef: Ref<HTMLDivElement>, onExit?: () => void, onPrev?: () => void, onNext?: () => void) => ReactNode;
+  onPrev?: () => void;
+  onNext?: () => void;
+  onExit?: () => void;
 }
 
 class Modal extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     isFocused: true,
-    onExit: () => {},
   };
 
   nodeRefs = {
@@ -33,13 +34,18 @@ class Modal extends PureComponent<Props> {
 
   render() {
     return (
-      <NavControlManager isEnabled={this.props.isFocused} onEscape={() => this.props.onExit()}>
+      <NavControlManager
+        isEnabled={this.props.isFocused}
+        onPrev={() => this.props.onPrev && this.props.onPrev()}
+        onNext={() => this.props.onNext && this.props.onNext()}
+        onEscape={() => this.props.onExit && this.props.onExit()}
+      >
         <StyledRoot transitionStatus={this.props.transitionStatus}>
           <StyledBackground
             transitionStatus={this.props.transitionStatus}
-            onClick={() => this.props.onExit()}
+            onClick={() => this.props.onExit && this.props.onExit()}
           />
-          {this.props.children && this.props.children(this.props.onExit, this.nodeRefs.scrollTarget)}
+          {this.props.children && this.props.children(this.nodeRefs.scrollTarget, this.props.onExit, this.props.onPrev, this.props.onNext)}
         </StyledRoot>
       </NavControlManager>
     );

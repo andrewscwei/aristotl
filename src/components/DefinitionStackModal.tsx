@@ -44,7 +44,7 @@ class DefinitionStackModal extends PureComponent<Props> {
                   transitionStatus={status}
                   onExit={() => this.props.dismissDefinitionById(definitionId)}
                 >
-                  {(onExit, scrollTargetRef) => {
+                  {(scrollTargetRef) => {
                     return (
                       <StyledDefinition
                         docId={definitionId}

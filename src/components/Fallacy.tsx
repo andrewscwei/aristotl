@@ -31,6 +31,9 @@ interface OwnProps {
   className?: string;
   docId?: string;
   scrollTargetRef?: Ref<HTMLDivElement>;
+  onPrev?: () => void;
+  onNext?: () => void;
+  onExit?: () => void;
 }
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
@@ -44,6 +47,15 @@ class Fallacy extends PureComponent<Props> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.docId !== this.props.docId) {
       _.set(this.props, 'scrollTargetRef.current.scrollTop', 0);
+    }
+  }
+
+  onExit() {
+    if (this.props.onExit) {
+      this.props.onExit();
+    }
+    else if (this.props.docId) {
+      this.props.dismissFallacyById(this.props.docId);
     }
   }
 
@@ -80,7 +92,23 @@ class Fallacy extends PureComponent<Props> {
           symbol='-'
           tintColor={colors.black}
           hoverTintColor={colors.red}
-          onActivate={() => { if (this.props.docId) this.props.dismissFallacyById(this.props.docId); }}
+          onActivate={() => this.onExit()}
+        />
+
+        <StyledPrevButton
+          symbol='<'
+          tintColor={colors.black}
+          hoverTintColor={colors.red}
+          isDisabled={this.props.onPrev === undefined}
+          onActivate={() => this.props.onPrev && this.props.onPrev()}
+        />
+
+        <StyledNextButton
+          symbol='>'
+          tintColor={colors.black}
+          hoverTintColor={colors.red}
+          isDisabled={this.props.onNext === undefined}
+          onActivate={() => this.props.onNext && this.props.onNext()}
         />
 
         <StyledAbbreviation>
@@ -217,6 +245,24 @@ export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <Connec
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}
   margin: 3rem;
+`;
+
+const StyledPrevButton = styled(ActionButton)<{
+  isDisabled: boolean;
+}>`
+  ${align.tr}
+  margin: 3rem ${3 + 2 + 1}rem 3rem 3rem;
+  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
+`;
+
+const StyledNextButton = styled(ActionButton)<{
+  isDisabled: boolean;
+}>`
+  ${align.tr}
+  margin: 3rem;
+  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
 `;
 
 const StyledContent = styled.div`

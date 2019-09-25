@@ -1,3 +1,4 @@
+import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, utils } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -8,7 +9,7 @@ import styled from 'styled-components';
 import Fallacy from '../components/Fallacy';
 import Modal from '../components/Modal';
 import { AppState } from '../store';
-import { dismissFallacyById } from '../store/fallacies';
+import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fallacy-stack-modal') : () => {};
@@ -16,9 +17,12 @@ const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fal
 interface StateProps {
   activeFallacyIds: Array<string>;
   activeDefinitionIds: Array<string>;
+  fallacyDict: ReadonlyArray<Document>;
+
 }
 
 interface DispatchProps {
+  presentFallacyById: typeof presentFallacyById;
   dismissFallacyById: typeof dismissFallacyById;
 }
 
@@ -27,6 +31,32 @@ interface Props extends StateProps, DispatchProps {
 }
 
 class FallacyStackModal extends PureComponent<Props> {
+  getPrevDoc(currDocId: string): Document | undefined {
+    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.id === currDocId);
+    if (currIndex < 1) return undefined;
+    return this.props.fallacyDict[currIndex - 1];
+  }
+
+  getNextDoc(currDocId: string): Document | undefined {
+    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.id === currDocId);
+    if (currIndex >= (this.props.fallacyDict.length - 1)) return undefined;
+    return this.props.fallacyDict[currIndex + 1];
+  }
+
+  onPrev(currDocId: string) {
+    const doc = this.getPrevDoc(currDocId);
+    if (!doc) return;
+    this.props.presentFallacyById(doc.id);
+    this.props.dismissFallacyById(currDocId);
+  }
+
+  onNext(currDocId: string) {
+    const doc = this.getNextDoc(currDocId);
+    if (!doc) return;
+    this.props.presentFallacyById(doc.id);
+    this.props.dismissFallacyById(currDocId);
+  }
+
   render() {
     return (
       <StyledRoot isFocused={this.props.activeFallacyIds.length > 0}>
@@ -37,15 +67,20 @@ class FallacyStackModal extends PureComponent<Props> {
                 <Modal
                   isFocused={i === (this.props.activeFallacyIds.length - 1) && this.props.activeDefinitionIds.length === 0}
                   transitionStatus={status}
+                  onPrev={this.getPrevDoc(fallacyId) ? () => this.onPrev(fallacyId) : undefined}
+                  onNext={this.getNextDoc(fallacyId) ? () => this.onNext(fallacyId) : undefined}
                   onExit={() => this.props.dismissFallacyById(fallacyId)}
                 >
-                  {(onExit, scrollTargetRef) => {
+                  {(scrollTargetRef, onExit, onPrev, onNext) => {
                     return (
                       <StyledFallacy
                         docId={fallacyId}
                         ref={scrollTargetRef}
                         stackIndex={this.props.activeFallacyIds.length - i - 1}
                         transitionStatus={status}
+                        onPrev={onPrev}
+                        onNext={onNext}
+                        onExit={onExit}
                       />
                     );
                   }}
@@ -63,8 +98,10 @@ export default connect(
   (state: AppState): StateProps => ({
     activeFallacyIds: state.fallacies.activeDocIds,
     activeDefinitionIds: state.definitions.activeDocIds,
+    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
+    presentFallacyById,
     dismissFallacyById,
   }, dispatch),
 )(FallacyStackModal);
