@@ -36,9 +36,6 @@ Bad Reasons Fallacy
 Bandwagon Fallacy
 Begging the Question
 Biased Sample
-Bifurcation
-Black-and-White Fallacy
-Black-or-White Fallacy
 Circular Argument
 Circulus in Probando
 Company that You Keep Fallacy
@@ -49,9 +46,7 @@ Converse Accident
 Cum Hoc, Ergo Propter Hoc
 Dicto Simpliciter
 Doublespeak
-Either/Or Fallacy
 Emotional Appeal
-Etymological Fallacy
 Exclusive Premisses
 Existential Fallacy
 Existential Assumption, Fallacy of
@@ -61,7 +56,6 @@ Fallacy Fallacy
 False Analogy
 False Cause
 False Conversion
-False Dilemma
 False Precision
 Faulty Analogy
 Four-Term Fallacy

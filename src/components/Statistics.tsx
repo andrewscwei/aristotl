@@ -2,6 +2,7 @@ import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import Pixel from './Pixel';
+import { colors } from '../styles/theme';
 
 interface Props {
   className?: string;
@@ -77,11 +78,11 @@ class Statistics extends PureComponent<Props, State> {
           }
         </StyledCount>
         <StyledFilterButton isActive={this.state.areFormalsEnabled} onClick={() => this.setState({ areFormalsEnabled: !this.state.areFormalsEnabled })}>
-          <Pixel size={6} isHollow={false}/>
+          <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
           <span>{this.props.totalFormals === 0 ? '--' : this.props.totalFormals}</span>
         </StyledFilterButton>
         <StyledFilterButton isActive={this.state.areInformalsEnabled} onClick={() => this.setState({ areInformalsEnabled: !this.state.areInformalsEnabled })}>
-          <Pixel size={6} isHollow={true}/>
+          <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
           <span>{this.props.totalInformals === 0 ? '--' : this.props.totalInformals}</span>
         </StyledFilterButton>
         <StyledFilterButton isActive={this.state.areAlphasEnabled} onClick={() => this.setState({ areAlphasEnabled: !this.state.areAlphasEnabled })}>
@@ -102,6 +103,14 @@ class Statistics extends PureComponent<Props, State> {
 }
 
 export default Statistics;
+
+const StyledFormalIcon = styled(Pixel)`
+  ${animations.transition('background', 200, 'ease-out')}
+`;
+
+const StyledInformalIcon = styled(Pixel)`
+${animations.transition('border-color', 200, 'ease-out')}
+`;
 
 const StyledCount = styled.div`
   ${container.fhcl}
@@ -128,10 +137,14 @@ const StyledFilterButton = styled.button<{
   font-size: 1.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.colors.white};
-  opacity: ${(props) => props.isActive ? 1.0 : 0.4};
+  opacity: ${(props) => props.isActive ? 1.0 : 0.2};
 
   > * {
     flex: 0 0 auto;
+  }
+
+  > span {
+    ${animations.transition('color', 200, 'ease-out')}
   }
 
   ${selectors.eblc} {
@@ -139,7 +152,15 @@ const StyledFilterButton = styled.button<{
   }
 
   ${selectors.hwot} {
-    opacity: ${(props) => props.isActive ? 0.6 : 1.0};
+    color: ${(props) => props.theme.colors.red};
+
+    ${StyledFormalIcon} {
+      background: ${(props) => props.theme.colors.red};
+    }
+
+    ${StyledInformalIcon} {
+      border-color: ${(props) => props.theme.colors.red};
+    }
   }
 `;
 

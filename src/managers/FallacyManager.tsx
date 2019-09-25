@@ -61,7 +61,7 @@ class FallacyManager extends PureComponent<Props> {
       const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
       const isAlpha = inheritance.length === 0;
       const isBeta = inheritance.length === 1;
-      const isGamma = inheritance.length === 2;
+      const isGamma = inheritance.length >= 2;
 
       if (isFormal && !this.props.filters.formal) return false;
       if (isInformal && !this.props.filters.informal) return false;
