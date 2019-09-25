@@ -1,11 +1,7 @@
 Abuse of Etymology
 Accident
-Affirmation of the Consequent
 Affirmative Conclusion from a Negative Premiss
-Affirming the Consequent
 Ambiguous Middle
-Amphiboly
-Amphibology
 Anecdotal Fallacy
 Argument by Consensus
 Appeal to / Argument from Authority
@@ -35,12 +31,10 @@ Argumentum ad Odium
 Argumentum ad Populum
 Argumentum ad Superbiam
 Argumentum ad Verecundiam
-Asserting the Consequent
 Authority of the Many
 Bad Company Fallacy
 Bad Reasons Fallacy
 Bandwagon Fallacy
-Base Rate Fallacy
 Beard, Argument/Fallacy of the
 Begging the Question
 Biased Sample
@@ -49,16 +43,12 @@ Black-and-White Fallacy
 Black-or-White Fallacy
 Circular Argument
 Circulus in Probando
-Commutation of Conditionals
 Company that You Keep Fallacy
 Complex Question
-Composition
 Conjunction Effect
 Conjunction Fallacy
-Consequent, Fallacy of the
 Continuum, Fallacy of the
 Converse Accident
-Converting a Conditional
 Cum Hoc, Ergo Propter Hoc
 Denial of the Antecedent
 Denying a Conjunct
@@ -69,7 +59,6 @@ Division
 Doublespeak
 Either/Or Fallacy
 Emotional Appeal
-Equivocation
 Etymological Fallacy
 Exclusive Premisses
 Existential Fallacy
@@ -83,7 +72,6 @@ False Conversion
 False Dilemma
 False Precision
 Faulty Analogy
-Formal Fallacy
 Four-Term Fallacy
 Gambler's Fallacy
 Genetic Fallacy
@@ -92,7 +80,6 @@ Hasty Generalization
 Heap, Fallacy of the
 Hitler Card
 Hot Hand Fallacy
-Ignoratio Elenchi
 Illicit Contraposition
 Illicit Conversion
 Illicit Major
@@ -104,9 +91,7 @@ Illicit Process of the Minor
 Illicit Quantifier Shift
 Illicit Substitution of Identicals
 Improper Transposition
-Informal Fallacy
 Ipse Dixit
-Irrelevant Thesis
 Irrelevant Emotional Appeal
 Loaded Language/Words
 Loaded Question
@@ -122,7 +107,6 @@ Multiple Comparisons Fallacy
 Naturalistic Fallacy
 Negating Antecedent & Consequent
 Negative Conclusion from Affirmative Premisses
-Neglecting Base Rates
 No-True-Scotsman Move/Ploy
 Non Causa Pro Causa
 Overgenerality
@@ -132,8 +116,6 @@ Petitio Principii
 Plurium Interrogationum
 Poisoning the Well
 Post Hoc
-Probabilistic Fallacy
-Propositional Fallacy
 Quantificational Fallacy
 Quantifier Shift
 Quaternio Terminorum
@@ -142,7 +124,6 @@ Question-Begging Epithets
 Questionable Analogy
 Quoting Out of Context
 Redefinition
-Red Herring
 Regression Fallacy
 Regressive Fallacy
 Scope Fallacy

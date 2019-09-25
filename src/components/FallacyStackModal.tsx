@@ -76,7 +76,7 @@ const StyledFallacy = styled(Fallacy)<{
   ${align.tr}
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   height: 100%;
-  max-width: 50rem;
+  max-width: 60rem;
   opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
   pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
   transform: ${(props) => valueByTransitionStatus(['translate3d(100%, 0, 0)', `translate3d(${-props.stackIndex * 2}rem, 0, 0)`], props.transitionStatus, true)};

@@ -222,7 +222,6 @@ const StyledCloseButton = styled(ActionButton)`
 const StyledContent = styled.div`
   padding: 1rem 1rem;
   width: 100%;
-  max-width: 40rem;
   font-family: 'RobotoMono';
   font-weight: 400;
   font-size: 1.4rem;
