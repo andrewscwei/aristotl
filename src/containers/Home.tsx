@@ -272,6 +272,7 @@ const StyledFooter = styled.footer`
   font-size: 1.2rem;
   font-weight: 400;
   margin-top: 10rem;
+  max-width: 120rem;
   user-select: text;
   width: 100%;
 
