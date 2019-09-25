@@ -280,9 +280,12 @@ const StyledContent = styled.div`
   pre {
     ${container.box}
     background: ${(props) => props.theme.colors.lightGrey};
-    padding: 1rem;
+    line-height: 130%;
     margin: 0;
+    padding: 1rem;
+    white-space: normal;
     width: 100%;
+    word-wrap: normal;
   }
 
   a:not([href]) {

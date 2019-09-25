@@ -174,9 +174,12 @@ const StyledContent = styled.div`
     ${container.box}
     background: ${(props) => props.theme.colors.darkPink};
     color: ${(props) => props.theme.colors.black};
+    line-height: 130%;
     margin: 0;
     padding: 1rem;
+    white-space: normal;
     width: 100%;
+    word-wrap: normal;
   }
 
   a:not([href]) {
