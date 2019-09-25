@@ -112,7 +112,7 @@ class FallacyManager extends PureComponent<Props> {
   countGammas(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance');
-      if (fragments.length === 2) out += 1;
+      if (fragments.length >= 2) out += 1;
       return out;
     }, 0);
   }

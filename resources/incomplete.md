@@ -1,7 +1,6 @@
 Abuse of Etymology
 Accident
 Affirmative Conclusion from a Negative Premiss
-Ambiguous Middle
 Anecdotal Fallacy
 Argument by Consensus
 Appeal to / Argument from Authority
@@ -48,12 +47,7 @@ Conjunction Effect
 Conjunction Fallacy
 Converse Accident
 Cum Hoc, Ergo Propter Hoc
-Denial of the Antecedent
-Denying a Conjunct
-Denying the Antecedent
 Dicto Simpliciter
-Disjunctive Syllogism, Fallacy of
-Division
 Doublespeak
 Either/Or Fallacy
 Emotional Appeal
