@@ -35,7 +35,6 @@ Authority of the Many
 Bad Company Fallacy
 Bad Reasons Fallacy
 Bandwagon Fallacy
-Beard, Argument/Fallacy of the
 Begging the Question
 Biased Sample
 Bifurcation
@@ -47,7 +46,6 @@ Company that You Keep Fallacy
 Complex Question
 Conjunction Effect
 Conjunction Fallacy
-Continuum, Fallacy of the
 Converse Accident
 Cum Hoc, Ergo Propter Hoc
 Denial of the Antecedent
@@ -77,7 +75,6 @@ Gambler's Fallacy
 Genetic Fallacy
 Guilt by Association
 Hasty Generalization
-Heap, Fallacy of the
 Hitler Card
 Hot Hand Fallacy
 Illicit Contraposition
@@ -142,7 +139,6 @@ Two Wrongs Make a Right
 Undistributed Middle
 Unrepresentative Sample
 Unwarranted Contrast
-Vagueness
 Vicious Circle
 Volvo Fallacy
 Weak Analogy

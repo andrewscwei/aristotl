@@ -230,12 +230,14 @@ class Home extends PureComponent<Props, State> {
                       maxPages={maxPages}
                       onActivate={(index) => this.onPageIndexChange(index)}
                     />
-                    <StyledGrid
-                      key={`${this.state.searchInput}-${this.state.pageIndex}`}
-                      docs={currResults}
-                      isSummaryEnabled={this.state.isSummaryEnabled}
-                      onActivate={(doc) => this.props.presentFallacyById(doc.id)}
-                    />
+                    <StyledGridContainer>
+                      <StyledGrid
+                        key={`${this.state.searchInput}-${this.state.pageIndex}`}
+                        docs={currResults}
+                        isSummaryEnabled={this.state.isSummaryEnabled}
+                        onActivate={(doc) => this.props.presentFallacyById(doc.id)}
+                      />
+                    </StyledGridContainer>
                     <StyledFooter dangerouslySetInnerHTML={{ __html: this.props.copyrightDoc && getMarkup(this.props.copyrightDoc, 'data.description') || '' }}/>
                   </StyledRoot>
                 </NavControlManager>
@@ -312,7 +314,6 @@ const StyledStatistics = styled(Statistics)`
 const StyledGrid = styled(Grid)`
   margin-left: -.5rem;
   max-width: 120rem;
-  min-height: 100vh;
   width: calc(100% + 1rem);
 
   > * {
@@ -345,6 +346,11 @@ const StyledGrid = styled(Grid)`
       width: ${(props) => props.isSummaryEnabled ? '26rem' : '20rem'};
     }
   }
+`;
+
+const StyledGridContainer = styled.div`
+  flex: 1 0 auto;
+  width: 100%;
 `;
 
 const StyledRoot = styled.div<{
