@@ -12,7 +12,7 @@ import { AppState } from '../store';
 import { dismissDefinitionById } from '../store/definitions';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:definition-stack-modal') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:definition-stack-modal') : () => {};
 
 interface StateProps {
   activeDefinitionIds: Array<string>;

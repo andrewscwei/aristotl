@@ -8,7 +8,7 @@ import { AppState } from '../store';
 import { fetchFallacies } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fallacy-manager') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacy-manager') : () => {};
 
 interface StateProps {
   i18n: I18nState;
@@ -43,12 +43,6 @@ class FallacyManager extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.props.fetchFallacies();
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.filters !== this.props.filters) {
-      debug('Changing filters...', 'OK', this.props.filters);
-    }
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
@@ -118,6 +112,8 @@ class FallacyManager extends PureComponent<Props> {
   }
 
   render() {
+    debug('Rendering...', 'OK');
+
     const results = this.getFilteredDocs();
     const pageIndex = this.props.pageIndex;
     const pages = _.chunk(results, this.props.docsPerPage);

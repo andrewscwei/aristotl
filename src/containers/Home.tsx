@@ -22,16 +22,16 @@ import { AppState } from '../store';
 import { fetch as fetchCopyright } from '../store/copyright';
 import { fetchDefinitions } from '../store/definitions';
 import { presentFallacyById } from '../store/fallacies';
-import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 import { getMarkup } from '../utils/prismic';
+
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
   activeDefinitionIds: Array<string>;
   activeFallacyIds: Array<string>;
   copyrightDoc?: Readonly<Document>;
-  i18n: I18nState;
 }
 
 interface DispatchProps {
@@ -93,16 +93,16 @@ class Home extends PureComponent<Props, State> {
       this.mapHashToState();
     }
 
-    if (prevProps.activeFallacyIds !== this.props.activeFallacyIds) {
-      const docId = _.last(this.props.activeFallacyIds);
+    // if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
+    //   const docId = _.last(this.props.activeFallacyIds);
 
-      // if (docId) {
-      //   this.props.history.replace(`#${docId}`);
-      // }
-      // else {
-      //   this.props.history.replace('/');
-      // }
-    }
+    //   if (docId) {
+    //     this.props.history.replace(`#${docId}`);
+    //   }
+    //   else {
+    //     this.props.history.replace('/');
+    //   }
+    // }
   }
 
   toNextPage() {
@@ -182,7 +182,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
-    const { ltxt } = this.props.i18n;
+    debug('Rendering...', 'OK');
 
     return (
       <FallacyManager
@@ -269,7 +269,6 @@ export default connect(
     activeDefinitionIds: state.definitions.activeDocIds,
     activeFallacyIds: state.fallacies.activeDocIds,
     copyrightDoc: state.copyright[__I18N_CONFIG__.defaultLocale],
-    i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     fetchCopyright,

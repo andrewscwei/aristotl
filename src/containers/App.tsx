@@ -15,7 +15,7 @@ import GlobalStyles from '../styles/global';
 import * as theme from '../styles/theme';
 import { getLocaleFromPath } from '../utils/i18n';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app') : () => {};
 
 interface StateProps {
   i18n: I18nState;

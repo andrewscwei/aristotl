@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 import Card from './Card';
 
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:grid') : () => {};
+
 interface Props {
   className?: string;
   id?: string;
@@ -28,6 +30,8 @@ class Grid extends PureComponent<Props> {
   }
 
   render() {
+    debug('Rendering...', 'OK');
+
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => {

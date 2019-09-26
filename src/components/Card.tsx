@@ -10,6 +10,8 @@ import { colors } from '../styles/theme';
 import { getDocs, getMarkup, getText } from '../utils/prismic';
 import Pixel from './Pixel';
 
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:card') : () => {};
+
 interface StateProps {
   i18n: I18nState;
 }

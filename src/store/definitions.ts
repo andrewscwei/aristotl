@@ -4,7 +4,7 @@ import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:definitions') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:definitions') : () => {};
 
 export enum DefinitionsActionType {
   DOC_PRESENTED = 'definitions-presented',

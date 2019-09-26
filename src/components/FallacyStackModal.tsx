@@ -13,7 +13,7 @@ import { AppState } from '../store';
 import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:fallacy-stack-modal') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacy-stack-modal') : () => {};
 
 interface StateProps {
   activeFallacyIds: Array<string>;

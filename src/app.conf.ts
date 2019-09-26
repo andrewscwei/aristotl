@@ -16,6 +16,9 @@ export default {
   // Google Analytics ID (i.e. UA-XXXXXXXX-1)
   ga: undefined,
 
+  // Enable debugger in production.
+  enableDebugInProduction: false,
+
   // Prismic config.
   prismic: {
     // API endpoint.

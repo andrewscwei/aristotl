@@ -6,7 +6,7 @@ import { Document } from 'prismic-javascript/d.ts/documents';
 import ResolvedApi, { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { getLocalizedPath } from './i18n';
 
-const debug = process.env.NODE_ENV === 'development' ? require('debug')('app:prismic') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {};
 
 export function linkResolver(doc: Document): string {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
