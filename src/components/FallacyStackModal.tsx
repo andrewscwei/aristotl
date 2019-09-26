@@ -33,28 +33,28 @@ interface Props extends StateProps, DispatchProps {
 
 class FallacyStackModal extends PureComponent<Props> {
   getPrevDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.id === currDocId);
+    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.uid === currDocId);
     if (currIndex < 1) return undefined;
     return this.props.fallacyDict[currIndex - 1];
   }
 
   getNextDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.id === currDocId);
+    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.uid === currDocId);
     if (currIndex >= (this.props.fallacyDict.length - 1)) return undefined;
     return this.props.fallacyDict[currIndex + 1];
   }
 
   onPrev(currDocId: string) {
     const doc = this.getPrevDoc(currDocId);
-    if (!doc) return;
-    this.props.presentFallacyById(doc.id);
+    if (!doc || !doc.uid) return;
+    this.props.presentFallacyById(doc.uid);
     this.props.dismissFallacyById(currDocId);
   }
 
   onNext(currDocId: string) {
     const doc = this.getNextDoc(currDocId);
-    if (!doc) return;
-    this.props.presentFallacyById(doc.id);
+    if (!doc || !doc.uid) return;
+    this.props.presentFallacyById(doc.uid);
     this.props.dismissFallacyById(currDocId);
   }
 

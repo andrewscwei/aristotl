@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { animations, container, media, selectors } from 'promptu';
 import qs from 'query-string';
@@ -90,6 +91,17 @@ class Home extends PureComponent<Props, State> {
 
     if (prevProps.location.hash !== this.props.location.hash) {
       this.mapHashToState();
+    }
+
+    if (prevProps.activeFallacyIds !== this.props.activeFallacyIds) {
+      const docId = _.last(this.props.activeFallacyIds);
+
+      if (docId) {
+        this.props.history.replace(`#${docId}`);
+      }
+      else {
+        this.props.history.replace('/');
+      }
     }
   }
 
@@ -235,7 +247,7 @@ class Home extends PureComponent<Props, State> {
                         key={`${this.state.searchInput}-${this.state.pageIndex}`}
                         docs={currResults}
                         isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => this.props.presentFallacyById(doc.id)}
+                        onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
                       />
                     </StyledGridContainer>
                     <StyledFooter dangerouslySetInnerHTML={{ __html: this.props.copyrightDoc && getMarkup(this.props.copyrightDoc, 'data.description') || '' }}/>

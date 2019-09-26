@@ -41,7 +41,7 @@ interface Props extends StateProps, DispatchProps, OwnProps {}
 class Fallacy extends PureComponent<Props> {
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
-    return _.find(this.props.fallacyDict, (v) => v.id === this.props.docId);
+    return _.find(this.props.fallacyDict, (v) => v.uid === this.props.docId);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -66,9 +66,10 @@ class Fallacy extends PureComponent<Props> {
     };
   }
 
-  onFallacySelect(docId: string) {
+  onFallacySelect(docId?: string) {
     return (event: MouseEvent) => {
       event.preventDefault();
+      if (!docId) return;
       this.props.presentFallacyById(docId);
     };
   }
@@ -159,7 +160,7 @@ class Fallacy extends PureComponent<Props> {
             {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
               <ul>
                 {inheritanceDocs.map((v, i) => (
-                  <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                  <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
                 ))}
               </ul>
             }
@@ -172,7 +173,7 @@ class Fallacy extends PureComponent<Props> {
             {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
               <ul>
                 {subtypeDocs.map((v, i) => (
-                  <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                  <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
                 ))}
               </ul>
             }
@@ -208,7 +209,7 @@ class Fallacy extends PureComponent<Props> {
               <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
-                    <a onClick={() => this.props.presentFallacyById(v.id)}>{_.get(v, 'data.name')}</a>
+                    <a onClick={() => this.props.presentFallacyById(v.uid)}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
               </ul>
