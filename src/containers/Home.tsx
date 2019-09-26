@@ -96,12 +96,12 @@ class Home extends PureComponent<Props, State> {
     if (prevProps.activeFallacyIds !== this.props.activeFallacyIds) {
       const docId = _.last(this.props.activeFallacyIds);
 
-      if (docId) {
-        this.props.history.replace(`#${docId}`);
-      }
-      else {
-        this.props.history.replace('/');
-      }
+      // if (docId) {
+      //   this.props.history.replace(`#${docId}`);
+      // }
+      // else {
+      //   this.props.history.replace('/');
+      // }
     }
   }
 
