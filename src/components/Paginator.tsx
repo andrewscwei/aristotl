@@ -40,7 +40,7 @@ class Paginator extends PureComponent<Props> {
           >
             <Pixel
               isHollow={this.props.activePageIndex !== i}
-              size={8}
+              size={10}
               tintColor={this.props.tintColor}
             />
           </StyledButton>
@@ -68,6 +68,6 @@ const StyledRoot = styled.div`
   ${container.fhcc}
 
   ${selectors.eblc} {
-    margin-right: .8rem;
+    margin-right: 1rem;
   }
 `;

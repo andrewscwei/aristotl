@@ -1,14 +1,7 @@
-Illicit Contraposition
-Illicit Conversion
-Loaded Language/Words
-Loaded Question
-Modal Fallacy
-Modal Scope Fallacy
-Multiple Comparisons Fallacy
-Negative Conclusion from Affirmative Premisses
-Overgenerality
-Quantifier Shift
-
+<!-- Illicit Contraposition -->
+<!-- Illicit Conversion -->
+<!-- Modal Scope Fallacy -->
+<!-- Multiple Comparisons Fallacy -->
 ~~Accent~~
 ~~Accident~~
 ~~Affirmative Conclusion from a Negative Premiss~~
@@ -53,7 +46,11 @@ Quantifier Shift
 ~~Illicit Major~~
 ~~Illicit Minor~~
 ~~Improper Transposition~~
+~~Loaded Language/Words~~
+~~Loaded Question~~
 ~~Masked Man Fallacy~~
+~~Modal Fallacy~~
+~~Negative Conclusion from Affirmative Premisses~~
 ~~No-True-Scotsman Move/Ploy~~
 ~~Non Causa Pro Causa~~
 ~~Overprecision~~
@@ -62,6 +59,7 @@ Quantifier Shift
 ~~Probabilistic Fallacy~~
 ~~Propositional Fallacy~~
 ~~Quantificational Fallacy~~
+~~Quantifier Shift~~
 ~~Question-Begging Analogy~~
 ~~Quoting Out of Context~~
 ~~Red Herring~~

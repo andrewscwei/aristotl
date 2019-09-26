@@ -304,7 +304,7 @@ const StyledHeader = styled.header`
 
 const StyledPaginator = styled(Paginator)`
   width: 100%;
-  margin: 2rem 0;
+  margin: 5rem 0 3rem;
 `;
 
 const StyledStatistics = styled(Statistics)`
