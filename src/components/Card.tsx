@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors, utils } from 'promptu';
+import { align, animations, container, selectors, utils, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -70,7 +70,7 @@ class Card extends PureComponent<Props> {
           <StyledSummary dangerouslySetInnerHTML={{ __html: summary }}/>
         }
 
-        <StyledDivider/>
+        <StyledDivider isSummaryEnabled={this.props.isSummaryEnabled}/>
       </StyledRoot>
     );
   }
@@ -135,28 +135,48 @@ const StyledAbbreviation = styled.div`
 
   h2 {
     font-family: 'NovaMono';
-    font-size: 6rem;
+    font-size: 4.2rem;
     font-weight: 400;
+
+    @media ${media.gtw(350)} {
+      font-size: 5rem;
+    }
+
+    @media ${media.gtw(400)} {
+      font-size: 6rem;
+    }
   }
 `;
 
 const StyledName = styled.h1`
-  width: 100%;
-  font-size: 1.4rem;
-  font-weight: 400;
   color: ${(props) => props.theme.colors.lightGrey};
   font-family: 'RobotoMono';
+  font-size: 1.3rem;
+  font-weight: 400;
+  hyphens: auto;
   padding: 0 1rem;
   user-select: text;
+  width: 100%;
+
+  @media ${media.gtw(500)} {
+    font-size: 1.4rem;
+  }
 `;
 
-const StyledDivider = styled.div`
+const StyledDivider = styled.div<{
+  isSummaryEnabled: boolean;
+}>`
   ${align.bl}
-  ${animations.transition('background', 200, 'ease-out')}
-  width: 2rem;
-  height: .2rem;
+  ${animations.transition(['opacity', 'background'], 200, 'ease-out')}
   background: ${(props) => props.theme.colors.darkGrey};
+  height: .2rem;
   margin: 2rem;
+  opacity: ${(props) => props.isSummaryEnabled ? 1 : 0};
+  width: 2rem;
+
+  @media ${media.gtw(500)} {
+    opacity: 1;
+  }
 `;
 
 const StyledRoot = styled.button`
