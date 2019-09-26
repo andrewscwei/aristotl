@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, selectors } from 'promptu';
+import { align, animations, container, media, selectors } from 'promptu';
 import React, { forwardRef, MouseEvent, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -77,14 +77,14 @@ class Fallacy extends PureComponent<Props> {
     const { ltxt } = this.props.i18n;
     const abbreviation = getText(this.doc, 'data.abbreviation');
     const name = getText(this.doc, 'data.name');
-    const aliases = getTexts(this.doc, 'data.aliases', 'name');
+    const aliases = _.sortBy(getTexts(this.doc, 'data.aliases', 'name'));
     const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitionDict);
     const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'fallacy', this.props.fallacyDict);
     const inheritanceDocs = getDocs(this.doc, 'data.inheritance', 'fallacy', this.props.fallacyDict);
     const descriptionMarkup = getMarkup(this.doc, 'data.description');
-    const exampleMarkups = getMarkups(this.doc, 'data.examples', 'example');
+    const exampleMarkups = _.sortBy(getMarkups(this.doc, 'data.examples', 'example'));
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
-    const relatedDocs = getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacyDict);
+    const relatedDocs = _.sortBy(getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacyDict), 'data.name');
 
     return (
       <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
@@ -130,7 +130,13 @@ class Fallacy extends PureComponent<Props> {
         <StyledSection>
           <StyledLabel>{ltxt('aliases')}</StyledLabel>
           <StyledContent>
-            {!aliases || aliases.length <= 0 ? '--' : <em>{aliases.join(', ')}</em>}
+            {!aliases || aliases.length <= 0 ? '--' :
+              <ul>
+                {aliases.map((v, i) => (
+                  <li key={`alias=${i}`}><em>{v}</em></li>
+                ))}
+              </ul>
+            }
           </StyledContent>
         </StyledSection>
 
@@ -244,25 +250,37 @@ export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <Connec
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}
-  margin: 3rem;
+  margin: 3rem 1.4rem;
+
+  @media ${media.gtmobile} {
+    margin: 3rem;
+  }
 `;
 
 const StyledPrevButton = styled(ActionButton)<{
   isDisabled: boolean;
 }>`
   ${align.tr}
-  margin: 3rem ${3 + 2 + 1}rem 3rem 3rem;
+  margin: 3rem ${1.4 + 2 + 1}rem 3rem 3rem;
   pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
   opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
+
+  @media ${media.gtmobile} {
+    margin: 3rem ${3 + 2 + 1}rem 3rem 3rem;
+  }
 `;
 
 const StyledNextButton = styled(ActionButton)<{
   isDisabled: boolean;
 }>`
   ${align.tr}
-  margin: 3rem;
+  margin: 3rem 1.4rem;
   pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
   opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
+
+  @media ${media.gtmobile} {
+    margin: 3rem;
+  }
 `;
 
 const StyledContent = styled.div`
@@ -388,8 +406,12 @@ const StyledAbbreviation = styled.div`
     color: ${(props) => props.theme.colors.black};
     font-family: 'NovaMono';
     width: 100%;
-    font-size: 12rem;
+    font-size: 10rem;
     text-align: center;
+
+    @media ${media.gtw(400)} {
+      font-size: 12rem;
+    }
   }
 `;
 
@@ -407,6 +429,10 @@ const StyledRoot = styled.div`
   background: ${(props) => props.theme.colors.white};
   color: ${(props) => props.theme.colors.black};
   overflow-y: scroll;
-  padding: 8rem 3rem;
+  padding: 8rem 1.4rem;
   user-select: text;
+
+  @media ${media.gtmobile} {
+    padding: 8rem 3rem;
+  }
 `;
