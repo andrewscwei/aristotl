@@ -1,18 +1,17 @@
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import React, { Fragment, PureComponent, ReactNode } from 'react';
+import React, { Component, Fragment, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { AppState } from '../store';
 import { fetchFallacies } from '../store/fallacies';
-import { I18nState } from '../store/i18n';
+import { shallowEqualDocs } from '../utils/prismic';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacy-manager') : () => {};
 
 interface StateProps {
-  i18n: I18nState;
-  docs: ReadonlyArray<Document>;
+  fallacyDict: ReadonlyArray<Document>;
   fusedDocs: Fuse<Document>;
 }
 
@@ -34,7 +33,7 @@ interface Props extends StateProps, DispatchProps {
   children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number, numAlphas: number, numBetas: number, numGammas: number) => ReactNode;
 }
 
-class FallacyManager extends PureComponent<Props> {
+class FallacyManager extends Component<Props> {
   static defaultProps: Partial<Props> = {
     pageIndex: 0,
     docsPerPage: 20,
@@ -45,9 +44,38 @@ class FallacyManager extends PureComponent<Props> {
     this.props.fetchFallacies();
   }
 
+  shouldComponentUpdate(nextProps: Props) {
+    if (this.props.docsPerPage !== nextProps.docsPerPage) {
+      debug('Marking prop "docsPerPage" as dirty...', 'OK', this.props.docsPerPage, nextProps.docsPerPage);
+      return true;
+    }
+
+    if (this.props.pageIndex !== nextProps.pageIndex) {
+      debug('Marking prop "pageIndex" as dirty...', 'OK', this.props.pageIndex, nextProps.pageIndex);
+      return true;
+    }
+
+    if (this.props.searchInput !== nextProps.searchInput) {
+      debug('Marking prop "searchInput" as dirty...', 'OK', this.props.searchInput, nextProps.searchInput);
+      return true;
+    }
+
+    if (!_.isEqual(this.props.filters, nextProps.filters)) {
+      debug('Marking prop "filters" as dirty...', 'OK', this.props.filters, nextProps.filters);
+      return true;
+    }
+
+    if (!shallowEqualDocs(this.props.fallacyDict, nextProps.fallacyDict)) {
+      debug('Marking prop "fallacyDict" as dirty...', 'OK', this.props.fallacyDict, nextProps.fallacyDict);
+      return true;
+    }
+
+    return false;
+  }
+
   getFilteredDocs(): ReadonlyArray<Document> {
     const searchInput = this.props.searchInput;
-    const searchResults = _.isEmpty(searchInput) ? this.props.docs : this.props.fusedDocs.search(searchInput!);
+    const searchResults = _.isEmpty(searchInput) ? this.props.fallacyDict : this.props.fusedDocs.search(searchInput!);
     const filteredResults = _.filter(searchResults, (v) => {
       const types = _.get(v, 'data.types');
       const inheritance = _.get(v, 'data.inheritance');
@@ -112,8 +140,6 @@ class FallacyManager extends PureComponent<Props> {
   }
 
   render() {
-    debug('Rendering...', 'OK');
-
     const results = this.getFilteredDocs();
     const pageIndex = this.props.pageIndex;
     const pages = _.chunk(results, this.props.docsPerPage);
@@ -143,8 +169,7 @@ class FallacyManager extends PureComponent<Props> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    i18n: state.i18n,
-    docs: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
+    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
     fusedDocs: new Fuse(state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [], {
       matchAllTokens: true,
       maxPatternLength: 24,

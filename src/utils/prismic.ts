@@ -193,3 +193,24 @@ export function getDocs(doc?: Document, path: string = '', subpath: string = '',
 
   return matchedDocs;
 }
+
+export function shallowEqualDoc(doc1?: Document, doc2?: Document): boolean {
+  if ((doc1 === undefined) && (doc2 === undefined)) return true;
+  if ((doc1 === undefined) || (doc2 === undefined)) return false;
+  if (doc1.id === doc2.id) return true;
+  return false;
+}
+
+export function shallowEqualDocs(docs1?: ReadonlyArray<Document>, docs2?: ReadonlyArray<Document>): boolean {
+  if ((docs1 === undefined) && (docs2 === undefined)) return true;
+  if ((docs1 === undefined) || (docs2 === undefined)) return false;
+  if (docs1.length !== docs2.length) return false;
+
+  const n = docs1.length;
+
+  for (let i = 0; i < n; i++) {
+    if (!shallowEqualDoc(docs1[i], docs2[i])) return false;
+  }
+
+  return true;
+}
