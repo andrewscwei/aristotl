@@ -75,9 +75,9 @@ class SearchBar extends PureComponent<Props> {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
         <StyledPixels>
-          <Pixel tintColor={colors.black}/>
-          <Pixel tintColor={colors.black}/>
-          <Pixel tintColor={colors.black}/>
+          <Pixel tintColor={colors.offBlack}/>
+          <Pixel tintColor={colors.offBlack}/>
+          <Pixel tintColor={colors.offBlack}/>
         </StyledPixels>
         <StyledInput>
           <input

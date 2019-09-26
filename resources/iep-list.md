@@ -2,7 +2,6 @@ Accident
 Ad Hoc Rescue
 Anecdotal Evidence
 Anthropomorphism
-Appeal to Authority
 Appeal to Consequence
 Appeal to Emotions
 Appeal to Ignorance
@@ -13,7 +12,6 @@ Availability Heuristic
 Avoiding the Issue
 Avoiding the Question
 Bad Seed
-Bandwagon
 Begging the Question
 Beside the Point
 Biased Generalizing
@@ -86,7 +84,6 @@ Selective Attention
 Self-Fulfilling Prophecy
 Self-Selection
 Sharpshooter's
-Slanting
 Small Sample
 Smear Tactic
 Smokescreen
@@ -114,6 +111,8 @@ Wishful Thinking
 ~~Affirming the Consequent~~
 ~~Ambiguity~~
 ~~Amphiboly~~
+~~Appeal to Authority~~
+~~Bandwagon~~
 ~~Black-or-White~~
 ~~Composition~~
 ~~Conjunction~~
