@@ -88,7 +88,6 @@ export default connect(
 const StyledSummary = styled.div`
   color: ${(props) => props.theme.colors.grey};
   margin-top: 1rem;
-  max-height: ${1.8 * 6}rem;
   overflow: hidden;
   padding: 0 1rem;
   width: 100%;
