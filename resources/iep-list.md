@@ -2,9 +2,7 @@ Accident
 Ad Hoc Rescue
 Anecdotal Evidence
 Anthropomorphism
-Appeal to Consequence
 Appeal to Emotions
-Appeal to Ignorance
 Appeal to Money
 Appeal to the People
 Appeal to Traditional Wisdom
@@ -21,15 +19,12 @@ Complex Question
 Confirmation Bias
 Confusing an Explanation with an Excuse
 Converse Accident
-Cum Hoc, Ergo Propter Hoc
 Curve Fitting
 Disregarding Known Science
 Double Standard
 Every and All
 Exaggeration
-False Analogy
 False Balance
-False Cause
 Far-Fetched Hypothesis
 Faulty Comparison
 Faulty Generalization
@@ -38,7 +33,6 @@ Gambler's
 Genetic
 Group Think
 Guilt by Association
-Hasty Generalization
 Hedging
 Hooded Man
 Hyperbolic Discounting
@@ -69,21 +63,17 @@ Oversimplification
 Pathetic
 Peer Pressure
 Popularity, Argument from
-Post Hoc
 Proof Surrogate
 Quantifier Shift
 Questionable Premise
 Quibbling
 Rationalization
 Refutation by Caricature
-Regression
 Reversing Causation
 Scapegoating
-Scare Tactic
 Selective Attention
 Self-Fulfilling Prophecy
 Self-Selection
-Sharpshooter's
 Small Sample
 Smear Tactic
 Smokescreen
@@ -101,7 +91,6 @@ Two Wrongs do not Make a Right
 Undistributed Middle
 Unfalsifiability
 Unrepresentative Generalization
-Unrepresentative Sample
 Vested Interest
 Willed ignorance
 Wishful Thinking
@@ -112,29 +101,40 @@ Wishful Thinking
 ~~Ambiguity~~
 ~~Amphiboly~~
 ~~Appeal to Authority~~
+~~Appeal to Consequence~~
+~~Appeal to Ignorance~~
 ~~Bandwagon~~
 ~~Black-or-White~~
 ~~Composition~~
 ~~Conjunction~~
+~~Cum Hoc, Ergo Propter Hoc~~
 ~~Definist~~
 ~~Denying the Antecedent~~
 ~~Division~~
 ~~Equivocation~~
 ~~Etymological~~
+~~False Analogy~~
+~~False Cause~~
 ~~False Dilemma~~
 ~~False Equivalence~~
 ~~Four Terms~~
+~~Hasty Generalization~~
 ~~Line-Drawing~~
 ~~Perfectionist~~
 ~~Persuasive Definition~~
 ~~Poisoning the Well~~
+~~Post Hoc~~
 ~~Prosecutor's Fallacy~~
 ~~Quoting out of Context~~
 ~~Red Herring~~
+~~Regression~~
 ~~Reification~~
+~~Scare Tactic~~
 ~~Scope~~
+~~Sharpshooter's~~
 ~~Slippery Slope~~
 ~~Special Pleading~~
 ~~Straw Man~~
 ~~Suppressed Evidence~~
 ~~Syllogistic~~
+~~Unrepresentative Sample~~

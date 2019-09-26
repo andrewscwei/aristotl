@@ -71,7 +71,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
   return newState;
 }
 
-export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: number = 2) {
+export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: number = 1) {
   return async (dispatch: Dispatch<FallaciesAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
