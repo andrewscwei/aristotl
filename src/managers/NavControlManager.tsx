@@ -45,11 +45,11 @@ class NavControlManager extends PureComponent<Props> {
     if (!this.props.isEnabled) return;
 
     switch (direction) {
-    case 2: // Left
-      this.props.onNext();
-      break;
-    case 4: // Right
-      this.props.onPrev();
+      case 2: // Left
+        this.props.onNext();
+        break;
+      case 4: // Right
+        this.props.onPrev();
     }
   }
 

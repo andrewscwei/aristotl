@@ -1,3 +1,4 @@
+import { container, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router-dom';
@@ -14,17 +15,11 @@ interface DispatchProps {
 
 }
 
-interface OwnProps extends RouteComponentProps<{}> {
+interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
 
 }
 
-interface Props extends StateProps, DispatchProps, OwnProps {}
-
-interface State {
-
-}
-
-class NotFound extends PureComponent<Props, State> {
+class NotFound extends PureComponent<Props> {
   componentDidMount() {
     document.title = this.props.i18n.ltxt('not-found');
   }
@@ -40,7 +35,7 @@ class NotFound extends PureComponent<Props, State> {
 
         return (
           <StyledRoot>
-            <h1>{ltxt('not-found-title')}</h1>
+            <StyledTitle>{ltxt('not-found-title')}</StyledTitle>
           </StyledRoot>
         );
       }}/>
@@ -57,27 +52,25 @@ export default connect(
   }, dispatch),
 )(NotFound);
 
+const StyledTitle = styled.h1`
+  color: ${(props) => props.theme.colors.white};
+  font-family: 'RobotoMono';
+  font-size: 2.4em;
+  font-weight: 400;
+  margin: 0;
+  max-width: 550px;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
 const StyledRoot = styled.div`
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-  font-family: ${(props) => props.theme.font};
-  flex-direction: column;
-  flex-wrap: nowrap;
+  ${container.fvcc}
+  background: ${(props) => props.theme.colors.black};
   height: 100%;
-  justify-content: center;
-  padding: 10% 5%;
-  position: absolute;
+  padding: 5rem 2rem 3rem;
   width: 100%;
 
-  h1 {
-    color: ${(props) => props.theme.titleColor};
-    font-size: 2.4em;
-    font-weight: 700;
-    letter-spacing: 3px;
-    margin: 0;
-    max-width: 550px;
-    text-align: center;
-    text-transform: uppercase;
+  @media ${media.gtw(500)} {
+    padding: 5rem 5rem 3rem;
   }
 `;

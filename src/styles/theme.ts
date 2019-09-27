@@ -1,5 +1,3 @@
-import { css } from 'styled-components';
-
 export const colors = {
   background: '#ccc',
   white: '#fff',

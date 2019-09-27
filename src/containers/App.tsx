@@ -61,7 +61,8 @@ class App extends PureComponent<Props, State> {
   }
 }
 
-export default hot(connect((state: AppState): StateProps => ({
+export default hot(
+  connect((state: AppState): StateProps => ({
     i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
