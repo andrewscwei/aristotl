@@ -27,8 +27,8 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
-  activeDefinitionIds: Array<string>;
-  activeFallacyIds: Array<string>;
+  lastActiveDefinitionId?: string;
+  lastActiveFallacyId?: string;
   fallacyDict: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
   searchInput: string;
@@ -144,17 +144,17 @@ class Home extends PureComponent<Props, State> {
 
     return (
       <Fragment>
-        <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+        <Transition in={!this.props.lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
             <NavControlManager
-              isEnabled={!this.state.isSearching && this.props.activeDefinitionIds.length === 0 && this.props.activeFallacyIds.length === 0}
+              isEnabled={!this.state.isSearching && !this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
               onPrev={() => this.toPreviousPage()}
               onNext={() => this.toNextPage()}
             >
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
-                    autoFocus={this.props.activeFallacyIds.length === 0 && this.props.activeDefinitionIds.length === 0}
+                    autoFocus={!this.props.lastActiveFallacyId && !this.props.lastActiveDefinitionId}
                     onFocusIn={() => this.setState({ isSearching: true })}
                     onFocusOut={() => this.setState({ isSearching: false })}
                   />
@@ -199,8 +199,8 @@ class Home extends PureComponent<Props, State> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    activeDefinitionIds: state.definitions.activeDocIds,
-    activeFallacyIds: state.fallacies.activeDocIds,
+    lastActiveDefinitionId: state.definitions.lastActiveDocId,
+    lastActiveFallacyId: state.fallacies.lastActiveDocId,
     fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
     filteredFallacies: getFilteredFallacies(state.fallacies),
     filters: state.fallacies.filters,

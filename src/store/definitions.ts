@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
@@ -14,6 +15,7 @@ export enum DefinitionsActionType {
 
 export interface DefinitionsState {
   activeDocIds: Array<string>;
+  lastActiveDocId?: string;
   docs: {
     [locale: string]: ReadonlyArray<Document>;
   };
@@ -25,6 +27,7 @@ export interface DefinitionsAction extends Action<DefinitionsActionType> {
 
 const initialState: DefinitionsState = {
   activeDocIds: [],
+  lastActiveDocId: undefined,
   docs: {},
 };
 
@@ -54,6 +57,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
       return {
         ...state,
         activeDocIds,
+        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -67,6 +71,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
       return {
         ...state,
         activeDocIds,
+        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -74,6 +79,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
       return {
         ...state,
         activeDocIds: [],
+        lastActiveDocId: undefined,
       };
     }
   }

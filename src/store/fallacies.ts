@@ -27,6 +27,7 @@ export enum FallaciesActionType {
 
 export interface FallaciesState {
   activeDocIds: Array<string>;
+  lastActiveDocId?: string;
   docs: { [locale: string]: ReadonlyArray<Document> };
   fdocs: { [locale: string]: Readonly<Fuse<Document>> };
   filters: FallaciesFilters;
@@ -40,6 +41,7 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 
 const initialState: FallaciesState = {
   activeDocIds: [],
+  lastActiveDocId: undefined,
   docs: {},
   fdocs: {},
   filters: {
@@ -100,6 +102,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds,
+        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -113,6 +116,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds,
+        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -120,6 +124,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds: [],
+        lastActiveDocId: undefined,
       };
     }
 
