@@ -30,7 +30,7 @@ interface Props extends StateProps, DispatchProps {
   docsPerPage: number;
   pageIndex: number;
   searchInput?: string;
-  children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, maxPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number, numAlphas: number, numBetas: number, numGammas: number) => ReactNode;
+  children: (results: ReadonlyArray<Document>, currResults: ReadonlyArray<Document>, numPages: number, startIndex: number, endIndex: number, numFormals: number, numInformals: number, numAlphas: number, numBetas: number, numGammas: number) => ReactNode;
 }
 
 class FallacyManager extends Component<Props> {

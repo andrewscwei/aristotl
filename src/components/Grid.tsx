@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container } from 'promptu';
+import { align, animations, container, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
@@ -67,7 +67,10 @@ const StyledCard = styled.div<{
   transitionStatus: TransitionStatus;
 }>`
   ${animations.transition('all', 200, 'ease-out')}
+  height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+  margin: 1rem .5rem;
   overflow: hidden;
+  width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 1rem)'};
 
   &::after {
     ${align.tl}
@@ -78,11 +81,36 @@ const StyledCard = styled.div<{
     transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0)', 'translate3d(100%, 0, 0)'], props.transitionStatus, true)};
     width: 100%;
   }
+
+  @media ${media.gtw(400)} {
+    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+    margin: 1rem;
+    width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 2rem)'};
+  }
+
+  @media ${media.gtw(540)} {
+    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+    width: calc(50% - 2rem);
+  }
+
+  @media ${media.gtw(660)} {
+    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+    width: ${(props) => props.isSummaryEnabled ? '26rem' : '20rem'};
+  }
 `;
 
 const StyledRoot = styled.div`
   ${animations.transition(['transform'], 150, 'ease-out')}
   ${container.fhtl}
   flex-wrap: wrap;
+  flex: 1 0 auto;
+  margin-left: -.5rem;
+  max-width: 120rem;
   transform: translate3d(0, 0, 0);
+  width: calc(100% + 1rem);
+
+  @media ${media.gtw(400)} {
+    margin-left: -1rem;
+    width: calc(100% + 2rem);
+  }
 `;

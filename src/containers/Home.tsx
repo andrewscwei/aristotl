@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { animations, container, media, selectors } from 'promptu';
@@ -12,36 +13,35 @@ import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
 import DefinitionStackModal from '../components/DefinitionStackModal';
 import FallacyStackModal from '../components/FallacyStackModal';
+import Footer from '../components/Footer';
 import Grid from '../components/Grid';
 import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
-import FallacyManager from '../managers/FallacyManager';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
-import { fetch as fetchCopyright } from '../store/copyright';
 import { fetchDefinitions } from '../store/definitions';
-import { presentFallacyById } from '../store/fallacies';
+import { fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
-import { getMarkup } from '../utils/prismic';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
   activeDefinitionIds: Array<string>;
   activeFallacyIds: Array<string>;
-  copyrightDoc?: Readonly<Document>;
+  fallacyDict: ReadonlyArray<Document>;
+  fusedDocs: Fuse<Document>;
 }
 
 interface DispatchProps {
-  presentFallacyById: typeof presentFallacyById;
   fetchDefinitions: typeof fetchDefinitions;
-  fetchCopyright: typeof fetchCopyright;
+  fetchFallacies: typeof fetchFallacies;
+  presentFallacyById: typeof presentFallacyById;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
-
+  docsPerPage: number;
 }
 
 interface State {
@@ -49,24 +49,26 @@ interface State {
   isSummaryEnabled: boolean;
   pageIndex: number;
   searchInput?: string;
-  areFormalsEnabled: boolean;
-  areInformalsEnabled: boolean;
-  areAlphasEnabled: boolean;
-  areBetasEnabled: boolean;
-  areGammasEnabled: boolean;
+  filters: FallacyFilters;
 }
 
 class Home extends PureComponent<Props, State> {
+  static defaultProps: Partial<Props> = {
+    docsPerPage: 20,
+  };
+
   state: State = {
     isSearching: false,
     isSummaryEnabled: false,
     pageIndex: 0,
     searchInput: undefined,
-    areFormalsEnabled: false,
-    areInformalsEnabled: false,
-    areAlphasEnabled: false,
-    areBetasEnabled: false,
-    areGammasEnabled: false,
+    filters: {
+      formal: true,
+      informal: true,
+      alpha: true,
+      beta: true,
+      gamma: true,
+    },
   };
 
   nodeRefs = {
@@ -75,7 +77,7 @@ class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.props.fetchCopyright();
+    this.props.fetchFallacies();
     this.props.fetchDefinitions();
   }
 
@@ -103,6 +105,30 @@ class Home extends PureComponent<Props, State> {
     //     this.props.history.replace('/');
     //   }
     // }
+  }
+
+  getFilteredDocs(): ReadonlyArray<Document> {
+    const searchInput = this.state.searchInput;
+    const searchResults = _.isEmpty(searchInput) ? this.props.fallacyDict : this.props.fusedDocs.search(searchInput!);
+    const filteredResults = _.filter(searchResults, (v) => {
+      const types = _.get(v, 'data.types');
+      const inheritance = _.get(v, 'data.inheritance');
+      const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+      const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+      const isAlpha = inheritance.length === 0;
+      const isBeta = inheritance.length === 1;
+      const isGamma = inheritance.length >= 2;
+
+      if (isFormal && !this.state.filters.formal) return false;
+      if (isInformal && !this.state.filters.informal) return false;
+      if (isAlpha && !this.state.filters.alpha) return false;
+      if (isBeta && !this.state.filters.beta) return false;
+      if (isGamma && !this.state.filters.gamma) return false;
+
+      return true;
+    });
+
+    return filteredResults;
   }
 
   toNextPage() {
@@ -184,82 +210,67 @@ class Home extends PureComponent<Props, State> {
   render() {
     debug('Rendering...', 'OK');
 
+    const results = this.getFilteredDocs();
+    const pageIndex = this.state.pageIndex;
+    const pages = _.chunk(results, this.props.docsPerPage);
+    const numPages = pages.length;
+    const currResults = pages[pageIndex] || [];
+
     return (
-      <FallacyManager
-        pageIndex={this.state.pageIndex}
-        searchInput={this.state.searchInput}
-        filters={{
-          formal: this.state.areFormalsEnabled,
-          informal: this.state.areInformalsEnabled,
-          alpha: this.state.areAlphasEnabled,
-          beta: this.state.areBetasEnabled,
-          gamma: this.state.areGammasEnabled,
-        }}
-      >
-        {(results, currResults, maxPages, startIndex, endIndex, numFormals, numInformals, numAlphas, numBetas, numGammas) => (
-          <Fragment>
-            <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
-              {(status) => (
-                <NavControlManager isEnabled={!this.state.isSearching && this.props.activeDefinitionIds.length === 0 && this.props.activeFallacyIds.length === 0} onPrev={() => this.toPreviousPage()} onNext={() => this.toNextPage()}>
-                  <StyledRoot transitionStatus={status}>
-                    <StyledHeader>
-                      <SearchBar
-                        id='search'
-                        input={this.state.searchInput}
-                        autoFocus={this.props.activeFallacyIds.length === 0 && this.props.activeDefinitionIds.length === 0}
-                        onFocusIn={() => this.setState({ isSearching: true })}
-                        onFocusOut={() => this.setState({ isSearching: false })}
-                        onChange={(input: string) => this.onSearchInputChange(input)}
-                      />
-                      <ActionButton
-                        symbol='i'
-                        isTogglable={true}
-                        tintColor={colors.white}
-                        hoverTintColor={colors.red}
-                        activeTintColor={colors.red}
-                        onToggleOn={() => this.setState({ isSummaryEnabled: true })}
-                        onToggleOff={() => this.setState({ isSummaryEnabled: false })}
-                      />
-                    </StyledHeader>
-                    <StyledStatistics
-                      totalResults={results.length}
-                      subtotalResultsStart={startIndex + 1}
-                      subtotalResultsEnd={endIndex}
-                      totalFormals={numFormals}
-                      totalInformals={numInformals}
-                      totalAlphas={numAlphas}
-                      totalBetas={numBetas}
-                      totalGammas={numGammas}
-                      onToggleFormals={(enabled) => this.setState({ areFormalsEnabled: enabled })}
-                      onToggleInformals={(enabled) => this.setState({ areInformalsEnabled: enabled })}
-                      onToggleAlphas={(enabled) => this.setState({ areAlphasEnabled: enabled })}
-                      onToggleBetas={(enabled) => this.setState({ areBetasEnabled: enabled })}
-                      onToggleGammas={(enabled) => this.setState({ areGammasEnabled: enabled })}
-                    />
-                    <StyledPaginator
-                      ref={this.nodeRefs.paginator}
-                      activePageIndex={this.state.pageIndex}
-                      maxPages={maxPages}
-                      onActivate={(index) => this.onPageIndexChange(index)}
-                    />
-                    <StyledGridContainer>
-                      <StyledGrid
-                        key={`${this.state.searchInput}-${this.state.pageIndex}`}
-                        docs={currResults}
-                        isSummaryEnabled={this.state.isSummaryEnabled}
-                        onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
-                      />
-                    </StyledGridContainer>
-                    <StyledFooter dangerouslySetInnerHTML={{ __html: this.props.copyrightDoc && getMarkup(this.props.copyrightDoc, 'data.description') || '' }}/>
-                  </StyledRoot>
-                </NavControlManager>
-              )}
-            </Transition>
-            <FallacyStackModal/>
-            <DefinitionStackModal/>
-          </Fragment>
-        )}
-      </FallacyManager>
+      <Fragment>
+        <Transition in={this.props.activeFallacyIds.length === 0} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+          {(status) => (
+            <NavControlManager
+              isEnabled={!this.state.isSearching && this.props.activeDefinitionIds.length === 0 && this.props.activeFallacyIds.length === 0}
+              onPrev={() => this.toPreviousPage()}
+              onNext={() => this.toNextPage()}
+            >
+              <StyledRoot transitionStatus={status}>
+                <StyledHeader>
+                  <SearchBar
+                    id='search'
+                    input={this.state.searchInput}
+                    autoFocus={this.props.activeFallacyIds.length === 0 && this.props.activeDefinitionIds.length === 0}
+                    onFocusIn={() => this.setState({ isSearching: true })}
+                    onFocusOut={() => this.setState({ isSearching: false })}
+                    onChange={(input: string) => this.onSearchInputChange(input)}
+                  />
+                  <ActionButton
+                    symbol='i'
+                    isTogglable={true}
+                    tintColor={colors.white}
+                    hoverTintColor={colors.red}
+                    activeTintColor={colors.red}
+                    onToggleOn={() => this.setState({ isSummaryEnabled: true })}
+                    onToggleOff={() => this.setState({ isSummaryEnabled: false })}
+                  />
+                </StyledHeader>
+                <Statistics
+                  docsPerPage={this.props.docsPerPage}
+                  pageIndex={this.state.pageIndex}
+                  results={results}
+                  onFiltersChange={(filters) => this.setState({ filters })}
+                />
+                <Paginator
+                  ref={this.nodeRefs.paginator}
+                  activePageIndex={this.state.pageIndex}
+                  numPages={numPages}
+                  onActivate={(index) => this.onPageIndexChange(index)}
+                />
+                <Grid
+                  key={`${this.state.searchInput}-${this.state.pageIndex}`}
+                  docs={currResults}
+                  isSummaryEnabled={this.state.isSummaryEnabled}
+                  onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
+                />
+                <Footer/>
+              </StyledRoot>
+            </NavControlManager>
+          )}
+        </Transition>
+        <FallacyStackModal/>
+        <DefinitionStackModal/>
+      </Fragment>
     );
   }
 }
@@ -268,39 +279,29 @@ export default connect(
   (state: AppState): StateProps => ({
     activeDefinitionIds: state.definitions.activeDocIds,
     activeFallacyIds: state.fallacies.activeDocIds,
-    copyrightDoc: state.copyright[__I18N_CONFIG__.defaultLocale],
+    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
+    fusedDocs: new Fuse(state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [], {
+      matchAllTokens: true,
+      maxPatternLength: 24,
+      minMatchCharLength: 0,
+      shouldSort: true,
+      tokenize: true,
+      keys: [
+        'data.abbreviation',
+        'data.name',
+        'data.aliases.name',
+        'data.summary.text',
+        'data.description.text',
+        'tags',
+      ],
+    }),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchCopyright,
     fetchDefinitions,
+    fetchFallacies,
     presentFallacyById,
   }, dispatch),
 )(Home);
-
-const StyledFooter = styled.footer`
-  color: ${(props) => props.theme.colors.grey};
-  font-family: 'RobotoMono';
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-top: 10rem;
-  max-width: 120rem;
-  user-select: text;
-  width: 100%;
-
-  p {
-    line-height: 130%;
-  }
-
-  a {
-    ${animations.transition(['color', 'opacity'], 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.red};
-
-    ${selectors.hwot} {
-      color: inherit;
-      text-transform: uppercase;
-    }
-  }
-`;
 
 const StyledHeader = styled.header`
   ${container.fhcl}
@@ -311,58 +312,6 @@ const StyledHeader = styled.header`
   ${selectors.eblc} {
     margin-right: 2rem;
   }
-`;
-
-const StyledPaginator = styled(Paginator)`
-  width: 100%;
-  margin: 5rem 0 3rem;
-`;
-
-const StyledStatistics = styled(Statistics)`
-  margin-left: 1rem;
-  user-select: none;
-`;
-
-const StyledGrid = styled(Grid)`
-  margin-left: -.5rem;
-  max-width: 120rem;
-  width: calc(100% + 1rem);
-
-  > * {
-    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
-    margin: 1rem .5rem;
-    width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 1rem)'};
-  }
-
-  @media ${media.gtw(400)} {
-    margin-left: -1rem;
-    width: calc(100% + 2rem);
-
-    > * {
-      height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
-      margin: 1rem;
-      width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 2rem)'};
-    }
-  }
-
-  @media ${media.gtw(540)} {
-    > * {
-      height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
-      width: calc(50% - 2rem);
-    }
-  }
-
-  @media ${media.gtw(660)} {
-    > * {
-      height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
-      width: ${(props) => props.isSummaryEnabled ? '26rem' : '20rem'};
-    }
-  }
-`;
-
-const StyledGridContainer = styled.div`
-  flex: 1 0 auto;
-  width: 100%;
 `;
 
 const StyledRoot = styled.div<{

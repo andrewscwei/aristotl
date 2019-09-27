@@ -8,7 +8,7 @@ interface Props {
   activePageIndex: number;
   className?: string;
   id?: string;
-  maxPages: number;
+  numPages: number;
   tintColor: string;
   onActivate: (index: number) => void;
 }
@@ -16,23 +16,23 @@ interface Props {
 class Paginator extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     activePageIndex: 0,
-    maxPages: 1,
+    numPages: 1,
     tintColor: colors.white,
     onActivate: (index: number) => {},
   };
 
   prev() {
-    this.props.onActivate((this.props.activePageIndex + this.props.maxPages - 1) % this.props.maxPages);
+    this.props.onActivate((this.props.activePageIndex + this.props.numPages - 1) % this.props.numPages);
   }
 
   next() {
-    this.props.onActivate((this.props.activePageIndex + 1) % this.props.maxPages);
+    this.props.onActivate((this.props.activePageIndex + 1) % this.props.numPages);
   }
 
   render() {
     return (
       <StyledRoot id={this.props.id} className={this.props.className}>
-        {[...Array(Math.max(1, this.props.maxPages)).keys()].map((v, i) => (
+        {[...Array(Math.max(1, this.props.numPages)).keys()].map((v, i) => (
           <StyledButton
             key={i}
             isActive={this.props.activePageIndex === i}
@@ -66,6 +66,8 @@ const StyledButton = styled.button<{
 
 const StyledRoot = styled.div`
   ${container.fhcc}
+  margin: 5rem 0 3rem;
+  width: 100%;
 
   ${selectors.eblc} {
     margin-right: 1rem;

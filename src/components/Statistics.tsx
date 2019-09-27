@@ -1,58 +1,39 @@
+import _ from 'lodash';
+import { Document } from 'prismic-javascript/d.ts/documents';
 import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import Pixel from './Pixel';
 import { colors } from '../styles/theme';
+import Pixel from './Pixel';
 
 interface Props {
   className?: string;
-  id?: string;
-  subtotalResultsStart: number;
-  subtotalResultsEnd: number;
-  totalResults: number;
-  totalFormals: number;
-  totalInformals: number;
-  totalAlphas: number;
-  totalBetas: number;
-  totalGammas: number;
-  onToggleFormals: (enabled: boolean) => void;
-  onToggleInformals: (enabled: boolean) => void;
-  onToggleAlphas: (enabled: boolean) => void;
-  onToggleBetas: (enabled: boolean) => void;
-  onToggleGammas: (enabled: boolean) => void;
+  docsPerPage: number;
+  pageIndex: number;
+  results: ReadonlyArray<Document>;
+  onFiltersChange: (filters: FallacyFilters) => void;
 }
 
 interface State {
-  areFormalsEnabled: boolean;
-  areInformalsEnabled: boolean;
-  areAlphasEnabled: boolean;
-  areBetasEnabled: boolean;
-  areGammasEnabled: boolean;
+  filters: FallacyFilters;
 }
 
 class Statistics extends PureComponent<Props, State> {
   static defaultProps: Partial<Props> = {
-    subtotalResultsStart: 0,
-    subtotalResultsEnd: 0,
-    totalResults: 0,
-    totalFormals: 0,
-    totalInformals: 0,
-    totalAlphas: 0,
-    totalBetas: 0,
-    totalGammas: 0,
-    onToggleFormals: () => {},
-    onToggleInformals: () => {},
-    onToggleAlphas: () => {},
-    onToggleBetas: () => {},
-    onToggleGammas: () => {},
+    docsPerPage: 0,
+    pageIndex: 0,
+    results: [],
+    onFiltersChange: () => {},
   };
 
   state: State = {
-    areFormalsEnabled: true,
-    areInformalsEnabled: true,
-    areAlphasEnabled: true,
-    areBetasEnabled: true,
-    areGammasEnabled: true,
+    filters: {
+      formal: true,
+      informal: true,
+      alpha: true,
+      beta: true,
+      gamma: true,
+    },
   };
 
   componentDidMount() {
@@ -60,42 +41,93 @@ class Statistics extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if (prevState.areFormalsEnabled !== this.state.areFormalsEnabled) this.props.onToggleFormals(this.state.areFormalsEnabled);
-    if (prevState.areInformalsEnabled !== this.state.areInformalsEnabled) this.props.onToggleInformals(this.state.areInformalsEnabled);
-    if (prevState.areAlphasEnabled !== this.state.areAlphasEnabled) this.props.onToggleAlphas(this.state.areAlphasEnabled);
-    if (prevState.areBetasEnabled !== this.state.areBetasEnabled) this.props.onToggleBetas(this.state.areBetasEnabled);
-    if (prevState.areGammasEnabled !== this.state.areGammasEnabled) this.props.onToggleGammas(this.state.areGammasEnabled);
+    if (!_.isEqual(prevState.filters, this.state.filters)) {
+      this.props.onFiltersChange(this.state.filters);
+    }
+  }
+
+  countFormals(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.types');
+      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+      if (match) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countInformals(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.types');
+      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+      if (match) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countAlphas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length === 0) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countBetas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length === 1) out += 1;
+      return out;
+    }, 0);
+  }
+
+  countGammas(docs: ReadonlyArray<Document>): number {
+    return docs.reduce((out, curr) => {
+      const fragments = _.get(curr, 'data.inheritance');
+      if (fragments.length >= 2) out += 1;
+      return out;
+    }, 0);
   }
 
   render() {
+    const numResults = this.props.results.length;
+    const pages = _.chunk(this.props.results, this.props.docsPerPage);
+    const currResults = pages[this.props.pageIndex] || [];
+    const startIndex = this.props.docsPerPage * this.props.pageIndex + 1;
+    const endIndex = currResults.length + startIndex - 1;
+    const numFormals = this.countFormals(currResults);
+    const numInformals = this.countInformals(currResults);
+    const numAlphas = this.countAlphas(currResults);
+    const numBetas = this.countBetas(currResults);
+    const numGammas = this.countGammas(currResults);
+
     return (
-      <StyledRoot id={this.props.id} className={this.props.className}>
+      <StyledRoot className={this.props.className}>
         <StyledCount>
-          {(this.props.subtotalResultsStart === 0 || this.props.subtotalResultsEnd === 0 || this.props.totalResults === 0) &&
+          {(startIndex === 0 || endIndex === 0 || numResults === 0) &&
             <span>--</span>
             ||
-            <span>{this.props.subtotalResultsStart}-{this.props.subtotalResultsEnd} / {this.props.totalResults}</span>
+            <span>{startIndex}-{endIndex} / {numResults}</span>
           }
         </StyledCount>
-        <StyledFilterButton isActive={this.state.areFormalsEnabled} onClick={() => this.setState({ areFormalsEnabled: !this.state.areFormalsEnabled })}>
+        <StyledFilterButton isActive={this.state.filters.formal} onClick={() => this.setState({ filters: { ...this.state.filters, formal: !this.state.filters.formal } })}>
           <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
-          <span>{this.props.totalFormals === 0 ? '--' : this.props.totalFormals}</span>
+          <span>{numFormals === 0 ? '--' : numFormals}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.state.areInformalsEnabled} onClick={() => this.setState({ areInformalsEnabled: !this.state.areInformalsEnabled })}>
+        <StyledFilterButton isActive={this.state.filters.informal} onClick={() => this.setState({ filters: { ...this.state.filters, informal: !this.state.filters.informal } })}>
           <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
-          <span>{this.props.totalInformals === 0 ? '--' : this.props.totalInformals}</span>
+          <span>{numInformals === 0 ? '--' : numInformals}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.state.areAlphasEnabled} onClick={() => this.setState({ areAlphasEnabled: !this.state.areAlphasEnabled })}>
+        <StyledFilterButton isActive={this.state.filters.alpha} onClick={() => this.setState({ filters: { ...this.state.filters, alpha: !this.state.filters.alpha } })}>
           <span>α</span>
-          <span>{this.props.totalAlphas === 0 ? '--' : this.props.totalAlphas}</span>
+          <span>{numAlphas === 0 ? '--' : numAlphas}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.state.areBetasEnabled} onClick={() => this.setState({ areBetasEnabled: !this.state.areBetasEnabled })}>
+        <StyledFilterButton isActive={this.state.filters.beta} onClick={() => this.setState({ filters: { ...this.state.filters, beta: !this.state.filters.beta } })}>
           <span>β</span>
-          <span>{this.props.totalBetas === 0 ? '--' : this.props.totalBetas}</span>
+          <span>{numBetas === 0 ? '--' : numBetas}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.state.areGammasEnabled} onClick={() => this.setState({ areGammasEnabled: !this.state.areGammasEnabled })}>
+        <StyledFilterButton isActive={this.state.filters.gamma} onClick={() => this.setState({ filters: { ...this.state.filters, gamma: !this.state.filters.gamma } })}>
           <span>𝛾</span>
-          <span>{this.props.totalGammas === 0 ? '--' : this.props.totalGammas}</span>
+          <span>{numGammas === 0 ? '--' : numGammas}</span>
         </StyledFilterButton>
       </StyledRoot>
     );
@@ -167,6 +199,8 @@ const StyledFilterButton = styled.button<{
 const StyledRoot = styled.div`
   ${container.fhcl}
   flex-wrap: wrap;
+  margin-left: 1rem;
+  user-select: none;
 
   ${selectors.eblc} {
     margin-right: 3rem;
