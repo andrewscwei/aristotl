@@ -33,13 +33,13 @@ class Grid extends PureComponent<Props> {
     debug('Rendering...', 'OK');
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className}>
+      <StyledRoot className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => {
           const duration = 150;
           const delay = i * 20;
 
           return (
-            <Transition in={true} key={doc.id} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
+            <Transition in={true} key={`${this.props.id}-${doc.id}`} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
               {(status) => (
                 <StyledCard
                   delay={delay}

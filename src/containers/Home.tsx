@@ -259,7 +259,7 @@ class Home extends PureComponent<Props, State> {
                 <Paginator ref={this.nodeRefs.paginator} activePageIndex={this.state.pageIndex} numPages={numPages} onActivate={(index) => this.onPageIndexChange(index)}
                 />
                 <Grid
-                  key={`${this.state.searchInput}-${this.state.pageIndex}`}
+                  id={`${this.state.searchInput}-${this.state.pageIndex}`}
                   docs={currResults}
                   isSummaryEnabled={this.state.isSummaryEnabled}
                   onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
