@@ -30,7 +30,6 @@ const store = createStore(reducer, initialState || {}, composeEnhancers(applyMid
 window.snapSaveState = () => ({
   __INITIAL_STATE__: _.omit(store.getState(), [
     'i18n',
-    'fallacies.fdocs',
   ]),
 });
 

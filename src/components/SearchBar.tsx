@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
+import { searchFallacies } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import ActionButton from './ActionButton';
@@ -11,18 +12,17 @@ import Pixel from './Pixel';
 
 interface StateProps {
   i18n: I18nState;
+  searchInput: string;
 }
 
 interface DispatchProps {
-
+  searchFallacies: typeof searchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps {
   autoFocus: boolean;
   className?: string;
-  id?: string;
   input?: string;
-  onChange: (input: string) => void;
   onFocusIn: () => void;
   onFocusOut: () => void;
 }
@@ -30,7 +30,6 @@ interface Props extends StateProps, DispatchProps {
 class SearchBar extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     autoFocus: true,
-    onChange: () => {},
     onFocusIn: () => {},
     onFocusOut: () => {},
   };
@@ -45,12 +44,6 @@ class SearchBar extends PureComponent<Props> {
 
   componentWillUnmount() {
     window.removeEventListener('keyup', this.onKeyUp);
-  }
-
-  clear() {
-    if (!this.nodeRefs.input.current) return;
-    this.nodeRefs.input.current.value = '';
-    this.props.onChange('');
   }
 
   onKeyUp = (event: KeyboardEvent) => {
@@ -73,7 +66,7 @@ class SearchBar extends PureComponent<Props> {
     const { ltxt } = this.props.i18n;
 
     return (
-      <StyledRoot id={this.props.id} className={this.props.className}>
+      <StyledRoot className={this.props.className}>
         <StyledPixels>
           <Pixel tintColor={colors.offBlack}/>
           <Pixel tintColor={colors.offBlack}/>
@@ -82,13 +75,13 @@ class SearchBar extends PureComponent<Props> {
         <StyledInput>
           <input
             type='text'
-            value={this.props.input || ''}
+            value={this.props.searchInput}
             ref={this.nodeRefs.input}
             placeholder={ltxt('search-placeholder')}
             maxLength={24}
             onFocus={() => this.props.onFocusIn()}
             onBlur={() => this.props.onFocusOut()}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.onChange(event.currentTarget.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.searchFallacies(event.currentTarget.value)}
           />
         </StyledInput>
         <StyledActionButton
@@ -96,7 +89,7 @@ class SearchBar extends PureComponent<Props> {
           isTogglable={true}
           tintColor={colors.white}
           hoverTintColor={colors.red}
-          onActivate={() => this.clear()}
+          onActivate={() => this.props.searchFallacies('')}
         />
       </StyledRoot>
     );
@@ -106,9 +99,10 @@ class SearchBar extends PureComponent<Props> {
 export default connect(
   (state: AppState): StateProps => ({
     i18n: state.i18n,
+    searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-
+    searchFallacies,
   }, dispatch),
 )(SearchBar);
 

@@ -20,7 +20,7 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { FallaciesFilters, fetchFallacies, filterFallacies, presentFallacyById, searchFallacies, getFilteredFallacies } from '../store/fallacies';
+import { FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
@@ -40,7 +40,6 @@ interface DispatchProps {
   fetchFallacies: typeof fetchFallacies;
   filterFallacies: typeof filterFallacies;
   presentFallacyById: typeof presentFallacyById;
-  searchFallacies: typeof searchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -79,20 +78,16 @@ class Home extends PureComponent<Props, State> {
     // this.mapQueryStringToState();
   }
 
-  // componentDidUpdate(prevProps: Props, prevState: State) {
-  //   const fallacyId = _.last(this.props.activeFallacyIds);
-  //   const fallacyIdDidChange = _.last(prevProps.activeFallacyIds) !== fallacyId;
-  //   const pageIndexDidChange = prevState.pageIndex !== this.state.pageIndex;
-  //   const searchInputDidChange = prevState.searchInput !== this.state.searchInput;
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const searchInputDidChange = prevProps.searchInput !== this.props.searchInput;
+    const filtersDidChange = !_.isEqual(prevProps.filters, this.props.filters);
 
-  //   if (fallacyIdDidChange) {
-  //     this.props.history.replace({
-  //       pathname: '/',
-  //       hash: fallacyIdDidChange ? (fallacyId ? `#${fallacyId}` : undefined) : this.props.location.hash,
-  //       search: this.mapStateToQueryString(),
-  //     });
-  //   }
-  // }
+    if (searchInputDidChange || filtersDidChange) {
+      this.setState({
+        pageIndex: 0,
+      });
+    }
+  }
 
   toNextPage() {
     const paginator = this.nodeRefs.paginator.current;
@@ -134,22 +129,6 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  onFiltersChange(filters: FallaciesFilters) {
-    this.props.filterFallacies(filters);
-
-    this.setState({
-      pageIndex: 0,
-    });
-  }
-
-  onSearchInputChange(input: string) {
-    this.props.searchFallacies(input);
-
-    this.setState({
-      pageIndex: 0,
-    });
-  }
-
   onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
     this.setState({
       pageIndex: index,
@@ -175,12 +154,9 @@ class Home extends PureComponent<Props, State> {
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
-                    id='search'
-                    input={this.props.searchInput}
                     autoFocus={this.props.activeFallacyIds.length === 0 && this.props.activeDefinitionIds.length === 0}
                     onFocusIn={() => this.setState({ isSearching: true })}
                     onFocusOut={() => this.setState({ isSearching: false })}
-                    onChange={(input: string) => this.onSearchInputChange(input)}
                   />
                   <ActionButton
                     symbol='i'
@@ -196,7 +172,6 @@ class Home extends PureComponent<Props, State> {
                   docsPerPage={this.props.docsPerPage}
                   pageIndex={this.state.pageIndex}
                   results={results}
-                  onFiltersChange={(filters) => this.onFiltersChange(filters)}
                 />
                 <Paginator
                   ref={this.nodeRefs.paginator}
@@ -236,7 +211,6 @@ export default connect(
     fetchFallacies,
     filterFallacies,
     presentFallacyById,
-    searchFallacies,
   }, dispatch),
 )(Home);
 
