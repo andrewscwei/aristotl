@@ -22,6 +22,18 @@ const initialState: I18nState = {
   ltxt: (...args) => getPolyglotByLocale(__I18N_CONFIG__.defaultLocale).t(...args),
 };
 
+export default function reducer(state = initialState, action: I18nAction): I18nState {
+  switch (action.type) {
+    case I18nActionType.LOCALE_CHANGED:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
 export function changeLocale(locale: string): I18nAction {
   debug('Changing locale...', 'OK', locale);
 
@@ -32,16 +44,4 @@ export function changeLocale(locale: string): I18nAction {
       ltxt: (...args) => getPolyglotByLocale(locale).t(...args),
     },
   };
-}
-
-export default function reducer(state = initialState, action: I18nAction): I18nState {
-  switch (action.type) {
-  case I18nActionType.LOCALE_CHANGED:
-    return {
-      ...state,
-      ...action.payload,
-    };
-  default:
-    return state;
-  }
 }
