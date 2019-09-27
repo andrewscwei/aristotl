@@ -35,12 +35,7 @@ class App extends PureComponent<Props, State> {
   syncLocaleWithUrl() {
     const { route, changeLocale, i18n } = this.props;
     const newLocale = getLocaleFromPath(route.location.pathname);
-
-    if (newLocale === i18n.locale) {
-      debug(`Syncing locale with URL path "${route.location.pathname}"...`, 'SKIPPED');
-      return;
-    }
-
+    if (newLocale === i18n.locale) return;
     changeLocale(newLocale);
   }
 

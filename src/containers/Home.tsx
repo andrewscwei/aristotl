@@ -45,11 +45,11 @@ interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
 }
 
 interface State {
+  filters: FallacyFilters;
   isSearching: boolean;
   isSummaryEnabled: boolean;
   pageIndex: number;
   searchInput?: string;
-  filters: FallacyFilters;
 }
 
 class Home extends PureComponent<Props, State> {
@@ -95,16 +95,16 @@ class Home extends PureComponent<Props, State> {
       this.mapHashToState();
     }
 
-    // if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
-    //   const docId = _.last(this.props.activeFallacyIds);
+    if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
+      const docId = _.last(this.props.activeFallacyIds);
 
-    //   if (docId) {
-    //     this.props.history.replace(`#${docId}`);
-    //   }
-    //   else {
-    //     this.props.history.replace('/');
-    //   }
-    // }
+      if (docId) {
+        this.props.history.replace(`#${docId}`);
+      }
+      else {
+        this.props.history.replace('/');
+      }
+    }
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
@@ -208,8 +208,6 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
-    debug('Rendering...', 'OK');
-
     const results = this.getFilteredDocs();
     const pageIndex = this.state.pageIndex;
     const pages = _.chunk(results, this.props.docsPerPage);
@@ -251,11 +249,7 @@ class Home extends PureComponent<Props, State> {
                   results={results}
                   onFiltersChange={(filters) => this.setState({ filters })}
                 />
-                <Paginator
-                  ref={this.nodeRefs.paginator}
-                  activePageIndex={this.state.pageIndex}
-                  numPages={numPages}
-                  onActivate={(index) => this.onPageIndexChange(index)}
+                <Paginator ref={this.nodeRefs.paginator} activePageIndex={this.state.pageIndex} numPages={numPages} onActivate={(index) => this.onPageIndexChange(index)}
                 />
                 <Grid
                   key={`${this.state.searchInput}-${this.state.pageIndex}`}

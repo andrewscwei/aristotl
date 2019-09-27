@@ -1,12 +1,12 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { animations, selectors } from 'promptu';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
 import { fetch as fetchCopyright } from '../store/copyright';
-import { getMarkup, shallowEqualDoc } from '../utils/prismic';
+import { getMarkup } from '../utils/prismic';
 
 interface StateProps {
   copyrightDoc?: Readonly<Document>;
@@ -20,15 +20,10 @@ interface Props extends StateProps, DispatchProps {
 
 }
 
-class Footer extends Component<Props> {
+class Footer extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.props.fetchCopyright();
-  }
-
-  shouldComponentUpdate(nextProps: Props): boolean {
-    if (!shallowEqualDoc(this.props.copyrightDoc, nextProps.copyrightDoc)) return true;
-    return false;
   }
 
   render() {

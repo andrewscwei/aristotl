@@ -10,10 +10,8 @@ import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-route
 import App from './containers/App';
 import store from './store';
 
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app') : () => {};
-
 if (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) {
-  window.localStorage.debug = 'app:fallacy-manager*';
+  window.localStorage.debug = 'app*';
 }
 
 // Detect touch device.
@@ -36,10 +34,8 @@ const markup = () => (
 const root = document.getElementById('app');
 
 if (root!.hasChildNodes() && process.env.NODE_ENV !== 'development') {
-  hydrate(markup(), root);
-  debug('Hydrating DOM...', 'OK');
+  render(markup(), root);
 }
 else {
   render(markup(), root);
-  debug('Rendering DOM...', 'OK');
 }
