@@ -20,19 +20,19 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById } from '../store/fallacies';
+import { FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
-  lastActiveDefinitionId?: string;
-  lastActiveFallacyId?: string;
   fallacyDict: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
-  searchInput: string;
   filters: FallaciesFilters;
+  lastActiveDefinitionId?: string;
+  lastActiveFallacyId?: string;
+  searchInput: string;
 }
 
 interface DispatchProps {
@@ -40,6 +40,7 @@ interface DispatchProps {
   fetchFallacies: typeof fetchFallacies;
   filterFallacies: typeof filterFallacies;
   presentFallacyById: typeof presentFallacyById;
+  searchFallacies: typeof searchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -74,8 +75,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    // this.mapHashToState();
-    // this.mapQueryStringToState();
+    this.mapLocationToState();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -83,9 +83,15 @@ class Home extends PureComponent<Props, State> {
     const filtersDidChange = !_.isEqual(prevProps.filters, this.props.filters);
 
     if (searchInputDidChange || filtersDidChange) {
-      this.setState({
-        pageIndex: 0,
-      });
+      this.setState({ pageIndex: 0 });
+    }
+
+    if (__APP_CONFIG__.enableHistoryForSearch || __APP_CONFIG__.enableHistoryForFallacies) {
+      const activeFallacyIdDidChange = prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId;
+
+      if (searchInputDidChange || activeFallacyIdDidChange) {
+        this.mapStateToLocation();
+      }
     }
   }
 
@@ -101,32 +107,46 @@ class Home extends PureComponent<Props, State> {
     paginator.prev();
   }
 
-  mapHashToState() {
-    if (!this.props.location.hash.startsWith('#')) return;
-    const docId = this.props.location.hash.substring(1);
-
-    this.props.presentFallacyById(docId);
-  }
-
-  mapQueryStringToState() {
+  mapLocationToState() {
     const { search, page } = qs.parse(this.props.location.search);
     const searchInput = (typeof search === 'string' && search !== '') ? search : '';
     const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
+    const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
 
-    this.setState({
-      pageIndex,
-    });
+    if (__APP_CONFIG__.enableHistoryForSearch) {
+      this.props.searchFallacies(searchInput);
+    }
+
+    if (__APP_CONFIG__.enableHistoryForFallacies && hash) {
+      this.props.presentFallacyById(hash);
+    }
+
+    // this.setState({ pageIndex });
   }
 
-  mapStateToQueryString(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
-    const searchInput = (nextState.searchInput === undefined) ? this.props.searchInput : nextState.searchInput;
-    const pageIndex = (nextState.pageIndex === undefined) ? this.state.pageIndex : nextState.pageIndex;
+  mapStateToLocation() {
+    if (!__APP_CONFIG__.enableHistoryForSearch && !__APP_CONFIG__.enableHistoryForFallacies) return;
+
     const params = [];
+    let hash;
 
-    if (searchInput !== undefined && searchInput !== '') params.push(`search=${searchInput}`);
-    if (pageIndex !== undefined && pageIndex > 0) params.push(`page=${pageIndex + 1}`);
+    if (__APP_CONFIG__.enableHistoryForSearch) {
+      if (!_.isEmpty(this.props.searchInput)) params.push(`search=${this.props.searchInput}`);
+    }
 
-    return (params.length > 0) ? `?${params.join('&')}` : '';
+    if (__APP_CONFIG__.enableHistoryForFallacies) {
+      hash = this.props.lastActiveFallacyId;
+    }
+
+    // if (this.state.pageIndex > 0) params.push(`page=${this.state.pageIndex + 1}`);
+
+    const location = {
+      pathname: '/',
+      hash,
+      search: (params.length > 0) ? `?${params.join('&')}` : '',
+    };
+
+    this.props.history.replace(location);
   }
 
   onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
@@ -211,6 +231,7 @@ export default connect(
     fetchFallacies,
     filterFallacies,
     presentFallacyById,
+    searchFallacies,
   }, dispatch),
 )(Home);
 

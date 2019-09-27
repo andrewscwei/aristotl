@@ -226,11 +226,11 @@ export function filterFallacies(filters: FallaciesFilters) {
 
 export const getFilteredFallacies = createSelector([
   (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
-  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || [],
+  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
   (state: FallaciesState) => state.searchInput,
   (state: FallaciesState) => state.filters,
 ], (docs, fdocs, searchInput, filters) => {
-  const res = _.isEmpty(searchInput) ? docs : fdocs.search(searchInput);
+  const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
   const fres = _.filter(res, (v) => {
     const types = _.get(v, 'data.types');
     const inheritance = _.get(v, 'data.inheritance');

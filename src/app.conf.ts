@@ -19,6 +19,10 @@ export default {
   // Enable debugger in production.
   enableDebugInProduction: false,
 
+  enableHistoryForSearch: false,
+
+  enableHistoryForFallacies: true,
+
   // Prismic config.
   prismic: {
     // API endpoint.
