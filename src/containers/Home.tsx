@@ -27,11 +27,13 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
+  docsPerPage: number;
   fallacyDict: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
   filters: FallaciesFilters;
   lastActiveDefinitionId?: string;
   lastActiveFallacyId?: string;
+  pageIndex: number;
   searchInput: string;
 }
 
@@ -44,24 +46,18 @@ interface DispatchProps {
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
-  docsPerPage: number;
+
 }
 
 interface State {
   isSearching: boolean;
   isSummaryEnabled: boolean;
-  pageIndex: number;
 }
 
 class Home extends PureComponent<Props, State> {
-  static defaultProps: Partial<Props> = {
-    docsPerPage: 20,
-  };
-
   state: State = {
     isSearching: false,
     isSummaryEnabled: false,
-    pageIndex: 0,
   };
 
   nodeRefs = {
@@ -80,11 +76,6 @@ class Home extends PureComponent<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const searchInputDidChange = prevProps.searchInput !== this.props.searchInput;
-    const filtersDidChange = !_.isEqual(prevProps.filters, this.props.filters);
-
-    if (searchInputDidChange || filtersDidChange) {
-      this.setState({ pageIndex: 0 });
-    }
 
     if (__APP_CONFIG__.enableHistoryForSearch || __APP_CONFIG__.enableHistoryForFallacies) {
       const activeFallacyIdDidChange = prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId;
@@ -110,7 +101,6 @@ class Home extends PureComponent<Props, State> {
   mapLocationToState() {
     const { search, page } = qs.parse(this.props.location.search);
     const searchInput = (typeof search === 'string' && search !== '') ? search : '';
-    const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
     const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
@@ -120,8 +110,6 @@ class Home extends PureComponent<Props, State> {
     if (__APP_CONFIG__.enableHistoryForFallacies && hash) {
       this.props.presentFallacyById(hash);
     }
-
-    // this.setState({ pageIndex });
   }
 
   mapStateToLocation() {
@@ -138,8 +126,6 @@ class Home extends PureComponent<Props, State> {
       hash = this.props.lastActiveFallacyId;
     }
 
-    // if (this.state.pageIndex > 0) params.push(`page=${this.state.pageIndex + 1}`);
-
     const location = {
       pathname: '/',
       hash,
@@ -149,18 +135,11 @@ class Home extends PureComponent<Props, State> {
     this.props.history.replace(location);
   }
 
-  onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
-    this.setState({
-      pageIndex: index,
-    });
-  }
-
   render() {
     const results = this.props.filteredFallacies;
-    const pageIndex = this.state.pageIndex;
     const pages = _.chunk(results, this.props.docsPerPage);
     const numPages = pages.length;
-    const currResults = pages[pageIndex] || [];
+    const currResults = pages[this.props.pageIndex] || [];
 
     return (
       <Fragment>
@@ -190,17 +169,16 @@ class Home extends PureComponent<Props, State> {
                 </StyledHeader>
                 <Statistics
                   docsPerPage={this.props.docsPerPage}
-                  pageIndex={this.state.pageIndex}
+                  pageIndex={this.props.pageIndex}
                   results={results}
                 />
                 <Paginator
                   ref={this.nodeRefs.paginator}
-                  activePageIndex={this.state.pageIndex}
+                  activePageIndex={this.props.pageIndex}
                   numPages={numPages}
-                  onActivate={(index) => this.onPageIndexChange(index)}
                 />
                 <Grid
-                  id={`${this.props.searchInput}-${this.state.pageIndex}`}
+                  id={`${this.props.searchInput}-${this.props.pageIndex}`}
                   docs={currResults}
                   isSummaryEnabled={this.state.isSummaryEnabled}
                   onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
@@ -219,11 +197,13 @@ class Home extends PureComponent<Props, State> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    lastActiveDefinitionId: state.definitions.lastActiveDocId,
-    lastActiveFallacyId: state.fallacies.lastActiveDocId,
+    docsPerPage: state.fallacies.docsPerPage,
     fallacyDict: state.fallacies.docs[state.i18n.locale] || [],
     filteredFallacies: getFilteredFallacies(state.i18n.locale)(state.fallacies),
     filters: state.fallacies.filters,
+    lastActiveDefinitionId: state.definitions.lastActiveDocId,
+    lastActiveFallacyId: state.fallacies.lastActiveDocId,
+    pageIndex: state.fallacies.pageIndex,
     searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({

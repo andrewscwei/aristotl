@@ -21,16 +21,19 @@ export enum FallaciesActionType {
   DISMISSED_ALL = 'fallacies/DISMISSED_ALL',
   FILTERED = 'fallacies/FILTERED',
   LOADED = 'fallacies/LOADED',
+  PAGE_CHANGED = 'fallacies/PAGE_CHANGED',
   PRESENTED = 'fallacies/PRESENTED',
   SEARCHED = 'fallacies/SEARCHED',
 }
 
 export interface FallaciesState {
   activeDocIds: Array<string>;
-  lastActiveDocId?: string;
   docs: { [locale: string]: ReadonlyArray<Document> };
   fdocs: { [locale: string]: Readonly<Fuse<Document>> };
   filters: FallaciesFilters;
+  lastActiveDocId?: string;
+  pageIndex: number;
+  docsPerPage: number;
   sdocs: ReadonlyArray<Document>;
   searchInput: string;
 }
@@ -41,7 +44,6 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 
 const initialState: FallaciesState = {
   activeDocIds: [],
-  lastActiveDocId: undefined,
   docs: {},
   fdocs: {},
   filters: {
@@ -51,6 +53,9 @@ const initialState: FallaciesState = {
     beta: true,
     gamma: true,
   },
+  lastActiveDocId: undefined,
+  docsPerPage: 20,
+  pageIndex: 0,
   sdocs: [],
   searchInput: '',
 };
@@ -134,6 +139,16 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         searchInput,
+        pageIndex: 0,
+      };
+    }
+
+    case FallaciesActionType.PAGE_CHANGED: {
+      const { pageIndex } = action.payload;
+
+      return {
+        ...state,
+        pageIndex,
       };
     }
 
@@ -143,6 +158,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         filters,
+        pageIndex: 0,
       };
     }
   }
@@ -220,6 +236,17 @@ export function filterFallacies(filters: FallaciesFilters) {
     type: FallaciesActionType.FILTERED,
     payload: {
       filters,
+    },
+  };
+}
+
+export function changePageIndex(pageIndex: number) {
+  debug('Changing page index...', 'OK', pageIndex);
+
+  return {
+    type: FallaciesActionType.PAGE_CHANGED,
+    payload: {
+      pageIndex,
     },
   };
 }

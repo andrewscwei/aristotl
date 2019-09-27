@@ -1,16 +1,27 @@
 import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { AppState } from '../store';
+import { changePageIndex } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
-interface Props {
+interface StateProps {
+
+}
+
+interface DispatchProps {
+  changePageIndex: typeof changePageIndex;
+}
+
+interface Props extends StateProps, DispatchProps {
   activePageIndex: number;
   className?: string;
   id?: string;
   numPages: number;
   tintColor: string;
-  onActivate: (index: number) => void;
 }
 
 class Paginator extends PureComponent<Props> {
@@ -18,15 +29,16 @@ class Paginator extends PureComponent<Props> {
     activePageIndex: 0,
     numPages: 1,
     tintColor: colors.white,
-    onActivate: (index: number) => {},
   };
 
   prev() {
-    this.props.onActivate((this.props.activePageIndex + this.props.numPages - 1) % this.props.numPages);
+    const pageIndex = (this.props.activePageIndex + this.props.numPages - 1) % this.props.numPages;
+    this.props.changePageIndex(pageIndex);
   }
 
   next() {
-    this.props.onActivate((this.props.activePageIndex + 1) % this.props.numPages);
+    const pageIndex = (this.props.activePageIndex + 1) % this.props.numPages;
+    this.props.changePageIndex(pageIndex);
   }
 
   render() {
@@ -36,7 +48,7 @@ class Paginator extends PureComponent<Props> {
           <StyledButton
             key={i}
             isActive={this.props.activePageIndex === i}
-            onClick={() => this.props.onActivate(i)}
+            onClick={() => this.props.changePageIndex(i)}
           >
             <Pixel
               isHollow={this.props.activePageIndex !== i}
@@ -50,7 +62,16 @@ class Paginator extends PureComponent<Props> {
   }
 }
 
-export default Paginator;
+export default connect(
+  (state: AppState): StateProps => ({
+
+  }),
+  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
+    changePageIndex,
+  }, dispatch),
+  undefined,
+  { forwardRef: true },
+)(Paginator);
 
 const StyledButton = styled.button<{
   isActive: boolean;
