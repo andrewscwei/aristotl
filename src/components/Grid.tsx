@@ -65,7 +65,7 @@ const StyledCard = styled.div<{
   transitionStatus: TransitionStatus;
 }>`
   ${animations.transition('all', 200, 'ease-out')}
-  height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
+  height: ${(props) => props.isSummaryEnabled ? '34rem' : '27rem'};
   margin: 1rem .5rem;
   overflow: hidden;
   width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 1rem)'};
@@ -81,19 +81,16 @@ const StyledCard = styled.div<{
   }
 
   @media ${media.gtw(400)} {
-    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
     margin: 1rem;
     width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 2rem)'};
   }
 
   @media ${media.gtw(540)} {
-    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
     width: calc(50% - 2rem);
   }
 
   @media ${media.gtw(660)} {
-    height: ${(props) => props.isSummaryEnabled ? '34rem' : '24rem'};
-    width: ${(props) => props.isSummaryEnabled ? '26rem' : '20rem'};
+    width: ${(props) => props.isSummaryEnabled ? '28rem' : '24rem'};
   }
 `;
 

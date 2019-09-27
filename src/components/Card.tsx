@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { align, animations, container, media, selectors, utils } from 'promptu';
 import React, { PureComponent } from 'react';
@@ -7,7 +8,7 @@ import styled from 'styled-components';
 import { AppState } from '../store';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
-import { getDocs, getMarkup, getText } from '../utils/prismic';
+import { getDocs, getMarkup, getText, getTexts } from '../utils/prismic';
 import Pixel from './Pixel';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:card') : () => {};
@@ -40,6 +41,10 @@ class Card extends PureComponent<Props> {
     const summary = getMarkup(this.props.doc, 'data.summary');
     const typeDocs = getDocs(this.props.doc, 'data.types', 'type');
 
+    const aliases = _.sortBy(getTexts(this.props.doc, 'data.aliases', 'name')) || [];
+    const first3Aliases = _.take(aliases, 3) || [];
+    const remainingAliases = aliases.length - first3Aliases.length;
+
     return (
       <StyledRoot
         className={this.props.className}
@@ -66,6 +71,10 @@ class Card extends PureComponent<Props> {
 
         {name &&
           <StyledName>{name}</StyledName>
+        }
+
+        {!this.props.isSummaryEnabled && first3Aliases.length > 0 &&
+          <StyledAliases><em>{first3Aliases.join(',')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
         }
 
         {this.props.isSummaryEnabled && summary &&
@@ -147,6 +156,19 @@ const StyledAbbreviation = styled.div`
       font-size: 6rem;
     }
   }
+`;
+
+const StyledAliases = styled.div`
+  ${container.fhtl}
+  color: ${(props) => props.theme.colors.grey};
+  font-family: 'RobotoMono';
+  font-size: 1.2rem;
+  font-weight: 400;
+  hyphens: auto;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  user-select: text;
+  width: 100%;
 `;
 
 const StyledName = styled.h1`
