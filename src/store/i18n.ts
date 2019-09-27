@@ -5,7 +5,7 @@ import { getPolyglotByLocale } from '../utils/i18n';
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:i18n') : () => {};
 
 export enum I18nActionType {
-  LOCALE_CHANGED = 'locale-changed',
+  LOCALE_CHANGED = 'i18n/LOCALE_CHANGED',
 }
 
 export interface I18nAction extends Action<I18nActionType> {

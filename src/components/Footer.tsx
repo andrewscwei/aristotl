@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
-import { fetch as fetchCopyright } from '../store/copyright';
+import { fetchCopyright } from '../store/copyright';
 import { getMarkup } from '../utils/prismic';
 
 interface StateProps {

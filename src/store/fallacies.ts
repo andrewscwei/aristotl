@@ -17,12 +17,12 @@ export interface FallaciesFilters {
 }
 
 export enum FallaciesActionType {
-  DISMISSED = 'aristotl/fallacies/dismissed',
-  DISMISSED_ALL = 'aristotl/fallacies/dismissed-all',
-  FILTERED = 'aristotl/fallacies/filtered',
-  LOADED = 'aristotl/fallacies/loaded',
-  PRESENTED = 'aristotl/fallacies/presented',
-  SEARCHED = 'aristotl/fallacies/searched',
+  DISMISSED = 'fallacies/DISMISSED',
+  DISMISSED_ALL = 'fallacies/DISMISSED_ALL',
+  FILTERED = 'fallacies/FILTERED',
+  LOADED = 'fallacies/LOADED',
+  PRESENTED = 'fallacies/PRESENTED',
+  SEARCHED = 'fallacies/SEARCHED',
 }
 
 export interface FallaciesState {
@@ -63,7 +63,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
         [locale]: newDocs,
       };
 
-      const fdict =  {
+      const fdict = {
         ...state.fdocs,
         [locale]: new Fuse(newDocs, {
           matchAllTokens: true,

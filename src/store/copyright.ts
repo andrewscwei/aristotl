@@ -4,7 +4,7 @@ import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
 export enum CopyrightActionType {
-  DOC_LOADED = 'copyright-loaded',
+  LOADED = 'copyright/LOADED',
 }
 
 export interface CopyrightState {
@@ -20,20 +20,21 @@ const initialState: CopyrightState = {
 };
 
 export default function reducer(state = initialState, action: CopyrightAction): CopyrightState {
-  const newState = _.cloneDeep(state);
-
   switch (action.type) {
-    case CopyrightActionType.DOC_LOADED: {
+    case CopyrightActionType.LOADED: {
       const { locale, doc: newDoc } = action.payload;
-      newState[locale] = newDoc;
-      break;
+
+      return {
+        ...state,
+        [locale]: newDoc,
+      };
     }
   }
 
-  return newState;
+  return state;
 }
 
-export function fetch() {
+export function fetchCopyright() {
   return async (dispatch: Dispatch<CopyrightAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
@@ -42,7 +43,7 @@ export function fetch() {
     const docs = await fetchDocsByType('copyright');
 
     dispatch({
-      type: CopyrightActionType.DOC_LOADED,
+      type: CopyrightActionType.LOADED,
       payload: {
         locale: localeResolver(opts.lang, true),
         doc: docs[0],

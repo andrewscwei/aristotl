@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
@@ -7,10 +6,10 @@ import { fetchDocsByType, localeResolver } from '../utils/prismic';
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:definitions') : () => {};
 
 export enum DefinitionsActionType {
-  DOC_PRESENTED = 'definitions-presented',
-  DOC_DISMISSED = 'definitions-dismissed',
-  DOC_DISMISSED_ALL = 'definitions-dismissed-all',
-  DOC_LOADED = 'definitions-loaded',
+  PRESENTED = 'definitions/PRESENTED',
+  DISMISSED = 'definitions/DISMISSED',
+  DISMISSED_ALL = 'definitions/DISMISSED_ALL',
+  LOADED = 'definitions/LOADED',
 }
 
 export interface DefinitionsState {
@@ -30,45 +29,56 @@ const initialState: DefinitionsState = {
 };
 
 export default function reducer(state = initialState, action: DefinitionsAction): DefinitionsState {
-  const newState: DefinitionsState = _.cloneDeep(state);
   switch (action.type) {
-    case DefinitionsActionType.DOC_LOADED: {
+    case DefinitionsActionType.LOADED: {
       const { locale, docs: newDocs } = action.payload;
+      const dict = {
+        ...state.docs,
+        [locale]: newDocs,
+      };
 
-      if (!newState.docs) newState.docs = {};
-      if (!newState.docs[locale]) newState.docs[locale] = [];
-
-      const oldDocs = newState.docs[locale];
-      const mergedDocs = _.unionWith([...newDocs, ...oldDocs], (doc1, doc2) => (doc1.id === doc2.id));
-
-      newState.docs[locale] = mergedDocs;
-
-      break;
+      return {
+        ...state,
+        docs: dict,
+      };
     }
-    case DefinitionsActionType.DOC_PRESENTED: {
+
+    case DefinitionsActionType.PRESENTED: {
       const { docId } = action.payload;
-      const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.splice(i, 1);
+      const activeDocIds = [...state.activeDocIds];
+      const docIdx = activeDocIds.indexOf(docId);
 
-      newState.activeDocIds.push(docId);
+      if (docIdx >= 0) activeDocIds.splice(docIdx, 1);
+      activeDocIds.push(docId);
 
-      break;
+      return {
+        ...state,
+        activeDocIds,
+      };
     }
-    case DefinitionsActionType.DOC_DISMISSED: {
+
+    case DefinitionsActionType.DISMISSED: {
       const { docId } = action.payload;
-      const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.splice(i, 1);
+      const activeDocIds = [...state.activeDocIds];
+      const docIdx = activeDocIds.indexOf(docId);
 
-      break;
+      if (docIdx >= 0) activeDocIds.splice(docIdx, 1);
+
+      return {
+        ...state,
+        activeDocIds,
+      };
     }
-    case DefinitionsActionType.DOC_DISMISSED_ALL: {
-      newState.activeDocIds = [];
 
-      break;
+    case DefinitionsActionType.DISMISSED_ALL: {
+      return {
+        ...state,
+        activeDocIds: [],
+      };
     }
   }
 
-  return newState;
+  return state;
 }
 
 export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages: number = 1) {
@@ -83,7 +93,7 @@ export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages: num
     const docs = await fetchDocsByType('definition', undefined, opts, pages);
 
     dispatch({
-      type: DefinitionsActionType.DOC_LOADED,
+      type: DefinitionsActionType.LOADED,
       payload: {
         locale: localeResolver(opts.lang, true),
         docs,
@@ -95,37 +105,30 @@ export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages: num
 export function presentDefinitionById(id: string) {
   debug('Presenting definition...', 'OK', id);
 
-  return (dispatch: Dispatch<DefinitionsAction>) => {
-    dispatch({
-      type: DefinitionsActionType.DOC_PRESENTED,
-      payload: {
-        docId: id,
-      },
-    });
+  return {
+    type: DefinitionsActionType.PRESENTED,
+    payload: {
+      docId: id,
+    },
   };
 }
 
 export function dismissDefinitionById(id: string) {
   debug('Dismissing definition...', 'OK', id);
 
-  return (dispatch: Dispatch<DefinitionsAction>) => {
-    dispatch({
-      type: DefinitionsActionType.DOC_DISMISSED,
-      payload: {
-        docId: id,
-      },
-    });
+  return {
+    type: DefinitionsActionType.DISMISSED,
+    payload: {
+      docId: id,
+    },
   };
 }
 
-export function dismissAllDefinitions() {
+export function dismissDefinitions() {
   debug('Dismissing all definitions...', 'OK');
 
-  return (dispatch: Dispatch<DefinitionsAction>) => {
-    dispatch({
-      type: DefinitionsActionType.DOC_DISMISSED_ALL,
-      payload: {
-      },
-    });
+  return {
+    type: DefinitionsActionType.DISMISSED_ALL,
+    payload: {},
   };
 }
