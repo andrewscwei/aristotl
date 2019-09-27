@@ -282,3 +282,29 @@ export function getFilteredFallacies(locale: string = __I18N_CONFIG__.defaultLoc
     return fres;
   });
 }
+
+export function getFilteredFallaciesInPageChunks(locale: string = __I18N_CONFIG__.defaultLocale) {
+  return createSelector([
+    getFilteredFallacies(locale),
+    (state: FallaciesState) => state.docsPerPage,
+  ], (docs, docsPerPage) => {
+    return _.chunk(docs, docsPerPage);
+  });
+}
+
+export function getFilteredFallaciesOnCurrentPage(locale: string = __I18N_CONFIG__.defaultLocale) {
+  return createSelector([
+    getFilteredFallaciesInPageChunks(locale),
+    (state: FallaciesState) => state.pageIndex,
+  ], (chunks, pageIndex) => {
+    return chunks[pageIndex] || [];
+  });
+}
+
+export function getMaxPagesOfFilteredFallacies(locale: string = __I18N_CONFIG__.defaultLocale) {
+  return createSelector([
+    getFilteredFallaciesInPageChunks(locale),
+  ], (chunks) => {
+    return chunks.length;
+  });
+}

@@ -20,7 +20,7 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { changePageIndex, FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
+import { changePageIndex, FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
@@ -30,6 +30,8 @@ interface StateProps {
   docsPerPage: number;
   fallacyDict: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
+  filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
+  maxPages: number;
   filters: FallaciesFilters;
   lastActiveDefinitionId?: string;
   lastActiveFallacyId?: string;
@@ -137,11 +139,6 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
-    const results = this.props.filteredFallacies;
-    const pages = _.chunk(results, this.props.docsPerPage);
-    const numPages = pages.length;
-    const currResults = pages[this.props.pageIndex] || [];
-
     return (
       <Fragment>
         <Transition in={!this.props.lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
@@ -171,17 +168,17 @@ class Home extends PureComponent<Props, State> {
                 <Statistics
                   docsPerPage={this.props.docsPerPage}
                   pageIndex={this.props.pageIndex}
-                  results={results}
+                  results={this.props.filteredFallacies}
                 />
                 <Paginator
                   ref={this.nodeRefs.paginator}
                   activePageIndex={this.props.pageIndex}
-                  numPages={numPages}
+                  numPages={this.props.maxPages}
                   onActivate={(pageIndex) => this.props.changePageIndex(pageIndex)}
                 />
                 <Grid
                   id={`${this.props.searchInput}-${this.props.pageIndex}`}
-                  docs={currResults}
+                  docs={this.props.filteredFallaciesOnCurrentPage}
                   isSummaryEnabled={this.state.isSummaryEnabled}
                   onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
                 />
@@ -202,6 +199,8 @@ export default connect(
     docsPerPage: state.fallacies.docsPerPage,
     fallacyDict: state.fallacies.docs[state.i18n.locale] || [],
     filteredFallacies: getFilteredFallacies(state.i18n.locale)(state.fallacies),
+    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state.i18n.locale)(state.fallacies),
+    maxPages: getMaxPagesOfFilteredFallacies(state.i18n.locale)(state.fallacies),
     filters: state.fallacies.filters,
     lastActiveDefinitionId: state.definitions.lastActiveDocId,
     lastActiveFallacyId: state.fallacies.lastActiveDocId,
