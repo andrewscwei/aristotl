@@ -95,16 +95,16 @@ class Home extends PureComponent<Props, State> {
       this.mapHashToState();
     }
 
-    if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
-      const docId = _.last(this.props.activeFallacyIds);
+    // if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
+    //   const docId = _.last(this.props.activeFallacyIds);
 
-      if (docId) {
-        this.props.history.replace(`#${docId}`);
-      }
-      else {
-        this.props.history.replace('/');
-      }
-    }
+    //   if (docId) {
+    //     this.props.history.replace(`#${docId}`);
+    //   }
+    //   else {
+    //     this.props.history.replace('/');
+    //   }
+    // }
   }
 
   getFilteredDocs(): ReadonlyArray<Document> {
@@ -172,9 +172,16 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
+  onFiltersChange(filters: FallacyFilters) {
+    this.setState({
+      filters,
+      pageIndex: 0,
+    });
+  }
+
   onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
     if (shouldUpdateHistory) {
-      this.props.history.push({
+      this.props.history.replace({
         pathname: '/',
         search: this.mapStateToQueryString({
           searchInput: input,
@@ -192,7 +199,7 @@ class Home extends PureComponent<Props, State> {
 
   onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
     if (shouldUpdateHistory) {
-      this.props.history.push({
+      this.props.history.replace({
         pathname: '/',
         search: this.mapStateToQueryString({
           searchInput: this.state.searchInput,
@@ -247,7 +254,7 @@ class Home extends PureComponent<Props, State> {
                   docsPerPage={this.props.docsPerPage}
                   pageIndex={this.state.pageIndex}
                   results={results}
-                  onFiltersChange={(filters) => this.setState({ filters })}
+                  onFiltersChange={(filters) => this.onFiltersChange(filters)}
                 />
                 <Paginator ref={this.nodeRefs.paginator} activePageIndex={this.state.pageIndex} numPages={numPages} onActivate={(index) => this.onPageIndexChange(index)}
                 />
