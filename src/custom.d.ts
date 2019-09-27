@@ -14,14 +14,6 @@ interface TranslationDataDict {
   [locale: string]: TranslationData;
 }
 
-interface FallacyFilters {
-  formal: boolean;
-  informal: boolean;
-  alpha: boolean;
-  beta: boolean;
-  gamma: boolean;
-}
-
 interface RouteData {
   component: string;
   exact?: boolean;

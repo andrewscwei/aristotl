@@ -1,4 +1,3 @@
-import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { animations, container, media, selectors } from 'promptu';
@@ -21,7 +20,7 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { fetchFallacies, presentFallacyById } from '../store/fallacies';
+import { FallaciesFilters, fetchFallacies, filterFallacies, presentFallacyById, searchFallacies, getFilteredFallacies } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
@@ -31,13 +30,17 @@ interface StateProps {
   activeDefinitionIds: Array<string>;
   activeFallacyIds: Array<string>;
   fallacyDict: ReadonlyArray<Document>;
-  fusedDocs: Fuse<Document>;
+  filteredFallacies: ReadonlyArray<Document>;
+  searchInput: string;
+  filters: FallaciesFilters;
 }
 
 interface DispatchProps {
   fetchDefinitions: typeof fetchDefinitions;
   fetchFallacies: typeof fetchFallacies;
+  filterFallacies: typeof filterFallacies;
   presentFallacyById: typeof presentFallacyById;
+  searchFallacies: typeof searchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -45,11 +48,9 @@ interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
 }
 
 interface State {
-  filters: FallacyFilters;
   isSearching: boolean;
   isSummaryEnabled: boolean;
   pageIndex: number;
-  searchInput: string;
 }
 
 class Home extends PureComponent<Props, State> {
@@ -61,14 +62,6 @@ class Home extends PureComponent<Props, State> {
     isSearching: false,
     isSummaryEnabled: false,
     pageIndex: 0,
-    searchInput: '',
-    filters: {
-      formal: true,
-      informal: true,
-      alpha: true,
-      beta: true,
-      gamma: true,
-    },
   };
 
   nodeRefs = {
@@ -101,30 +94,6 @@ class Home extends PureComponent<Props, State> {
   //   }
   // }
 
-  getFilteredDocs(): ReadonlyArray<Document> {
-    const searchInput = this.state.searchInput;
-    const searchResults = _.isEmpty(searchInput) ? this.props.fallacyDict : this.props.fusedDocs.search(searchInput!);
-    const filteredResults = _.filter(searchResults, (v) => {
-      const types = _.get(v, 'data.types');
-      const inheritance = _.get(v, 'data.inheritance');
-      const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
-      const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-      const isAlpha = inheritance.length === 0;
-      const isBeta = inheritance.length === 1;
-      const isGamma = inheritance.length >= 2;
-
-      if (isFormal && !this.state.filters.formal) return false;
-      if (isInformal && !this.state.filters.informal) return false;
-      if (isAlpha && !this.state.filters.alpha) return false;
-      if (isBeta && !this.state.filters.beta) return false;
-      if (isGamma && !this.state.filters.gamma) return false;
-
-      return true;
-    });
-
-    return filteredResults;
-  }
-
   toNextPage() {
     const paginator = this.nodeRefs.paginator.current;
     if (!paginator) return;
@@ -150,13 +119,12 @@ class Home extends PureComponent<Props, State> {
     const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
 
     this.setState({
-      searchInput,
       pageIndex,
     });
   }
 
   mapStateToQueryString(nextState: { searchInput?: string, pageIndex?: number } = {}): string {
-    const searchInput = (nextState.searchInput === undefined) ? this.state.searchInput : nextState.searchInput;
+    const searchInput = (nextState.searchInput === undefined) ? this.props.searchInput : nextState.searchInput;
     const pageIndex = (nextState.pageIndex === undefined) ? this.state.pageIndex : nextState.pageIndex;
     const params = [];
 
@@ -166,39 +134,30 @@ class Home extends PureComponent<Props, State> {
     return (params.length > 0) ? `?${params.join('&')}` : '';
   }
 
-  onFiltersChange(filters: FallacyFilters) {
+  onFiltersChange(filters: FallaciesFilters) {
+    this.props.filterFallacies(filters);
+
     this.setState({
-      filters,
       pageIndex: 0,
     });
   }
 
   onSearchInputChange(input: string) {
+    this.props.searchFallacies(input);
+
     this.setState({
-      searchInput: input,
       pageIndex: 0,
     });
   }
 
   onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
-    if (shouldUpdateHistory) {
-      this.props.history.replace({
-        pathname: '/',
-        search: this.mapStateToQueryString({
-          searchInput: this.state.searchInput,
-          pageIndex: index,
-        }),
-      });
-    }
-    else {
-      this.setState({
-        pageIndex: index,
-      });
-    }
+    this.setState({
+      pageIndex: index,
+    });
   }
 
   render() {
-    const results = this.getFilteredDocs();
+    const results = this.props.filteredFallacies;
     const pageIndex = this.state.pageIndex;
     const pages = _.chunk(results, this.props.docsPerPage);
     const numPages = pages.length;
@@ -217,7 +176,7 @@ class Home extends PureComponent<Props, State> {
                 <StyledHeader>
                   <SearchBar
                     id='search'
-                    input={this.state.searchInput}
+                    input={this.props.searchInput}
                     autoFocus={this.props.activeFallacyIds.length === 0 && this.props.activeDefinitionIds.length === 0}
                     onFocusIn={() => this.setState({ isSearching: true })}
                     onFocusOut={() => this.setState({ isSearching: false })}
@@ -246,7 +205,7 @@ class Home extends PureComponent<Props, State> {
                   onActivate={(index) => this.onPageIndexChange(index)}
                 />
                 <Grid
-                  id={`${this.state.searchInput}-${this.state.pageIndex}`}
+                  id={`${this.props.searchInput}-${this.state.pageIndex}`}
                   docs={currResults}
                   isSummaryEnabled={this.state.isSummaryEnabled}
                   onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
@@ -268,26 +227,16 @@ export default connect(
     activeDefinitionIds: state.definitions.activeDocIds,
     activeFallacyIds: state.fallacies.activeDocIds,
     fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
-    fusedDocs: new Fuse(state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [], {
-      matchAllTokens: true,
-      maxPatternLength: 24,
-      minMatchCharLength: 0,
-      shouldSort: true,
-      tokenize: true,
-      keys: [
-        'data.abbreviation',
-        'data.name',
-        'data.aliases.name',
-        'data.summary.text',
-        'data.description.text',
-        'tags',
-      ],
-    }),
+    filteredFallacies: getFilteredFallacies(state.fallacies),
+    filters: state.fallacies.filters,
+    searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     fetchDefinitions,
     fetchFallacies,
+    filterFallacies,
     presentFallacyById,
+    searchFallacies,
   }, dispatch),
 )(Home);
 

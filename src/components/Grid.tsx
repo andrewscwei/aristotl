@@ -30,8 +30,6 @@ class Grid extends PureComponent<Props> {
   }
 
   render() {
-    debug('Rendering...', 'OK');
-
     return (
       <StyledRoot className={this.props.className}>
         {this.props.docs.map((doc: Document, i: number) => {

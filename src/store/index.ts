@@ -28,7 +28,10 @@ delete window.__INITIAL_STATE__;
 const store = createStore(reducer, initialState || {}, composeEnhancers(applyMiddleware(thunk)));
 
 window.snapSaveState = () => ({
-  __INITIAL_STATE__: _.omit(store.getState(), 'i18n'),
+  __INITIAL_STATE__: _.omit(store.getState(), [
+    'i18n',
+    'fallacies.fdocs',
+  ]),
 });
 
 export default store;

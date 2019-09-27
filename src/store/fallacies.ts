@@ -1,21 +1,37 @@
+import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacies') : () => {};
+
+export interface FallaciesFilters {
+  formal: boolean;
+  informal: boolean;
+  alpha: boolean;
+  beta: boolean;
+  gamma: boolean;
+}
+
 export enum FallaciesActionType {
-  DOC_PRESENTED = 'fallacies-presented',
-  DOC_DISMISSED = 'fallacies-dismissed',
-  DOC_DISMISSED_ALL = 'fallacies-dismissed-all',
-  DOC_LOADED = 'fallacies-loaded',
+  DISMISSED = 'aristotl/fallacies/dismissed',
+  DISMISSED_ALL = 'aristotl/fallacies/dismissed-all',
+  FILTERED = 'aristotl/fallacies/filtered',
+  LOADED = 'aristotl/fallacies/loaded',
+  PRESENTED = 'aristotl/fallacies/presented',
+  SEARCHED = 'aristotl/fallacies/searched',
 }
 
 export interface FallaciesState {
   activeDocIds: Array<string>;
-  docs: {
-    [locale: string]: ReadonlyArray<Document>;
-  };
+  docs: { [locale: string]: ReadonlyArray<Document> };
+  fdocs: { [locale: string]: Readonly<Fuse<Document>> };
+  filters: FallaciesFilters;
+  sdocs: ReadonlyArray<Document>;
+  searchInput: string;
 }
 
 export interface FallaciesAction extends Action<FallaciesActionType> {
@@ -25,50 +41,108 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 const initialState: FallaciesState = {
   activeDocIds: [],
   docs: {},
+  fdocs: {},
+  filters: {
+    formal: true,
+    informal: true,
+    alpha: true,
+    beta: true,
+    gamma: true,
+  },
+  sdocs: [],
+  searchInput: '',
 };
 
 export default function reducer(state = initialState, action: FallaciesAction): FallaciesState {
-  const newState: FallaciesState = _.cloneDeep(state);
-
   switch (action.type) {
-    case FallaciesActionType.DOC_LOADED: {
+    case FallaciesActionType.LOADED: {
       const { locale, docs: newDocs } = action.payload;
 
-      if (!newState.docs) newState.docs = {};
-      if (!newState.docs[locale]) newState.docs[locale] = [];
+      const dict = {
+        ...state.docs,
+        [locale]: newDocs,
+      };
 
-      const oldDocs = newState.docs[locale];
-      const mergedDocs = _.unionWith([...newDocs, ...oldDocs], (doc1, doc2) => (doc1.id === doc2.id));
+      const fdict =  {
+        ...state.fdocs,
+        [locale]: new Fuse(newDocs, {
+          matchAllTokens: true,
+          maxPatternLength: 24,
+          minMatchCharLength: 0,
+          shouldSort: true,
+          tokenize: true,
+          keys: [
+            'data.abbreviation',
+            'data.name',
+            'data.aliases.name',
+            'data.summary.text',
+            'data.description.text',
+            'tags',
+          ],
+        }),
+      };
 
-      newState.docs[locale] = mergedDocs;
-
-      break;
+      return {
+        ...state,
+        docs: dict,
+        fdocs: fdict,
+      };
     }
-    case FallaciesActionType.DOC_PRESENTED: {
+
+    case FallaciesActionType.PRESENTED: {
       const { docId } = action.payload;
+      const activeDocIds = [...state.activeDocIds];
+      const docIdx = activeDocIds.indexOf(docId);
 
-      const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.splice(i, 1);
+      if (docIdx >= 0) activeDocIds.splice(docIdx, 1);
+      activeDocIds.push(docId);
 
-      newState.activeDocIds.push(docId);
-
-      break;
+      return {
+        ...state,
+        activeDocIds,
+      };
     }
-    case FallaciesActionType.DOC_DISMISSED: {
+
+    case FallaciesActionType.DISMISSED: {
       const { docId } = action.payload;
-      const i = newState.activeDocIds.indexOf(docId);
-      if (i >= 0) newState.activeDocIds.splice(i, 1);
+      const activeDocIds = [...state.activeDocIds];
+      const docIdx = activeDocIds.indexOf(docId);
 
-      break;
+      if (docIdx >= 0) activeDocIds.splice(docIdx, 1);
+
+      return {
+        ...state,
+        activeDocIds,
+      };
     }
-    case FallaciesActionType.DOC_DISMISSED_ALL: {
-      newState.activeDocIds = [];
 
-      break;
+    case FallaciesActionType.DISMISSED_ALL: {
+      return {
+        ...state,
+        activeDocIds: [],
+      };
+    }
+
+    case FallaciesActionType.SEARCHED: {
+      const { searchInput } = action.payload;
+
+      return {
+        ...state,
+        searchInput,
+      };
+    }
+
+    case FallaciesActionType.FILTERED: {
+      const { filters } = action.payload;
+
+      return {
+        ...state,
+        filters,
+      };
     }
   }
 
-  return newState;
+  return state;
 }
 
 export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: number = 1) {
@@ -83,7 +157,7 @@ export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: numbe
     const docs = await fetchDocsByType('fallacy', undefined, opts, pages);
 
     dispatch({
-      type: FallaciesActionType.DOC_LOADED,
+      type: FallaciesActionType.LOADED,
       payload: {
         locale: localeResolver(opts.lang, true),
         docs,
@@ -93,34 +167,84 @@ export function fetchFallacies(options: Partial<QueryOptions> = {}, pages: numbe
 }
 
 export function presentFallacyById(id: string) {
-  return (dispatch: Dispatch<FallaciesAction>) => {
-    dispatch({
-      type: FallaciesActionType.DOC_PRESENTED,
-      payload: {
-        docId: id,
-      },
-    });
+  debug('Presenting fallacy...', 'OK', id);
+
+  return {
+    type: FallaciesActionType.PRESENTED,
+    payload: {
+      docId: id,
+    },
   };
 }
 
 export function dismissFallacyById(id: string) {
-  return (dispatch: Dispatch<FallaciesAction>) => {
-    dispatch({
-      type: FallaciesActionType.DOC_DISMISSED,
-      payload: {
-        docId: id,
-      },
-    });
+  debug('Dismissing fallacy...', 'OK', id);
+
+  return {
+    type: FallaciesActionType.DISMISSED,
+    payload: {
+      docId: id,
+    },
   };
 }
 
-export function dismissAllFallacies() {
-  return (dispatch: Dispatch<FallaciesAction>) => {
-    dispatch({
-      type: FallaciesActionType.DOC_DISMISSED_ALL,
-      payload: {
+export function dismissFallacies() {
+  debug('Dismissing all fallacies...', 'OK');
 
-      },
-    });
+  return {
+    type: FallaciesActionType.DISMISSED_ALL,
+    payload: {},
   };
 }
+
+export function searchFallacies(searchInput: string) {
+  debug('Searching fallacies...', 'OK', searchInput);
+
+  return {
+    type: FallaciesActionType.SEARCHED,
+    payload: {
+      searchInput,
+    },
+  };
+}
+
+export function filterFallacies(filters: FallaciesFilters) {
+  debug('Filtering fallacies...', 'OK', filters);
+
+  return {
+    type: FallaciesActionType.FILTERED,
+    payload: {
+      filters,
+    },
+  };
+}
+
+export const getFilteredFallacies = createSelector([
+  (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
+  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || [],
+  (state: FallaciesState) => state.searchInput,
+  (state: FallaciesState) => state.filters,
+], (docs, fdocs, searchInput, filters) => {
+  const res = _.isEmpty(searchInput) ? docs : fdocs.search(searchInput);
+  const fres = _.filter(res, (v) => {
+    const types = _.get(v, 'data.types');
+    const inheritance = _.get(v, 'data.inheritance');
+    const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+    const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+    const isAlpha = inheritance.length === 0;
+    const isBeta = inheritance.length === 1;
+    const isGamma = inheritance.length >= 2;
+
+    if (isFormal && !filters.formal) return false;
+    if (isInformal && !filters.informal) return false;
+    if (isAlpha && !filters.alpha) return false;
+    if (isBeta && !filters.beta) return false;
+    if (isGamma && !filters.gamma) return false;
+
+    return true;
+  });
+
+  debug('Getting filtered fallacies...', 'OK', fres);
+
+  return fres;
+});
