@@ -19,8 +19,10 @@ export default {
   // Enable debugger in production.
   enableDebugInProduction: false,
 
+  // Enable browser history for searches.
   enableHistoryForSearch: false,
 
+  // Enable browser history for presented fallacies.
   enableHistoryForFallacies: true,
 
   // Prismic config.

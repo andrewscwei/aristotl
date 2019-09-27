@@ -224,32 +224,34 @@ export function filterFallacies(filters: FallaciesFilters) {
   };
 }
 
-export const getFilteredFallacies = createSelector([
-  (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
-  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
-  (state: FallaciesState) => state.searchInput,
-  (state: FallaciesState) => state.filters,
-], (docs, fdocs, searchInput, filters) => {
-  const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
-  const fres = _.filter(res, (v) => {
-    const types = _.get(v, 'data.types');
-    const inheritance = _.get(v, 'data.inheritance');
-    const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
-    const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-    const isAlpha = inheritance.length === 0;
-    const isBeta = inheritance.length === 1;
-    const isGamma = inheritance.length >= 2;
+export function getFilteredFallacies(locale: string = __I18N_CONFIG__.defaultLocale) {
+  return createSelector([
+    (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
+    (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
+    (state: FallaciesState) => state.searchInput,
+    (state: FallaciesState) => state.filters,
+  ], (docs, fdocs, searchInput, filters) => {
+    const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
+    const fres = _.filter(res, (v) => {
+      const types = _.get(v, 'data.types');
+      const inheritance = _.get(v, 'data.inheritance');
+      const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+      const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+      const isAlpha = inheritance.length === 0;
+      const isBeta = inheritance.length === 1;
+      const isGamma = inheritance.length >= 2;
 
-    if (isFormal && !filters.formal) return false;
-    if (isInformal && !filters.informal) return false;
-    if (isAlpha && !filters.alpha) return false;
-    if (isBeta && !filters.beta) return false;
-    if (isGamma && !filters.gamma) return false;
+      if (isFormal && !filters.formal) return false;
+      if (isInformal && !filters.informal) return false;
+      if (isAlpha && !filters.alpha) return false;
+      if (isBeta && !filters.beta) return false;
+      if (isGamma && !filters.gamma) return false;
 
-    return true;
+      return true;
+    });
+
+    debug('Getting filtered fallacies...', 'OK', fres);
+
+    return fres;
   });
-
-  debug('Getting filtered fallacies...', 'OK', fres);
-
-  return fres;
-});
+}

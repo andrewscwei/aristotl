@@ -221,8 +221,8 @@ export default connect(
   (state: AppState): StateProps => ({
     lastActiveDefinitionId: state.definitions.lastActiveDocId,
     lastActiveFallacyId: state.fallacies.lastActiveDocId,
-    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
-    filteredFallacies: getFilteredFallacies(state.fallacies),
+    fallacyDict: state.fallacies.docs[state.i18n.locale] || [],
+    filteredFallacies: getFilteredFallacies(state.i18n.locale)(state.fallacies),
     filters: state.fallacies.filters,
     searchInput: state.fallacies.searchInput,
   }),
