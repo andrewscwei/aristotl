@@ -49,7 +49,7 @@ interface State {
   isSearching: boolean;
   isSummaryEnabled: boolean;
   pageIndex: number;
-  searchInput?: string;
+  searchInput: string;
 }
 
 class Home extends PureComponent<Props, State> {
@@ -61,7 +61,7 @@ class Home extends PureComponent<Props, State> {
     isSearching: false,
     isSummaryEnabled: false,
     pageIndex: 0,
-    searchInput: undefined,
+    searchInput: '',
     filters: {
       formal: true,
       informal: true,
@@ -82,30 +82,24 @@ class Home extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.mapHashToState();
-    this.mapQueryStringToState();
+    // this.mapHashToState();
+    // this.mapQueryStringToState();
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (prevProps.location.search !== this.props.location.search) {
-      this.mapQueryStringToState();
-    }
+  // componentDidUpdate(prevProps: Props, prevState: State) {
+  //   const fallacyId = _.last(this.props.activeFallacyIds);
+  //   const fallacyIdDidChange = _.last(prevProps.activeFallacyIds) !== fallacyId;
+  //   const pageIndexDidChange = prevState.pageIndex !== this.state.pageIndex;
+  //   const searchInputDidChange = prevState.searchInput !== this.state.searchInput;
 
-    if (prevProps.location.hash !== this.props.location.hash) {
-      this.mapHashToState();
-    }
-
-    // if (_.last(prevProps.activeFallacyIds) !== _.last(this.props.activeFallacyIds)) {
-    //   const docId = _.last(this.props.activeFallacyIds);
-
-    //   if (docId) {
-    //     this.props.history.replace(`#${docId}`);
-    //   }
-    //   else {
-    //     this.props.history.replace('/');
-    //   }
-    // }
-  }
+  //   if (fallacyIdDidChange) {
+  //     this.props.history.replace({
+  //       pathname: '/',
+  //       hash: fallacyIdDidChange ? (fallacyId ? `#${fallacyId}` : undefined) : this.props.location.hash,
+  //       search: this.mapStateToQueryString(),
+  //     });
+  //   }
+  // }
 
   getFilteredDocs(): ReadonlyArray<Document> {
     const searchInput = this.state.searchInput;
@@ -152,7 +146,7 @@ class Home extends PureComponent<Props, State> {
 
   mapQueryStringToState() {
     const { search, page } = qs.parse(this.props.location.search);
-    const searchInput = typeof search === 'string' ? search : undefined;
+    const searchInput = (typeof search === 'string' && search !== '') ? search : '';
     const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
 
     this.setState({
@@ -166,7 +160,7 @@ class Home extends PureComponent<Props, State> {
     const pageIndex = (nextState.pageIndex === undefined) ? this.state.pageIndex : nextState.pageIndex;
     const params = [];
 
-    if (searchInput === undefined && searchInput !== '') params.push(`search=${searchInput}`);
+    if (searchInput !== undefined && searchInput !== '') params.push(`search=${searchInput}`);
     if (pageIndex !== undefined && pageIndex > 0) params.push(`page=${pageIndex + 1}`);
 
     return (params.length > 0) ? `?${params.join('&')}` : '';
@@ -179,22 +173,11 @@ class Home extends PureComponent<Props, State> {
     });
   }
 
-  onSearchInputChange(input: string, shouldUpdateHistory: boolean = false) {
-    if (shouldUpdateHistory) {
-      this.props.history.replace({
-        pathname: '/',
-        search: this.mapStateToQueryString({
-          searchInput: input,
-          pageIndex: 0,
-        }),
-      });
-    }
-    else {
-      this.setState({
-        searchInput: input,
-        pageIndex: 0,
-      });
-    }
+  onSearchInputChange(input: string) {
+    this.setState({
+      searchInput: input,
+      pageIndex: 0,
+    });
   }
 
   onPageIndexChange(index: number, shouldUpdateHistory: boolean = false) {
@@ -256,7 +239,11 @@ class Home extends PureComponent<Props, State> {
                   results={results}
                   onFiltersChange={(filters) => this.onFiltersChange(filters)}
                 />
-                <Paginator ref={this.nodeRefs.paginator} activePageIndex={this.state.pageIndex} numPages={numPages} onActivate={(index) => this.onPageIndexChange(index)}
+                <Paginator
+                  ref={this.nodeRefs.paginator}
+                  activePageIndex={this.state.pageIndex}
+                  numPages={numPages}
+                  onActivate={(index) => this.onPageIndexChange(index)}
                 />
                 <Grid
                   id={`${this.state.searchInput}-${this.state.pageIndex}`}
