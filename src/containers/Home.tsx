@@ -20,7 +20,7 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
+import { changePageIndex, FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
@@ -38,6 +38,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
+  changePageIndex: typeof changePageIndex;
   fetchDefinitions: typeof fetchDefinitions;
   fetchFallacies: typeof fetchFallacies;
   filterFallacies: typeof filterFallacies;
@@ -176,6 +177,7 @@ class Home extends PureComponent<Props, State> {
                   ref={this.nodeRefs.paginator}
                   activePageIndex={this.props.pageIndex}
                   numPages={numPages}
+                  onActivate={(pageIndex) => this.props.changePageIndex(pageIndex)}
                 />
                 <Grid
                   id={`${this.props.searchInput}-${this.props.pageIndex}`}
@@ -207,6 +209,7 @@ export default connect(
     searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
+    changePageIndex,
     fetchDefinitions,
     fetchFallacies,
     filterFallacies,
