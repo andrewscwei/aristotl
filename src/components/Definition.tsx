@@ -115,7 +115,8 @@ const StyledContent = styled.div`
   padding: 0 2rem;
   width: 100%;
 
-  ul, ol {
+  ul,
+  ol {
     ${container.fvtl}
     width: 100%;
     margin: 0;

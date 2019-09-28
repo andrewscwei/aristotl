@@ -1,4 +1,4 @@
-import { animations, selectors, container } from 'promptu';
+import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { colors } from '../styles/theme';

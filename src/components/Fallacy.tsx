@@ -291,7 +291,8 @@ const StyledContent = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
 
-  ul, ol {
+  ul,
+  ol {
     ${container.fvtl}
     width: 100%;
     margin: 0;
@@ -374,7 +375,7 @@ const StyledContent = styled.div`
 
     ${selectors.hwot} {
       color: inherit;
-      opacity: 0.6;
+      opacity: .6;
     }
   }
 `;
@@ -404,7 +405,7 @@ const StyledAbbreviation = styled.div`
 
   h2 {
     color: ${(props) => props.theme.colors.black};
-    font-family: 'NovaMono';
+    font-family: 'NovaMono', monospace;
     width: 100%;
     font-size: 10rem;
     text-align: center;

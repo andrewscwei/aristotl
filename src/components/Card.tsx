@@ -142,7 +142,7 @@ const StyledAbbreviation = styled.div`
   user-select: text;
 
   h2 {
-    font-family: 'NovaMono';
+    font-family: 'NovaMono', monospace;
     font-size: 4.2rem;
     font-weight: 400;
 

@@ -9,7 +9,7 @@ export default createGlobalStyle`
   body {
     background: ${colors.background};
     color: ${colors.white};
-    font-family: 'RobotoMono';
+    font-family: 'RobotoMono', monospace;
     font-weight: 400;
   }
 
