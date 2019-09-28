@@ -74,7 +74,7 @@ class Card extends PureComponent<Props> {
         }
 
         {!this.props.isSummaryEnabled && first3Aliases.length > 0 &&
-          <StyledAliases><em>{first3Aliases.join(',')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
+          <StyledAliases><em>{first3Aliases.join(', ')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
         }
 
         {this.props.isSummaryEnabled && summary &&
@@ -165,6 +165,7 @@ const StyledAliases = styled.div`
   font-size: 1.2rem;
   font-weight: 400;
   hyphens: auto;
+  line-height: 140%;
   margin-top: 1rem;
   padding: 0 1rem;
   user-select: text;
