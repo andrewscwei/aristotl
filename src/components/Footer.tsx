@@ -1,5 +1,5 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { animations, selectors, container } from 'promptu';
+import { animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
