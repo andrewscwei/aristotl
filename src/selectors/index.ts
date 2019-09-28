@@ -28,9 +28,17 @@ export const getFallacies = createSelector([
   return docs;
 });
 
+export const getFallaciesFuse = createSelector([
+  (state: AppState) => state.fallacies.fuses[state.i18n.locale] || undefined,
+], (fuse) => {
+  debug('Getting localized fallacies fuse...', 'OK');
+
+  return fuse;
+});
+
 export const getFilteredFallacies = createSelector([
   getFallacies,
-  (state: AppState) => state.fallacies.fuses[state.i18n.locale] || undefined,
+  getFallaciesFuse,
   (state: AppState) => state.fallacies.searchInput,
   (state: AppState) => state.fallacies.filters,
 ], (docs, fuse, searchInput, filters) => {
