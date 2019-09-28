@@ -135,46 +135,42 @@ class Home extends PureComponent<Props, State> {
   render() {
     return (
       <Fragment>
-        <Transition in={!this.props.lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
-          {(status) => (
-            <NavControlManager
-              isEnabled={!this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
-              onPrev={() => this.toPreviousPage()}
-              onNext={() => this.toNextPage()}
-            >
-              <StyledRoot transitionStatus={status}>
-                <StyledHeader>
-                  <SearchBar
-                    autoFocus={!this.props.lastActiveFallacyId && !this.props.lastActiveDefinitionId}
-                  />
-                  <ActionButton
-                    symbol='i'
-                    isTogglable={true}
-                    tintColor={colors.white}
-                    hoverTintColor={colors.red}
-                    activeTintColor={colors.red}
-                    onToggleOn={() => this.setState({ isSummaryEnabled: true })}
-                    onToggleOff={() => this.setState({ isSummaryEnabled: false })}
-                  />
-                </StyledHeader>
-                <Statistics/>
-                <Paginator
-                  ref={this.nodeRefs.paginator}
-                  pageIndex={this.props.pageIndex}
-                  numPages={this.props.maxPages}
-                  onActivate={this.props.changeFallaciesPage}
+          <NavControlManager
+            isEnabled={!this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
+            onPrev={() => this.toPreviousPage()}
+            onNext={() => this.toNextPage()}
+          >
+            <StyledRoot>
+              <StyledHeader>
+                <SearchBar
+                  autoFocus={!this.props.lastActiveFallacyId && !this.props.lastActiveDefinitionId}
                 />
-                <Grid
-                  id={`${this.props.searchInput}-${this.props.pageIndex}`}
-                  docs={this.props.filteredFallaciesOnCurrentPage}
-                  isSummaryEnabled={this.state.isSummaryEnabled}
-                  onActivate={this.props.presentFallacyById}
+                <ActionButton
+                  symbol='i'
+                  isTogglable={true}
+                  tintColor={colors.white}
+                  hoverTintColor={colors.red}
+                  activeTintColor={colors.red}
+                  onToggleOn={() => this.setState({ isSummaryEnabled: true })}
+                  onToggleOff={() => this.setState({ isSummaryEnabled: false })}
                 />
-                <Footer/>
-              </StyledRoot>
-            </NavControlManager>
-          )}
-        </Transition>
+              </StyledHeader>
+              <Statistics/>
+              <Paginator
+                ref={this.nodeRefs.paginator}
+                pageIndex={this.props.pageIndex}
+                numPages={this.props.maxPages}
+                onActivate={this.props.changeFallaciesPage}
+              />
+              <Grid
+                id={`${this.props.searchInput}-${this.props.pageIndex}`}
+                docs={this.props.filteredFallaciesOnCurrentPage}
+                isSummaryEnabled={this.state.isSummaryEnabled}
+                onActivate={this.props.presentFallacyById}
+              />
+              <Footer/>
+            </StyledRoot>
+          </NavControlManager>
         <FallacyStackModal/>
         <DefinitionStackModal/>
       </Fragment>
@@ -214,17 +210,13 @@ const StyledHeader = styled.header`
   }
 `;
 
-const StyledRoot = styled.div<{
-  transitionStatus: TransitionStatus;
-}>`
+const StyledRoot = styled.div`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
   ${container.fvtl}
   background: ${(props) => props.theme.colors.black};
   min-height: 100%;
-  opacity: ${(props) => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
   padding: 5rem 2rem 3rem;
   perspective: 80rem;
-  pointer-events: ${(props) => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
   transform-origin: center;
   transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'], props.transitionStatus)};
   width: 100%;
