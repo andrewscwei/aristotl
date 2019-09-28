@@ -24,7 +24,6 @@ import { fetchDefinitions } from '../store/definitions';
 import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
-import { analyzeRenderCycle } from '../utils/profiler';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
@@ -82,8 +81,6 @@ class Home extends PureComponent<Props, State> {
     if ((__APP_CONFIG__.enableHistoryForSearch && searchInputDidChange) || (__APP_CONFIG__.enableHistoryForFallacies && activeFallacyIdDidChange)) {
       this.mapStateToLocation();
     }
-
-    analyzeRenderCycle(prevProps, this.props, prevState, this.state);
   }
 
   toNextPage() {
@@ -160,11 +157,7 @@ class Home extends PureComponent<Props, State> {
                     onToggleOff={() => this.setState({ isSummaryEnabled: false })}
                   />
                 </StyledHeader>
-                <Statistics
-                  pageSize={this.props.pageSize}
-                  pageIndex={this.props.pageIndex}
-                  results={this.props.filteredFallacies}
-                />
+                <Statistics/>
                 <Paginator
                   ref={this.nodeRefs.paginator}
                   activePageIndex={this.props.pageIndex}

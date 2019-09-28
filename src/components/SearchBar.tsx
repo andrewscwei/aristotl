@@ -47,10 +47,10 @@ class SearchBar extends PureComponent<Props> {
     if (!this.nodeRefs.input.current) return;
 
     switch (event.keyCode) {
-    case 37:
-    case 38:
-    case 39:
-    case 40: return;
+      case 37:
+      case 38:
+      case 39:
+      case 40: return;
     }
 
     if (this.nodeRefs.input.current === document.activeElement) return;

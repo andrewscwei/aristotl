@@ -5,13 +5,19 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
 import { AppState } from '../store';
 import { changeFallaciesFilters, FallaciesFilters } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
 interface StateProps {
+  filteredFallacies: ReadonlyArray<Document>;
+  filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
   filters: FallaciesFilters;
+  maxPages: number;
+  pageIndex: number;
+  pageSize: number;
 }
 
 interface DispatchProps {
@@ -20,18 +26,9 @@ interface DispatchProps {
 
 interface Props extends StateProps, DispatchProps {
   className?: string;
-  pageSize: number;
-  pageIndex: number;
-  results: ReadonlyArray<Document>;
 }
 
 class Statistics extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    pageSize: 0,
-    pageIndex: 0,
-    results: [],
-  };
-
   countFormals(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.types');
@@ -75,16 +72,14 @@ class Statistics extends PureComponent<Props> {
   }
 
   render() {
-    const numResults = this.props.results.length;
-    const pages = _.chunk(this.props.results, this.props.pageSize);
-    const currResults = pages[this.props.pageIndex] || [];
+    const numResults = this.props.filteredFallacies.length;
     const startIndex = this.props.pageSize * this.props.pageIndex + 1;
-    const endIndex = currResults.length + startIndex - 1;
-    const numFormals = this.countFormals(currResults);
-    const numInformals = this.countInformals(currResults);
-    const numAlphas = this.countAlphas(currResults);
-    const numBetas = this.countBetas(currResults);
-    const numGammas = this.countGammas(currResults);
+    const endIndex = this.props.filteredFallaciesOnCurrentPage.length + startIndex - 1;
+    const numFormals = this.countFormals(this.props.filteredFallaciesOnCurrentPage);
+    const numInformals = this.countInformals(this.props.filteredFallaciesOnCurrentPage);
+    const numAlphas = this.countAlphas(this.props.filteredFallaciesOnCurrentPage);
+    const numBetas = this.countBetas(this.props.filteredFallaciesOnCurrentPage);
+    const numGammas = this.countGammas(this.props.filteredFallaciesOnCurrentPage);
 
     return (
       <StyledRoot className={this.props.className}>
@@ -122,7 +117,12 @@ class Statistics extends PureComponent<Props> {
 
 export default connect(
   (state: AppState): StateProps => ({
+    filteredFallacies: getFilteredFallacies(state),
+    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     filters: state.fallacies.filters,
+    maxPages: getMaxPagesOfFilteredFallacies(state),
+    pageIndex: state.fallacies.pageIndex,
+    pageSize: state.fallacies.pageSize,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     changeFallaciesFilters,
