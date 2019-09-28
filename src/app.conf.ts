@@ -31,6 +31,9 @@ export default {
   // Enable browser history for presented fallacies.
   enableHistoryForFallacies: true,
 
+  // Enable browser history for presented definitions.
+  enableHistoryForDefinitions: true,
+
   // Prismic config.
   prismic: {
     // API endpoint.

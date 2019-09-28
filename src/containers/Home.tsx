@@ -20,7 +20,7 @@ import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
 import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
 import { AppState } from '../store';
-import { fetchDefinitions } from '../store/definitions';
+import { fetchDefinitions, presentDefinitionById } from '../store/definitions';
 import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, FallaciesFilters, fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
@@ -45,6 +45,7 @@ interface DispatchProps {
   changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
   fetchDefinitions: typeof fetchDefinitions;
   fetchFallacies: typeof fetchFallacies;
+  presentDefinitionById: typeof presentDefinitionById;
   presentFallacyById: typeof presentFallacyById;
 }
 
@@ -80,8 +81,9 @@ class Home extends PureComponent<Props, State> {
     const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex);
     const filtersDidChange = __APP_CONFIG__.enableHistoryForFilters && (!_.isEqual(prevProps.filters, this.props.filters));
     const activeFallacyIdsDidChange = __APP_CONFIG__.enableHistoryForFallacies && (!_.isEqual(prevProps.activeFallacyIds, this.props.activeFallacyIds));
+    const activeDefinitionIdsDidChange = __APP_CONFIG__.enableHistoryForDefinitions && (!_.isEqual(prevProps.activeDefinitionIds, this.props.activeDefinitionIds));
 
-    if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdsDidChange) {
+    if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdsDidChange || activeDefinitionIdsDidChange) {
       this.mapStateToLocation();
     }
   }
@@ -99,7 +101,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   mapLocationToState() {
-    const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, f: fallacies } = qs.parse(this.props.location.search);
+    const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, d: definitions, f: fallacies } = qs.parse(this.props.location.search);
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       const searchInput = (typeof search === 'string' && search !== '') ? search : '';
@@ -137,6 +139,19 @@ class Home extends PureComponent<Props, State> {
 
       if (activeFallacyId) this.props.presentFallacyById(activeFallacyId);
     }
+
+    if (__APP_CONFIG__.enableHistoryForDefinitions) {
+      if (definitions) {
+        if (typeof definitions === 'string') {
+          this.props.presentDefinitionById(definitions);
+        }
+        else {
+          for (const definitionId of definitions) {
+            this.props.presentDefinitionById(definitionId);
+          }
+        }
+      }
+    }
   }
 
   mapStateToLocation() {
@@ -165,6 +180,10 @@ class Home extends PureComponent<Props, State> {
       hash = lastActiveId;
 
       if (prevActiveIds.length > 0) params.f = prevActiveIds;
+    }
+
+    if (__APP_CONFIG__.enableHistoryForDefinitions) {
+      if (this.props.activeDefinitionIds.length > 0) params.d = this.props.activeDefinitionIds;
     }
 
     const location = {
@@ -249,6 +268,7 @@ export default connect(
     changeFallaciesSearchInput,
     fetchDefinitions,
     fetchFallacies,
+    presentDefinitionById,
     presentFallacyById,
   }, dispatch),
 )(Home);
