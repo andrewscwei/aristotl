@@ -83,10 +83,11 @@ class Home extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const searchInputDidChange = prevProps.searchInput !== this.props.searchInput;
-    const activeFallacyIdDidChange = prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId;
+    const searchInputDidChange = __APP_CONFIG__.enableHistoryForSearch && (prevProps.searchInput !== this.props.searchInput);
+    const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex);
+    const activeFallacyIdDidChange = __APP_CONFIG__.enableHistoryForFallacies && (prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId);
 
-    if ((__APP_CONFIG__.enableHistoryForSearch && searchInputDidChange) || (__APP_CONFIG__.enableHistoryForFallacies && activeFallacyIdDidChange)) {
+    if (searchInputDidChange || pageIndexDidChange || activeFallacyIdDidChange) {
       this.mapStateToLocation();
     }
   }
@@ -105,26 +106,33 @@ class Home extends PureComponent<Props, State> {
 
   mapLocationToState() {
     const { search, page } = qs.parse(this.props.location.search);
-    const searchInput = (typeof search === 'string' && search !== '') ? search : '';
-    const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
+      const searchInput = (typeof search === 'string' && search !== '') ? search : '';
       this.props.changeFallaciesSearchInput(searchInput);
     }
 
-    if (__APP_CONFIG__.enableHistoryForFallacies && hash) {
-      this.props.presentFallacyById(hash);
+    if (__APP_CONFIG__.enableHistoryForPageIndexes) {
+      const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
+      this.props.changeFallaciesPage(pageIndex);
+    }
+
+    if (__APP_CONFIG__.enableHistoryForFallacies) {
+      const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
+      if (hash) this.props.presentFallacyById(hash);
     }
   }
 
   mapStateToLocation() {
-    if (!__APP_CONFIG__.enableHistoryForSearch && !__APP_CONFIG__.enableHistoryForFallacies) return;
-
     const params = [];
     let hash;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       if (!_.isEmpty(this.props.searchInput)) params.push(`search=${this.props.searchInput}`);
+    }
+
+    if (__APP_CONFIG__.enableHistoryForPageIndexes) {
+      if (this.props.pageIndex > 0) params.push(`page=${this.props.pageIndex + 1}`);
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {

@@ -26,7 +26,7 @@ export default {
   enableHistoryForFilters: false,
 
   // Enable browser history for page indexes.
-  enableHistoryForPageIndex: false,
+  enableHistoryForPageIndexes: true,
 
   // Enable browser history for presented fallacies.
   enableHistoryForFallacies: true,
