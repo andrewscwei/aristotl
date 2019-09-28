@@ -14,7 +14,7 @@ interface Props {
   id?: string;
   docs: ReadonlyArray<Document>;
   isSummaryEnabled: boolean;
-  onActivate: (doc: Document) => void;
+  onActivate: (docId: string) => void;
 }
 
 class Grid extends PureComponent<Props> {
@@ -25,8 +25,9 @@ class Grid extends PureComponent<Props> {
 
   onActivate(cardIndex: number) {
     if (cardIndex >= this.props.docs.length) throw new Error(`Invalid index ${cardIndex} provided`);
-
-    this.props.onActivate(this.props.docs[cardIndex]);
+    const doc = this.props.docs[cardIndex];
+    if (!doc || !doc.uid) return;
+    this.props.onActivate(doc.uid);
   }
 
   render() {
@@ -45,7 +46,11 @@ class Grid extends PureComponent<Props> {
                   isSummaryEnabled={this.props.isSummaryEnabled}
                   transitionStatus={status}
                 >
-                  <Card doc={doc} isSummaryEnabled={this.props.isSummaryEnabled} onActivate={() => this.onActivate(i)}/>
+                  <Card
+                    doc={doc}
+                    isSummaryEnabled={this.props.isSummaryEnabled}
+                    onActivate={() => this.onActivate(i)}
+                  />
                 </StyledCard>
               )}
             </Transition>

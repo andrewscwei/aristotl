@@ -168,7 +168,7 @@ class Home extends PureComponent<Props, State> {
                   id={`${this.props.searchInput}-${this.props.pageIndex}`}
                   docs={this.props.filteredFallaciesOnCurrentPage}
                   isSummaryEnabled={this.state.isSummaryEnabled}
-                  onActivate={(doc) => doc.uid && this.props.presentFallacyById(doc.uid)}
+                  onActivate={this.props.presentFallacyById}
                 />
                 <Footer/>
               </StyledRoot>
