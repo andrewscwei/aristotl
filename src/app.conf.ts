@@ -49,7 +49,7 @@ export default {
     description: require('../package.json').description,
 
     // Search keywords.
-    keywords: require('../package.json').keywords,
+    keywords: (require('../package.json').keywords || []).join(','),
 
     // App URL.
     url: require('../package.json').homepage,

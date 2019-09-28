@@ -1,7 +1,9 @@
 {
   "name": "aristotl",
   "version": "0.1.0",
-  "description": "Intuitive logical fallacy lookup",
+  "description": "[M]ake [E]veryone [L]ogical [A]gain",
+  "homepage": "https://www.aristotl.io",
+  "keywords": ["aristotl", "aristotle", "logical", "fallacy", "fallacies", "logic", "reasoning"],
   "private": true,
   "license": "MIT",
   "scripts": {
