@@ -67,8 +67,7 @@ const StyledRoot = styled.footer`
     color: ${(props) => props.theme.colors.red};
 
     ${selectors.hwot} {
-      color: inherit;
-      text-transform: uppercase;
+      text-decoration: underline;
     }
   }
 `;
