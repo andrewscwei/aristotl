@@ -1,8 +1,9 @@
-import { animations, container, selectors } from 'promptu';
+import { animations, container, selectors, align } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/theme';
 import Pixel from './Pixel';
+import ActionButton from './ActionButton';
 
 interface Props {
   className?: string;
@@ -46,6 +47,21 @@ class Paginator extends PureComponent<Props> {
             />
           </StyledButton>
         ))}
+        <StyledPrevButton
+          symbol='<'
+          tintColor={colors.white}
+          hoverTintColor={colors.red}
+          isDisabled={this.props.numPages === 1}
+          onActivate={() => this.prev()}
+        />
+
+        <StyledNextButton
+          symbol='>'
+          tintColor={colors.white}
+          hoverTintColor={colors.red}
+          isDisabled={this.props.numPages === 1}
+          onActivate={() => this.next()}
+        />
       </StyledRoot>
     );
   }
@@ -53,12 +69,31 @@ class Paginator extends PureComponent<Props> {
 
 export default Paginator;
 
+const StyledPrevButton = styled(ActionButton)<{
+  isDisabled: boolean;
+}>`
+  ${align.cl}
+  left: -3rem;
+  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${(props) => props.isDisabled ? 0 : 1.0};
+`;
+
+const StyledNextButton = styled(ActionButton)<{
+  isDisabled: boolean;
+}>`
+  ${align.cr}
+  right: -3rem;
+  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${(props) => props.isDisabled ? 0 : 1.0};
+`;
+
 const StyledButton = styled.button<{
   isActive: boolean;
 }>`
   ${animations.transition('transform', 200, 'ease-out')}
   pointer-events: ${(props) => props.isActive ? 'none' : 'auto'};
   transform: translate3d(0, 0, 0) ${(props) => props.isActive ? 'scale(1.5)' : 'scale(1)'};
+  margin: 0 .5rem;
 
   ${selectors.hwot} {
     transform: translate3d(0, 0, 0) scale(1.5);
@@ -67,10 +102,6 @@ const StyledButton = styled.button<{
 
 const StyledRoot = styled.div`
   ${container.fhcc}
+  align-self: center;
   margin: 5rem 0 3rem;
-  width: 100%;
-
-  ${selectors.eblc} {
-    margin-right: 1rem;
-  }
 `;
