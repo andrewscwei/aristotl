@@ -47,8 +47,8 @@ export const getFallaciesFuse = createSelector([
     location: 0,
     matchAllTokens: false,
     maxPatternLength: 24,
-    minMatchCharLength: 1,
-    shouldSort: false,
+    minMatchCharLength: 0,
+    shouldSort: true,
     threshold: 0.6,
     tokenize: false,
   });
