@@ -12,8 +12,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  presentDefinitionById: typeof presentDefinitionById;
   dismissDefinitions: typeof dismissDefinitions;
+  presentDefinitionById: typeof presentDefinitionById;
   presentFallacyById: typeof presentFallacyById;
 }
 

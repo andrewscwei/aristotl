@@ -160,9 +160,9 @@ class Home extends PureComponent<Props, State> {
                 <Statistics/>
                 <Paginator
                   ref={this.nodeRefs.paginator}
-                  activePageIndex={this.props.pageIndex}
+                  pageIndex={this.props.pageIndex}
                   numPages={this.props.maxPages}
-                  onActivate={(pageIndex) => this.props.changeFallaciesPage(pageIndex)}
+                  onActivate={this.props.changeFallaciesPage}
                 />
                 <Grid
                   id={`${this.props.searchInput}-${this.props.pageIndex}`}

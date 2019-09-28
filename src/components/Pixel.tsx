@@ -1,19 +1,25 @@
 import { container } from 'promptu';
-import React, { CSSProperties, PropsWithChildren, SFC } from 'react';
+import React, { SFC } from 'react';
 import styled, { css } from 'styled-components';
 
-interface Props extends PropsWithChildren<{}> {
+interface Props {
   alignment?: 'tl' | 'tc' | 'tr' | 'bl' | 'bc' | 'br' | 'cl' | 'cr';
   className?: string;
   isHollow?: boolean;
   offset?: number;
   size?: number;
-  style?: CSSProperties;
   tintColor?: string;
 }
 
-const Pixel: SFC<Props> = ({ alignment, className, isHollow, offset, size, style, tintColor }) => (
-  <StyledRoot alignment={alignment} className={className} isHollow={isHollow || false} offset={offset || 0} style={style} size={size || 5} tintColor={tintColor || '#fff'}/>
+const Pixel: SFC<Props> = ({ alignment, className, isHollow, offset, size, tintColor }) => (
+  <StyledRoot
+    alignment={alignment}
+    className={className}
+    isHollow={isHollow || false}
+    offset={offset || 0}
+    size={size || 5}
+    tintColor={tintColor || '#fff'}
+  />
 );
 
 export default Pixel;

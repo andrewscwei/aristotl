@@ -5,43 +5,42 @@ import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
 interface Props {
-  activePageIndex: number;
   className?: string;
-  id?: string;
   numPages: number;
+  pageIndex: number;
   tintColor: string;
   onActivate: (pageIndex: number) => void;
 }
 
 class Paginator extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
-    activePageIndex: 0,
     numPages: 1,
+    pageIndex: 0,
     tintColor: colors.white,
     onActivate: () => {},
   };
 
   prev() {
-    const pageIndex = (this.props.activePageIndex + this.props.numPages - 1) % this.props.numPages;
+    const pageIndex = (this.props.pageIndex + this.props.numPages - 1) % this.props.numPages;
     this.props.onActivate(pageIndex);
   }
 
   next() {
-    const pageIndex = (this.props.activePageIndex + 1) % this.props.numPages;
+    const pageIndex = (this.props.pageIndex + 1) % this.props.numPages;
     this.props.onActivate(pageIndex);
   }
 
   render() {
     return (
-      <StyledRoot id={this.props.id} className={this.props.className}>
+      <StyledRoot className={this.props.className}>
         {[...Array(Math.max(1, this.props.numPages)).keys()].map((v, i) => (
           <StyledButton
             key={i}
-            isActive={this.props.activePageIndex === i}
+            isActive={this.props.pageIndex === i}
             onClick={() => this.props.onActivate(i)}
           >
             <Pixel
-              isHollow={this.props.activePageIndex !== i}
+              isHollow={this.props.pageIndex !== i}
               size={10}
               tintColor={this.props.tintColor}
             />
@@ -58,8 +57,8 @@ const StyledButton = styled.button<{
   isActive: boolean;
 }>`
   ${animations.transition('transform', 200, 'ease-out')}
-  transform: translate3d(0, 0, 0) ${(props) => props.isActive ? 'scale(1.5)' : 'scale(1)'};
   pointer-events: ${(props) => props.isActive ? 'none' : 'auto'};
+  transform: translate3d(0, 0, 0) ${(props) => props.isActive ? 'scale(1.5)' : 'scale(1)'};
 
   ${selectors.hwot} {
     transform: translate3d(0, 0, 0) scale(1.5);
