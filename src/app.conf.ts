@@ -20,7 +20,13 @@ export default {
   enableDebugInProduction: true,
 
   // Enable browser history for searches.
-  enableHistoryForSearch: false,
+  enableHistoryForSearch: true,
+
+  // Enable browser history for filters.
+  enableHistoryForFilters: false,
+
+  // Enable browser history for page indexes.
+  enableHistoryForPageIndex: false,
 
   // Enable browser history for presented fallacies.
   enableHistoryForFallacies: true,
