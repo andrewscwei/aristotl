@@ -27,6 +27,7 @@ class NavControlManager extends PureComponent<Props> {
 
   onKeyUp = (event: KeyboardEvent) => {
     if (!this.props.isEnabled) return;
+    if (document.activeElement instanceof HTMLInputElement) return;
 
     switch (event.keyCode) {
       case 39:

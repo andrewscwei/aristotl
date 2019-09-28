@@ -24,6 +24,7 @@ import { fetchDefinitions } from '../store/definitions';
 import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
+import { analyzeRenderCycle } from '../utils/profiler';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
@@ -52,13 +53,11 @@ interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
 }
 
 interface State {
-  isSearching: boolean;
   isSummaryEnabled: boolean;
 }
 
 class Home extends PureComponent<Props, State> {
   state: State = {
-    isSearching: false,
     isSummaryEnabled: false,
   };
 
@@ -78,14 +77,13 @@ class Home extends PureComponent<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const searchInputDidChange = prevProps.searchInput !== this.props.searchInput;
+    const activeFallacyIdDidChange = prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId;
 
-    if (__APP_CONFIG__.enableHistoryForSearch || __APP_CONFIG__.enableHistoryForFallacies) {
-      const activeFallacyIdDidChange = prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId;
-
-      if (searchInputDidChange || activeFallacyIdDidChange) {
-        this.mapStateToLocation();
-      }
+    if ((__APP_CONFIG__.enableHistoryForSearch && searchInputDidChange) || (__APP_CONFIG__.enableHistoryForFallacies && activeFallacyIdDidChange)) {
+      this.mapStateToLocation();
     }
+
+    analyzeRenderCycle(prevProps, this.props, prevState, this.state);
   }
 
   toNextPage() {
@@ -143,7 +141,7 @@ class Home extends PureComponent<Props, State> {
         <Transition in={!this.props.lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
             <NavControlManager
-              isEnabled={!this.state.isSearching && !this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
+              isEnabled={!this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
               onPrev={() => this.toPreviousPage()}
               onNext={() => this.toNextPage()}
             >
@@ -151,8 +149,6 @@ class Home extends PureComponent<Props, State> {
                 <StyledHeader>
                   <SearchBar
                     autoFocus={!this.props.lastActiveFallacyId && !this.props.lastActiveDefinitionId}
-                    onFocusIn={() => this.setState({ isSearching: true })}
-                    onFocusOut={() => this.setState({ isSearching: false })}
                   />
                   <ActionButton
                     symbol='i'

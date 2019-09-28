@@ -23,15 +23,11 @@ interface Props extends StateProps, DispatchProps {
   autoFocus: boolean;
   className?: string;
   input?: string;
-  onFocusIn: () => void;
-  onFocusOut: () => void;
 }
 
 class SearchBar extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     autoFocus: true,
-    onFocusIn: () => {},
-    onFocusOut: () => {},
   };
 
   nodeRefs = {
@@ -79,8 +75,6 @@ class SearchBar extends PureComponent<Props> {
             ref={this.nodeRefs.input}
             placeholder={ltxt('search-placeholder')}
             maxLength={24}
-            onFocus={() => this.props.onFocusIn()}
-            onBlur={() => this.props.onFocusOut()}
             onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.changeFallaciesSearchInput(event.currentTarget.value)}
           />
         </StyledInput>

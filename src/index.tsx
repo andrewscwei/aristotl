@@ -3,7 +3,7 @@
  */
 
 import isTouchDevice from 'is-touch-device';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { hydrate, render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
@@ -11,7 +11,7 @@ import App from './containers/App';
 import store from './store';
 
 if (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) {
-  window.localStorage.debug = 'app*';
+  window.localStorage.debug = 'app*,profiler*,-app:prismic';
 }
 
 // Detect touch device.

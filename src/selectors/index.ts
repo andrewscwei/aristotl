@@ -7,18 +7,24 @@ const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDe
 export const getCopyright = createSelector([
   (state: AppState) => state.copyright[state.i18n.locale],
 ], (doc) => {
+  debug('Getting localized copyright...', 'OK');
+
   return doc;
 });
 
 export const getDefinitions = createSelector([
   (state: AppState) => state.definitions.docs[state.i18n.locale] || [],
 ], (docs) => {
+  debug('Getting localized definitions...', 'OK', `${docs.length} results`);
+
   return docs;
 });
 
 export const getFallacies = createSelector([
   (state: AppState) => state.fallacies.docs[state.i18n.locale] || [],
 ], (docs) => {
+  debug('Getting localized fallacies...', 'OK', `${docs.length} results`);
+
   return docs;
 });
 
@@ -47,7 +53,7 @@ export const getFilteredFallacies = createSelector([
     return true;
   });
 
-  debug('Getting filtered fallacies...', 'OK', fres);
+  debug('Getting filtered fallacies...', 'OK', `${fres.length} results`);
 
   return fres;
 });
@@ -56,18 +62,28 @@ export const getFilteredFallaciesInPageChunks = createSelector([
   getFilteredFallacies,
   (state: AppState) => state.fallacies.pageSize,
 ], (docs, pageSize) => {
-  return _.chunk(docs, pageSize);
+  const chunks = _.chunk(docs, pageSize);
+
+  debug('Getting filtered fallacies in page chunks...', 'OK', `${chunks.length} chunk(s)`);
+
+  return chunks;
 });
 
 export const getFilteredFallaciesOnCurrentPage = createSelector([
   getFilteredFallaciesInPageChunks,
   (state: AppState) => state.fallacies.pageIndex,
 ], (chunks, pageIndex) => {
-  return chunks[pageIndex] || [];
+  const res = chunks[pageIndex] || [];
+
+  debug('Getting filtered fallacies on current page...', 'OK', `${res.length} results`);
+
+  return res;
 });
 
 export const getMaxPagesOfFilteredFallacies = createSelector([
   getFilteredFallaciesInPageChunks,
 ], (chunks) => {
+  debug('Getting max pages of filtered fallacies...', 'OK', chunks.length);
+
   return chunks.length;
 });
