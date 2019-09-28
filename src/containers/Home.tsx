@@ -21,17 +21,16 @@ import NavControlManager from '../managers/NavControlManager';
 import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies';
+import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, FallaciesFilters, fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
-
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
   definitions: ReadonlyArray<Document>;
   fallacies: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
   filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
+  filters: FallaciesFilters;
   lastActiveDefinitionId?: string;
   lastActiveFallacyId?: string;
   maxPages: number;
@@ -85,9 +84,10 @@ class Home extends PureComponent<Props, State> {
   componentDidUpdate(prevProps: Props, prevState: State) {
     const searchInputDidChange = __APP_CONFIG__.enableHistoryForSearch && (prevProps.searchInput !== this.props.searchInput);
     const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex);
+    const filtersDidChange = __APP_CONFIG__.enableHistoryForFilters && (!_.isEqual(prevProps.filters, this.props.filters));
     const activeFallacyIdDidChange = __APP_CONFIG__.enableHistoryForFallacies && (prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId);
 
-    if (searchInputDidChange || pageIndexDidChange || activeFallacyIdDidChange) {
+    if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdDidChange) {
       this.mapStateToLocation();
     }
   }
@@ -105,7 +105,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   mapLocationToState() {
-    const { search, page } = qs.parse(this.props.location.search);
+    const { search, page, formal, informal, alpha, beta, gamma } = qs.parse(this.props.location.search);
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       const searchInput = (typeof search === 'string' && search !== '') ? search : '';
@@ -115,6 +115,16 @@ class Home extends PureComponent<Props, State> {
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
       const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
       this.props.changeFallaciesPage(pageIndex);
+    }
+
+    if (__APP_CONFIG__.enableHistoryForFilters) {
+      this.props.changeFallaciesFilters({
+        formal: formal !== 'no',
+        informal: informal !== 'no',
+        alpha: alpha !== 'no',
+        beta: beta !== 'no',
+        gamma: gamma !== 'no',
+      });
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
@@ -133,6 +143,14 @@ class Home extends PureComponent<Props, State> {
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
       if (this.props.pageIndex > 0) params.push(`page=${this.props.pageIndex + 1}`);
+    }
+
+    if (__APP_CONFIG__.enableHistoryForFilters) {
+      if (!this.props.filters.formal) params.push('formal=no');
+      if (!this.props.filters.informal) params.push('informal=no');
+      if (!this.props.filters.alpha) params.push('alpha=no');
+      if (!this.props.filters.beta) params.push('beta=no');
+      if (!this.props.filters.gamma) params.push('gamma=no');
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
@@ -204,6 +222,7 @@ export default connect(
     fallacies: getFallacies(state),
     filteredFallacies: getFilteredFallacies(state),
     filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
+    filters: state.fallacies.filters,
     lastActiveDefinitionId: state.definitions.lastActiveDocId,
     lastActiveFallacyId: state.fallacies.lastActiveDocId,
     maxPages: getMaxPagesOfFilteredFallacies(state),

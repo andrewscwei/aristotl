@@ -23,7 +23,7 @@ export default {
   enableHistoryForSearch: true,
 
   // Enable browser history for filters.
-  enableHistoryForFilters: false,
+  enableHistoryForFilters: true,
 
   // Enable browser history for page indexes.
   enableHistoryForPageIndexes: true,
