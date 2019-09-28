@@ -12,8 +12,8 @@ export function linkResolver(doc: Document): string {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
 
   switch (doc.type) {
-    case 'definition': return getLocalizedPath(`#definitions/${doc.id}`, locale);
-    case 'fallacy': return getLocalizedPath(`#fallacies/${doc.id}`, locale);
+    case 'definition': return getLocalizedPath(`/#def-${doc.id}`, locale);
+    case 'fallacy': return getLocalizedPath(`/#${doc.uid}`, locale);
     default: return getLocalizedPath('/');
   }
 }

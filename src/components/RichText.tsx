@@ -46,18 +46,18 @@ class RichText extends PureComponent<Props> {
 
         if (!href) return undefined;
 
-        if (href.startsWith('#definitions')) {
-          const matches = href.match(/#definitions\/(.*)/);
+        if (href.startsWith('/#def-')) {
+          const matches = href.match(/\/#def-(.*)/);
           const docId = _.get(matches, '1');
+
           if (!docId) return undefined;
 
           return (
             <a onClick={this.onActivateDefinition(docId)}>{domToReact(node.children)}</a>
           );
         }
-
-        if (href.startsWith('#fallacies')) {
-          const matches = href.match(/#fallacies\/(.*)/);
+        else if (href.startsWith('/#')) {
+          const matches = href.match(/\/#(.*)/);
           const docId = _.get(matches, '1');
           if (!docId) return undefined;
 
@@ -75,8 +75,8 @@ export default connect(
 
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    presentDefinitionById,
     dismissDefinitions,
+    presentDefinitionById,
     presentFallacyById,
   }, dispatch),
 )(RichText);
