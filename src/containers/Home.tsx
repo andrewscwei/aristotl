@@ -26,6 +26,8 @@ import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 interface StateProps {
+  activeDefinitionIds: ReadonlyArray<string>;
+  activeFallacyIds: ReadonlyArray<string>;
   definitions: ReadonlyArray<Document>;
   fallacies: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
@@ -79,9 +81,9 @@ class Home extends PureComponent<Props, State> {
     const searchInputDidChange = __APP_CONFIG__.enableHistoryForSearch && (prevProps.searchInput !== this.props.searchInput);
     const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex);
     const filtersDidChange = __APP_CONFIG__.enableHistoryForFilters && (!_.isEqual(prevProps.filters, this.props.filters));
-    const activeFallacyIdDidChange = __APP_CONFIG__.enableHistoryForFallacies && (prevProps.lastActiveFallacyId !== this.props.lastActiveFallacyId);
+    const activeFallacyIdsDidChange = __APP_CONFIG__.enableHistoryForFallacies && (!_.isEqual(prevProps.activeFallacyIds, this.props.activeFallacyIds));
 
-    if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdDidChange) {
+    if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdsDidChange) {
       this.mapStateToLocation();
     }
   }
@@ -99,7 +101,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   mapLocationToState() {
-    const { search, page, formal, informal, alpha, beta, gamma } = qs.parse(this.props.location.search);
+    const { search, page, formal, informal, alpha, beta, gamma, fallacies } = qs.parse(this.props.location.search);
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       const searchInput = (typeof search === 'string' && search !== '') ? search : '';
@@ -122,39 +124,50 @@ class Home extends PureComponent<Props, State> {
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
-      const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
-      if (hash) this.props.presentFallacyById(hash);
+      const activeFallacyId = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
+
+      if (fallacies) {
+        for (const fallacyId of fallacies) {
+          this.props.presentFallacyById(fallacyId);
+        }
+      }
+
+      if (activeFallacyId) this.props.presentFallacyById(activeFallacyId);
     }
   }
 
   mapStateToLocation() {
-    const params = [];
+    const params: any = {};
     let hash;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      if (!_.isEmpty(this.props.searchInput)) params.push(`search=${this.props.searchInput}`);
+      if (!_.isEmpty(this.props.searchInput)) params.search =this.props.searchInput;
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
-      if (this.props.pageIndex > 0) params.push(`page=${this.props.pageIndex + 1}`);
+      if (this.props.pageIndex > 0) params.page = this.props.pageIndex + 1;
     }
 
     if (__APP_CONFIG__.enableHistoryForFilters) {
-      if (!this.props.filters.formal) params.push('formal=no');
-      if (!this.props.filters.informal) params.push('informal=no');
-      if (!this.props.filters.alpha) params.push('alpha=no');
-      if (!this.props.filters.beta) params.push('beta=no');
-      if (!this.props.filters.gamma) params.push('gamma=no');
+      if (!this.props.filters.formal) params.formal = 'no';
+      if (!this.props.filters.informal) params.informal = 'no';
+      if (!this.props.filters.alpha) params.alpha = 'no';
+      if (!this.props.filters.beta) params.beta = 'no';
+      if (!this.props.filters.gamma) params.gamma = 'no';
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
-      hash = this.props.lastActiveFallacyId;
+      const lastActiveId = _.last(this.props.activeFallacyIds);
+      const prevActiveIds = _.dropRight(this.props.activeFallacyIds);
+      hash = lastActiveId;
+
+      if (prevActiveIds.length > 0) params.fallacies = prevActiveIds;
     }
 
     const location = {
       pathname: '/',
       hash,
-      search: (params.length > 0) ? `?${params.join('&')}` : '',
+      search: _.isEmpty(params) ? undefined : `?${qs.stringify(params)}`,
     };
 
     this.props.history.replace(location);
@@ -212,13 +225,15 @@ class Home extends PureComponent<Props, State> {
 
 export default connect(
   (state: AppState): StateProps => ({
+    activeDefinitionIds: state.definitions.activeDocIds,
+    activeFallacyIds: state.fallacies.activeDocIds,
     definitions: getDefinitions(state),
     fallacies: getFallacies(state),
     filteredFallacies: getFilteredFallacies(state),
     filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     filters: state.fallacies.filters,
-    lastActiveDefinitionId: state.definitions.lastActiveDocId,
-    lastActiveFallacyId: state.fallacies.lastActiveDocId,
+    lastActiveDefinitionId: _.last(state.definitions.activeDocIds),
+    lastActiveFallacyId: _.last(state.fallacies.activeDocIds),
     maxPages: getMaxPagesOfFilteredFallacies(state),
     pageIndex: state.fallacies.pageIndex,
     pageSize: state.fallacies.pageSize,

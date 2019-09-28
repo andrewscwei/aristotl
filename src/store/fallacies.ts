@@ -28,7 +28,6 @@ export interface FallaciesState {
   activeDocIds: Array<string>;
   docs: { [locale: string]: ReadonlyArray<Document> };
   filters: FallaciesFilters;
-  lastActiveDocId?: string;
   pageIndex: number;
   pageSize: number;
   searchInput: string;
@@ -48,7 +47,6 @@ const initialState: FallaciesState = {
     beta: true,
     gamma: true,
   },
-  lastActiveDocId: undefined,
   pageSize: 20,
   pageIndex: 0,
   searchInput: '',
@@ -81,7 +79,6 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds,
-        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -95,7 +92,6 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds,
-        lastActiveDocId: _.last(activeDocIds),
       };
     }
 
@@ -103,7 +99,6 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       return {
         ...state,
         activeDocIds: [],
-        lastActiveDocId: undefined,
       };
     }
 
