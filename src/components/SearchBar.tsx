@@ -128,7 +128,6 @@ const StyledInput = styled.div`
   ${container.fvcl}
   ${(props) => props.theme.fonts.search}
   color: ${(props) => props.theme.colors.white};
-  font-family: 'RobotoMono';
   font-size: 2rem;
   height: 5rem;
   width: 100%;

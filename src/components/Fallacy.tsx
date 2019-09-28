@@ -288,7 +288,6 @@ const StyledNextButton = styled(ActionButton)<{
 const StyledContent = styled.div`
   padding: 1rem 1rem;
   width: 100%;
-  font-family: 'RobotoMono';
   font-weight: 400;
   font-size: 1.4rem;
 
@@ -384,7 +383,6 @@ const StyledLabel = styled.div`
   ${container.fhcl}
   background: ${(props) => props.theme.colors.black};
   color: ${(props) => props.theme.colors.white};
-  font-family: 'NovaMono';
   font-size: 1.4rem;
   font-weight: 400;
   padding: .4rem 1rem;
@@ -418,7 +416,6 @@ const StyledAbbreviation = styled.div`
 `;
 
 const StyledName = styled.h1`
-  font-family: 'RobotoMono';
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 120%;

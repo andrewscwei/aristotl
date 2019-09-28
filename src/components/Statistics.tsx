@@ -134,12 +134,11 @@ const StyledFormalIcon = styled(Pixel)`
 `;
 
 const StyledInformalIcon = styled(Pixel)`
-${animations.transition('border-color', 200, 'ease-out')}
+  ${animations.transition('border-color', 200, 'ease-out')}
 `;
 
 const StyledCount = styled.div`
   ${container.fhcl}
-  font-family: 'RobotoMono';
   font-size: 1.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.colors.white};
@@ -158,7 +157,6 @@ const StyledFilterButton = styled.button<{
 }>`
   ${container.fhcl}
   ${animations.transition('opacity', 200, 'ease-out')}
-  font-family: 'RobotoMono';
   font-size: 1.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.colors.white};

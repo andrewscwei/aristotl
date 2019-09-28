@@ -86,7 +86,6 @@ const StyledConnect = styled.div`
 
 const StyledRoot = styled.footer`
   color: ${(props) => props.theme.colors.grey};
-  font-family: 'RobotoMono';
   font-size: 1.2rem;
   font-weight: 400;
   margin-top: 10rem;

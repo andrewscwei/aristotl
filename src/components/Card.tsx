@@ -106,7 +106,6 @@ const StyledSummary = styled.div`
 
   p {
     line-height: 1.8rem;
-    font-family: 'RobotoMono';
     font-size: 1.4rem;
     font-weight: 400;
   }
@@ -114,7 +113,6 @@ const StyledSummary = styled.div`
 
 const StyledType = styled.div`
   ${container.fhcl}
-  font-family: 'RobotoMono';
   font-size: 1.1rem;
   font-weight: 400;
   height: 2rem;
@@ -161,7 +159,6 @@ const StyledAbbreviation = styled.div`
 const StyledAliases = styled.div`
   ${container.fhtl}
   color: ${(props) => props.theme.colors.grey};
-  font-family: 'RobotoMono';
   font-size: 1.2rem;
   font-weight: 400;
   hyphens: auto;
@@ -174,7 +171,6 @@ const StyledAliases = styled.div`
 
 const StyledName = styled.h1`
   color: ${(props) => props.theme.colors.lightGrey};
-  font-family: 'RobotoMono';
   font-size: 1.3rem;
   font-weight: 400;
   hyphens: auto;

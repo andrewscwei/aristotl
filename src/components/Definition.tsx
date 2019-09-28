@@ -100,7 +100,6 @@ const StyledAliases = styled.div`
 `;
 
 const StyledTitle = styled.h2`
-  font-family: 'RobotoMono';
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -200,7 +199,7 @@ const StyledContent = styled.div`
 
     ${selectors.hwot} {
       color: inherit;
-      opacity: 0.6;
+      opacity: .6;
     }
   }
 `;
@@ -216,7 +215,6 @@ const StyledDivider = styled.hr`
 const StyledRoot = styled.div`
   background: ${(props) => props.theme.colors.pink};
   color: ${(props) => props.theme.colors.darkBlue};
-  font-family: 'RobotoMono';
   font-size: 1.4rem;
   font-weight: 400;
   padding: 6rem 0 3rem;

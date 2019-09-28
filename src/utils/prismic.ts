@@ -12,9 +12,9 @@ export function linkResolver(doc: Document): string {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
 
   switch (doc.type) {
-  case 'definition': return `#definitions/${doc.id}`;
-  case 'fallacy': return `#fallacies/${doc.id}`;
-  default: return '/';
+    case 'definition': return getLocalizedPath(`#definitions/${doc.id}`, locale);
+    case 'fallacy': return getLocalizedPath(`#fallacies/${doc.id}`, locale);
+    default: return getLocalizedPath('/');
   }
 }
 
@@ -24,14 +24,14 @@ export function localeResolver(locale: string, reverse: boolean = false): string
 
   if (reverse) {
     switch (locale) {
-    default: return 'en';
+      default: return 'en';
     }
   }
   else {
     if (supportedLocales.indexOf(locale) < 0) return defaultLocale;
 
     switch (locale) {
-    default: return 'en-us';
+      default: return 'en-us';
     }
   }
 }
@@ -218,25 +218,4 @@ export function getDocs(doc?: Document, path: string = '', subpath: string = '',
   const matchedDocs = _.intersectionWith(lookupDocs, docs, (lookupDoc, doc) => lookupDoc.id === doc.id);
 
   return matchedDocs;
-}
-
-export function shallowEqualDoc(doc1?: Document, doc2?: Document): boolean {
-  if ((doc1 === undefined) && (doc2 === undefined)) return true;
-  if ((doc1 === undefined) || (doc2 === undefined)) return false;
-  if (doc1.id === doc2.id) return true;
-  return false;
-}
-
-export function shallowEqualDocs(docs1?: ReadonlyArray<Document>, docs2?: ReadonlyArray<Document>): boolean {
-  if ((docs1 === undefined) && (docs2 === undefined)) return true;
-  if ((docs1 === undefined) || (docs2 === undefined)) return false;
-  if (docs1.length !== docs2.length) return false;
-
-  const n = docs1.length;
-
-  for (let i = 0; i < n; i++) {
-    if (!shallowEqualDoc(docs1[i], docs2[i])) return false;
-  }
-
-  return true;
 }

@@ -54,7 +54,6 @@ export default connect(
 
 const StyledTitle = styled.h1`
   color: ${(props) => props.theme.colors.white};
-  font-family: 'RobotoMono';
   font-size: 2.4em;
   font-weight: 400;
   margin: 0;
