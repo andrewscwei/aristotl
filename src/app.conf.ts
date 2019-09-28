@@ -14,7 +14,7 @@ export default {
   buildNumber: process.env.BUILD_NUMBER || 0,
 
   // Google Analytics ID (i.e. UA-XXXXXXXX-1)
-  ga: undefined,
+  ga: 'UA-108117457-5',
 
   // Enable debugger in production.
   enableDebugInProduction: true,
