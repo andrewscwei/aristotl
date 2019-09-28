@@ -33,8 +33,6 @@ interface StateProps {
   filteredFallacies: ReadonlyArray<Document>;
   filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
   filters: FallaciesFilters;
-  lastActiveDefinitionId?: string;
-  lastActiveFallacyId?: string;
   maxPages: number;
   pageIndex: number;
   pageSize: number;
@@ -101,7 +99,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   mapLocationToState() {
-    const { search, page, formal, informal, alpha, beta, gamma, fallacies } = qs.parse(this.props.location.search);
+    const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, f: fallacies } = qs.parse(this.props.location.search);
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       const searchInput = (typeof search === 'string' && search !== '') ? search : '';
@@ -127,8 +125,13 @@ class Home extends PureComponent<Props, State> {
       const activeFallacyId = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
 
       if (fallacies) {
-        for (const fallacyId of fallacies) {
-          this.props.presentFallacyById(fallacyId);
+        if (typeof fallacies === 'string') {
+          this.props.presentFallacyById(fallacies);
+        }
+        else {
+          for (const fallacyId of fallacies) {
+            this.props.presentFallacyById(fallacyId);
+          }
         }
       }
 
@@ -141,19 +144,19 @@ class Home extends PureComponent<Props, State> {
     let hash;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      if (!_.isEmpty(this.props.searchInput)) params.search =this.props.searchInput;
+      if (!_.isEmpty(this.props.searchInput)) params.s =this.props.searchInput;
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
-      if (this.props.pageIndex > 0) params.page = this.props.pageIndex + 1;
+      if (this.props.pageIndex > 0) params.p = this.props.pageIndex + 1;
     }
 
     if (__APP_CONFIG__.enableHistoryForFilters) {
-      if (!this.props.filters.formal) params.formal = 'no';
-      if (!this.props.filters.informal) params.informal = 'no';
-      if (!this.props.filters.alpha) params.alpha = 'no';
-      if (!this.props.filters.beta) params.beta = 'no';
-      if (!this.props.filters.gamma) params.gamma = 'no';
+      if (!this.props.filters.formal) params.ff = 'no';
+      if (!this.props.filters.informal) params.fi = 'no';
+      if (!this.props.filters.alpha) params.fa = 'no';
+      if (!this.props.filters.beta) params.fb = 'no';
+      if (!this.props.filters.gamma) params.fg = 'no';
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
@@ -161,7 +164,7 @@ class Home extends PureComponent<Props, State> {
       const prevActiveIds = _.dropRight(this.props.activeFallacyIds);
       hash = lastActiveId;
 
-      if (prevActiveIds.length > 0) params.fallacies = prevActiveIds;
+      if (prevActiveIds.length > 0) params.f = prevActiveIds;
     }
 
     const location = {
@@ -174,19 +177,22 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
+    const lastActiveFallacyId =_.last(this.props.activeFallacyIds);
+    const lastActiveDefinitionId =_.last(this.props.activeDefinitionIds);
+
     return (
       <Fragment>
-        <Transition in={!this.props.lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
+        <Transition in={!lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {(status) => (
             <NavControlManager
-              isEnabled={!this.props.lastActiveDefinitionId && !this.props.lastActiveFallacyId}
+              isEnabled={!lastActiveDefinitionId && !lastActiveFallacyId}
               onPrev={() => this.toPreviousPage()}
               onNext={() => this.toNextPage()}
             >
               <StyledRoot transitionStatus={status}>
                 <StyledHeader>
                   <SearchBar
-                    autoFocus={!this.props.lastActiveFallacyId && !this.props.lastActiveDefinitionId}
+                    autoFocus={!lastActiveFallacyId && !lastActiveDefinitionId}
                   />
                   <ActionButton
                     symbol='i'
@@ -232,8 +238,6 @@ export default connect(
     filteredFallacies: getFilteredFallacies(state),
     filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     filters: state.fallacies.filters,
-    lastActiveDefinitionId: _.last(state.definitions.activeDocIds),
-    lastActiveFallacyId: _.last(state.fallacies.activeDocIds),
     maxPages: getMaxPagesOfFilteredFallacies(state),
     pageIndex: state.fallacies.pageIndex,
     pageSize: state.fallacies.pageSize,
