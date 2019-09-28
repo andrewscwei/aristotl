@@ -1,4 +1,4 @@
-import { container, align } from 'promptu';
+import { container } from 'promptu';
 import React, { CSSProperties, PropsWithChildren, SFC } from 'react';
 import styled, { css } from 'styled-components';
 

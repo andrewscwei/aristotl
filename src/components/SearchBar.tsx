@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
-import { searchFallacies } from '../store/fallacies';
+import { changeFallaciesSearchInput } from '../store/fallacies';
 import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import ActionButton from './ActionButton';
@@ -16,7 +16,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  searchFallacies: typeof searchFallacies;
+  changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
 }
 
 interface Props extends StateProps, DispatchProps {
@@ -81,7 +81,7 @@ class SearchBar extends PureComponent<Props> {
             maxLength={24}
             onFocus={() => this.props.onFocusIn()}
             onBlur={() => this.props.onFocusOut()}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.searchFallacies(event.currentTarget.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.changeFallaciesSearchInput(event.currentTarget.value)}
           />
         </StyledInput>
         <StyledActionButton
@@ -89,7 +89,7 @@ class SearchBar extends PureComponent<Props> {
           isTogglable={true}
           tintColor={colors.white}
           hoverTintColor={colors.red}
-          onActivate={() => this.props.searchFallacies('')}
+          onActivate={() => this.props.changeFallaciesSearchInput('')}
         />
       </StyledRoot>
     );
@@ -102,7 +102,7 @@ export default connect(
     searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    searchFallacies,
+    changeFallaciesSearchInput,
   }, dispatch),
 )(SearchBar);
 

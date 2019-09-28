@@ -18,34 +18,33 @@ import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
+import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
-import { changePageIndex, FallaciesFilters, fetchFallacies, filterFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies, presentFallacyById, searchFallacies } from '../store/fallacies';
+import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
-  docsPerPage: number;
-  fallacyDict: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
   filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
-  maxPages: number;
-  filters: FallaciesFilters;
   lastActiveDefinitionId?: string;
   lastActiveFallacyId?: string;
+  maxPages: number;
   pageIndex: number;
+  pageSize: number;
   searchInput: string;
 }
 
 interface DispatchProps {
-  changePageIndex: typeof changePageIndex;
+  changeFallaciesFilters: typeof changeFallaciesFilters;
+  changeFallaciesPage: typeof changeFallaciesPage;
+  changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
   fetchDefinitions: typeof fetchDefinitions;
   fetchFallacies: typeof fetchFallacies;
-  filterFallacies: typeof filterFallacies;
   presentFallacyById: typeof presentFallacyById;
-  searchFallacies: typeof searchFallacies;
 }
 
 interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
@@ -107,7 +106,7 @@ class Home extends PureComponent<Props, State> {
     const hash = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      this.props.searchFallacies(searchInput);
+      this.props.changeFallaciesSearchInput(searchInput);
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies && hash) {
@@ -166,7 +165,7 @@ class Home extends PureComponent<Props, State> {
                   />
                 </StyledHeader>
                 <Statistics
-                  docsPerPage={this.props.docsPerPage}
+                  pageSize={this.props.pageSize}
                   pageIndex={this.props.pageIndex}
                   results={this.props.filteredFallacies}
                 />
@@ -174,7 +173,7 @@ class Home extends PureComponent<Props, State> {
                   ref={this.nodeRefs.paginator}
                   activePageIndex={this.props.pageIndex}
                   numPages={this.props.maxPages}
-                  onActivate={(pageIndex) => this.props.changePageIndex(pageIndex)}
+                  onActivate={(pageIndex) => this.props.changeFallaciesPage(pageIndex)}
                 />
                 <Grid
                   id={`${this.props.searchInput}-${this.props.pageIndex}`}
@@ -196,32 +195,30 @@ class Home extends PureComponent<Props, State> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    docsPerPage: state.fallacies.docsPerPage,
-    fallacyDict: state.fallacies.docs[state.i18n.locale] || [],
-    filteredFallacies: getFilteredFallacies(state.fallacies),
-    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state.fallacies),
-    maxPages: getMaxPagesOfFilteredFallacies(state.fallacies),
-    filters: state.fallacies.filters,
+    filteredFallacies: getFilteredFallacies(state),
+    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     lastActiveDefinitionId: state.definitions.lastActiveDocId,
     lastActiveFallacyId: state.fallacies.lastActiveDocId,
+    maxPages: getMaxPagesOfFilteredFallacies(state),
     pageIndex: state.fallacies.pageIndex,
+    pageSize: state.fallacies.pageSize,
     searchInput: state.fallacies.searchInput,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    changePageIndex,
+    changeFallaciesFilters,
+    changeFallaciesPage,
+    changeFallaciesSearchInput,
     fetchDefinitions,
     fetchFallacies,
-    filterFallacies,
     presentFallacyById,
-    searchFallacies,
   }, dispatch),
 )(Home);
 
 const StyledHeader = styled.header`
   ${container.fhcl}
-  width: 100%;
-  margin-bottom: 1rem;
   justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 100%;
 
   ${selectors.eblc} {
     margin-right: 2rem;

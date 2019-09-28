@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
 import { Action, Dispatch } from 'redux';
-import { createSelector } from 'reselect';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacies') : () => {};
@@ -29,12 +28,11 @@ export enum FallaciesActionType {
 export interface FallaciesState {
   activeDocIds: Array<string>;
   docs: { [locale: string]: ReadonlyArray<Document> };
-  fdocs: { [locale: string]: Readonly<Fuse<Document>> };
   filters: FallaciesFilters;
+  fuses: { [locale: string]: Readonly<Fuse<Document>> };
   lastActiveDocId?: string;
   pageIndex: number;
-  docsPerPage: number;
-  sdocs: ReadonlyArray<Document>;
+  pageSize: number;
   searchInput: string;
 }
 
@@ -45,7 +43,7 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 const initialState: FallaciesState = {
   activeDocIds: [],
   docs: {},
-  fdocs: {},
+  fuses: {},
   filters: {
     formal: true,
     informal: true,
@@ -54,25 +52,24 @@ const initialState: FallaciesState = {
     gamma: true,
   },
   lastActiveDocId: undefined,
-  docsPerPage: 20,
+  pageSize: 20,
   pageIndex: 0,
-  sdocs: [],
   searchInput: '',
 };
 
 export default function reducer(state = initialState, action: FallaciesAction): FallaciesState {
   switch (action.type) {
     case FallaciesActionType.LOADED: {
-      const { locale, docs: newDocs } = action.payload;
+      const { locale, docs } = action.payload;
 
-      const dict = {
+      const newDocs = {
         ...state.docs,
-        [locale]: newDocs,
+        [locale]: docs,
       };
 
-      const fdict = {
-        ...state.fdocs,
-        [locale]: new Fuse(newDocs, {
+      const newFuses = {
+        ...state.fuses,
+        [locale]: new Fuse(docs, {
           matchAllTokens: true,
           maxPatternLength: 24,
           minMatchCharLength: 0,
@@ -91,8 +88,8 @@ export default function reducer(state = initialState, action: FallaciesAction): 
 
       return {
         ...state,
-        docs: dict,
-        fdocs: fdict,
+        docs: newDocs,
+        fuses: newFuses,
       };
     }
 
@@ -218,7 +215,7 @@ export function dismissAllFallacies() {
   };
 }
 
-export function searchFallacies(searchInput: string) {
+export function changeFallaciesSearchInput(searchInput: string) {
   debug('Searching fallacies...', 'OK', searchInput);
 
   return {
@@ -229,7 +226,7 @@ export function searchFallacies(searchInput: string) {
   };
 }
 
-export function filterFallacies(filters: FallaciesFilters) {
+export function changeFallaciesFilters(filters: FallaciesFilters) {
   debug('Filtering fallacies...', 'OK', filters);
 
   return {
@@ -240,7 +237,7 @@ export function filterFallacies(filters: FallaciesFilters) {
   };
 }
 
-export function changePageIndex(pageIndex: number) {
+export function changeFallaciesPage(pageIndex: number) {
   debug('Changing page index...', 'OK', pageIndex);
 
   return {
@@ -250,53 +247,3 @@ export function changePageIndex(pageIndex: number) {
     },
   };
 }
-
-export const getFilteredFallacies = createSelector([
-  (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
-  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
-  (state: FallaciesState) => state.searchInput,
-  (state: FallaciesState) => state.filters,
-], (docs, fdocs, searchInput, filters) => {
-  const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
-  const fres = _.filter(res, (v) => {
-    const types = _.get(v, 'data.types');
-    const inheritance = _.get(v, 'data.inheritance');
-    const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
-    const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-    const isAlpha = inheritance.length === 0;
-    const isBeta = inheritance.length === 1;
-    const isGamma = inheritance.length >= 2;
-
-    if (isFormal && !filters.formal) return false;
-    if (isInformal && !filters.informal) return false;
-    if (isAlpha && !filters.alpha) return false;
-    if (isBeta && !filters.beta) return false;
-    if (isGamma && !filters.gamma) return false;
-
-    return true;
-  });
-
-  debug('Getting filtered fallacies...', 'OK', fres);
-
-  return fres;
-});
-
-export const getFilteredFallaciesInPageChunks = createSelector([
-  getFilteredFallacies,
-  (state: FallaciesState) => state.docsPerPage,
-], (docs, docsPerPage) => {
-  return _.chunk(docs, docsPerPage);
-});
-
-export const getFilteredFallaciesOnCurrentPage = createSelector([
-  getFilteredFallaciesInPageChunks,
-  (state: FallaciesState) => state.pageIndex,
-], (chunks, pageIndex) => {
-  return chunks[pageIndex] || [];
-});
-
-export const getMaxPagesOfFilteredFallacies = createSelector([
-  getFilteredFallaciesInPageChunks,
-], (chunks) => {
-  return chunks.length;
-});

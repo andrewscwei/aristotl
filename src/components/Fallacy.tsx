@@ -5,6 +5,7 @@ import React, { forwardRef, MouseEvent, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { getDefinitions, getFallacies } from '../selectors';
 import { AppState } from '../store';
 import { presentDefinitionById } from '../store/definitions';
 import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
@@ -16,8 +17,8 @@ import Pixel from './Pixel';
 import RichText from './RichText';
 
 interface StateProps {
-  definitionDict: ReadonlyArray<Document>;
-  fallacyDict: ReadonlyArray<Document>;
+  definitions: ReadonlyArray<Document>;
+  fallacies: ReadonlyArray<Document>;
   i18n: I18nState;
 }
 
@@ -41,7 +42,7 @@ interface Props extends StateProps, DispatchProps, OwnProps {}
 class Fallacy extends PureComponent<Props> {
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
-    return _.find(this.props.fallacyDict, (v) => v.uid === this.props.docId);
+    return _.find(this.props.fallacies, (v) => v.uid === this.props.docId);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -79,13 +80,13 @@ class Fallacy extends PureComponent<Props> {
     const abbreviation = getText(this.doc, 'data.abbreviation');
     const name = getText(this.doc, 'data.name');
     const aliases = _.sortBy(getTexts(this.doc, 'data.aliases', 'name'));
-    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitionDict);
-    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'fallacy', this.props.fallacyDict);
-    const inheritanceDocs = getDocs(this.doc, 'data.inheritance', 'fallacy', this.props.fallacyDict);
+    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitions);
+    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'fallacy', this.props.fallacies);
+    const inheritanceDocs = getDocs(this.doc, 'data.inheritance', 'fallacy', this.props.fallacies);
     const descriptionMarkup = getMarkup(this.doc, 'data.description');
     const exampleMarkups = _.sortBy(getMarkups(this.doc, 'data.examples', 'example'));
     const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
-    const relatedDocs = _.sortBy(getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacyDict), 'data.name');
+    const relatedDocs = _.sortBy(getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacies), 'data.name');
 
     return (
       <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
@@ -236,8 +237,8 @@ class Fallacy extends PureComponent<Props> {
 
 const ConnectedFallacy = connect(
   (state: AppState): StateProps => ({
-    definitionDict: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
-    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
+    definitions: getDefinitions(state),
+    fallacies: getFallacies(state),
     i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({

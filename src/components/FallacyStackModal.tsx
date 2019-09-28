@@ -9,6 +9,7 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import Fallacy from '../components/Fallacy';
 import Modal from '../components/Modal';
+import { getFallacies } from '../selectors';
 import { AppState } from '../store';
 import { dismissFallacyById, presentFallacyById } from '../store/fallacies';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
@@ -16,15 +17,14 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacy-stack-modal') : () => {};
 
 interface StateProps {
-  activeFallacyIds: Array<string>;
   activeDefinitionIds: Array<string>;
-  fallacyDict: ReadonlyArray<Document>;
-
+  activeFallacyIds: Array<string>;
+  fallacies: ReadonlyArray<Document>;
 }
 
 interface DispatchProps {
-  presentFallacyById: typeof presentFallacyById;
   dismissFallacyById: typeof dismissFallacyById;
+  presentFallacyById: typeof presentFallacyById;
 }
 
 interface Props extends StateProps, DispatchProps {
@@ -33,15 +33,15 @@ interface Props extends StateProps, DispatchProps {
 
 class FallacyStackModal extends PureComponent<Props> {
   getPrevDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.uid === currDocId);
+    const currIndex = _.findIndex(this.props.fallacies, (v) => v.uid === currDocId);
     if (currIndex < 1) return undefined;
-    return this.props.fallacyDict[currIndex - 1];
+    return this.props.fallacies[currIndex - 1];
   }
 
   getNextDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacyDict, (v) => v.uid === currDocId);
-    if (currIndex >= (this.props.fallacyDict.length - 1)) return undefined;
-    return this.props.fallacyDict[currIndex + 1];
+    const currIndex = _.findIndex(this.props.fallacies, (v) => v.uid === currDocId);
+    if (currIndex >= (this.props.fallacies.length - 1)) return undefined;
+    return this.props.fallacies[currIndex + 1];
   }
 
   onPrev(currDocId: string) {
@@ -97,9 +97,9 @@ class FallacyStackModal extends PureComponent<Props> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    activeFallacyIds: state.fallacies.activeDocIds,
     activeDefinitionIds: state.definitions.activeDocIds,
-    fallacyDict: state.fallacies.docs[__I18N_CONFIG__.defaultLocale] || [],
+    activeFallacyIds: state.fallacies.activeDocIds,
+    fallacies: getFallacies(state),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     presentFallacyById,

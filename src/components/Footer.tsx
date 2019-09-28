@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { getCopyright } from '../selectors';
 import { AppState } from '../store';
 import { fetchCopyright } from '../store/copyright';
 import { getMarkup } from '../utils/prismic';
@@ -37,7 +38,7 @@ class Footer extends PureComponent<Props> {
 
 export default connect(
   (state: AppState): StateProps => ({
-    copyrightDoc: state.copyright[__I18N_CONFIG__.defaultLocale],
+    copyrightDoc: getCopyright(state),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     fetchCopyright,

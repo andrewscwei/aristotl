@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { AppState } from '../store';
-import { FallaciesFilters, filterFallacies } from '../store/fallacies';
+import { changeFallaciesFilters, FallaciesFilters } from '../store/fallacies';
 import { colors } from '../styles/theme';
 import Pixel from './Pixel';
 
@@ -15,19 +15,19 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  filterFallacies: typeof filterFallacies;
+  changeFallaciesFilters: typeof changeFallaciesFilters;
 }
 
 interface Props extends StateProps, DispatchProps {
   className?: string;
-  docsPerPage: number;
+  pageSize: number;
   pageIndex: number;
   results: ReadonlyArray<Document>;
 }
 
 class Statistics extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
-    docsPerPage: 0,
+    pageSize: 0,
     pageIndex: 0,
     results: [],
   };
@@ -76,9 +76,9 @@ class Statistics extends PureComponent<Props> {
 
   render() {
     const numResults = this.props.results.length;
-    const pages = _.chunk(this.props.results, this.props.docsPerPage);
+    const pages = _.chunk(this.props.results, this.props.pageSize);
     const currResults = pages[this.props.pageIndex] || [];
-    const startIndex = this.props.docsPerPage * this.props.pageIndex + 1;
+    const startIndex = this.props.pageSize * this.props.pageIndex + 1;
     const endIndex = currResults.length + startIndex - 1;
     const numFormals = this.countFormals(currResults);
     const numInformals = this.countInformals(currResults);
@@ -95,23 +95,23 @@ class Statistics extends PureComponent<Props> {
             <span>{startIndex}-{endIndex} / {numResults}</span>
           }
         </StyledCount>
-        <StyledFilterButton isActive={this.props.filters.formal} onClick={() => this.props.filterFallacies({ ...this.props.filters, formal: !this.props.filters.formal })}>
+        <StyledFilterButton isActive={this.props.filters.formal} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, formal: !this.props.filters.formal })}>
           <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
           <span>{numFormals === 0 ? '--' : numFormals}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.informal} onClick={() => this.props.filterFallacies({ ...this.props.filters, informal: !this.props.filters.informal })}>
+        <StyledFilterButton isActive={this.props.filters.informal} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, informal: !this.props.filters.informal })}>
           <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
           <span>{numInformals === 0 ? '--' : numInformals}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.alpha} onClick={() => this.props.filterFallacies({ ...this.props.filters, alpha: !this.props.filters.alpha })}>
+        <StyledFilterButton isActive={this.props.filters.alpha} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, alpha: !this.props.filters.alpha })}>
           <span>α</span>
           <span>{numAlphas === 0 ? '--' : numAlphas}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.beta} onClick={() => this.props.filterFallacies({ ...this.props.filters, beta: !this.props.filters.beta })}>
+        <StyledFilterButton isActive={this.props.filters.beta} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, beta: !this.props.filters.beta })}>
           <span>β</span>
           <span>{numBetas === 0 ? '--' : numBetas}</span>
         </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.gamma} onClick={() => this.props.filterFallacies({ ...this.props.filters, gamma: !this.props.filters.gamma })}>
+        <StyledFilterButton isActive={this.props.filters.gamma} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, gamma: !this.props.filters.gamma })}>
           <span>𝛾</span>
           <span>{numGammas === 0 ? '--' : numGammas}</span>
         </StyledFilterButton>
@@ -125,7 +125,7 @@ export default connect(
     filters: state.fallacies.filters,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    filterFallacies,
+    changeFallaciesFilters,
   }, dispatch),
 )(Statistics);
 

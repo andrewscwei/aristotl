@@ -5,6 +5,7 @@ import React, { forwardRef, Fragment, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { getDefinitions } from '../selectors';
 import { AppState } from '../store';
 import { dismissDefinitionById, presentDefinitionById } from '../store/definitions';
 import { I18nState } from '../store/i18n';
@@ -14,7 +15,7 @@ import ActionButton from './ActionButton';
 import RichText from './RichText';
 
 interface StateProps {
-  definitionDict: ReadonlyArray<Document>;
+  definitions: ReadonlyArray<Document>;
   i18n: I18nState;
 }
 
@@ -34,7 +35,7 @@ interface Props extends StateProps, DispatchProps, OwnProps {}
 class Definition extends PureComponent<Props> {
   get doc(): Document | undefined {
     if (!this.props.docId) return undefined;
-    return _.find(this.props.definitionDict, (v) => v.id === this.props.docId);
+    return _.find(this.props.definitions, (v) => v.id === this.props.docId);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -80,7 +81,7 @@ class Definition extends PureComponent<Props> {
 
 const ConnectedDefinition = connect(
   (state: AppState): StateProps => ({
-    definitionDict: state.definitions.docs[__I18N_CONFIG__.defaultLocale] || [],
+    definitions: getDefinitions(state),
     i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
