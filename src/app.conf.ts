@@ -17,10 +17,10 @@ export default {
   ga: undefined,
 
   // Enable debugger in production.
-  enableDebugInProduction: false,
+  enableDebugInProduction: true,
 
   // Enable browser history for searches.
-  enableHistoryForSearch: true,
+  enableHistoryForSearch: false,
 
   // Enable browser history for presented fallacies.
   enableHistoryForFallacies: true,

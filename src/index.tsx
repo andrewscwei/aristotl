@@ -11,7 +11,7 @@ import App from './containers/App';
 import store from './store';
 
 if (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) {
-  window.localStorage.debug = 'app*,profiler*,-app:prismic';
+  window.localStorage.debug = 'app*,profiler*';
 }
 
 // Detect touch device.

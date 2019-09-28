@@ -18,7 +18,7 @@ import Paginator from '../components/Paginator';
 import SearchBar from '../components/SearchBar';
 import Statistics from '../components/Statistics';
 import NavControlManager from '../managers/NavControlManager';
-import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
+import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
 import { AppState } from '../store';
 import { fetchDefinitions } from '../store/definitions';
 import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies';
@@ -28,6 +28,8 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:home') : () => {};
 
 interface StateProps {
+  definitions: ReadonlyArray<Document>;
+  fallacies: ReadonlyArray<Document>;
   filteredFallacies: ReadonlyArray<Document>;
   filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
   lastActiveDefinitionId?: string;
@@ -66,8 +68,14 @@ class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.props.fetchFallacies();
-    this.props.fetchDefinitions();
+
+    if (!this.props.fallacies || this.props.fallacies.length === 0) {
+      this.props.fetchFallacies();
+    }
+
+    if (!this.props.definitions || this.props.definitions.length === 0) {
+      this.props.fetchDefinitions();
+    }
   }
 
   componentDidMount() {
@@ -184,6 +192,8 @@ class Home extends PureComponent<Props, State> {
 
 export default connect(
   (state: AppState): StateProps => ({
+    definitions: getDefinitions(state),
+    fallacies: getFallacies(state),
     filteredFallacies: getFilteredFallacies(state),
     filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     lastActiveDefinitionId: state.definitions.lastActiveDocId,

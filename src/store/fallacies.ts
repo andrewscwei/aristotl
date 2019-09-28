@@ -1,4 +1,3 @@
-import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
 import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
@@ -29,7 +28,6 @@ export interface FallaciesState {
   activeDocIds: Array<string>;
   docs: { [locale: string]: ReadonlyArray<Document> };
   filters: FallaciesFilters;
-  fuses: { [locale: string]: Readonly<Fuse<Document>> };
   lastActiveDocId?: string;
   pageIndex: number;
   pageSize: number;
@@ -43,7 +41,6 @@ export interface FallaciesAction extends Action<FallaciesActionType> {
 const initialState: FallaciesState = {
   activeDocIds: [],
   docs: {},
-  fuses: {},
   filters: {
     formal: true,
     informal: true,
@@ -67,29 +64,9 @@ export default function reducer(state = initialState, action: FallaciesAction): 
         [locale]: docs,
       };
 
-      const newFuses = {
-        ...state.fuses,
-        [locale]: new Fuse(docs, {
-          matchAllTokens: true,
-          maxPatternLength: 24,
-          minMatchCharLength: 0,
-          shouldSort: true,
-          tokenize: true,
-          keys: [
-            'data.abbreviation',
-            'data.name',
-            'data.aliases.name',
-            'data.summary.text',
-            'data.description.text',
-            'tags',
-          ],
-        }),
-      };
-
       return {
         ...state,
         docs: newDocs,
-        fuses: newFuses,
       };
     }
 

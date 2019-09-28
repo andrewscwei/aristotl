@@ -24,7 +24,10 @@ interface Props extends StateProps, DispatchProps {
 class Footer extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
-    this.props.fetchCopyright();
+
+    if (!this.props.copyrightDoc) {
+      this.props.fetchCopyright();
+    }
   }
 
   render() {

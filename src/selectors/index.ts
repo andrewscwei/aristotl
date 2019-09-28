@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { AppState } from '../store';
@@ -29,11 +30,28 @@ export const getFallacies = createSelector([
 });
 
 export const getFallaciesFuse = createSelector([
-  (state: AppState) => state.fallacies.fuses[state.i18n.locale] || undefined,
-], (fuse) => {
+  getFallacies,
+], (docs) => {
   debug('Getting localized fallacies fuse...', 'OK');
 
-  return fuse;
+  return new Fuse(docs, {
+    distance: 100,
+    keys: [
+      'data.abbreviation',
+      'data.name',
+      'data.aliases.name',
+      'data.summary.text',
+      'data.description.text',
+      'tags',
+    ],
+    location: 0,
+    matchAllTokens: false,
+    maxPatternLength: 24,
+    minMatchCharLength: 1,
+    shouldSort: false,
+    threshold: 0.6,
+    tokenize: false,
+  });
 });
 
 export const getFilteredFallacies = createSelector([
