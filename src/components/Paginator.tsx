@@ -1,9 +1,9 @@
-import { animations, container, selectors, align } from 'promptu';
+import { align, animations, container, selectors } from 'promptu';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/theme';
-import Pixel from './Pixel';
 import ActionButton from './ActionButton';
+import Pixel from './Pixel';
 
 interface Props {
   className?: string;
@@ -47,7 +47,7 @@ class Paginator extends PureComponent<Props> {
             />
           </StyledButton>
         ))}
-        <StyledPrevButton
+        {/* <StyledPrevButton
           symbol='<'
           tintColor={colors.white}
           hoverTintColor={colors.red}
@@ -61,7 +61,7 @@ class Paginator extends PureComponent<Props> {
           hoverTintColor={colors.red}
           isDisabled={this.props.numPages === 1}
           onActivate={() => this.next()}
-        />
+        /> */}
       </StyledRoot>
     );
   }
