@@ -159,7 +159,7 @@ class Home extends PureComponent<Props, State> {
     let hash;
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      if (!_.isEmpty(this.props.searchInput)) params.s =this.props.searchInput;
+      if (!_.isEmpty(this.props.searchInput)) params.s = this.props.searchInput;
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
@@ -196,8 +196,8 @@ class Home extends PureComponent<Props, State> {
   }
 
   render() {
-    const lastActiveFallacyId =_.last(this.props.activeFallacyIds);
-    const lastActiveDefinitionId =_.last(this.props.activeDefinitionIds);
+    const lastActiveFallacyId = _.last(this.props.activeFallacyIds);
+    const lastActiveDefinitionId = _.last(this.props.activeDefinitionIds);
 
     return (
       <Fragment>
