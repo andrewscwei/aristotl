@@ -1,20 +1,20 @@
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { animations, selectors } from 'promptu';
+import { animations, selectors, container } from 'promptu';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
-import { getCopyright } from '../selectors';
+import { getMetadata } from '../selectors';
 import { AppState } from '../store';
-import { fetchCopyright } from '../store/copyright';
-import { getMarkup } from '../utils/prismic';
+import { fetchMetadata } from '../store/metadata';
+import { getMarkup, getUrls } from '../utils/prismic';
 
 interface StateProps {
-  copyrightDoc?: Readonly<Document>;
+  metadataDoc?: Readonly<Document>;
 }
 
 interface DispatchProps {
-  fetchCopyright: typeof fetchCopyright;
+  fetchMetadata: typeof fetchMetadata;
 }
 
 interface Props extends StateProps, DispatchProps {
@@ -24,29 +24,65 @@ interface Props extends StateProps, DispatchProps {
 class Footer extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
-
-    if (!this.props.copyrightDoc) {
-      this.props.fetchCopyright();
-    }
+    this.props.fetchMetadata();
   }
 
   render() {
-    const markup = getMarkup(this.props.copyrightDoc, 'data.description');
+    const markup = getMarkup(this.props.metadataDoc, 'data.copyright');
+    const imageUrls = getUrls(this.props.metadataDoc, 'data.connect', 'icon');
+    const links = getUrls(this.props.metadataDoc, 'data.connect', 'url');
 
     return (
-      <StyledRoot dangerouslySetInnerHTML={{ __html: markup || '' }}/>
+      <StyledRoot>
+        <div dangerouslySetInnerHTML={{ __html: markup || '' }}/>
+        {imageUrls && imageUrls.length > 0 && links && links.length > 0 &&
+          <StyledConnect>
+            {imageUrls.map((v, i) => (
+              <a key={`connect-${i}`} href={links[i]}>
+                <img src={v}/>
+              </a>
+            ))}
+          </StyledConnect>
+        }
+      </StyledRoot>
     );
   }
 }
 
 export default connect(
   (state: AppState): StateProps => ({
-    copyrightDoc: getCopyright(state),
+    metadataDoc: getMetadata(state),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchCopyright,
+    fetchMetadata,
   }, dispatch),
 )(Footer);
+
+const StyledConnect = styled.div`
+  ${container.fhcl}
+  margin-top: 1rem;
+  width: 100%;
+
+  ${selectors.eblc} {
+    margin-right: 1rem;
+  }
+
+  a {
+    ${animations.transition('opacity', 200, 'ease-out')}
+    height: 1.6rem;
+    width: 1.6rem;
+    opacity: .6;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    ${selectors.hwot} {
+      opacity: .3;
+    }
+  }
+`;
 
 const StyledRoot = styled.footer`
   color: ${(props) => props.theme.colors.grey};

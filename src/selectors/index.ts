@@ -5,10 +5,10 @@ import { AppState } from '../store';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:selectors') : () => {};
 
-export const getCopyright = createSelector([
-  (state: AppState) => state.copyright[state.i18n.locale],
+export const getMetadata = createSelector([
+  (state: AppState) => state.metadata[state.i18n.locale],
 ], (doc) => {
-  debug('Getting localized copyright...', 'OK');
+  debug('Getting localized metadata...', 'OK');
 
   return doc;
 });

@@ -117,14 +117,6 @@ export function getText(doc?: Document, path: string = ''): string | undefined {
   return PrismicDOM.RichText.asText(fragment);
 }
 
-export function getMarkup(doc?: Document, path: string = ''): string | undefined {
-  const fragment = _.get(doc, path);
-
-  if (!fragment) return undefined;
-
-  return PrismicDOM.RichText.asHtml(fragment, linkResolver);
-}
-
 export function getTexts(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
   const fragments = _.get(doc, path);
 
@@ -145,6 +137,40 @@ export function getTexts(doc?: Document, path: string = '', subpath: string = ''
   }, Array<string>());
 
   return texts;
+}
+
+export function getUrl(doc?: Document, path: string = ''): string | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+
+  return PrismicDOM.Link.url(fragment, linkResolver);
+}
+
+export function getUrls(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+  const fragments = _.get(doc, path);
+
+  if (!_.isArray(fragments)) return undefined;
+
+  const urls = _.reduce(fragments, (out, curr: any) => {
+    const url = _.get(curr, subpath);
+    if (!url) return out;
+    if (url.length === 0) return out;
+
+    out.push(PrismicDOM.Link.url(url, linkResolver));
+
+    return out;
+  }, Array<string>());
+
+  return urls;
+}
+
+export function getMarkup(doc?: Document, path: string = ''): string | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+
+  return PrismicDOM.RichText.asHtml(fragment, linkResolver);
 }
 
 export function getMarkups(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {

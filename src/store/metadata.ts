@@ -3,25 +3,25 @@ import { Document } from 'prismic-javascript/d.ts/documents';
 import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 
-export enum CopyrightActionType {
-  LOADED = 'copyright/LOADED',
+export enum MetadataActionType {
+  LOADED = 'metadata/LOADED',
 }
 
-export interface CopyrightState {
+export interface MetadataState {
   [locale: string]: Readonly<Document> | undefined;
 }
 
-export interface CopyrightAction extends Action<CopyrightActionType> {
+export interface MetadataAction extends Action<MetadataActionType> {
   payload: { [key: string]: any };
 }
 
-const initialState: CopyrightState = {
+const initialState: MetadataState = {
 
 };
 
-export default function reducer(state = initialState, action: CopyrightAction): CopyrightState {
+export default function reducer(state = initialState, action: MetadataAction): MetadataState {
   switch (action.type) {
-    case CopyrightActionType.LOADED: {
+    case MetadataActionType.LOADED: {
       const { locale, doc: newDoc } = action.payload;
 
       return {
@@ -34,16 +34,16 @@ export default function reducer(state = initialState, action: CopyrightAction): 
   return state;
 }
 
-export function fetchCopyright() {
-  return async (dispatch: Dispatch<CopyrightAction>) => {
+export function fetchMetadata() {
+  return async (dispatch: Dispatch<MetadataAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
     };
 
-    const docs = await fetchDocsByType('copyright');
+    const docs = await fetchDocsByType('metadata');
 
     dispatch({
-      type: CopyrightActionType.LOADED,
+      type: MetadataActionType.LOADED,
       payload: {
         locale: localeResolver(opts.lang, true),
         doc: docs[0],

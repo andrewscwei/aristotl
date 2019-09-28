@@ -67,14 +67,8 @@ class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-
-    if (!this.props.fallacies || this.props.fallacies.length === 0) {
-      this.props.fetchFallacies();
-    }
-
-    if (!this.props.definitions || this.props.definitions.length === 0) {
-      this.props.fetchDefinitions();
-    }
+    this.props.fetchFallacies();
+    this.props.fetchDefinitions();
   }
 
   componentDidMount() {
