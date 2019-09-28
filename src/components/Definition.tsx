@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { getDefinitions } from '../selectors';
 import { AppState } from '../store';
 import { dismissDefinitionById, presentDefinitionById } from '../store/definitions';
-import { I18nState } from '../store/i18n';
 import { colors } from '../styles/theme';
 import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
 import ActionButton from './ActionButton';
@@ -16,12 +15,11 @@ import RichText from './RichText';
 
 interface StateProps {
   definitions: ReadonlyArray<Document>;
-  i18n: I18nState;
 }
 
 interface DispatchProps {
-  presentDefinitionById: typeof presentDefinitionById;
   dismissDefinitionById: typeof dismissDefinitionById;
+  presentDefinitionById: typeof presentDefinitionById;
 }
 
 interface OwnProps {
@@ -45,7 +43,6 @@ class Definition extends PureComponent<Props> {
   }
 
   render() {
-    const { ltxt } = this.props.i18n;
     const name = getText(this.doc, 'data.name');
     const descriptionMarkup = getMarkup(this.doc, 'data.description');
     const aliases = getTexts(this.doc, 'data.aliases', 'name');
@@ -82,7 +79,6 @@ class Definition extends PureComponent<Props> {
 const ConnectedDefinition = connect(
   (state: AppState): StateProps => ({
     definitions: getDefinitions(state),
-    i18n: state.i18n,
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     presentDefinitionById,

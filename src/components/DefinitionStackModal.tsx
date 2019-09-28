@@ -48,8 +48,8 @@ class DefinitionStackModal extends PureComponent<Props> {
                     return (
                       <StyledDefinition
                         docId={definitionId}
-                        ref={scrollTargetRef}
                         maxStacks={this.props.activeDefinitionIds.length}
+                        ref={scrollTargetRef}
                         stackIndex={i}
                         transitionStatus={status}
                       />
