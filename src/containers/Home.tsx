@@ -198,9 +198,9 @@ export default connect(
   (state: AppState): StateProps => ({
     docsPerPage: state.fallacies.docsPerPage,
     fallacyDict: state.fallacies.docs[state.i18n.locale] || [],
-    filteredFallacies: getFilteredFallacies(state.i18n.locale)(state.fallacies),
-    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state.i18n.locale)(state.fallacies),
-    maxPages: getMaxPagesOfFilteredFallacies(state.i18n.locale)(state.fallacies),
+    filteredFallacies: getFilteredFallacies(state.fallacies),
+    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state.fallacies),
+    maxPages: getMaxPagesOfFilteredFallacies(state.fallacies),
     filters: state.fallacies.filters,
     lastActiveDefinitionId: state.definitions.lastActiveDocId,
     lastActiveFallacyId: state.fallacies.lastActiveDocId,

@@ -209,7 +209,7 @@ export function dismissFallacyById(id: string) {
   };
 }
 
-export function dismissFallacies() {
+export function dismissAllFallacies() {
   debug('Dismissing all fallacies...', 'OK');
 
   return {
@@ -251,60 +251,52 @@ export function changePageIndex(pageIndex: number) {
   };
 }
 
-export function getFilteredFallacies(locale: string = __I18N_CONFIG__.defaultLocale) {
-  return createSelector([
-    (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
-    (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
-    (state: FallaciesState) => state.searchInput,
-    (state: FallaciesState) => state.filters,
-  ], (docs, fdocs, searchInput, filters) => {
-    const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
-    const fres = _.filter(res, (v) => {
-      const types = _.get(v, 'data.types');
-      const inheritance = _.get(v, 'data.inheritance');
-      const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
-      const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-      const isAlpha = inheritance.length === 0;
-      const isBeta = inheritance.length === 1;
-      const isGamma = inheritance.length >= 2;
+export const getFilteredFallacies = createSelector([
+  (state: FallaciesState) => state.docs[__I18N_CONFIG__.defaultLocale] || [],
+  (state: FallaciesState) => state.fdocs[__I18N_CONFIG__.defaultLocale] || undefined,
+  (state: FallaciesState) => state.searchInput,
+  (state: FallaciesState) => state.filters,
+], (docs, fdocs, searchInput, filters) => {
+  const res = (_.isEmpty(searchInput) || !fdocs) ? docs : fdocs.search(searchInput);
+  const fres = _.filter(res, (v) => {
+    const types = _.get(v, 'data.types');
+    const inheritance = _.get(v, 'data.inheritance');
+    const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
+    const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
+    const isAlpha = inheritance.length === 0;
+    const isBeta = inheritance.length === 1;
+    const isGamma = inheritance.length >= 2;
 
-      if (isFormal && !filters.formal) return false;
-      if (isInformal && !filters.informal) return false;
-      if (isAlpha && !filters.alpha) return false;
-      if (isBeta && !filters.beta) return false;
-      if (isGamma && !filters.gamma) return false;
+    if (isFormal && !filters.formal) return false;
+    if (isInformal && !filters.informal) return false;
+    if (isAlpha && !filters.alpha) return false;
+    if (isBeta && !filters.beta) return false;
+    if (isGamma && !filters.gamma) return false;
 
-      return true;
-    });
-
-    debug('Getting filtered fallacies...', 'OK', fres);
-
-    return fres;
+    return true;
   });
-}
 
-export function getFilteredFallaciesInPageChunks(locale: string = __I18N_CONFIG__.defaultLocale) {
-  return createSelector([
-    getFilteredFallacies(locale),
-    (state: FallaciesState) => state.docsPerPage,
-  ], (docs, docsPerPage) => {
-    return _.chunk(docs, docsPerPage);
-  });
-}
+  debug('Getting filtered fallacies...', 'OK', fres);
 
-export function getFilteredFallaciesOnCurrentPage(locale: string = __I18N_CONFIG__.defaultLocale) {
-  return createSelector([
-    getFilteredFallaciesInPageChunks(locale),
-    (state: FallaciesState) => state.pageIndex,
-  ], (chunks, pageIndex) => {
-    return chunks[pageIndex] || [];
-  });
-}
+  return fres;
+});
 
-export function getMaxPagesOfFilteredFallacies(locale: string = __I18N_CONFIG__.defaultLocale) {
-  return createSelector([
-    getFilteredFallaciesInPageChunks(locale),
-  ], (chunks) => {
-    return chunks.length;
-  });
-}
+export const getFilteredFallaciesInPageChunks = createSelector([
+  getFilteredFallacies,
+  (state: FallaciesState) => state.docsPerPage,
+], (docs, docsPerPage) => {
+  return _.chunk(docs, docsPerPage);
+});
+
+export const getFilteredFallaciesOnCurrentPage = createSelector([
+  getFilteredFallaciesInPageChunks,
+  (state: FallaciesState) => state.pageIndex,
+], (chunks, pageIndex) => {
+  return chunks[pageIndex] || [];
+});
+
+export const getMaxPagesOfFilteredFallacies = createSelector([
+  getFilteredFallaciesInPageChunks,
+], (chunks) => {
+  return chunks.length;
+});
