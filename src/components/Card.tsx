@@ -42,8 +42,8 @@ class Card extends PureComponent<Props> {
     const typeDocs = getDocs(this.props.doc, 'data.types', 'type');
 
     const aliases = _.sortBy(getTexts(this.props.doc, 'data.aliases', 'name')) || [];
-    const first3Aliases = _.take(aliases, 3) || [];
-    const remainingAliases = aliases.length - first3Aliases.length;
+    const firstAliases = _.take(aliases, 3) || [];
+    const remainingAliases = aliases.length - firstAliases.length;
 
     return (
       <StyledRoot
@@ -73,8 +73,8 @@ class Card extends PureComponent<Props> {
           <StyledName>{name}</StyledName>
         }
 
-        {!this.props.isSummaryEnabled && first3Aliases.length > 0 &&
-          <StyledAliases><em>{first3Aliases.join(', ')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
+        {!this.props.isSummaryEnabled && firstAliases.length > 0 &&
+          <StyledAliases><em>{firstAliases.join(', ')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
         }
 
         {this.props.isSummaryEnabled && summary &&

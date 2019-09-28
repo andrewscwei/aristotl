@@ -95,7 +95,7 @@ const StyledCard = styled.div<{
   }
 
   @media ${media.gtw(660)} {
-    width: ${(props) => props.isSummaryEnabled ? '28rem' : '26rem'};
+    width: ${(props) => props.isSummaryEnabled ? '28rem' : '25rem'};
   }
 `;
 
