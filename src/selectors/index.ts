@@ -44,13 +44,14 @@ export const getFallaciesFuse = createSelector([
       'data.description.text',
       'tags',
     ],
+    includeMatches: __APP_CONFIG__.includeMatchesInSearch,
     location: 0,
     matchAllTokens: false,
     maxPatternLength: 24,
     minMatchCharLength: 0,
     shouldSort: true,
-    threshold: 0.6,
-    tokenize: false,
+    threshold: 0,
+    tokenize: __APP_CONFIG__.useTokenizedSearch,
   });
 });
 
@@ -60,7 +61,7 @@ export const getFilteredFallacies = createSelector([
   (state: AppState) => state.fallacies.searchInput,
   (state: AppState) => state.fallacies.filters,
 ], (docs, fuse, searchInput, filters) => {
-  const res = (_.isEmpty(searchInput) || !fuse) ? docs : fuse.search(searchInput);
+  const res = (_.isEmpty(searchInput) || !fuse) ? docs : (__APP_CONFIG__.includeMatchesInSearch ? _.map(fuse.search(searchInput), (v) => v.item) : fuse.search(searchInput));
   const fres = _.filter(res, (v) => {
     const types = _.get(v, 'data.types');
     const inheritance = _.get(v, 'data.inheritance');

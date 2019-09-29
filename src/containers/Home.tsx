@@ -81,7 +81,7 @@ class Home extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.mapLocationToState();
+    this.mapLocationToProps();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -92,7 +92,7 @@ class Home extends PureComponent<Props, State> {
     const activeDefinitionIdsDidChange = __APP_CONFIG__.enableHistoryForDefinitions && (!_.isEqual(prevProps.activeDefinitionIds, this.props.activeDefinitionIds));
 
     if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdsDidChange || activeDefinitionIdsDidChange) {
-      this.mapStateToLocation();
+      this.mapPropsToLocation();
     }
   }
 
@@ -108,7 +108,7 @@ class Home extends PureComponent<Props, State> {
     paginator.prev();
   }
 
-  mapLocationToState() {
+  mapLocationToProps() {
     const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, d: definitions, f: fallacies } = qs.parse(this.props.location.search);
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
@@ -162,7 +162,7 @@ class Home extends PureComponent<Props, State> {
     }
   }
 
-  mapStateToLocation() {
+  mapPropsToLocation() {
     const params: any = {};
     let hash;
 
