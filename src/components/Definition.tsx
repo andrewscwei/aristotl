@@ -174,7 +174,7 @@ const StyledContent = styled.div`
     line-height: 130%;
     margin: 0;
     padding: 1rem;
-    white-space: normal;
+    white-space: pre-wrap;
     width: 100%;
     word-wrap: normal;
   }
