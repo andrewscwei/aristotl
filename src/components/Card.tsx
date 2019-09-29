@@ -203,7 +203,7 @@ const StyledRoot = styled.button`
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${(props) => props.theme.colors.offBlack};
-  height: 100%;
+  height: inherit;
   overflow: hidden;
   padding: 1rem;
   text-align: left;
