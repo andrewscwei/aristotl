@@ -22,8 +22,10 @@ import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallacie
 import { AppState } from '../store';
 import { fetchDefinitions, presentDefinitionById } from '../store/definitions';
 import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, FallaciesFilters, fetchFallacies, presentFallacyById } from '../store/fallacies';
+import { fetchMetadata } from '../store/metadata';
 import { colors } from '../styles/theme';
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
+import { loadPreviewToken } from '../utils/prismic';
 
 interface StateProps {
   activeDefinitionIds: ReadonlyArray<string>;
@@ -34,6 +36,7 @@ interface StateProps {
   filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
   filters: FallaciesFilters;
   maxPages: number;
+  metadataDoc?: Readonly<Document>;
   pageIndex: number;
   pageSize: number;
   searchInput: string;
@@ -45,6 +48,7 @@ interface DispatchProps {
   changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
   fetchDefinitions: typeof fetchDefinitions;
   fetchFallacies: typeof fetchFallacies;
+  fetchMetadata: typeof fetchMetadata;
   presentDefinitionById: typeof presentDefinitionById;
   presentFallacyById: typeof presentFallacyById;
 }
@@ -68,8 +72,12 @@ class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.props.fetchFallacies();
-    this.props.fetchDefinitions();
+
+    const previewToken = loadPreviewToken();
+
+    if (!this.props.metadataDoc || previewToken) this.props.fetchMetadata();
+    if ((this.props.fallacies.length === 0) || previewToken) this.props.fetchFallacies();
+    if ((this.props.definitions.length === 0) || previewToken) this.props.fetchDefinitions();
   }
 
   componentDidMount() {
@@ -258,6 +266,7 @@ export default connect(
     filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
     filters: state.fallacies.filters,
     maxPages: getMaxPagesOfFilteredFallacies(state),
+    metadataDoc: getMetadata(state),
     pageIndex: state.fallacies.pageIndex,
     pageSize: state.fallacies.pageSize,
     searchInput: state.fallacies.searchInput,
@@ -268,6 +277,7 @@ export default connect(
     changeFallaciesSearchInput,
     fetchDefinitions,
     fetchFallacies,
+    fetchMetadata,
     presentDefinitionById,
     presentFallacyById,
   }, dispatch),

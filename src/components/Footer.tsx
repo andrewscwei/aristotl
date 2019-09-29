@@ -6,7 +6,6 @@ import { Action, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { getMetadata } from '../selectors';
 import { AppState } from '../store';
-import { fetchMetadata } from '../store/metadata';
 import { getMarkup, getUrls } from '../utils/prismic';
 
 interface StateProps {
@@ -14,7 +13,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  fetchMetadata: typeof fetchMetadata;
+
 }
 
 interface Props extends StateProps, DispatchProps {
@@ -22,11 +21,6 @@ interface Props extends StateProps, DispatchProps {
 }
 
 class Footer extends PureComponent<Props> {
-  constructor(props: Props) {
-    super(props);
-    this.props.fetchMetadata();
-  }
-
   render() {
     const markup = getMarkup(this.props.metadataDoc, 'data.copyright');
     const imageUrls = getUrls(this.props.metadataDoc, 'data.connect', 'icon');
@@ -54,7 +48,7 @@ export default connect(
     metadataDoc: getMetadata(state),
   }),
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    fetchMetadata,
+
   }, dispatch),
 )(Footer);
 
