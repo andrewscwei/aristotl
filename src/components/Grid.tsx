@@ -70,7 +70,7 @@ const StyledCard = styled.div<{
   transitionStatus: TransitionStatus;
 }>`
   ${animations.transition('all', 200, 'ease-out')}
-  height: ${(props) => props.isSummaryEnabled ? 'auto' : 'auto'};
+  height: ${(props) => props.isSummaryEnabled ? '34rem' : '28rem'};
   margin: 1rem .5rem;
   overflow: hidden;
   width: ${(props) => props.isSummaryEnabled ? '100%' : '100%'};
@@ -86,7 +86,7 @@ const StyledCard = styled.div<{
   }
 
   @media ${media.gtw(400)} {
-    height: ${(props) => props.isSummaryEnabled ? 'auto' : '28rem'};
+    height: ${(props) => props.isSummaryEnabled ? '34rem' : '28rem'};
     margin: 1rem;
     width: ${(props) => props.isSummaryEnabled ? '100%' : 'calc(50% - 2rem)'};
   }
