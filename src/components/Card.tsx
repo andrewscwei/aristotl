@@ -194,7 +194,7 @@ const StyledDivider = styled.div<{
   opacity: ${(props) => props.isSummaryEnabled ? 1 : 0};
   width: 2rem;
 
-  @media ${media.gtw(500)} {
+  @media ${media.gtw(540)} {
     opacity: 1;
   }
 `;
