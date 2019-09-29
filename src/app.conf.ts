@@ -17,7 +17,7 @@ export default {
   ga: 'UA-108117457-5',
 
   // Enable debugger in production.
-  enableDebugInProduction: true,
+  enableDebugInProduction: false,
 
   // Enable browser history for searches.
   enableHistoryForSearch: true,
