@@ -205,7 +205,7 @@ const StyledRoot = styled.button`
   background: ${(props) => props.theme.colors.offBlack};
   height: inherit;
   overflow: hidden;
-  padding: 1rem;
+  padding: 1rem 1rem 1.5rem;
   text-align: left;
   transform: translate3d(0, 0, 0);
   width: 100%;
