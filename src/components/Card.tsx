@@ -167,6 +167,10 @@ const StyledAliases = styled.div`
   padding: 0 1rem;
   user-select: text;
   width: 100%;
+
+  @media ${media.gtw(660)} {
+    font-size: 1.4rem;
+  }
 `;
 
 const StyledName = styled.h1`
@@ -191,7 +195,7 @@ const StyledDivider = styled.div<{
   background: ${(props) => props.theme.colors.darkGrey};
   height: .2rem;
   margin: 2rem;
-  opacity: ${(props) => props.isSummaryEnabled ? 1 : 0};
+  opacity: 0;
   width: 2rem;
 
   @media ${media.gtw(540)} {
