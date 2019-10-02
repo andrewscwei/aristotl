@@ -115,9 +115,9 @@ const StyledFallacy = styled(Fallacy)<{
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   height: 100%;
   max-width: 60rem;
-  opacity: ${(props) => props.stackIndex === 0 ? 1 : 0.6};
+  opacity: ${(props) => valueByTransitionStatus([0, props.stackIndex === 0 ? 1 : 0.6], props.transitionStatus, true)};
   pointer-events: ${(props) => props.stackIndex === 0 ? 'auto' : 'none'};
-  transform: ${(props) => valueByTransitionStatus(['translate3d(100%, 0, 0)', `translate3d(${-props.stackIndex * 2}rem, 0, 0)`], props.transitionStatus, true)};
+  transform: ${(props) => valueByTransitionStatus(['translate3d(10%, 0, 0)', `translate3d(${-props.stackIndex * 2}rem, 0, 0)`], props.transitionStatus, true)};
   width: 90%;
 `;
 

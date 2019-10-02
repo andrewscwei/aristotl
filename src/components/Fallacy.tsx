@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Document } from 'prismic-javascript/d.ts/documents';
-import { align, animations, container, media, selectors } from 'promptu';
+import { animations, container, media, selectors } from 'promptu';
 import React, { forwardRef, MouseEvent, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';
 import { Action, bindActionCreators, Dispatch } from 'redux';
@@ -45,12 +45,6 @@ class Fallacy extends PureComponent<Props> {
     return _.find(this.props.fallacies, (v) => v.uid === this.props.docId);
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.docId !== this.props.docId) {
-      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0);
-    }
-  }
-
   onExit() {
     if (this.props.onExit) {
       this.props.onExit();
@@ -89,147 +83,151 @@ class Fallacy extends PureComponent<Props> {
     const relatedDocs = _.sortBy(getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacies), 'data.name');
 
     return (
-      <StyledRoot className={this.props.className} ref={this.props.scrollTargetRef}>
-        <StyledCloseButton
-          symbol='-'
-          tintColor={colors.black}
-          hoverTintColor={colors.red}
-          onActivate={() => this.onExit()}
-        />
+      <StyledRoot className={this.props.className}>
+        <StyledHeader>
+          <StyledCloseButton
+            symbol='-'
+            tintColor={colors.black}
+            hoverTintColor={colors.red}
+            onActivate={() => this.onExit()}
+          />
+          <div>
+            <StyledPrevButton
+              symbol='<'
+              tintColor={colors.black}
+              hoverTintColor={colors.red}
+              isDisabled={this.props.onPrev === undefined}
+              onActivate={() => this.props.onPrev && this.props.onPrev()}
+            />
+            <StyledNextButton
+              symbol='>'
+              tintColor={colors.black}
+              hoverTintColor={colors.red}
+              isDisabled={this.props.onNext === undefined}
+              onActivate={() => this.props.onNext && this.props.onNext()}
+            />
+          </div>
+        </StyledHeader>
 
-        <StyledPrevButton
-          symbol='<'
-          tintColor={colors.black}
-          hoverTintColor={colors.red}
-          isDisabled={this.props.onPrev === undefined}
-          onActivate={() => this.props.onPrev && this.props.onPrev()}
-        />
+        <StyledBody ref={this.props.scrollTargetRef}>
+          <StyledAbbreviation>
+            <Pixel alignment='tr' tintColor={colors.black}/>
+            <Pixel alignment='br' tintColor={colors.black}/>
+            <Pixel alignment='cr' tintColor={colors.black}/>
+            <Pixel alignment='tc' tintColor={colors.black}/>
+            <Pixel alignment='bc' tintColor={colors.black}/>
+            <h2>{abbreviation || '--'}</h2>
+          </StyledAbbreviation>
 
-        <StyledNextButton
-          symbol='>'
-          tintColor={colors.black}
-          hoverTintColor={colors.red}
-          isDisabled={this.props.onNext === undefined}
-          onActivate={() => this.props.onNext && this.props.onNext()}
-        />
+          <StyledSection>
+            <StyledLabel>{ltxt('name')}</StyledLabel>
+            <StyledContent>
+              <StyledName>{name || '--'}</StyledName>
+            </StyledContent>
+          </StyledSection>
 
-        <StyledAbbreviation>
-          <Pixel alignment='tr' tintColor={colors.black}/>
-          <Pixel alignment='br' tintColor={colors.black}/>
-          <Pixel alignment='cr' tintColor={colors.black}/>
-          <Pixel alignment='tc' tintColor={colors.black}/>
-          <Pixel alignment='bc' tintColor={colors.black}/>
-          <h2>{abbreviation || '--'}</h2>
-        </StyledAbbreviation>
+          <StyledSection>
+            <StyledLabel>{ltxt('aliases')}</StyledLabel>
+            <StyledContent>
+              {!aliases || aliases.length <= 0 ? '--' :
+                <ul>
+                  {aliases.map((v, i) => (
+                    <li key={`alias=${i}`}><em>{v}</em></li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('name')}</StyledLabel>
-          <StyledContent>
-            <StyledName>{name || '--'}</StyledName>
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('types')}</StyledLabel>
+            <StyledContent>
+              {!typeDocs || typeDocs.length <= 0 ? '--' :
+                <ul>
+                  {typeDocs.map((v, i) => (
+                    <li key={`type=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('aliases')}</StyledLabel>
-          <StyledContent>
-            {!aliases || aliases.length <= 0 ? '--' :
-              <ul>
-                {aliases.map((v, i) => (
-                  <li key={`alias=${i}`}><em>{v}</em></li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('inheritance')}</StyledLabel>
+            <StyledContent>
+              {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
+                <ul>
+                  {inheritanceDocs.map((v, i) => (
+                    <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('types')}</StyledLabel>
-          <StyledContent>
-            {!typeDocs || typeDocs.length <= 0 ? '--' :
-              <ul>
-                {typeDocs.map((v, i) => (
-                  <li key={`type=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('subtypes')}</StyledLabel>
+            <StyledContent>
+              {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
+                <ul>
+                  {subtypeDocs.map((v, i) => (
+                    <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('inheritance')}</StyledLabel>
-          <StyledContent>
-            {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
-              <ul>
-                {inheritanceDocs.map((v, i) => (
-                  <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('description')}</StyledLabel>
+            <StyledContent>
+              {descriptionMarkup ? <RichText markup={descriptionMarkup}/> : '--'}
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('subtypes')}</StyledLabel>
-          <StyledContent>
-            {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
-              <ul>
-                {subtypeDocs.map((v, i) => (
-                  <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('examples')}</StyledLabel>
+            <StyledContent>
+              {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
+                <ul>
+                  {exampleMarkups.map((v, i) => (
+                    <li key={`example-${i}`}>
+                      <RichText markup={v}/>
+                    </li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('description')}</StyledLabel>
-          <StyledContent>
-            {descriptionMarkup ? <RichText markup={descriptionMarkup}/> : '--'}
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('related')}</StyledLabel>
+            <StyledContent>
+              {!relatedDocs || relatedDocs.length <= 0 ? '--' :
+                <ul>
+                  {relatedDocs.map((v: any, i) => (
+                    <li key={`related-${i}`}>
+                      <a onClick={() => this.props.presentFallacyById(v.uid)}>{_.get(v, 'data.name')}</a>
+                    </li>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
 
-        <StyledSection>
-          <StyledLabel>{ltxt('examples')}</StyledLabel>
-          <StyledContent>
-            {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
-              <ul>
-                {exampleMarkups.map((v, i) => (
-                  <li key={`example-${i}`}>
-                    <RichText markup={v}/>
-                  </li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
-
-        <StyledSection>
-          <StyledLabel>{ltxt('related')}</StyledLabel>
-          <StyledContent>
-            {!relatedDocs || relatedDocs.length <= 0 ? '--' :
-              <ul>
-                {relatedDocs.map((v: any, i) => (
-                  <li key={`related-${i}`}>
-                    <a onClick={() => this.props.presentFallacyById(v.uid)}>{_.get(v, 'data.name')}</a>
-                  </li>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
-
-        <StyledSection>
-          <StyledLabel>{ltxt('references')}</StyledLabel>
-          <StyledContent>
-            {!referenceMarkups || referenceMarkups.length <= 0 ? '--' :
-              <ul>
-                {referenceMarkups.map((v, i) => (
-                  <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
-                ))}
-              </ul>
-            }
-          </StyledContent>
-        </StyledSection>
+          <StyledSection>
+            <StyledLabel>{ltxt('references')}</StyledLabel>
+            <StyledContent>
+              {!referenceMarkups || referenceMarkups.length <= 0 ? '--' :
+                <ul>
+                  {referenceMarkups.map((v, i) => (
+                    <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
+                  ))}
+                </ul>
+              }
+            </StyledContent>
+          </StyledSection>
+        </StyledBody>
       </StyledRoot>
     );
   }
@@ -251,38 +249,21 @@ const ConnectedFallacy = connect(
 export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} scrollTargetRef={ref}/>);
 
 const StyledCloseButton = styled(ActionButton)`
-  ${align.tl}
-  margin: 3rem 1.4rem;
 
-  @media ${media.gtmobile} {
-    margin: 3rem;
-  }
 `;
 
 const StyledPrevButton = styled(ActionButton)<{
   isDisabled: boolean;
 }>`
-  ${align.tr}
-  margin: 3rem ${1.4 + 2 + 1}rem 3rem 3rem;
   pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
   opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
-
-  @media ${media.gtmobile} {
-    margin: 3rem ${3 + 2 + 1}rem 3rem 3rem;
-  }
 `;
 
 const StyledNextButton = styled(ActionButton)<{
   isDisabled: boolean;
 }>`
-  ${align.tr}
-  margin: 3rem 1.4rem;
   pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
   opacity: ${(props) => props.isDisabled ? 0.2 : 1.0};
-
-  @media ${media.gtmobile} {
-    margin: 3rem;
-  }
 `;
 
 const StyledContent = styled.div`
@@ -424,15 +405,41 @@ const StyledName = styled.h1`
   width: 100%;
 `;
 
-const StyledRoot = styled.div`
+const StyledHeader = styled.div`
+  ${container.fhcs}
+  margin-bottom: 3rem;
+  padding: 0 1.4rem;
+  width: 100%;
+
+  > div {
+    ${container.fhcl}
+    ${selectors.eblc} {
+      margin-right: 1rem;
+    }
+  }
+
+  @media ${media.gtmobile} {
+    padding: 0 3rem;
+  }
+`;
+
+const StyledBody = styled.div`
   -webkit-overflow-scrolling: touch;
-  background: ${(props) => props.theme.colors.white};
   color: ${(props) => props.theme.colors.black};
+  flex: 1 1 auto;
   overflow-y: scroll;
-  padding: 8rem 1.4rem;
+  padding: 0 1.4rem;
+  width: 100%;
   user-select: text;
 
   @media ${media.gtmobile} {
-    padding: 8rem 3rem;
+    padding: 0 3rem;
   }
+`;
+
+const StyledRoot = styled.div`
+  ${container.fvtl}
+  background: ${(props) => props.theme.colors.white};
+  padding: 3rem 0;
+  overflow: hidden;
 `;
