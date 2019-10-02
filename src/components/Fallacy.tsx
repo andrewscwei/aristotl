@@ -428,12 +428,12 @@ const StyledBody = styled.div`
   color: ${(props) => props.theme.colors.black};
   flex: 1 1 auto;
   overflow-y: scroll;
-  padding: 0 1.4rem;
+  padding: 1rem 1.4rem;
   width: 100%;
   user-select: text;
 
   @media ${media.gtmobile} {
-    padding: 0 3rem;
+    padding: 1rem 3rem;
   }
 `;
 
