@@ -83,7 +83,7 @@ const StyledDefinition = styled(Definition)<{
   max-width: 50rem;
   opacity: ${(props) => (props.stackIndex === (props.maxStacks - 1)) ? 1 : 0.6};
   pointer-events: ${(props) => (props.stackIndex === (props.maxStacks - 1)) ? 'auto' : 'none'};
-  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', `translate3d(${(props.maxStacks - 1 - props.stackIndex) * DX[props.stackIndex % 10]}rem, ${(props.maxStacks - 1 - props.stackIndex) * DY[props.stackIndex % 10]}rem, 0) scale(1)`], props.transitionStatus, true)};
+  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.97)', `translate3d(${(props.maxStacks - 1 - props.stackIndex) * DX[props.stackIndex % 10]}rem, ${(props.maxStacks - 1 - props.stackIndex) * DY[props.stackIndex % 10]}rem, 0) scale(1)`], props.transitionStatus, true)};
   width: 90%;
 `;
 

@@ -407,7 +407,7 @@ const StyledName = styled.h1`
 
 const StyledHeader = styled.div`
   ${container.fhcs}
-  margin-bottom: 3rem;
+  margin: 3rem 0;
   padding: 0 1.4rem;
   width: 100%;
 
@@ -428,18 +428,17 @@ const StyledBody = styled.div`
   color: ${(props) => props.theme.colors.black};
   flex: 1 1 auto;
   overflow-y: scroll;
-  padding: 1rem 1.4rem;
+  padding: 1rem 1.4rem 3rem;
   width: 100%;
   user-select: text;
 
   @media ${media.gtmobile} {
-    padding: 1rem 3rem;
+    padding: 1rem 3rem 3rem;
   }
 `;
 
 const StyledRoot = styled.div`
   ${container.fvtl}
   background: ${(props) => props.theme.colors.white};
-  padding: 3rem 0;
   overflow: hidden;
 `;
