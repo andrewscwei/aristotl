@@ -74,6 +74,7 @@ const StyledCard = styled.div<{
   margin: 1rem .5rem;
   overflow: hidden;
   width: ${(props) => props.isSummaryEnabled ? '100%' : '100%'};
+  position: relative;
 
   &::after {
     ${align.tl}
