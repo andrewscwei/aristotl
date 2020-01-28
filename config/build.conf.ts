@@ -98,7 +98,6 @@ const config: Configuration = {
   plugins: [
     new CopyPlugin([{
       from: path.join(inputDir, 'static'),
-      ignore: ['.*'],
       to: outputDir,
     }]),
     new EnvironmentPlugin({
