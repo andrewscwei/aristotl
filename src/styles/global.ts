@@ -12,8 +12,4 @@ export default createGlobalStyle`
     font-family: 'RobotoMono', monospace;
     font-weight: 400;
   }
-
-  #app {
-    height: auto;
-  }
 `;

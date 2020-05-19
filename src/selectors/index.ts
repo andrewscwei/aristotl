@@ -61,15 +61,15 @@ export const getFilteredFallacies = createSelector([
   (state: AppState) => state.fallacies.searchInput,
   (state: AppState) => state.fallacies.filters,
 ], (docs, fuse, searchInput, filters) => {
-  const res = (_.isEmpty(searchInput) || !fuse) ? docs : (__APP_CONFIG__.includeMatchesInSearch ? _.map(fuse.search(searchInput), (v) => v.item) : fuse.search(searchInput));
+  const res = (_.isEmpty(searchInput) || !fuse) ? docs : _.map(fuse.search(searchInput), (v) => v.item);
   const fres = _.filter(res, (v) => {
     const types = _.get(v, 'data.types');
     const inheritance = _.get(v, 'data.inheritance');
     const isFormal = _.find(types, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
     const isInformal = _.find(types, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-    const isAlpha = inheritance.length === 0;
-    const isBeta = inheritance.length === 1;
-    const isGamma = inheritance.length >= 2;
+    const isAlpha = inheritance ? inheritance.length === 0 : true;
+    const isBeta = inheritance ? inheritance.length === 1 : false;
+    const isGamma = inheritance ? inheritance.length >= 2 : false;
 
     if (isFormal && !filters.formal) return false;
     if (isInformal && !filters.informal) return false;

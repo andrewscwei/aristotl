@@ -50,7 +50,7 @@ class Statistics extends PureComponent<Props> {
   countAlphas(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance');
-      if (fragments.length === 0) out += 1;
+      if (!fragments || fragments.length === 0) out += 1;
       return out;
     }, 0);
   }
@@ -58,7 +58,7 @@ class Statistics extends PureComponent<Props> {
   countBetas(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance');
-      if (fragments.length === 1) out += 1;
+      if (fragments && fragments.length === 1) out += 1;
       return out;
     }, 0);
   }
@@ -66,7 +66,7 @@ class Statistics extends PureComponent<Props> {
   countGammas(docs: ReadonlyArray<Document>): number {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance');
-      if (fragments.length >= 2) out += 1;
+      if (fragments && fragments.length >= 2) out += 1;
       return out;
     }, 0);
   }

@@ -158,7 +158,7 @@ class Fallacy extends PureComponent<Props> {
               {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
                 <ul>
                   {inheritanceDocs.map((v, i) => (
-                    <li key={`inheritance=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                    <li key={`inheritance-${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
                   ))}
                 </ul>
               }
@@ -171,7 +171,7 @@ class Fallacy extends PureComponent<Props> {
               {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
                 <ul>
                   {subtypeDocs.map((v, i) => (
-                    <li key={`subtype=${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                    <li key={`subtype-${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
                   ))}
                 </ul>
               }
@@ -424,13 +424,23 @@ const StyledHeader = styled.div`
 `;
 
 const StyledBody = styled.div`
+  ${container.box}
   -webkit-overflow-scrolling: touch;
   color: ${(props) => props.theme.colors.black};
   flex: 1 1 auto;
+  overflow-x: hidden;
   overflow-y: scroll;
-  padding: 1rem 1.4rem 3rem;
+  padding: 0 1.4rem;
   width: 100%;
   user-select: text;
+
+  > *:first-child {
+    margin-top: 1rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 3rem;
+  }
 
   @media ${media.gtmobile} {
     padding: 1rem 3rem 3rem;

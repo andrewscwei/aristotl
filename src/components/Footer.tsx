@@ -84,7 +84,6 @@ const StyledRoot = styled.footer`
   font-weight: 400;
   margin-top: 10rem;
   max-width: 120rem;
-  user-select: text;
   width: 100%;
 
   p {

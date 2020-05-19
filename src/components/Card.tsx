@@ -102,7 +102,6 @@ const StyledSummary = styled.div`
   overflow: hidden;
   padding: 0 1rem;
   width: 100%;
-  user-select: text;
 
   p {
     line-height: 1.8rem;
@@ -139,7 +138,6 @@ const StyledAbbreviation = styled.div`
   overflow: visible;
   padding: 0 1rem;
   width: 100%;
-  user-select: text;
 
   h2 {
     font-family: 'NovaMono', monospace;
@@ -165,7 +163,6 @@ const StyledAliases = styled.div`
   line-height: 140%;
   margin-top: 1rem;
   padding: 0 1rem;
-  user-select: text;
   width: 100%;
 
   @media ${media.gtw(660)} {
@@ -179,7 +176,6 @@ const StyledName = styled.h1`
   font-weight: 400;
   hyphens: auto;
   padding: 0 1rem;
-  user-select: text;
   width: 100%;
 
   @media ${media.gtw(500)} {
