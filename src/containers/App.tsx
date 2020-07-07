@@ -32,19 +32,19 @@ interface Props extends StateProps, DispatchProps {
 interface State {}
 
 class App extends PureComponent<Props, State> {
-  syncLocaleWithUrl() {
-    const { route, changeLocale, i18n } = this.props;
-    const newLocale = getLocaleFromPath(route.location.pathname);
-    if (newLocale === i18n.locale) return;
-    changeLocale(newLocale);
+  unlistenHistory?: () => any = undefined;
+
+  constructor(props: Props) {
+    super(props);
+    this.syncLocaleWithUrl(this.props.route.location.pathname);
   }
 
-  generateRoutes() {
-    this.syncLocaleWithUrl();
+  componentDidMount() {
+    this.unlistenHistory = this.props.route.history.listen((location) => this.syncLocaleWithUrl(location.pathname));
+  }
 
-    return routes.map((route, index) => (
-      <Route exact={route.exact} path={route.path} key={`route-${index}`} component={route.component}/>
-    ));
+  componentWillUnmount() {
+    this.unlistenHistory?.();
   }
 
   render() {
@@ -58,6 +58,21 @@ class App extends PureComponent<Props, State> {
         </Fragment>
       </ThemeProvider>
     );
+  }
+
+  private syncLocaleWithUrl(url: string) {
+    const { route, changeLocale, i18n } = this.props;
+    const newLocale = getLocaleFromPath(url);
+
+    if (newLocale === i18n.locale) return;
+
+    changeLocale(newLocale);
+  }
+
+  private generateRoutes() {
+    return routes.map((route, index) => (
+      <Route exact={route.exact} path={route.path} key={`route-${index}`} component={route.component}/>
+    ));
   }
 }
 
