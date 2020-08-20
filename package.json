@@ -1,6 +1,6 @@
 {
   "name": "aristotl",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "An experimental logical fallacy lookup tool.",
   "homepage": "https://www.aristotl.io",
   "keywords": [
@@ -30,9 +30,7 @@
   "reactSnap": {
     "source": "build",
     "include": [
-      "/",
-      "/preview",
-      "/404.html"
+      "/preview"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

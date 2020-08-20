@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import qs from 'query-string';
 import { SFC, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { getPreviewPath, savePreviewToken } from '../utils/prismic';
@@ -13,15 +15,17 @@ const Preview: SFC<Props> = ({ location, history}) => {
     const documentId = params.get('documentId');
 
     if (token && documentId) {
-      document.title = 'Previewing...';
-
       debug(`Previewing document <${documentId}>...`);
 
       savePreviewToken(token);
 
       getPreviewPath(token, documentId).then((path) => {
+        const parsed = qs.parseUrl(path, { parseFragmentIdentifier: true });
+
         history.push({
-          pathname: path,
+          pathname: parsed.url,
+          hash: parsed.fragmentIdentifier,
+          search: _.isEmpty(params) ? undefined : `?${qs.stringify(parsed.query)}`
         });
       });
     }
