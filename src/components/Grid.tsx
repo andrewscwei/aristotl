@@ -1,4 +1,4 @@
-import { Document } from 'prismic-javascript/d.ts/documents';
+import { Document } from 'prismic-javascript/types/documents';
 import { align, animations, container, media } from 'promptu';
 import React, { PureComponent } from 'react';
 import { Transition } from 'react-transition-group';

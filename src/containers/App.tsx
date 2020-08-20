@@ -8,12 +8,14 @@ import { connect } from 'react-redux';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { ThemeProvider } from 'styled-components';
+import PreviewIndicator from '../components/PreviewIndicator';
 import routes from '../routes';
 import { AppState } from '../store';
 import { changeLocale, I18nState } from '../store/i18n';
 import GlobalStyles from '../styles/global';
 import * as theme from '../styles/theme';
 import { getLocaleFromPath } from '../utils/i18n';
+import { hasPreviewToken } from '../utils/prismic';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app') : () => {};
 
@@ -54,6 +56,7 @@ class App extends PureComponent<Props, State> {
       <ThemeProvider theme={theme}>
         <Fragment>
           <GlobalStyles/>
+          {hasPreviewToken() && <PreviewIndicator/>}
           <Switch location={route.location}>{this.generateRoutes()}</Switch>
         </Fragment>
       </ThemeProvider>

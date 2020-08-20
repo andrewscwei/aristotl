@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { Document } from 'prismic-javascript/d.ts/documents';
-import { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
+import { Document } from 'prismic-javascript/types/documents';
+import { QueryOptions } from 'prismic-javascript/types/ResolvedApi';
 import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Document } from 'prismic-javascript/d.ts/documents';
+import { Document } from 'prismic-javascript/types/documents';
 import { Action, Dispatch } from 'redux';
 import { fetchDocsByType, localeResolver } from '../utils/prismic';
 

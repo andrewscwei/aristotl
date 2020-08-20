@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Document } from 'prismic-javascript/d.ts/documents';
+import { Document } from 'prismic-javascript/types/documents';
 import { align, animations, container, selectors } from 'promptu';
 import React, { forwardRef, Fragment, PureComponent, Ref } from 'react';
 import { connect } from 'react-redux';

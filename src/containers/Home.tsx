@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Document } from 'prismic-javascript/d.ts/documents';
+import { Document } from 'prismic-javascript/types/documents';
 import { animations, container, media, selectors } from 'promptu';
 import qs from 'query-string';
 import React, { createRef, Fragment, PureComponent } from 'react';

@@ -1,58 +1,147 @@
-import cookie from 'cookie';
+import Cookies from 'js-cookie';
 import _ from 'lodash';
 import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
-import { Document } from 'prismic-javascript/d.ts/documents';
-import ResolvedApi, { QueryOptions } from 'prismic-javascript/d.ts/ResolvedApi';
+import { Document } from 'prismic-javascript/types/documents';
+import ResolvedApi, { QueryOptions } from 'prismic-javascript/types/ResolvedApi';
+import resolveLinks from '../links.conf';
 import { getLocalizedPath } from './i18n';
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {};
 
-export function linkResolver(doc: Document): string {
-  const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
-
-  switch (doc.type) {
-    case 'definition': return getLocalizedPath(`/#def-${doc.id}`, locale);
-    case 'fallacy': return getLocalizedPath(`/#${doc.uid}`, locale);
-    default: return getLocalizedPath('/');
-  }
+/**
+ * Sets the page title, adds the preview tag if currently in preview mode.
+ *
+ * @param title - The title of the page to set to.
+ */
+export function setPageTitle(title: string) {
+  document.title = hasPreviewToken() ? `[PREVIEW] ${title}` : title;
 }
 
-export function localeResolver(locale: string, reverse: boolean = false): string {
+/**
+ * Maps a Prismic document to its URL in the app. An example of when this is
+ * used is when a modified document on Prismic is being previewed.
+ *
+ * @param doc - The Prismic document to map.
+ *
+ * @returns The corresponding URL.
+ */
+export function linkResolver(doc: Document): string {
+  const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
+  return getLocalizedPath(resolveLinks(doc), locale);
+}
+
+/**
+ * Maps Prismic locale code to local locale code. Set `reverse` to `true` to
+ * reverse the mapping (from local locale code to Prismic locale code instead).
+ * Note that only local locale codes listed in `appConf#locales` will be
+ * supported. Any unmappable or unsupported locale codes will yield English
+ * locale as default.
+ *
+ * @param locale - Locale code to map.
+ * @param reverse - Indicates if the operation is reversed. If `false` a Prismic
+ *                  locale code is expected and will be mapped to a local locale
+ *                  code. If `true` the mapping will be reversed.
+ *
+ * @returns The mapped locale code.
+ */
+export function localeResolver(locale: string, reverse = false): string {
   const defaultLocale = __I18N_CONFIG__.defaultLocale;
   const supportedLocales = __I18N_CONFIG__.locales;
 
   if (reverse) {
-    switch (locale) {
-      default: return 'en';
-    }
+    const matches = locale.match(/^([a-zA-Z0-9]*)-?.*$/);
+    return matches && matches.length > 0 && matches[1] || 'en';
   }
   else {
     if (supportedLocales.indexOf(locale) < 0) return defaultLocale;
 
     switch (locale) {
-      default: return 'en-us';
+    case 'ar': return 'ar-ae'; // Arabic
+    case 'bg': return 'bg'; // Bulgarian
+    case 'ca': return 'ca'; // Catalan
+    case 'cs': return 'cs-cz'; // Czech
+    case 'da': return 'da-dk'; // Danish
+    case 'de': return 'de-de'; // German
+    case 'el': return 'el-gr'; // Greek
+    case 'es': return 'es-es'; // Spanish
+    case 'eu': return 'eu'; // Basque
+    case 'fa': return 'fa-ir'; // Farsi
+    case 'fi': return 'fi'; // Finnish
+    case 'fr': return 'fr-fr'; // French
+    case 'he': return 'he'; // Hebrew
+    case 'hi': return 'hi-in'; // Hindi
+    case 'hr': return 'hr'; // Croatian
+    case 'hu': return 'hu'; // Hungarian
+    case 'hy': return 'hy-am'; // Armenian
+    case 'id': return 'id'; // Indonesian
+    case 'is': return 'is'; // Icelandic
+    case 'it': return 'it-it'; // Italian
+    case 'ja': return 'ja-jp'; // Japanese
+    case 'ko': return 'ko-kr'; // Korean
+    case 'lt': return 'lt'; // Lithuanian
+    case 'lv': return 'lv'; // Latvian
+    case 'ms': return 'ms-my'; // Malay
+    case 'nl': return 'nl-nl'; // Dutch
+    case 'no': return 'no'; // Norwegian
+    case 'pl': return 'pl'; // Polish
+    case 'pt': return 'pt-pt'; // Portuguese
+    case 'ro': return 'ro'; // Romanian
+    case 'ru': return 'ru'; // Russian
+    case 'sk': return 'sk'; // Slovak
+    case 'sl': return 'sl'; // Slovenian
+    case 'sv': return 'sv-se'; // Swedish
+    case 'th': return 'th'; // Thai
+    case 'tr': return 'tr'; // Turkish
+    case 'vi': return 'vi'; // Vietnamese
+    case 'zh': return 'zh-cn'; // Chinese
+    default: return 'en-us'; // English
     }
   }
 }
 
+/**
+ * Gets the object to be used to interact with the Prismic API.
+ *
+ * @returns The Prismic API object.
+ */
 export function getAPI(): Promise<ResolvedApi> {
   const { apiEndpoint, accessToken } = __APP_CONFIG__.prismic;
   return Prismic.api(apiEndpoint, { accessToken });
 }
 
-export async function getPreviewPath(token: string): Promise<string> {
+/**
+ * Gets the preview path of a document.
+ *
+ * @param token - The preview token generated by Prismic.
+ * @param documentId - The UID of the document to preview.
+ *
+ * @returns The preview path.
+ */
+export async function getPreviewPath(token: string, documentId: string): Promise<string> {
   const api = await getAPI();
-  return api.previewSession(token, linkResolver, '/');
+  return api.getPreviewResolver(token, documentId).resolve(linkResolver, '/');
 }
 
-export function savePreviewToken(token: string) {
-  document.cookie = cookie.serialize(Prismic.previewCookie, token, {
-    expires: new Date(Date.now() + 60 * 60 * 1000),
-    path: '/',
-  });
+/**
+ * Indicates if there exists a preview token.
+ *
+ * @returns `true` if a preview token exists, `false` otherwise.
+ */
+export function hasPreviewToken(): boolean {
+  const token = loadPreviewToken();
+  return token !== undefined;
+}
 
-  if (cookie.parse(document.cookie)[Prismic.previewCookie]) {
+/**
+ * Saves the preview token to browser cookies.
+ *
+ * @param token - The preview token.
+ */
+export function savePreviewToken(token: string) {
+  Cookies.set(Prismic.previewCookie, token, { expires: 1/24, path: '/' });
+
+  if (loadPreviewToken()) {
     debug('Saving preview token to cookies...', 'OK');
   }
   else {
@@ -60,9 +149,21 @@ export function savePreviewToken(token: string) {
   }
 }
 
+/**
+ * Loads and returns the preview token from browser cookies, if available.
+ *
+ * @returns The preview token.
+ */
 export function loadPreviewToken(): string | undefined {
-  const token = cookie.parse(document.cookie)[Prismic.previewCookie];
+  const token = Cookies.get(Prismic.previewCookie);
   return token;
+}
+
+/**
+ * Removes the preview token from browser cookies.
+ */
+export function removePreviewToken() {
+  Cookies.remove(Prismic.previewCookie);
 }
 
 /**
@@ -108,7 +209,16 @@ export async function fetchDocsByType(type: string, uid?: string, options: Parti
   return docs;
 }
 
-export function getText(doc?: Document, path: string = ''): string | undefined {
+/**
+ * Convenience method for fetching the text from a document field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the target field relative to the root of the
+ *               document object.
+ *
+ * @returns The text if available, `undefined` otherwise.
+ */
+export function getText(doc?: Document, path = ''): string | undefined {
   const fragment = _.get(doc, path);
 
   if (!fragment) return undefined;
@@ -117,7 +227,20 @@ export function getText(doc?: Document, path: string = ''): string | undefined {
   return PrismicDOM.RichText.asText(fragment);
 }
 
-export function getTexts(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+/**
+ * Convenience method for fetching multiple texts from a document array field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the array field relative to the root of the
+ *               document object.
+ * @param subpath - The path of the target field relative the root of each item
+ *                  in the array field.
+ *
+ * @returns An array of texts if available. If the target path is a valid array
+ *          but the target subpath contains no text, an empty array is returned.
+ *          If the target path is not an array, `undefined` is returned.
+ */
+export function getTexts(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
   const fragments = _.get(doc, path);
 
   if (!_.isArray(fragments)) return undefined;
@@ -139,7 +262,70 @@ export function getTexts(doc?: Document, path: string = '', subpath: string = ''
   return texts;
 }
 
-export function getUrl(doc?: Document, path: string = ''): string | undefined {
+/**
+ * Convenience method for fetching the number from a document field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the target field relative to the root of the
+ *               document object.
+ *
+ * @returns The number if available, `undefined` otherwise.
+ */
+export function getNumber(doc?: Document, path = ''): number | undefined {
+  const fragment = _.get(doc, path);
+
+  if (!fragment) return undefined;
+  if (typeof fragment === 'number') return fragment;
+
+  return fragment;
+}
+
+/**
+ * Convenience method for fetching multiple numbers from a document array field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the array field relative to the root of the
+ *               document object.
+ * @param subpath - The path of the target field relative the root of each item
+ *                  in the array field.
+ *
+ * @returns An array of numbers if available. If the target path is a valid
+ *          array but the target subpath contains no number, an empty array is
+ *          returned. If the target path is not an array, `undefined` is
+ *          returned.
+ */
+export function getNumbers(doc?: Document, path = '', subpath = ''): ReadonlyArray<number> | undefined {
+  const fragments = _.get(doc, path);
+
+  if (!_.isArray(fragments)) return undefined;
+
+  const numbers = _.reduce(fragments, (out, curr: any) => {
+    const n = _.get(curr, subpath);
+    if (n === undefined || n === null) return out;
+
+    if (typeof n === 'number') {
+      out.push(n);
+    }
+    else {
+      out.push(n);
+    }
+
+    return out;
+  }, Array<number>());
+
+  return numbers;
+}
+
+/**
+ * Convenience method for fetching the URL from a document field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the target field relative to the root of the
+ *               document object.
+ *
+ * @returns The URL if available, `undefined` otherwise.
+ */
+export function getUrl(doc?: Document, path = ''): string | undefined {
   const fragment = _.get(doc, path);
 
   if (!fragment) return undefined;
@@ -147,7 +333,20 @@ export function getUrl(doc?: Document, path: string = ''): string | undefined {
   return PrismicDOM.Link.url(fragment, linkResolver);
 }
 
-export function getUrls(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+/**
+ * Convenience method for fetching multiple URLs from a document array field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the array field relative to the root of the
+ *               document object.
+ * @param subpath - The path of the target field relative the root of each item
+ *                  in the array field.
+ *
+ * @returns An array of URLs if available. If the target path is a valid array
+ *          but the target subpath contains no URL, an empty array is returned.
+ *          If the target path is not an array, `undefined` is returned.
+ */
+export function getUrls(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
   const fragments = _.get(doc, path);
 
   if (!_.isArray(fragments)) return undefined;
@@ -165,7 +364,16 @@ export function getUrls(doc?: Document, path: string = '', subpath: string = '')
   return urls;
 }
 
-export function getMarkup(doc?: Document, path: string = ''): string | undefined {
+/**
+ * Convenience method for fetching the HTML markup from a document field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the target field relative to the root of the
+ *               document object.
+ *
+ * @returns The HTML markup if available, `undefined` otherwise.
+ */
+export function getMarkup(doc?: Document, path = ''): string | undefined {
   const fragment = _.get(doc, path);
 
   if (!fragment) return undefined;
@@ -173,7 +381,22 @@ export function getMarkup(doc?: Document, path: string = ''): string | undefined
   return PrismicDOM.RichText.asHtml(fragment, linkResolver);
 }
 
-export function getMarkups(doc?: Document, path: string = '', subpath: string = ''): ReadonlyArray<string> | undefined {
+/**
+ * Convenience method for fetching multiple HTML markups from a document array
+ * field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the array field relative to the root of the
+ *               document object.
+ * @param subpath - The path of the target field relative the root of each item
+ *                  in the array field.
+ *
+ * @returns An array of HTML markups if available. If the target path is a valid
+ *          array but the target subpath contains no HTML markup, an empty array
+ *          is returned. If the target path is not an array, `undefined` is
+ *          returned.
+ */
+export function getMarkups(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
   const fragments = _.get(doc, path);
 
   if (!_.isArray(fragments)) return undefined;
@@ -191,7 +414,16 @@ export function getMarkups(doc?: Document, path: string = '', subpath: string = 
   return markups;
 }
 
-export function getDoc(doc?: Document, path: string = '', lookupDocs?: ReadonlyArray<Document>): Document | undefined {
+/**
+ * Convenience method for fetching the inner document from a document field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the target field relative to the root of the
+ *               document object.
+ *
+ * @returns The HTML markup if available, `undefined` otherwise.
+ */
+export function getDoc(doc?: Document, path = '', lookupDocs?: ReadonlyArray<Document>): Document | undefined {
   const fragment = _.get(doc, path);
 
   if (!fragment) return undefined;
@@ -202,7 +434,22 @@ export function getDoc(doc?: Document, path: string = '', lookupDocs?: ReadonlyA
   return _.find(lookupDocs, (v) => v.id === fragment.id);
 }
 
-export function getDocs(doc?: Document, path: string = '', subpath: string = '', lookupDocs?: ReadonlyArray<Document>): ReadonlyArray<Document> | undefined {
+/**
+ * Convenience method for fetching multiple inner documents from a document
+ * array field.
+ *
+ * @param doc - The document.
+ * @param path - The path of the array field relative to the root of the
+ *               document object.
+ * @param subpath - The path of the target field relative the root of each item
+ *                  in the array field.
+ *
+ * @returns An array of inner documents if available. If the target path is a
+ *          valid array but the target subpath contains no inner document, an
+ *          empty array is returned. If the target path is not an array,
+ *          `undefined` is returned.
+ */
+export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: ReadonlyArray<Document>): ReadonlyArray<Document> | undefined {
   const fragments = _.get(doc, path);
 
   if (!fragments) return undefined;
