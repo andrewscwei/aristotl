@@ -25,7 +25,7 @@ const Preview: SFC<Props> = ({ location, history}) => {
         history.push({
           pathname: parsed.url,
           hash: parsed.fragmentIdentifier,
-          search: _.isEmpty(params) ? undefined : `?${qs.stringify(parsed.query)}`
+          search: _.isEmpty(params) ? undefined : `?${qs.stringify(parsed.query)}`,
         });
       });
     }
