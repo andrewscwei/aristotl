@@ -1,65 +1,62 @@
-import React, { HTMLAttributes, PropsWithChildren, PureComponent } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 // import Hammer from 'react-hammerjs'
 
-type Props = PropsWithChildren<HTMLAttributes<HTMLElement>> & {
-  isEnabled: boolean
-  onPrev: () => void
-  onNext: () => void
-  onEscape: () => void
-}
+type Props = PropsWithChildren<{
+  isEnabled?: boolean
+  onEscape?: () => void
+  onNext?: () => void
+  onPrev?: () => void
+}>
 
-class NavControlManager extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    isEnabled: false,
-    onPrev: () => {},
-    onNext: () => {},
-    onEscape: () => {},
-  }
-
-  componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp)
-  }
-
-  onKeyUp = (event: KeyboardEvent) => {
-    if (!this.props.isEnabled) return
+export default function NavControlManager({
+  children,
+  isEnabled = false,
+  onEscape,
+  onNext,
+  onPrev,
+}: Props) {
+  const onKeyUp = (event: KeyboardEvent) => {
+    if (!isEnabled) return
     if (document.activeElement instanceof HTMLInputElement) return
 
     switch (event.keyCode) {
     case 39:
-      this.props.onNext()
+      onNext?.()
       break
     case 37:
-      this.props.onPrev()
+      onPrev?.()
       break
     case 27:
-      this.props.onEscape()
+      onEscape?.()
       break
     }
   }
 
-  onSwipe = (direction: number) => {
-    if (!this.props.isEnabled) return
+  const onSwipe = (direction: number) => {
+    if (!isEnabled) return
 
     switch (direction) {
     case 2: // Left
-      this.props.onNext()
+      onNext?.()
       break
     case 4: // Right
-      this.props.onPrev()
+      onPrev?.()
     }
   }
 
-  render() {
-    return (
-      // <Hammer direction='DIRECTION_HORIZONTAL' onSwipe={event => this.onSwipe(event.direction)}>
-      <>{this.props.children}</>
-      // </Hammer>
-    )
-  }
-}
+  useEffect(() => {
+    window.addEventListener('keyup', onKeyUp)
 
-export default NavControlManager
+    return () => {
+      window.removeEventListener('keyup', onKeyUp)
+    }
+  }, [])
+
+  return (
+    // <Hammer direction='DIRECTION_HORIZONTAL' onSwipe={event => this.onSwipe(event.direction)}>
+    <>
+      {children}
+    </>
+    // </Hammer>
+  )
+}

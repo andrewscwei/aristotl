@@ -1,98 +1,72 @@
 import _ from 'lodash'
 import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, container, media, selectors, utils } from 'promptu'
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { AppState } from '../store'
-import { I18nState } from '../store/i18n'
 import { colors } from '../styles/theme'
+import { useLtxt } from '../utils/i18n'
 import { getDocs, getMarkup, getText, getTexts } from '../utils/prismic'
 import Pixel from './Pixel'
 
-interface StateProps {
-  i18n: I18nState
-}
-
-interface DispatchProps {
-
-}
-
-interface Props extends StateProps, DispatchProps {
-  className?: string
+type Props = HTMLAttributes<HTMLElement> & {
   doc: Document
-  isSummaryEnabled: boolean
-  onActivate: () => void
+  isSummaryEnabled?: boolean
+  onActivate?: () => void
 }
 
-class Card extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    isSummaryEnabled: false,
-    onActivate: () => {},
-  }
+export default function Card({
+  doc,
+  isSummaryEnabled = false,
+  onActivate,
+  ...props
+}: Props) {
+  const ltxt = useLtxt()
+  const abbreviation = getText(doc, 'data.abbreviation')
+  const name = getText(doc, 'data.name')
+  const summary = getMarkup(doc, 'data.summary')
+  const typeDocs = getDocs(doc, 'data.types', 'type')
 
-  render() {
-    const { ltxt } = this.props.i18n
-    const abbreviation = getText(this.props.doc, 'data.abbreviation')
-    const name = getText(this.props.doc, 'data.name')
-    const summary = getMarkup(this.props.doc, 'data.summary')
-    const typeDocs = getDocs(this.props.doc, 'data.types', 'type')
+  const aliases = _.sortBy(getTexts(doc, 'data.aliases', 'name')) || []
+  const firstAliases = _.take(aliases, 3) || []
+  const remainingAliases = aliases.length - firstAliases.length
 
-    const aliases = _.sortBy(getTexts(this.props.doc, 'data.aliases', 'name')) || []
-    const firstAliases = _.take(aliases, 3) || []
-    const remainingAliases = aliases.length - firstAliases.length
+  return (
+    <StyledRoot {...props} onClick={() => onActivate?.()}>
+      <StyledAbbreviation>
+        <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <h2>{abbreviation}</h2>
+      </StyledAbbreviation>
 
-    return (
-      <StyledRoot
-        className={this.props.className}
-        onClick={() => this.props.onActivate()}
-      >
-        <StyledAbbreviation>
-          <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-          <h2>{abbreviation}</h2>
-        </StyledAbbreviation>
+      <StyledTypes>
+        {typeDocs && typeDocs.map((v: any, i) => (
+          <StyledType key={`type-${i}`}>
+            <Pixel isHollow={v.slug === 'informal-fallacy'}/>
+            <span>{ltxt(v.slug)}</span>
+          </StyledType>
+        ))}
+      </StyledTypes>
 
-        <StyledTypes>
-          {typeDocs && typeDocs.map((v: any, i) => (
-            <StyledType key={`type-${i}`}>
-              <Pixel isHollow={v.slug === 'informal-fallacy'}/>
-              <span>{ltxt(v.slug)}</span>
-            </StyledType>
-          ))}
-        </StyledTypes>
+      {name &&
+        <StyledName>{name}</StyledName>
+      }
 
-        {name &&
-          <StyledName>{name}</StyledName>
-        }
+      {!isSummaryEnabled && firstAliases.length > 0 &&
+        <StyledAliases><em>{firstAliases.join(', ')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
+      }
 
-        {!this.props.isSummaryEnabled && firstAliases.length > 0 &&
-          <StyledAliases><em>{firstAliases.join(', ')}{remainingAliases > 0 ? `, ${ltxt('n-more', { n: remainingAliases })}` : ''}</em></StyledAliases>
-        }
+      {isSummaryEnabled && summary &&
+        <StyledSummary dangerouslySetInnerHTML={{ __html: summary }}/>
+      }
 
-        {this.props.isSummaryEnabled && summary &&
-          <StyledSummary dangerouslySetInnerHTML={{ __html: summary }}/>
-        }
-
-        <StyledDivider isSummaryEnabled={this.props.isSummaryEnabled}/>
-      </StyledRoot>
-    )
-  }
+      <StyledDivider isSummaryEnabled={isSummaryEnabled}/>
+    </StyledRoot>
+  )
 }
-
-export default connect(
-  (state: AppState): StateProps => ({
-    i18n: state.i18n,
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-
-  }, dispatch),
-)(Card)
 
 const StyledSummary = styled.div`
   color: ${props => props.theme.colors.grey};

@@ -5,7 +5,7 @@ import { fetchDocsByType, localeResolver } from '../utils/prismic'
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:fallacies') : () => {}
 
-export interface FallaciesFilters {
+export type FallaciesFilters = {
   formal: boolean
   informal: boolean
   alpha: boolean
@@ -23,7 +23,7 @@ export enum FallaciesActionType {
   SEARCHED = 'fallacies/SEARCHED',
 }
 
-export interface FallaciesState {
+export type FallaciesState = {
   activeDocIds: string[]
   docs: { [locale: string]: readonly Document[] }
   filters: FallaciesFilters
@@ -32,7 +32,7 @@ export interface FallaciesState {
   searchInput: string
 }
 
-export interface FallaciesAction extends Action<FallaciesActionType> {
+export type FallaciesAction = Action<FallaciesActionType> & {
   payload: { [key: string]: any }
 }
 

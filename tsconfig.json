@@ -2,25 +2,39 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "diagnostics": false,
+    "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": true,
     "jsx": "react",
     "lib": ["es6", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "outDir": "./build",
+    "pretty": true,
     "removeComments": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
+    "sourceRoot": "/",
     "strict": true,
-    "target": "es6"
+    "strictNullChecks": true,
+    "target": "es5"
   },
   "include": [
-    "src/**/*",
-    "config/**/*"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
     "node_modules",
-    "**/*.spec.*"
+    "build",
+    "tests"
   ]
 }

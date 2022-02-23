@@ -6,11 +6,11 @@ export enum MetadataActionType {
   LOADED = 'metadata/LOADED',
 }
 
-export interface MetadataState {
+export type MetadataState = {
   [locale: string]: Readonly<Document> | undefined
 }
 
-export interface MetadataAction extends Action<MetadataActionType> {
+export type MetadataAction = Action<MetadataActionType> & {
   payload: { [key: string]: any }
 }
 

@@ -12,14 +12,14 @@ export enum DefinitionsActionType {
   LOADED = 'definitions/LOADED',
 }
 
-export interface DefinitionsState {
+export type DefinitionsState = {
   activeDocIds: string[]
   docs: {
     [locale: string]: readonly Document[]
   }
 }
 
-export interface DefinitionsAction extends Action<DefinitionsActionType> {
+export type DefinitionsAction = Action<DefinitionsActionType> & {
   payload: { [key: string]: any }
 }
 
