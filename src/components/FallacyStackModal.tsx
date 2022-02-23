@@ -1,11 +1,10 @@
 import _ from 'lodash'
 import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, utils } from 'promptu'
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
+import React, { HTMLAttributes } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Transition, TransitionGroup } from 'react-transition-group'
 import { TransitionStatus } from 'react-transition-group/Transition'
-import { Action, bindActionCreators, Dispatch } from 'redux'
 import styled from 'styled-components'
 import Fallacy from '../components/Fallacy'
 import Modal from '../components/Modal'
@@ -14,94 +13,74 @@ import { AppState } from '../store'
 import { dismissFallacyById, presentFallacyById } from '../store/fallacies'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 
-interface StateProps {
-  activeDefinitionIds: string[]
-  activeFallacyIds: string[]
-  fallacies: readonly Document[]
-}
+type Props = HTMLAttributes<HTMLDivElement>
 
-interface DispatchProps {
-  dismissFallacyById: typeof dismissFallacyById
-  presentFallacyById: typeof presentFallacyById
-}
+export default function FallacyStackModal({
+  ...props
+}: Props) {
+  const dispatch = useDispatch()
+  const activeDefinitionIds = useSelector((state: AppState) => state.definitions.activeDocIds)
+  const activeFallacyIds = useSelector((state: AppState) => state.fallacies.activeDocIds)
+  const fallacies = useSelector((state: AppState) => getFallacies(state))
 
-interface Props extends StateProps, DispatchProps {
-
-}
-
-class FallacyStackModal extends PureComponent<Props> {
-  getPrevDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacies, v => v.uid === currDocId)
+  const getPrevDoc = (currDocId: string): Document | undefined => {
+    const currIndex = _.findIndex(fallacies, v => v.uid === currDocId)
     if (currIndex < 1) return undefined
-    return this.props.fallacies[currIndex - 1]
+    return fallacies[currIndex - 1]
   }
 
-  getNextDoc(currDocId: string): Document | undefined {
-    const currIndex = _.findIndex(this.props.fallacies, v => v.uid === currDocId)
-    if (currIndex >= (this.props.fallacies.length - 1)) return undefined
-    return this.props.fallacies[currIndex + 1]
+  const getNextDoc = (currDocId: string): Document | undefined => {
+    const currIndex = _.findIndex(fallacies, v => v.uid === currDocId)
+    if (currIndex >= (fallacies.length - 1)) return undefined
+    return fallacies[currIndex + 1]
   }
 
-  onPrev(currDocId: string) {
-    const doc = this.getPrevDoc(currDocId)
+  const onPrev = (currDocId: string) => {
+    const doc = getPrevDoc(currDocId)
     if (!doc || !doc.uid) return
-    this.props.presentFallacyById(doc.uid)
-    this.props.dismissFallacyById(currDocId)
+    dispatch(presentFallacyById(doc.uid))
+    dispatch(dismissFallacyById(currDocId))
   }
 
-  onNext(currDocId: string) {
-    const doc = this.getNextDoc(currDocId)
+  const onNext = (currDocId: string) => {
+    const doc = getNextDoc(currDocId)
     if (!doc || !doc.uid) return
-    this.props.presentFallacyById(doc.uid)
-    this.props.dismissFallacyById(currDocId)
+    dispatch(presentFallacyById(doc.uid))
+    dispatch(dismissFallacyById(currDocId))
   }
 
-  render() {
-    return (
-      <StyledRoot isFocused={this.props.activeFallacyIds.length > 0}>
-        <TransitionGroup>
-          {(this.props.activeFallacyIds.map((fallacyId, i) => (
-            <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
-              {status => (
-                <Modal
-                  isFocused={i === (this.props.activeFallacyIds.length - 1) && this.props.activeDefinitionIds.length === 0}
-                  transitionStatus={status}
-                  onPrev={this.getPrevDoc(fallacyId) ? () => this.onPrev(fallacyId) : undefined}
-                  onNext={this.getNextDoc(fallacyId) ? () => this.onNext(fallacyId) : undefined}
-                  onExit={() => this.props.dismissFallacyById(fallacyId)}
-                >
-                  {(scrollTargetRef, onExit, onPrev, onNext) => (
-                    <StyledFallacy
-                      docId={fallacyId}
-                      ref={scrollTargetRef}
-                      stackIndex={this.props.activeFallacyIds.length - i - 1}
-                      transitionStatus={status}
-                      onPrev={onPrev}
-                      onNext={onNext}
-                      onExit={onExit}
-                    />
-                  )}
-                </Modal>
-              )}
-            </Transition>
-          )))}
-        </TransitionGroup>
-      </StyledRoot>
-    )
-  }
+  return (
+    <StyledRoot {...props} isFocused={activeFallacyIds.length > 0}>
+      <TransitionGroup>
+        {(activeFallacyIds.map((fallacyId, i) => (
+          <Transition key={fallacyId} timeout={timeoutByTransitionStatus(200, true)} mountOnEnter={true} unmountOnExit={true}>
+            {status => (
+              <Modal
+                isFocused={i === (activeFallacyIds.length - 1) && activeDefinitionIds.length === 0}
+                transitionStatus={status}
+                onPrev={getPrevDoc(fallacyId) ? () => onPrev(fallacyId) : undefined}
+                onNext={getNextDoc(fallacyId) ? () => onNext(fallacyId) : undefined}
+                onExit={() => dispatch(dismissFallacyById(fallacyId))}
+              >
+                {(scrollTargetRef, onExit, onPrev, onNext) => (
+                  <StyledFallacy
+                    docId={fallacyId}
+                    ref={scrollTargetRef}
+                    stackIndex={activeFallacyIds.length - i - 1}
+                    transitionStatus={status}
+                    onPrev={onPrev}
+                    onNext={onNext}
+                    onExit={onExit}
+                  />
+                )}
+              </Modal>
+            )}
+          </Transition>
+        )))}
+      </TransitionGroup>
+    </StyledRoot>
+  )
 }
-
-export default connect(
-  (state: AppState): StateProps => ({
-    activeDefinitionIds: state.definitions.activeDocIds,
-    activeFallacyIds: state.fallacies.activeDocIds,
-    fallacies: getFallacies(state),
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    presentFallacyById,
-    dismissFallacyById,
-  }, dispatch),
-)(FallacyStackModal)
 
 const StyledFallacy = styled(Fallacy)<{
   stackIndex: number

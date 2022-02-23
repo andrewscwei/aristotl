@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { Document } from 'prismic-javascript/types/documents'
 import { animations, container, media, selectors } from 'promptu'
 import qs from 'query-string'
-import React, { createRef, Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Location, NavigateFunction } from 'react-router'
 import { Transition } from 'react-transition-group'
@@ -67,10 +67,6 @@ class Home extends PureComponent<Props, State> {
     isSummaryEnabled: false,
   }
 
-  nodeRefs = {
-    paginator: createRef<Paginator>(),
-  }
-
   constructor(props: Props) {
     super(props)
 
@@ -98,15 +94,13 @@ class Home extends PureComponent<Props, State> {
   }
 
   toNextPage() {
-    const paginator = this.nodeRefs.paginator.current
-    if (!paginator) return
-    paginator.next()
+    const pageIndex = (this.props.pageIndex + 1) % this.props.maxPages
+    this.props.changeFallaciesPage(pageIndex)
   }
 
   toPreviousPage() {
-    const paginator = this.nodeRefs.paginator.current
-    if (!paginator) return
-    paginator.prev()
+    const pageIndex = (this.props.pageIndex + this.props.maxPages - 1) % this.props.maxPages
+    this.props.changeFallaciesPage(pageIndex)
   }
 
   mapLocationToProps() {
@@ -211,7 +205,7 @@ class Home extends PureComponent<Props, State> {
     const lastActiveDefinitionId = _.last(this.props.activeDefinitionIds)
 
     return (
-      <Fragment>
+      <>
         <Transition in={!lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
           {status => (
             <NavControlManager
@@ -236,7 +230,6 @@ class Home extends PureComponent<Props, State> {
                 </StyledHeader>
                 <Statistics/>
                 <Paginator
-                  ref={this.nodeRefs.paginator}
                   pageIndex={this.props.pageIndex}
                   numPages={this.props.maxPages}
                   onActivate={this.props.changeFallaciesPage}
@@ -254,7 +247,7 @@ class Home extends PureComponent<Props, State> {
         </Transition>
         <FallacyStackModal/>
         <DefinitionStackModal/>
-      </Fragment>
+      </>
     )
   }
 }

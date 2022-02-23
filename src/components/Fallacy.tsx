@@ -1,252 +1,222 @@
 import _ from 'lodash'
-import { Document } from 'prismic-javascript/types/documents'
 import { animations, container, media, selectors } from 'promptu'
-import React, { forwardRef, MouseEvent, PureComponent, Ref } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { forwardRef, HTMLAttributes, MouseEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions, getFallacies } from '../selectors'
 import { AppState } from '../store'
 import { presentDefinitionById } from '../store/definitions'
 import { dismissFallacyById, presentFallacyById } from '../store/fallacies'
-import { I18nState } from '../store/i18n'
 import { colors } from '../styles/theme'
+import { useLtxt } from '../utils/i18n'
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
 import ActionButton from './ActionButton'
 import Pixel from './Pixel'
 import RichText from './RichText'
 
-interface StateProps {
-  definitions: readonly Document[]
-  fallacies: readonly Document[]
-  i18n: I18nState
-}
-
-interface DispatchProps {
-  presentFallacyById: typeof presentFallacyById
-  dismissFallacyById: typeof dismissFallacyById
-  presentDefinitionById: typeof presentDefinitionById
-}
-
-interface OwnProps {
-  className?: string
+type Props = HTMLAttributes<HTMLDivElement> & {
   docId?: string
-  scrollTargetRef?: Ref<HTMLDivElement>
   onPrev?: () => void
   onNext?: () => void
   onExit?: () => void
 }
 
-interface Props extends StateProps, DispatchProps, OwnProps {}
+export default forwardRef<HTMLDivElement, Props>(({
+  docId,
+  onPrev,
+  onNext,
+  onExit: _onExit,
+  ...props
+}, ref) => {
+  const ltxt = useLtxt()
+  const dispatch = useDispatch()
+  const definitions = useSelector((state: AppState) => getDefinitions(state))
+  const fallacies = useSelector((state: AppState) => getFallacies(state))
+  const doc = _.find(fallacies, v => v.uid === docId)
+  const abbreviation = getText(doc, 'data.abbreviation')
+  const name = getText(doc, 'data.name')
+  const aliases = _.sortBy(getTexts(doc, 'data.aliases', 'name'))
+  const typeDocs = getDocs(doc, 'data.types', 'type', definitions)
+  const subtypeDocs = getDocs(doc, 'data.subtypes', 'fallacy', fallacies)
+  const inheritanceDocs = getDocs(doc, 'data.inheritance', 'fallacy', fallacies)
+  const descriptionMarkup = getMarkup(doc, 'data.description')
+  const exampleMarkups = _.sortBy(getMarkups(doc, 'data.examples', 'example'))
+  const referenceMarkups = getMarkups(doc, 'data.references', 'reference')
+  const relatedDocs = _.sortBy(getDocs(doc, 'data.related', 'fallacy', fallacies), 'data.name')
 
-class Fallacy extends PureComponent<Props> {
-  get doc(): Document | undefined {
-    if (!this.props.docId) return undefined
-    return _.find(this.props.fallacies, v => v.uid === this.props.docId)
+  const onExit = () => {
+    if (_onExit) {
+      _onExit()
+    }
+    else if (docId) {
+      dispatch(dismissFallacyById(docId))
+    }
   }
 
-  onExit() {
-    if (this.props.onExit) {
-      this.props.onExit()
-    }
-    else if (this.props.docId) {
-      this.props.dismissFallacyById(this.props.docId)
-    }
-  }
-
-  onTypeSelect(docId: string) {
+  const onTypeSelect = (docId: string) => {
     return (event: MouseEvent) => {
       event.preventDefault()
-      this.props.presentDefinitionById(docId)
+      dispatch(presentDefinitionById(docId))
     }
   }
 
-  onFallacySelect(docId?: string) {
+  const onFallacySelect = (docId?: string) => {
     return (event: MouseEvent) => {
       event.preventDefault()
       if (!docId) return
-      this.props.presentFallacyById(docId)
+      dispatch(presentFallacyById(docId))
     }
   }
 
-  render() {
-    const { ltxt } = this.props.i18n
-    const abbreviation = getText(this.doc, 'data.abbreviation')
-    const name = getText(this.doc, 'data.name')
-    const aliases = _.sortBy(getTexts(this.doc, 'data.aliases', 'name'))
-    const typeDocs = getDocs(this.doc, 'data.types', 'type', this.props.definitions)
-    const subtypeDocs = getDocs(this.doc, 'data.subtypes', 'fallacy', this.props.fallacies)
-    const inheritanceDocs = getDocs(this.doc, 'data.inheritance', 'fallacy', this.props.fallacies)
-    const descriptionMarkup = getMarkup(this.doc, 'data.description')
-    const exampleMarkups = _.sortBy(getMarkups(this.doc, 'data.examples', 'example'))
-    const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference')
-    const relatedDocs = _.sortBy(getDocs(this.doc, 'data.related', 'fallacy', this.props.fallacies), 'data.name')
-
-    return (
-      <StyledRoot className={this.props.className}>
-        <StyledHeader>
-          <StyledCloseButton
-            symbol='-'
+  return (
+    <StyledRoot {...props}>
+      <StyledHeader>
+        <StyledCloseButton
+          symbol='-'
+          tintColor={colors.black}
+          hoverTintColor={colors.red}
+          onActivate={() => onExit()}
+        />
+        <div>
+          <StyledPrevButton
+            symbol='<'
             tintColor={colors.black}
             hoverTintColor={colors.red}
-            onActivate={() => this.onExit()}
+            isDisabled={onPrev === undefined}
+            onActivate={() => onPrev?.()}
           />
-          <div>
-            <StyledPrevButton
-              symbol='<'
-              tintColor={colors.black}
-              hoverTintColor={colors.red}
-              isDisabled={this.props.onPrev === undefined}
-              onActivate={() => this.props.onPrev && this.props.onPrev()}
-            />
-            <StyledNextButton
-              symbol='>'
-              tintColor={colors.black}
-              hoverTintColor={colors.red}
-              isDisabled={this.props.onNext === undefined}
-              onActivate={() => this.props.onNext && this.props.onNext()}
-            />
-          </div>
-        </StyledHeader>
+          <StyledNextButton
+            symbol='>'
+            tintColor={colors.black}
+            hoverTintColor={colors.red}
+            isDisabled={onNext === undefined}
+            onActivate={() => onNext?.()}
+          />
+        </div>
+      </StyledHeader>
 
-        <StyledBody ref={this.props.scrollTargetRef}>
-          <StyledAbbreviation>
-            <Pixel alignment='tr' tintColor={colors.black}/>
-            <Pixel alignment='br' tintColor={colors.black}/>
-            <Pixel alignment='cr' tintColor={colors.black}/>
-            <Pixel alignment='tc' tintColor={colors.black}/>
-            <Pixel alignment='bc' tintColor={colors.black}/>
-            <h2>{abbreviation || '--'}</h2>
-          </StyledAbbreviation>
+      <StyledBody ref={ref}>
+        <StyledAbbreviation>
+          <Pixel alignment='tr' tintColor={colors.black}/>
+          <Pixel alignment='br' tintColor={colors.black}/>
+          <Pixel alignment='cr' tintColor={colors.black}/>
+          <Pixel alignment='tc' tintColor={colors.black}/>
+          <Pixel alignment='bc' tintColor={colors.black}/>
+          <h2>{abbreviation || '--'}</h2>
+        </StyledAbbreviation>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('name')}</StyledLabel>
-            <StyledContent>
-              <StyledName>{name || '--'}</StyledName>
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('name')}</StyledLabel>
+          <StyledContent>
+            <StyledName>{name || '--'}</StyledName>
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('aliases')}</StyledLabel>
-            <StyledContent>
-              {!aliases || aliases.length <= 0 ? '--' :
-                <ul>
-                  {aliases.map((v, i) => (
-                    <li key={`alias=${i}`}><em>{v}</em></li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('aliases')}</StyledLabel>
+          <StyledContent>
+            {!aliases || aliases.length <= 0 ? '--' :
+              <ul>
+                {aliases.map((v, i) => (
+                  <li key={`alias=${i}`}><em>{v}</em></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('types')}</StyledLabel>
-            <StyledContent>
-              {!typeDocs || typeDocs.length <= 0 ? '--' :
-                <ul>
-                  {typeDocs.map((v, i) => (
-                    <li key={`type=${i}`}><a onClick={this.onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('types')}</StyledLabel>
+          <StyledContent>
+            {!typeDocs || typeDocs.length <= 0 ? '--' :
+              <ul>
+                {typeDocs.map((v, i) => (
+                  <li key={`type=${i}`}><a onClick={onTypeSelect(v.id)}>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('inheritance')}</StyledLabel>
-            <StyledContent>
-              {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
-                <ul>
-                  {inheritanceDocs.map((v, i) => (
-                    <li key={`inheritance-${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('inheritance')}</StyledLabel>
+          <StyledContent>
+            {!inheritanceDocs || inheritanceDocs.length <= 0 ? '--' :
+              <ul>
+                {inheritanceDocs.map((v, i) => (
+                  <li key={`inheritance-${i}`}><a onClick={onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('subtypes')}</StyledLabel>
-            <StyledContent>
-              {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
-                <ul>
-                  {subtypeDocs.map((v, i) => (
-                    <li key={`subtype-${i}`}><a onClick={this.onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('subtypes')}</StyledLabel>
+          <StyledContent>
+            {!subtypeDocs || subtypeDocs.length <= 0 ? '--' :
+              <ul>
+                {subtypeDocs.map((v, i) => (
+                  <li key={`subtype-${i}`}><a onClick={onFallacySelect(v.uid)}>{_.get(v, 'data.name')}</a></li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('description')}</StyledLabel>
-            <StyledContent>
-              {descriptionMarkup ? <RichText markup={descriptionMarkup}/> : '--'}
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('description')}</StyledLabel>
+          <StyledContent>
+            {descriptionMarkup ? <RichText markup={descriptionMarkup}/> : '--'}
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('examples')}</StyledLabel>
-            <StyledContent>
-              {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
-                <ul>
-                  {exampleMarkups.map((v, i) => (
-                    <li key={`example-${i}`}>
-                      <RichText markup={v}/>
-                    </li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('examples')}</StyledLabel>
+          <StyledContent>
+            {!exampleMarkups || exampleMarkups.length <= 0 ? '--' :
+              <ul>
+                {exampleMarkups.map((v, i) => (
+                  <li key={`example-${i}`}>
+                    <RichText markup={v}/>
+                  </li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('related')}</StyledLabel>
-            <StyledContent>
-              {!relatedDocs || relatedDocs.length <= 0 ? '--' :
-                <ul>
-                  {relatedDocs.map((v: any, i) => (
-                    <li key={`related-${i}`}>
-                      <a onClick={() => this.props.presentFallacyById(v.uid)}>{_.get(v, 'data.name')}</a>
-                    </li>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
+        <StyledSection>
+          <StyledLabel>{ltxt('related')}</StyledLabel>
+          <StyledContent>
+            {!relatedDocs || relatedDocs.length <= 0 ? '--' :
+              <ul>
+                {relatedDocs.map((v: any, i) => (
+                  <li key={`related-${i}`}>
+                    <a onClick={() => dispatch(presentFallacyById(v.uid))}>{_.get(v, 'data.name')}</a>
+                  </li>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
 
-          <StyledSection>
-            <StyledLabel>{ltxt('references')}</StyledLabel>
-            <StyledContent>
-              {!referenceMarkups || referenceMarkups.length <= 0 ? '--' :
-                <ul>
-                  {referenceMarkups.map((v, i) => (
-                    <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
-                  ))}
-                </ul>
-              }
-            </StyledContent>
-          </StyledSection>
-        </StyledBody>
-      </StyledRoot>
-    )
-  }
-}
-
-const ConnectedFallacy = connect(
-  (state: AppState): StateProps => ({
-    definitions: getDefinitions(state),
-    fallacies: getFallacies(state),
-    i18n: state.i18n,
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    presentFallacyById,
-    dismissFallacyById,
-    presentDefinitionById,
-  }, dispatch),
-)(Fallacy)
-
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedFallacy {...props} scrollTargetRef={ref}/>)
+        <StyledSection>
+          <StyledLabel>{ltxt('references')}</StyledLabel>
+          <StyledContent>
+            {!referenceMarkups || referenceMarkups.length <= 0 ? '--' :
+              <ul>
+                {referenceMarkups.map((v, i) => (
+                  <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
+                ))}
+              </ul>
+            }
+          </StyledContent>
+        </StyledSection>
+      </StyledBody>
+    </StyledRoot>
+  )
+})
 
 const StyledCloseButton = styled(ActionButton)`
 

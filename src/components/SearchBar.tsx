@@ -1,51 +1,32 @@
 import { align, container, selectors } from 'promptu'
-import React, { ChangeEvent, createRef, PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { ChangeEvent, HTMLAttributes, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AppState } from '../store'
 import { changeFallaciesFilters, changeFallaciesSearchInput } from '../store/fallacies'
-import { I18nState } from '../store/i18n'
 import { colors } from '../styles/theme'
+import { useLtxt } from '../utils/i18n'
 import ActionButton from './ActionButton'
 import Pixel from './Pixel'
 
-interface StateProps {
-  i18n: I18nState
-  searchInput: string
-}
-
-interface DispatchProps {
-  changeFallaciesFilters: typeof changeFallaciesFilters
-  changeFallaciesSearchInput: typeof changeFallaciesSearchInput
-}
-
-interface Props extends StateProps, DispatchProps {
+type Props = HTMLAttributes<HTMLDivElement> & {
   autoFocus: boolean
-  className?: string
   input?: string
 }
 
-class SearchBar extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    autoFocus: true,
-  }
+export default function SearchBar({
+  autoFocus = true,
+  input,
+  ...props
+}: Props) {
+  const ltxt = useLtxt()
+  const dispatch = useDispatch()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const searchInput = useSelector((state: AppState) => state.fallacies.searchInput)
 
-  nodeRefs = {
-    input: createRef<HTMLInputElement>(),
-  }
-
-  componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp)
-  }
-
-  onKeyUp = (event: KeyboardEvent) => {
-    if (!this.props.autoFocus) return
-    if (!this.nodeRefs.input.current) return
+  const onKeyUp = (event: KeyboardEvent) => {
+    if (!autoFocus) return
+    if (!inputRef.current) return
 
     switch (event.keyCode) {
     case 37:
@@ -54,64 +35,57 @@ class SearchBar extends PureComponent<Props> {
     case 40: return
     }
 
-    if (this.nodeRefs.input.current === document.activeElement) return
+    if (inputRef.current === document.activeElement) return
 
-    this.nodeRefs.input.current.focus()
+    inputRef.current.focus()
   }
 
-  onClear() {
-    this.props.changeFallaciesSearchInput('')
-    this.props.changeFallaciesFilters({
+  const onClear = () => {
+    dispatch(changeFallaciesSearchInput(''))
+    dispatch(changeFallaciesFilters({
       formal: true,
       informal: true,
       alpha: true,
       beta: true,
       gamma: true,
-    })
+    }))
   }
 
-  render() {
-    const { ltxt } = this.props.i18n
+  useEffect(() => {
+    window.addEventListener('keyup', onKeyUp)
 
-    return (
-      <StyledRoot className={this.props.className}>
-        <StyledPixels>
-          <Pixel tintColor={colors.offBlack}/>
-          <Pixel tintColor={colors.offBlack}/>
-          <Pixel tintColor={colors.offBlack}/>
-        </StyledPixels>
-        <StyledInput>
-          <input
-            type='text'
-            value={this.props.searchInput}
-            ref={this.nodeRefs.input}
-            placeholder={ltxt('search-placeholder')}
-            maxLength={24}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => this.props.changeFallaciesSearchInput(event.currentTarget.value)}
-          />
-        </StyledInput>
-        <StyledActionButton
-          symbol='c'
-          isTogglable={true}
-          tintColor={colors.white}
-          hoverTintColor={colors.red}
-          onActivate={() => this.onClear()}
+    return () => {
+      window.removeEventListener('keyup', onKeyUp)
+    }
+  }, [])
+
+  return (
+    <StyledRoot {...props}>
+      <StyledPixels>
+        <Pixel tintColor={colors.offBlack}/>
+        <Pixel tintColor={colors.offBlack}/>
+        <Pixel tintColor={colors.offBlack}/>
+      </StyledPixels>
+      <StyledInput>
+        <input
+          type='text'
+          value={searchInput}
+          ref={inputRef}
+          placeholder={ltxt('search-placeholder')}
+          maxLength={24}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(changeFallaciesSearchInput(event.currentTarget.value))}
         />
-      </StyledRoot>
-    )
-  }
+      </StyledInput>
+      <StyledActionButton
+        symbol='c'
+        isTogglable={true}
+        tintColor={colors.white}
+        hoverTintColor={colors.red}
+        onActivate={() => onClear()}
+      />
+    </StyledRoot>
+  )
 }
-
-export default connect(
-  (state: AppState): StateProps => ({
-    i18n: state.i18n,
-    searchInput: state.fallacies.searchInput,
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    changeFallaciesFilters,
-    changeFallaciesSearchInput,
-  }, dispatch),
-)(SearchBar)
 
 const StyledPixels = styled.div`
   ${container.fvcc}

@@ -1,35 +1,29 @@
 import _ from 'lodash'
 import { Document } from 'prismic-javascript/types/documents'
 import { animations, container, selectors } from 'promptu'
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { HTMLAttributes } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors'
+import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage } from '../selectors'
 import { AppState } from '../store'
-import { changeFallaciesFilters, FallaciesFilters } from '../store/fallacies'
+import { changeFallaciesFilters } from '../store/fallacies'
 import { colors } from '../styles/theme'
 import Pixel from './Pixel'
 
-interface StateProps {
-  filteredFallacies: readonly Document[]
-  filteredFallaciesOnCurrentPage: readonly Document[]
-  filters: FallaciesFilters
-  maxPages: number
-  pageIndex: number
-  pageSize: number
-}
+type Props = HTMLAttributes<HTMLDivElement>
 
-interface DispatchProps {
-  changeFallaciesFilters: typeof changeFallaciesFilters
-}
+export default function Statistics({
+  ...props
+}: Props) {
+  const dispatch = useDispatch()
 
-interface Props extends StateProps, DispatchProps {
-  className?: string
-}
+  const filteredFallacies = useSelector((state: AppState) => getFilteredFallacies(state))
+  const filteredFallaciesOnCurrentPage = useSelector((state: AppState) => getFilteredFallaciesOnCurrentPage(state))
+  const filters = useSelector((state: AppState) => state.fallacies.filters)
+  const pageIndex = useSelector((state: AppState) => state.fallacies.pageIndex)
+  const pageSize = useSelector((state: AppState) => state.fallacies.pageSize)
 
-class Statistics extends PureComponent<Props> {
-  countFormals(docs: readonly Document[]): number {
+  const countFormals = (docs: readonly Document[]): number => {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.types')
       const match = _.find(fragments, v => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined
@@ -38,7 +32,7 @@ class Statistics extends PureComponent<Props> {
     }, 0)
   }
 
-  countInformals(docs: readonly Document[]): number {
+  const countInformals = (docs: readonly Document[]): number => {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.types')
       const match = _.find(fragments, v => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined
@@ -47,7 +41,7 @@ class Statistics extends PureComponent<Props> {
     }, 0)
   }
 
-  countAlphas(docs: readonly Document[]): number {
+  const countAlphas = (docs: readonly Document[]): number => {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance')
       if (!fragments || fragments.length === 0) out += 1
@@ -55,7 +49,7 @@ class Statistics extends PureComponent<Props> {
     }, 0)
   }
 
-  countBetas(docs: readonly Document[]): number {
+  const countBetas = (docs: readonly Document[]): number => {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance')
       if (fragments && fragments.length === 1) out += 1
@@ -63,7 +57,7 @@ class Statistics extends PureComponent<Props> {
     }, 0)
   }
 
-  countGammas(docs: readonly Document[]): number {
+  const countGammas = (docs: readonly Document[]): number => {
     return docs.reduce((out, curr) => {
       const fragments = _.get(curr, 'data.inheritance')
       if (fragments && fragments.length >= 2) out += 1
@@ -71,63 +65,47 @@ class Statistics extends PureComponent<Props> {
     }, 0)
   }
 
-  render() {
-    const numResults = this.props.filteredFallacies.length
-    const startIndex = this.props.pageSize * this.props.pageIndex + 1
-    const endIndex = this.props.filteredFallaciesOnCurrentPage.length + startIndex - 1
-    const numFormals = this.countFormals(this.props.filteredFallaciesOnCurrentPage)
-    const numInformals = this.countInformals(this.props.filteredFallaciesOnCurrentPage)
-    const numAlphas = this.countAlphas(this.props.filteredFallaciesOnCurrentPage)
-    const numBetas = this.countBetas(this.props.filteredFallaciesOnCurrentPage)
-    const numGammas = this.countGammas(this.props.filteredFallaciesOnCurrentPage)
+  const numResults = filteredFallacies.length
+  const startIndex = pageSize * pageIndex + 1
+  const endIndex = filteredFallaciesOnCurrentPage.length + startIndex - 1
+  const numFormals = countFormals(filteredFallaciesOnCurrentPage)
+  const numInformals = countInformals(filteredFallaciesOnCurrentPage)
+  const numAlphas = countAlphas(filteredFallaciesOnCurrentPage)
+  const numBetas = countBetas(filteredFallaciesOnCurrentPage)
+  const numGammas = countGammas(filteredFallaciesOnCurrentPage)
 
-    return (
-      <StyledRoot className={this.props.className}>
-        <StyledCount>
-          {(startIndex === 0 || endIndex === 0 || numResults === 0) &&
-            <span>--</span>
-            ||
-            <span>{startIndex}-{endIndex} / {numResults}</span>
-          }
-        </StyledCount>
-        <StyledFilterButton isActive={this.props.filters.formal} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, formal: !this.props.filters.formal })}>
-          <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
-          <span>{numFormals === 0 ? '--' : numFormals}</span>
-        </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.informal} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, informal: !this.props.filters.informal })}>
-          <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
-          <span>{numInformals === 0 ? '--' : numInformals}</span>
-        </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.alpha} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, alpha: !this.props.filters.alpha })}>
-          <span>α</span>
-          <span>{numAlphas === 0 ? '--' : numAlphas}</span>
-        </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.beta} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, beta: !this.props.filters.beta })}>
-          <span>β</span>
-          <span>{numBetas === 0 ? '--' : numBetas}</span>
-        </StyledFilterButton>
-        <StyledFilterButton isActive={this.props.filters.gamma} onClick={() => this.props.changeFallaciesFilters({ ...this.props.filters, gamma: !this.props.filters.gamma })}>
-          <span>𝛾</span>
-          <span>{numGammas === 0 ? '--' : numGammas}</span>
-        </StyledFilterButton>
-      </StyledRoot>
-    )
-  }
+  return (
+    <StyledRoot {...props}>
+      <StyledCount>
+        {(startIndex === 0 || endIndex === 0 || numResults === 0) &&
+          <span>--</span>
+          ||
+          <span>{startIndex}-{endIndex} / {numResults}</span>
+        }
+      </StyledCount>
+      <StyledFilterButton isActive={filters.formal} onClick={() => dispatch(changeFallaciesFilters({ ...filters, formal: !filters.formal }))}>
+        <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
+        <span>{numFormals === 0 ? '--' : numFormals}</span>
+      </StyledFilterButton>
+      <StyledFilterButton isActive={filters.informal} onClick={() => dispatch(changeFallaciesFilters({ ...filters, informal: !filters.informal }))}>
+        <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
+        <span>{numInformals === 0 ? '--' : numInformals}</span>
+      </StyledFilterButton>
+      <StyledFilterButton isActive={filters.alpha} onClick={() => dispatch(changeFallaciesFilters({ ...filters, alpha: !filters.alpha }))}>
+        <span>α</span>
+        <span>{numAlphas === 0 ? '--' : numAlphas}</span>
+      </StyledFilterButton>
+      <StyledFilterButton isActive={filters.beta} onClick={() => dispatch(changeFallaciesFilters({ ...filters, beta: !filters.beta }))}>
+        <span>β</span>
+        <span>{numBetas === 0 ? '--' : numBetas}</span>
+      </StyledFilterButton>
+      <StyledFilterButton isActive={filters.gamma} onClick={() => dispatch(changeFallaciesFilters({ ...filters, gamma: !filters.gamma }))}>
+        <span>𝛾</span>
+        <span>{numGammas === 0 ? '--' : numGammas}</span>
+      </StyledFilterButton>
+    </StyledRoot>
+  )
 }
-
-export default connect(
-  (state: AppState): StateProps => ({
-    filteredFallacies: getFilteredFallacies(state),
-    filteredFallaciesOnCurrentPage: getFilteredFallaciesOnCurrentPage(state),
-    filters: state.fallacies.filters,
-    maxPages: getMaxPagesOfFilteredFallacies(state),
-    pageIndex: state.fallacies.pageIndex,
-    pageSize: state.fallacies.pageSize,
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    changeFallaciesFilters,
-  }, dispatch),
-)(Statistics)
 
 const StyledFormalIcon = styled(Pixel)`
   ${animations.transition('background', 200, 'ease-out')}

@@ -1,65 +1,61 @@
 import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, container, media } from 'promptu'
-import React, { PureComponent } from 'react'
+import React, { HTMLAttributes } from 'react'
 import { Transition } from 'react-transition-group'
 import { TransitionStatus } from 'react-transition-group/Transition'
 import styled from 'styled-components'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 import Card from './Card'
 
-interface Props {
-  className?: string
+type Props = HTMLAttributes<HTMLDivElement> & {
   id?: string
-  docs: readonly Document[]
+  docs?: readonly Document[]
   isSummaryEnabled: boolean
   onActivate: (docId: string) => void
 }
 
-class Grid extends PureComponent<Props> {
-  static defaultProps: Partial<Props> = {
-    docs: [],
-    onActivate: () => {},
-  }
-
-  onActivate(cardIndex: number) {
-    if (cardIndex >= this.props.docs.length) throw new Error(`Invalid index ${cardIndex} provided`)
-    const doc = this.props.docs[cardIndex]
+export default function Grid({
+  id,
+  docs = [],
+  isSummaryEnabled,
+  onActivate: _onActivate,
+  ...props
+}: Props) {
+  const onActivate = (cardIndex: number) => {
+    if (cardIndex >= docs.length) throw new Error(`Invalid index ${cardIndex} provided`)
+    const doc = docs[cardIndex]
     if (!doc || !doc.uid) return
-    this.props.onActivate(doc.uid)
+    _onActivate?.(doc.uid)
   }
 
-  render() {
-    return (
-      <StyledRoot className={this.props.className}>
-        {this.props.docs.map((doc: Document, i: number) => {
-          const duration = 150
-          const delay = i * 20
+  return (
+    <StyledRoot {...props}>
+      {docs.map((doc: Document, i: number) => {
+        const duration = 150
+        const delay = i * 20
 
-          return (
-            <Transition in={true} key={`${this.props.id}-${doc.id}`} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
-              {status => (
-                <StyledCard
-                  delay={delay}
-                  duration={duration}
-                  isSummaryEnabled={this.props.isSummaryEnabled}
-                  transitionStatus={status}
-                >
-                  <Card
-                    doc={doc}
-                    isSummaryEnabled={this.props.isSummaryEnabled}
-                    onActivate={() => this.onActivate(i)}
-                  />
-                </StyledCard>
-              )}
-            </Transition>
-          )
-        })}
-      </StyledRoot>
-    )
-  }
+        return (
+          <Transition in={true} key={`${id}-${doc.id}`} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
+            {status => (
+              <StyledCard
+                delay={delay}
+                duration={duration}
+                isSummaryEnabled={isSummaryEnabled}
+                transitionStatus={status}
+              >
+                <Card
+                  doc={doc}
+                  isSummaryEnabled={isSummaryEnabled}
+                  onActivate={() => onActivate(i)}
+                />
+              </StyledCard>
+            )}
+          </Transition>
+        )
+      })}
+    </StyledRoot>
+  )
 }
-
-export default Grid
 
 const StyledCard = styled.div<{
   delay: number

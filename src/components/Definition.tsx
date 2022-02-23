@@ -1,92 +1,62 @@
 import _ from 'lodash'
-import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, container, selectors } from 'promptu'
-import React, { forwardRef, Fragment, PureComponent, Ref } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { forwardRef, HTMLAttributes, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions } from '../selectors'
 import { AppState } from '../store'
-import { dismissDefinitionById, presentDefinitionById } from '../store/definitions'
+import { dismissDefinitionById } from '../store/definitions'
 import { colors } from '../styles/theme'
 import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
 import ActionButton from './ActionButton'
 import RichText from './RichText'
 
-interface StateProps {
-  definitions: readonly Document[]
-}
-
-interface DispatchProps {
-  dismissDefinitionById: typeof dismissDefinitionById
-  presentDefinitionById: typeof presentDefinitionById
-}
-
-interface OwnProps {
-  className?: string
+type Props = HTMLAttributes<HTMLDivElement> & {
   docId?: string
-  scrollTargetRef?: Ref<HTMLDivElement>
 }
 
-interface Props extends StateProps, DispatchProps, OwnProps {}
+export default forwardRef<HTMLDivElement, Props>(({
+  docId,
+  ...props
+}, ref) => {
+  const dispatch = useDispatch()
+  const docs = useSelector((state: AppState) => getDefinitions(state))
+  const doc = _.find(docs, v => v.id === docId)
+  const name = getText(doc, 'data.name')
+  const descriptionMarkup = getMarkup(doc, 'data.description')
+  const aliases = getTexts(doc, 'data.aliases', 'name')
+  const referenceMarkups = getMarkups(doc, 'data.references', 'reference')
 
-class Definition extends PureComponent<Props> {
-  get doc(): Document | undefined {
-    if (!this.props.docId) return undefined
-    return _.find(this.props.definitions, v => v.id === this.props.docId)
-  }
+  useEffect(() => {
+    _.set((ref as any)?.current as any, 'scrollTop', 0)
+  }, [docId])
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.docId !== this.props.docId) {
-      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0)
-    }
-  }
-
-  render() {
-    const name = getText(this.doc, 'data.name')
-    const descriptionMarkup = getMarkup(this.doc, 'data.description')
-    const aliases = getTexts(this.doc, 'data.aliases', 'name')
-    const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference')
-
-    return (
-      <StyledRoot className={this.props.className}>
-        <StyledCloseButton
-          symbol='-'
-          tintColor={colors.darkBlue}
-          hoverTintColor={colors.red}
-          onActivate={() => { if (this.props.docId) this.props.dismissDefinitionById(this.props.docId) }}
-        />
-        <StyledTitle>{name}</StyledTitle>
-        {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}
-        <StyledContent ref={this.props.scrollTargetRef}>
-          {descriptionMarkup && <RichText markup={descriptionMarkup}/>}
-          {(referenceMarkups && referenceMarkups.length > 0) &&
-            <Fragment>
-              <StyledDivider/>
-              <ul>
-                {referenceMarkups.map((v, i) => (
-                  <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
-                ))}
-              </ul>
-            </Fragment>
-          }
-        </StyledContent>
-      </StyledRoot>
-    )
-  }
-}
-
-const ConnectedDefinition = connect(
-  (state: AppState): StateProps => ({
-    definitions: getDefinitions(state),
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    presentDefinitionById,
-    dismissDefinitionById,
-  }, dispatch),
-)(Definition)
-
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={ref}/>)
+  return (
+    <StyledRoot {...props}>
+      <StyledCloseButton
+        symbol='-'
+        tintColor={colors.darkBlue}
+        hoverTintColor={colors.red}
+        onActivate={() => { if (docId) dispatch(dismissDefinitionById(docId)) }}
+      />
+      <StyledTitle>{name}</StyledTitle>
+      {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}
+      <StyledContent ref={ref}>
+        {descriptionMarkup && <RichText markup={descriptionMarkup}/>}
+        {(referenceMarkups && referenceMarkups.length > 0) &&
+          <>
+            <StyledDivider/>
+            <ul>
+              {referenceMarkups.map((v, i) => (
+                <li key={`reference-${i}`} dangerouslySetInnerHTML={{ __html: v }}/>
+              ))}
+            </ul>
+          </>
+        }
+      </StyledContent>
+    </StyledRoot>
+  )
+})
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}

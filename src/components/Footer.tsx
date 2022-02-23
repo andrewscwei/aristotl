@@ -1,56 +1,36 @@
-import { Document } from 'prismic-javascript/types/documents'
 import { animations, container, selectors } from 'promptu'
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Action, bindActionCreators, Dispatch } from 'redux'
+import React, { HTMLAttributes } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getMetadata } from '../selectors'
 import { AppState } from '../store'
 import { getMarkup, getUrls } from '../utils/prismic'
 
-interface StateProps {
-  metadataDoc?: Readonly<Document>
+type Props = HTMLAttributes<HTMLDivElement>
+
+export default function Footer({
+  ...props
+}: Props) {
+  const metadataDoc = useSelector((state: AppState) => getMetadata(state))
+  const markup = getMarkup(metadataDoc, 'data.copyright')
+  const imageUrls = getUrls(metadataDoc, 'data.connect', 'icon')
+  const links = getUrls(metadataDoc, 'data.connect', 'url')
+
+  return (
+    <StyledRoot {...props}>
+      <div dangerouslySetInnerHTML={{ __html: markup || '' }}/>
+      {imageUrls && imageUrls.length > 0 && links && links.length > 0 &&
+        <StyledConnect>
+          {imageUrls.map((v, i) => (
+            <a key={`connect-${i}`} href={links[i]}>
+              <img src={v}/>
+            </a>
+          ))}
+        </StyledConnect>
+      }
+    </StyledRoot>
+  )
 }
-
-interface DispatchProps {
-
-}
-
-interface Props extends StateProps, DispatchProps {
-
-}
-
-class Footer extends PureComponent<Props> {
-  render() {
-    const markup = getMarkup(this.props.metadataDoc, 'data.copyright')
-    const imageUrls = getUrls(this.props.metadataDoc, 'data.connect', 'icon')
-    const links = getUrls(this.props.metadataDoc, 'data.connect', 'url')
-
-    return (
-      <StyledRoot>
-        <div dangerouslySetInnerHTML={{ __html: markup || '' }}/>
-        {imageUrls && imageUrls.length > 0 && links && links.length > 0 &&
-          <StyledConnect>
-            {imageUrls.map((v, i) => (
-              <a key={`connect-${i}`} href={links[i]}>
-                <img src={v}/>
-              </a>
-            ))}
-          </StyledConnect>
-        }
-      </StyledRoot>
-    )
-  }
-}
-
-export default connect(
-  (state: AppState): StateProps => ({
-    metadataDoc: getMetadata(state),
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-
-  }, dispatch),
-)(Footer)
 
 const StyledConnect = styled.div`
   ${container.fhcl}
