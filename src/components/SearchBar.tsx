@@ -76,13 +76,7 @@ export default function SearchBar({
           onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(changeFallaciesSearchInput(event.currentTarget.value))}
         />
       </StyledInput>
-      <StyledActionButton
-        symbol='c'
-        isTogglable={true}
-        tintColor={colors.white}
-        hoverTintColor={colors.red}
-        onActivate={() => onClear()}
-      />
+      <StyledActionButton symbol='c' isTogglable={true} onActivate={() => onClear()}/>
     </StyledRoot>
   )
 }

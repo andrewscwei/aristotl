@@ -74,21 +74,18 @@ export default forwardRef<HTMLDivElement, Props>(({
         <StyledCloseButton
           symbol='-'
           tintColor={colors.black}
-          hoverTintColor={colors.red}
           onActivate={() => onExit()}
         />
         <div>
           <StyledPrevButton
             symbol='<'
             tintColor={colors.black}
-            hoverTintColor={colors.red}
             isDisabled={onPrev === undefined}
             onActivate={() => onPrev?.()}
           />
           <StyledNextButton
             symbol='>'
             tintColor={colors.black}
-            hoverTintColor={colors.red}
             isDisabled={onNext === undefined}
             onActivate={() => onNext?.()}
           />

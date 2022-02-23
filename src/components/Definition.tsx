@@ -36,7 +36,6 @@ export default forwardRef<HTMLDivElement, Props>(({
       <StyledCloseButton
         symbol='-'
         tintColor={colors.darkBlue}
-        hoverTintColor={colors.red}
         onActivate={() => { if (docId) dispatch(dismissDefinitionById(docId)) }}
       />
       <StyledTitle>{name}</StyledTitle>

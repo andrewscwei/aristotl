@@ -17,7 +17,7 @@ type Props = HTMLAttributes<HTMLButtonElement> & {
 
 export default function ActionButton({
   activeTintColor,
-  hoverTintColor,
+  hoverTintColor = colors.red,
   isTogglable = false,
   symbol,
   tintColor = colors.white,

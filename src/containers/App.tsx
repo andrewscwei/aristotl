@@ -2,8 +2,8 @@
  * @file Client app root.
  */
 
-import React from 'react'
-import { Route, Routes, useLocation, useNavigate } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router'
 import PreviewIndicator from '../components/PreviewIndicator'
 import { hasPreviewToken } from '../utils/prismic'
 import Home from './Home'
@@ -11,15 +11,18 @@ import NotFound from './NotFound'
 import Preview from './Preview'
 
 export default function App() {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const [isPreviewing, setIsPreviewing] = useState(hasPreviewToken())
+
+  useEffect(() => {
+    setIsPreviewing(hasPreviewToken())
+  }, [])
 
   return (
     <>
-      {hasPreviewToken() && <PreviewIndicator/>}
+      {isPreviewing && <PreviewIndicator/>}
       <Routes>
-        <Route path='/' element={<Home location={location} navigate={navigate}/>}/>
-        <Route path='about' element={<Preview/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='preview' element={<Preview/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </>
