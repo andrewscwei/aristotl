@@ -1,15 +1,15 @@
-import { Document } from 'prismic-javascript/types/documents';
-import { animations, container, selectors } from 'promptu';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import { getMetadata } from '../selectors';
-import { AppState } from '../store';
-import { getMarkup, getUrls } from '../utils/prismic';
+import { Document } from 'prismic-javascript/types/documents'
+import { animations, container, selectors } from 'promptu'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import { getMetadata } from '../selectors'
+import { AppState } from '../store'
+import { getMarkup, getUrls } from '../utils/prismic'
 
 interface StateProps {
-  metadataDoc?: Readonly<Document>;
+  metadataDoc?: Readonly<Document>
 }
 
 interface DispatchProps {
@@ -22,9 +22,9 @@ interface Props extends StateProps, DispatchProps {
 
 class Footer extends PureComponent<Props> {
   render() {
-    const markup = getMarkup(this.props.metadataDoc, 'data.copyright');
-    const imageUrls = getUrls(this.props.metadataDoc, 'data.connect', 'icon');
-    const links = getUrls(this.props.metadataDoc, 'data.connect', 'url');
+    const markup = getMarkup(this.props.metadataDoc, 'data.copyright')
+    const imageUrls = getUrls(this.props.metadataDoc, 'data.connect', 'icon')
+    const links = getUrls(this.props.metadataDoc, 'data.connect', 'url')
 
     return (
       <StyledRoot>
@@ -39,7 +39,7 @@ class Footer extends PureComponent<Props> {
           </StyledConnect>
         }
       </StyledRoot>
-    );
+    )
   }
 }
 
@@ -50,7 +50,7 @@ export default connect(
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 
   }, dispatch),
-)(Footer);
+)(Footer)
 
 const StyledConnect = styled.div`
   ${container.fhcl}
@@ -76,10 +76,10 @@ const StyledConnect = styled.div`
       opacity: .3;
     }
   }
-`;
+`
 
 const StyledRoot = styled.footer`
-  color: ${(props) => props.theme.colors.grey};
+  color: ${props => props.theme.colors.grey};
   font-size: 1.2rem;
   font-weight: 400;
   margin-top: 10rem;
@@ -92,10 +92,10 @@ const StyledRoot = styled.footer`
 
   a {
     ${animations.transition(['color', 'opacity'], 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.red};
+    color: ${props => props.theme.colors.red};
 
     ${selectors.hwot} {
       text-decoration: underline;
     }
   }
-`;
+`

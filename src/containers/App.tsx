@@ -2,88 +2,26 @@
  * @file Client app root.
  */
 
-import React, { Fragment, PureComponent } from 'react';
-import { hot } from 'react-hot-loader/root';
-import { connect } from 'react-redux';
-import { Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import { ThemeProvider } from 'styled-components';
-import PreviewIndicator from '../components/PreviewIndicator';
-import routes from '../routes';
-import { AppState } from '../store';
-import { changeLocale, I18nState } from '../store/i18n';
-import GlobalStyles from '../styles/global';
-import * as theme from '../styles/theme';
-import { getLocaleFromPath } from '../utils/i18n';
-import { hasPreviewToken } from '../utils/prismic';
+import React from 'react'
+import { Route, Routes, useLocation, useNavigate } from 'react-router'
+import PreviewIndicator from '../components/PreviewIndicator'
+import { hasPreviewToken } from '../utils/prismic'
+import Home from './Home'
+import NotFound from './NotFound'
+import Preview from './Preview'
 
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app') : () => {};
+export default function App() {
+  const location = useLocation()
+  const navigate = useNavigate()
 
-interface StateProps {
-  i18n: I18nState;
+  return (
+    <>
+      {hasPreviewToken() && <PreviewIndicator/>}
+      <Routes>
+        <Route path='/' element={<Home location={location} navigate={navigate}/>}/>
+        <Route path='about' element={<Preview/>}/>
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
+    </>
+  )
 }
-
-interface DispatchProps {
-  changeLocale: typeof changeLocale;
-}
-
-interface Props extends StateProps, DispatchProps {
-  route: RouteComponentProps<{}>;
-}
-
-interface State {}
-
-class App extends PureComponent<Props, State> {
-  unlistenHistory?: () => any = undefined;
-
-  constructor(props: Props) {
-    super(props);
-    this.syncLocaleWithUrl(this.props.route.location.pathname);
-  }
-
-  componentDidMount() {
-    this.unlistenHistory = this.props.route.history.listen((location) => this.syncLocaleWithUrl(location.pathname));
-  }
-
-  componentWillUnmount() {
-    this.unlistenHistory?.();
-  }
-
-  render() {
-    const { route } = this.props;
-
-    return (
-      <ThemeProvider theme={theme}>
-        <Fragment>
-          <GlobalStyles/>
-          {hasPreviewToken() && <PreviewIndicator/>}
-          <Switch location={route.location}>{this.generateRoutes()}</Switch>
-        </Fragment>
-      </ThemeProvider>
-    );
-  }
-
-  private syncLocaleWithUrl(url: string) {
-    const { route, changeLocale, i18n } = this.props;
-    const newLocale = getLocaleFromPath(url);
-
-    if (newLocale === i18n.locale) return;
-
-    changeLocale(newLocale);
-  }
-
-  private generateRoutes() {
-    return routes.map((route, index) => (
-      <Route exact={route.exact} path={route.path} key={`route-${index}`} component={route.component}/>
-    ));
-  }
-}
-
-export default hot(
-  connect((state: AppState): StateProps => ({
-    i18n: state.i18n,
-  }),
-  (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
-    changeLocale,
-  }, dispatch),
-)(App));

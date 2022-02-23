@@ -1,13 +1,13 @@
-import Cookies from 'js-cookie';
-import _ from 'lodash';
-import PrismicDOM from 'prismic-dom';
-import Prismic from 'prismic-javascript';
-import { Document } from 'prismic-javascript/types/documents';
-import ResolvedApi, { QueryOptions } from 'prismic-javascript/types/ResolvedApi';
-import resolveLinks from '../links.conf';
-import { getLocalizedPath } from './i18n';
+import Cookies from 'js-cookie'
+import _ from 'lodash'
+import PrismicDOM from 'prismic-dom'
+import Prismic from 'prismic-javascript'
+import { Document } from 'prismic-javascript/types/documents'
+import ResolvedApi, { QueryOptions } from 'prismic-javascript/types/ResolvedApi'
+import resolveLinks from '../links.conf'
+import { getLocalizedPath } from './i18n'
 
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {};
+const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {}
 
 /**
  * Sets the page title, adds the preview tag if currently in preview mode.
@@ -15,7 +15,7 @@ const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDe
  * @param title - The title of the page to set to.
  */
 export function setPageTitle(title: string) {
-  document.title = hasPreviewToken() ? `[PREVIEW] ${title}` : title;
+  document.title = hasPreviewToken() ? `[PREVIEW] ${title}` : title
 }
 
 /**
@@ -27,8 +27,8 @@ export function setPageTitle(title: string) {
  * @returns The corresponding URL.
  */
 export function linkResolver(doc: Document): string {
-  const locale = doc.lang ? localeResolver(doc.lang, true) : 'en';
-  return getLocalizedPath(resolveLinks(doc), locale);
+  const locale = doc.lang ? localeResolver(doc.lang, true) : 'en'
+  return getLocalizedPath(resolveLinks(doc), locale)
 }
 
 /**
@@ -46,56 +46,56 @@ export function linkResolver(doc: Document): string {
  * @returns The mapped locale code.
  */
 export function localeResolver(locale: string, reverse = false): string {
-  const defaultLocale = __I18N_CONFIG__.defaultLocale;
-  const supportedLocales = __I18N_CONFIG__.locales;
+  const defaultLocale = __I18N_CONFIG__.defaultLocale
+  const supportedLocales = __I18N_CONFIG__.locales
 
   if (reverse) {
-    const matches = locale.match(/^([a-zA-Z0-9]*)-?.*$/);
-    return matches && matches.length > 0 && matches[1] || 'en';
+    const matches = locale.match(/^([a-zA-Z0-9]*)-?.*$/)
+    return matches && matches.length > 0 && matches[1] || 'en'
   }
   else {
-    if (supportedLocales.indexOf(locale) < 0) return defaultLocale;
+    if (supportedLocales.indexOf(locale) < 0) return defaultLocale
 
     switch (locale) {
-    case 'ar': return 'ar-ae'; // Arabic
-    case 'bg': return 'bg'; // Bulgarian
-    case 'ca': return 'ca'; // Catalan
-    case 'cs': return 'cs-cz'; // Czech
-    case 'da': return 'da-dk'; // Danish
-    case 'de': return 'de-de'; // German
-    case 'el': return 'el-gr'; // Greek
-    case 'es': return 'es-es'; // Spanish
-    case 'eu': return 'eu'; // Basque
-    case 'fa': return 'fa-ir'; // Farsi
-    case 'fi': return 'fi'; // Finnish
-    case 'fr': return 'fr-fr'; // French
-    case 'he': return 'he'; // Hebrew
-    case 'hi': return 'hi-in'; // Hindi
-    case 'hr': return 'hr'; // Croatian
-    case 'hu': return 'hu'; // Hungarian
-    case 'hy': return 'hy-am'; // Armenian
-    case 'id': return 'id'; // Indonesian
-    case 'is': return 'is'; // Icelandic
-    case 'it': return 'it-it'; // Italian
-    case 'ja': return 'ja-jp'; // Japanese
-    case 'ko': return 'ko-kr'; // Korean
-    case 'lt': return 'lt'; // Lithuanian
-    case 'lv': return 'lv'; // Latvian
-    case 'ms': return 'ms-my'; // Malay
-    case 'nl': return 'nl-nl'; // Dutch
-    case 'no': return 'no'; // Norwegian
-    case 'pl': return 'pl'; // Polish
-    case 'pt': return 'pt-pt'; // Portuguese
-    case 'ro': return 'ro'; // Romanian
-    case 'ru': return 'ru'; // Russian
-    case 'sk': return 'sk'; // Slovak
-    case 'sl': return 'sl'; // Slovenian
-    case 'sv': return 'sv-se'; // Swedish
-    case 'th': return 'th'; // Thai
-    case 'tr': return 'tr'; // Turkish
-    case 'vi': return 'vi'; // Vietnamese
-    case 'zh': return 'zh-cn'; // Chinese
-    default: return 'en-us'; // English
+    case 'ar': return 'ar-ae' // Arabic
+    case 'bg': return 'bg' // Bulgarian
+    case 'ca': return 'ca' // Catalan
+    case 'cs': return 'cs-cz' // Czech
+    case 'da': return 'da-dk' // Danish
+    case 'de': return 'de-de' // German
+    case 'el': return 'el-gr' // Greek
+    case 'es': return 'es-es' // Spanish
+    case 'eu': return 'eu' // Basque
+    case 'fa': return 'fa-ir' // Farsi
+    case 'fi': return 'fi' // Finnish
+    case 'fr': return 'fr-fr' // French
+    case 'he': return 'he' // Hebrew
+    case 'hi': return 'hi-in' // Hindi
+    case 'hr': return 'hr' // Croatian
+    case 'hu': return 'hu' // Hungarian
+    case 'hy': return 'hy-am' // Armenian
+    case 'id': return 'id' // Indonesian
+    case 'is': return 'is' // Icelandic
+    case 'it': return 'it-it' // Italian
+    case 'ja': return 'ja-jp' // Japanese
+    case 'ko': return 'ko-kr' // Korean
+    case 'lt': return 'lt' // Lithuanian
+    case 'lv': return 'lv' // Latvian
+    case 'ms': return 'ms-my' // Malay
+    case 'nl': return 'nl-nl' // Dutch
+    case 'no': return 'no' // Norwegian
+    case 'pl': return 'pl' // Polish
+    case 'pt': return 'pt-pt' // Portuguese
+    case 'ro': return 'ro' // Romanian
+    case 'ru': return 'ru' // Russian
+    case 'sk': return 'sk' // Slovak
+    case 'sl': return 'sl' // Slovenian
+    case 'sv': return 'sv-se' // Swedish
+    case 'th': return 'th' // Thai
+    case 'tr': return 'tr' // Turkish
+    case 'vi': return 'vi' // Vietnamese
+    case 'zh': return 'zh-cn' // Chinese
+    default: return 'en-us' // English
     }
   }
 }
@@ -106,8 +106,8 @@ export function localeResolver(locale: string, reverse = false): string {
  * @returns The Prismic API object.
  */
 export function getAPI(): Promise<ResolvedApi> {
-  const { apiEndpoint, accessToken } = __APP_CONFIG__.prismic;
-  return Prismic.api(apiEndpoint, { accessToken });
+  const { apiEndpoint, accessToken } = __APP_CONFIG__.prismic
+  return Prismic.api(apiEndpoint, { accessToken })
 }
 
 /**
@@ -119,8 +119,8 @@ export function getAPI(): Promise<ResolvedApi> {
  * @returns The preview path.
  */
 export async function getPreviewPath(token: string, documentId: string): Promise<string> {
-  const api = await getAPI();
-  return api.getPreviewResolver(token, documentId).resolve(linkResolver, '/');
+  const api = await getAPI()
+  return api.getPreviewResolver(token, documentId).resolve(linkResolver, '/')
 }
 
 /**
@@ -129,8 +129,8 @@ export async function getPreviewPath(token: string, documentId: string): Promise
  * @returns `true` if a preview token exists, `false` otherwise.
  */
 export function hasPreviewToken(): boolean {
-  const token = loadPreviewToken();
-  return token !== undefined;
+  const token = loadPreviewToken()
+  return token !== undefined
 }
 
 /**
@@ -139,13 +139,13 @@ export function hasPreviewToken(): boolean {
  * @param token - The preview token.
  */
 export function savePreviewToken(token: string) {
-  Cookies.set(Prismic.previewCookie, token, { expires: 1/24, path: '/' });
+  Cookies.set(Prismic.previewCookie, token, { expires: 1/24, path: '/' })
 
   if (loadPreviewToken()) {
-    debug('Saving preview token to cookies...', 'OK');
+    debug('Saving preview token to cookies...', 'OK')
   }
   else {
-    debug('Saving preview token to cookies...', 'ERR');
+    debug('Saving preview token to cookies...', 'ERR')
   }
 }
 
@@ -155,15 +155,15 @@ export function savePreviewToken(token: string) {
  * @returns The preview token.
  */
 export function loadPreviewToken(): string | undefined {
-  const token = Cookies.get(Prismic.previewCookie);
-  return token;
+  const token = Cookies.get(Prismic.previewCookie)
+  return token
 }
 
 /**
  * Removes the preview token from browser cookies.
  */
 export function removePreviewToken() {
-  Cookies.remove(Prismic.previewCookie);
+  Cookies.remove(Prismic.previewCookie)
 }
 
 /**
@@ -178,35 +178,35 @@ export function removePreviewToken() {
  *
  * @returns Fetched documents as fulfilment value.
  */
-export async function fetchDocsByType(type: string, uid?: string, options: Partial<QueryOptions> = {}, pages: number = 1): Promise<ReadonlyArray<Document>> {
-  const api = await getAPI();
-  const previewToken = loadPreviewToken();
+export async function fetchDocsByType(type: string, uid?: string, options: Partial<QueryOptions> = {}, pages = 1): Promise<readonly Document[]> {
+  const api = await getAPI()
+  const previewToken = loadPreviewToken()
   const opts: any = {
     lang: localeResolver(__I18N_CONFIG__.defaultLocale),
-    orderings : '[document.first_publication_date desc]',
+    orderings: '[document.first_publication_date desc]',
     ref: previewToken || api.master(),
     ...options,
-  };
+  }
 
-  let docs: Array<Document> = [];
-  const startingPage = opts.page || 1;
+  let docs: Document[] = []
+  const startingPage = opts.page || 1
 
   for (let i = 0; i < pages; i++) {
     const res = uid
       ? await api.query(Prismic.Predicates.at(`my.${type}.uid`, uid), { ...opts, page: Number(startingPage) + i })
-      : await api.query(Prismic.Predicates.at('document.type', type), { ...opts, page: Number(startingPage) + i });
+      : await api.query(Prismic.Predicates.at('document.type', type), { ...opts, page: Number(startingPage) + i })
 
-    docs = docs.concat(res.results);
+    docs = docs.concat(res.results)
   }
 
   if (opts.ref === previewToken) {
-    debug(`Previewing docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs);
+    debug(`Previewing docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs)
   }
   else {
-    debug(`Fetching docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs);
+    debug(`Fetching docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs)
   }
 
-  return docs;
+  return docs
 }
 
 /**
@@ -219,12 +219,12 @@ export async function fetchDocsByType(type: string, uid?: string, options: Parti
  * @returns The text if available, `undefined` otherwise.
  */
 export function getText(doc?: Document, path = ''): string | undefined {
-  const fragment = _.get(doc, path);
+  const fragment = _.get(doc, path)
 
-  if (!fragment) return undefined;
-  if (typeof fragment === 'string') return fragment;
+  if (!fragment) return undefined
+  if (typeof fragment === 'string') return fragment
 
-  return PrismicDOM.RichText.asText(fragment);
+  return PrismicDOM.RichText.asText(fragment)
 }
 
 /**
@@ -240,26 +240,26 @@ export function getText(doc?: Document, path = ''): string | undefined {
  *          but the target subpath contains no text, an empty array is returned.
  *          If the target path is not an array, `undefined` is returned.
  */
-export function getTexts(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
-  const fragments = _.get(doc, path);
+export function getTexts(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+  const fragments = _.get(doc, path)
 
-  if (!_.isArray(fragments)) return undefined;
+  if (!_.isArray(fragments)) return undefined
 
   const texts = _.reduce(fragments, (out, curr: any) => {
-    const text = _.get(curr, subpath);
-    if (!text) return out;
+    const text = _.get(curr, subpath)
+    if (!text) return out
 
     if (typeof text === 'string') {
-      out.push(text);
+      out.push(text)
     }
     else {
-      out.push(PrismicDOM.RichText.asText(text));
+      out.push(PrismicDOM.RichText.asText(text))
     }
 
-    return out;
-  }, Array<string>());
+    return out
+  }, Array<string>())
 
-  return texts;
+  return texts
 }
 
 /**
@@ -272,12 +272,12 @@ export function getTexts(doc?: Document, path = '', subpath = ''): ReadonlyArray
  * @returns The number if available, `undefined` otherwise.
  */
 export function getNumber(doc?: Document, path = ''): number | undefined {
-  const fragment = _.get(doc, path);
+  const fragment = _.get(doc, path)
 
-  if (!fragment) return undefined;
-  if (typeof fragment === 'number') return fragment;
+  if (!fragment) return undefined
+  if (typeof fragment === 'number') return fragment
 
-  return fragment;
+  return fragment
 }
 
 /**
@@ -294,26 +294,26 @@ export function getNumber(doc?: Document, path = ''): number | undefined {
  *          returned. If the target path is not an array, `undefined` is
  *          returned.
  */
-export function getNumbers(doc?: Document, path = '', subpath = ''): ReadonlyArray<number> | undefined {
-  const fragments = _.get(doc, path);
+export function getNumbers(doc?: Document, path = '', subpath = ''): readonly number[] | undefined {
+  const fragments = _.get(doc, path)
 
-  if (!_.isArray(fragments)) return undefined;
+  if (!_.isArray(fragments)) return undefined
 
   const numbers = _.reduce(fragments, (out, curr: any) => {
-    const n = _.get(curr, subpath);
-    if (n === undefined || n === null) return out;
+    const n = _.get(curr, subpath)
+    if (n === undefined || n === null) return out
 
     if (typeof n === 'number') {
-      out.push(n);
+      out.push(n)
     }
     else {
-      out.push(n);
+      out.push(n)
     }
 
-    return out;
-  }, Array<number>());
+    return out
+  }, Array<number>())
 
-  return numbers;
+  return numbers
 }
 
 /**
@@ -326,11 +326,11 @@ export function getNumbers(doc?: Document, path = '', subpath = ''): ReadonlyArr
  * @returns The URL if available, `undefined` otherwise.
  */
 export function getUrl(doc?: Document, path = ''): string | undefined {
-  const fragment = _.get(doc, path);
+  const fragment = _.get(doc, path)
 
-  if (!fragment) return undefined;
+  if (!fragment) return undefined
 
-  return PrismicDOM.Link.url(fragment, linkResolver);
+  return PrismicDOM.Link.url(fragment, linkResolver)
 }
 
 /**
@@ -346,22 +346,22 @@ export function getUrl(doc?: Document, path = ''): string | undefined {
  *          but the target subpath contains no URL, an empty array is returned.
  *          If the target path is not an array, `undefined` is returned.
  */
-export function getUrls(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
-  const fragments = _.get(doc, path);
+export function getUrls(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+  const fragments = _.get(doc, path)
 
-  if (!_.isArray(fragments)) return undefined;
+  if (!_.isArray(fragments)) return undefined
 
   const urls = _.reduce(fragments, (out, curr: any) => {
-    const url = _.get(curr, subpath);
-    if (!url) return out;
-    if (url.length === 0) return out;
+    const url = _.get(curr, subpath)
+    if (!url) return out
+    if (url.length === 0) return out
 
-    out.push(PrismicDOM.Link.url(url, linkResolver));
+    out.push(PrismicDOM.Link.url(url, linkResolver))
 
-    return out;
-  }, Array<string>());
+    return out
+  }, Array<string>())
 
-  return urls;
+  return urls
 }
 
 /**
@@ -374,11 +374,11 @@ export function getUrls(doc?: Document, path = '', subpath = ''): ReadonlyArray<
  * @returns The HTML markup if available, `undefined` otherwise.
  */
 export function getMarkup(doc?: Document, path = ''): string | undefined {
-  const fragment = _.get(doc, path);
+  const fragment = _.get(doc, path)
 
-  if (!fragment) return undefined;
+  if (!fragment) return undefined
 
-  return PrismicDOM.RichText.asHtml(fragment, linkResolver);
+  return PrismicDOM.RichText.asHtml(fragment, linkResolver)
 }
 
 /**
@@ -396,22 +396,22 @@ export function getMarkup(doc?: Document, path = ''): string | undefined {
  *          is returned. If the target path is not an array, `undefined` is
  *          returned.
  */
-export function getMarkups(doc?: Document, path = '', subpath = ''): ReadonlyArray<string> | undefined {
-  const fragments = _.get(doc, path);
+export function getMarkups(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+  const fragments = _.get(doc, path)
 
-  if (!_.isArray(fragments)) return undefined;
+  if (!_.isArray(fragments)) return undefined
 
   const markups = _.reduce(fragments, (out, curr: any) => {
-    const markup = _.get(curr, subpath);
-    if (!markup) return out;
-    if (markup.length === 0) return out;
+    const markup = _.get(curr, subpath)
+    if (!markup) return out
+    if (markup.length === 0) return out
 
-    out.push(PrismicDOM.RichText.asHtml(markup, linkResolver));
+    out.push(PrismicDOM.RichText.asHtml(markup, linkResolver))
 
-    return out;
-  }, Array<string>());
+    return out
+  }, Array<string>())
 
-  return markups;
+  return markups
 }
 
 /**
@@ -423,15 +423,15 @@ export function getMarkups(doc?: Document, path = '', subpath = ''): ReadonlyArr
  *
  * @returns The HTML markup if available, `undefined` otherwise.
  */
-export function getDoc(doc?: Document, path = '', lookupDocs?: ReadonlyArray<Document>): Document | undefined {
-  const fragment = _.get(doc, path);
+export function getDoc(doc?: Document, path = '', lookupDocs?: readonly Document[]): Document | undefined {
+  const fragment = _.get(doc, path)
 
-  if (!fragment) return undefined;
-  if (!fragment.id) return undefined;
+  if (!fragment) return undefined
+  if (!fragment.id) return undefined
 
-  if (!lookupDocs) return fragment;
+  if (!lookupDocs) return fragment
 
-  return _.find(lookupDocs, (v) => v.id === fragment.id);
+  return _.find(lookupDocs, v => v.id === fragment.id)
 }
 
 /**
@@ -449,20 +449,20 @@ export function getDoc(doc?: Document, path = '', lookupDocs?: ReadonlyArray<Doc
  *          empty array is returned. If the target path is not an array,
  *          `undefined` is returned.
  */
-export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: ReadonlyArray<Document>): ReadonlyArray<Document> | undefined {
-  const fragments = _.get(doc, path);
+export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: readonly Document[]): readonly Document[] | undefined {
+  const fragments = _.get(doc, path)
 
-  if (!fragments) return undefined;
+  if (!fragments) return undefined
 
   const docs = _.reduce(fragments, (out, curr: any) => {
-    const doc = _.get(curr, subpath);
-    if (doc && doc.id) out.push(doc);
-    return out;
-  }, Array<Document>());
+    const doc = _.get(curr, subpath)
+    if (doc && doc.id) out.push(doc)
+    return out
+  }, Array<Document>())
 
-  if (!lookupDocs) return docs;
+  if (!lookupDocs) return docs
 
-  const matchedDocs = _.intersectionWith(lookupDocs, docs, (lookupDoc, doc) => lookupDoc.id === doc.id);
+  const matchedDocs = _.intersectionWith(lookupDocs, docs, (lookupDoc, doc) => lookupDoc.id === doc.id)
 
-  return matchedDocs;
+  return matchedDocs
 }

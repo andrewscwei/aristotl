@@ -1,124 +1,125 @@
-import _ from 'lodash';
-import { Document } from 'prismic-javascript/types/documents';
-import { animations, container, media, selectors } from 'promptu';
-import qs from 'query-string';
-import React, { createRef, Fragment, PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
-import { Transition } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import ActionButton from '../components/ActionButton';
-import DefinitionStackModal from '../components/DefinitionStackModal';
-import FallacyStackModal from '../components/FallacyStackModal';
-import Footer from '../components/Footer';
-import Grid from '../components/Grid';
-import Paginator from '../components/Paginator';
-import SearchBar from '../components/SearchBar';
-import Statistics from '../components/Statistics';
-import NavControlManager from '../managers/NavControlManager';
-import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies, getMetadata } from '../selectors';
-import { AppState } from '../store';
-import { fetchDefinitions, presentDefinitionById } from '../store/definitions';
-import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, FallaciesFilters, fetchFallacies, presentFallacyById } from '../store/fallacies';
-import { fetchMetadata } from '../store/metadata';
-import { colors } from '../styles/theme';
-import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils';
-import { loadPreviewToken } from '../utils/prismic';
+import _ from 'lodash'
+import { Document } from 'prismic-javascript/types/documents'
+import { animations, container, media, selectors } from 'promptu'
+import qs from 'query-string'
+import React, { createRef, Fragment, PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Location, NavigateFunction } from 'react-router'
+import { Transition } from 'react-transition-group'
+import { TransitionStatus } from 'react-transition-group/Transition'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import ActionButton from '../components/ActionButton'
+import DefinitionStackModal from '../components/DefinitionStackModal'
+import FallacyStackModal from '../components/FallacyStackModal'
+import Footer from '../components/Footer'
+import Grid from '../components/Grid'
+import Paginator from '../components/Paginator'
+import SearchBar from '../components/SearchBar'
+import Statistics from '../components/Statistics'
+import NavControlManager from '../managers/NavControlManager'
+import { getDefinitions, getFallacies, getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies, getMetadata } from '../selectors'
+import { AppState } from '../store'
+import { fetchDefinitions, presentDefinitionById } from '../store/definitions'
+import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, FallaciesFilters, fetchFallacies, presentFallacyById } from '../store/fallacies'
+import { fetchMetadata } from '../store/metadata'
+import { colors } from '../styles/theme'
+import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
+import { loadPreviewToken } from '../utils/prismic'
 
 interface StateProps {
-  activeDefinitionIds: ReadonlyArray<string>;
-  activeFallacyIds: ReadonlyArray<string>;
-  definitions: ReadonlyArray<Document>;
-  fallacies: ReadonlyArray<Document>;
-  filteredFallacies: ReadonlyArray<Document>;
-  filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
-  filters: FallaciesFilters;
-  maxPages: number;
-  metadataDoc?: Readonly<Document>;
-  pageIndex: number;
-  pageSize: number;
-  searchInput: string;
+  activeDefinitionIds: readonly string[]
+  activeFallacyIds: readonly string[]
+  definitions: readonly Document[]
+  fallacies: readonly Document[]
+  filteredFallacies: readonly Document[]
+  filteredFallaciesOnCurrentPage: readonly Document[]
+  filters: FallaciesFilters
+  maxPages: number
+  metadataDoc?: Readonly<Document>
+  pageIndex: number
+  pageSize: number
+  searchInput: string
 }
 
 interface DispatchProps {
-  changeFallaciesFilters: typeof changeFallaciesFilters;
-  changeFallaciesPage: typeof changeFallaciesPage;
-  changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
-  fetchDefinitions: typeof fetchDefinitions;
-  fetchFallacies: typeof fetchFallacies;
-  fetchMetadata: typeof fetchMetadata;
-  presentDefinitionById: typeof presentDefinitionById;
-  presentFallacyById: typeof presentFallacyById;
+  changeFallaciesFilters: typeof changeFallaciesFilters
+  changeFallaciesPage: typeof changeFallaciesPage
+  changeFallaciesSearchInput: typeof changeFallaciesSearchInput
+  fetchDefinitions: typeof fetchDefinitions
+  fetchFallacies: typeof fetchFallacies
+  fetchMetadata: typeof fetchMetadata
+  presentDefinitionById: typeof presentDefinitionById
+  presentFallacyById: typeof presentFallacyById
 }
 
-interface Props extends StateProps, DispatchProps, RouteComponentProps<{}> {
-
+type Props = StateProps & DispatchProps & {
+  location: Location
+  navigate: NavigateFunction
 }
 
 interface State {
-  isSummaryEnabled: boolean;
+  isSummaryEnabled: boolean
 }
 
 class Home extends PureComponent<Props, State> {
   state: State = {
     isSummaryEnabled: false,
-  };
+  }
 
   nodeRefs = {
     paginator: createRef<Paginator>(),
-  };
+  }
 
   constructor(props: Props) {
-    super(props);
+    super(props)
 
-    const previewToken = loadPreviewToken();
+    const previewToken = loadPreviewToken()
 
-    if (!this.props.metadataDoc || previewToken) this.props.fetchMetadata();
-    if ((this.props.fallacies.length === 0) || previewToken) this.props.fetchFallacies();
-    if ((this.props.definitions.length === 0) || previewToken) this.props.fetchDefinitions();
+    if (!this.props.metadataDoc || previewToken) this.props.fetchMetadata()
+    if ((this.props.fallacies.length === 0) || previewToken) this.props.fetchFallacies()
+    if ((this.props.definitions.length === 0) || previewToken) this.props.fetchDefinitions()
   }
 
   componentDidMount() {
-    this.mapLocationToProps();
+    this.mapLocationToProps()
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const searchInputDidChange = __APP_CONFIG__.enableHistoryForSearch && (prevProps.searchInput !== this.props.searchInput);
-    const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex);
-    const filtersDidChange = __APP_CONFIG__.enableHistoryForFilters && (!_.isEqual(prevProps.filters, this.props.filters));
-    const activeFallacyIdsDidChange = __APP_CONFIG__.enableHistoryForFallacies && (!_.isEqual(prevProps.activeFallacyIds, this.props.activeFallacyIds));
-    const activeDefinitionIdsDidChange = __APP_CONFIG__.enableHistoryForDefinitions && (!_.isEqual(prevProps.activeDefinitionIds, this.props.activeDefinitionIds));
+    const searchInputDidChange = __APP_CONFIG__.enableHistoryForSearch && (prevProps.searchInput !== this.props.searchInput)
+    const pageIndexDidChange = __APP_CONFIG__.enableHistoryForPageIndexes && (prevProps.pageIndex !== this.props.pageIndex)
+    const filtersDidChange = __APP_CONFIG__.enableHistoryForFilters && (!_.isEqual(prevProps.filters, this.props.filters))
+    const activeFallacyIdsDidChange = __APP_CONFIG__.enableHistoryForFallacies && (!_.isEqual(prevProps.activeFallacyIds, this.props.activeFallacyIds))
+    const activeDefinitionIdsDidChange = __APP_CONFIG__.enableHistoryForDefinitions && (!_.isEqual(prevProps.activeDefinitionIds, this.props.activeDefinitionIds))
 
     if (searchInputDidChange || pageIndexDidChange || filtersDidChange || activeFallacyIdsDidChange || activeDefinitionIdsDidChange) {
-      this.mapPropsToLocation();
+      this.mapPropsToLocation()
     }
   }
 
   toNextPage() {
-    const paginator = this.nodeRefs.paginator.current;
-    if (!paginator) return;
-    paginator.next();
+    const paginator = this.nodeRefs.paginator.current
+    if (!paginator) return
+    paginator.next()
   }
 
   toPreviousPage() {
-    const paginator = this.nodeRefs.paginator.current;
-    if (!paginator) return;
-    paginator.prev();
+    const paginator = this.nodeRefs.paginator.current
+    if (!paginator) return
+    paginator.prev()
   }
 
   mapLocationToProps() {
-    const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, d: definitions, f: fallacies } = qs.parse(this.props.location.search);
+    const { s: search, p: page, ff: formal, fi: informal, fa: alpha, fb: beta, fg: gamma, d: definitions, f: fallacies } = qs.parse(this.props.location.search)
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      const searchInput = (typeof search === 'string' && search !== '') ? search : '';
-      this.props.changeFallaciesSearchInput(searchInput);
+      const searchInput = (typeof search === 'string' && search !== '') ? search : ''
+      this.props.changeFallaciesSearchInput(searchInput)
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
-      const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1;
-      this.props.changeFallaciesPage(pageIndex);
+      const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1
+      this.props.changeFallaciesPage(pageIndex)
     }
 
     if (__APP_CONFIG__.enableHistoryForFilters) {
@@ -128,34 +129,36 @@ class Home extends PureComponent<Props, State> {
         alpha: alpha !== 'no',
         beta: beta !== 'no',
         gamma: gamma !== 'no',
-      });
+      })
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
-      const activeFallacyId = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined;
+      const activeFallacyId = this.props.location.hash.startsWith('#') ? this.props.location.hash.substring(1) : undefined
 
       if (fallacies) {
         if (typeof fallacies === 'string') {
-          this.props.presentFallacyById(fallacies);
+          this.props.presentFallacyById(fallacies)
         }
         else {
           for (const fallacyId of fallacies) {
-            this.props.presentFallacyById(fallacyId);
+            if (!fallacyId) continue
+            this.props.presentFallacyById(fallacyId)
           }
         }
       }
 
-      if (activeFallacyId) this.props.presentFallacyById(activeFallacyId);
+      if (activeFallacyId) this.props.presentFallacyById(activeFallacyId)
     }
 
     if (__APP_CONFIG__.enableHistoryForDefinitions) {
       if (definitions) {
         if (typeof definitions === 'string') {
-          this.props.presentDefinitionById(definitions);
+          this.props.presentDefinitionById(definitions)
         }
         else {
           for (const definitionId of definitions) {
-            this.props.presentDefinitionById(definitionId);
+            if (!definitionId) continue
+            this.props.presentDefinitionById(definitionId)
           }
         }
       }
@@ -163,54 +166,54 @@ class Home extends PureComponent<Props, State> {
   }
 
   mapPropsToLocation() {
-    const params: any = {};
-    let hash;
+    const params: any = {}
+    let hash
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
-      if (!_.isEmpty(this.props.searchInput)) params.s = this.props.searchInput;
+      if (!_.isEmpty(this.props.searchInput)) params.s = this.props.searchInput
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
-      if (this.props.pageIndex > 0) params.p = this.props.pageIndex + 1;
+      if (this.props.pageIndex > 0) params.p = this.props.pageIndex + 1
     }
 
     if (__APP_CONFIG__.enableHistoryForFilters) {
-      if (!this.props.filters.formal) params.ff = 'no';
-      if (!this.props.filters.informal) params.fi = 'no';
-      if (!this.props.filters.alpha) params.fa = 'no';
-      if (!this.props.filters.beta) params.fb = 'no';
-      if (!this.props.filters.gamma) params.fg = 'no';
+      if (!this.props.filters.formal) params.ff = 'no'
+      if (!this.props.filters.informal) params.fi = 'no'
+      if (!this.props.filters.alpha) params.fa = 'no'
+      if (!this.props.filters.beta) params.fb = 'no'
+      if (!this.props.filters.gamma) params.fg = 'no'
     }
 
     if (__APP_CONFIG__.enableHistoryForFallacies) {
-      const lastActiveId = _.last(this.props.activeFallacyIds);
-      const prevActiveIds = _.dropRight(this.props.activeFallacyIds);
-      hash = lastActiveId;
+      const lastActiveId = _.last(this.props.activeFallacyIds)
+      const prevActiveIds = _.dropRight(this.props.activeFallacyIds)
+      hash = lastActiveId
 
-      if (prevActiveIds.length > 0) params.f = prevActiveIds;
+      if (prevActiveIds.length > 0) params.f = prevActiveIds
     }
 
     if (__APP_CONFIG__.enableHistoryForDefinitions) {
-      if (this.props.activeDefinitionIds.length > 0) params.d = this.props.activeDefinitionIds;
+      if (this.props.activeDefinitionIds.length > 0) params.d = this.props.activeDefinitionIds
     }
 
     const location = {
       pathname: '/',
       hash,
       search: _.isEmpty(params) ? undefined : `?${qs.stringify(params)}`,
-    };
+    }
 
-    this.props.history.replace(location);
+    this.props.navigate(location, { replace: true })
   }
 
   render() {
-    const lastActiveFallacyId = _.last(this.props.activeFallacyIds);
-    const lastActiveDefinitionId = _.last(this.props.activeDefinitionIds);
+    const lastActiveFallacyId = _.last(this.props.activeFallacyIds)
+    const lastActiveDefinitionId = _.last(this.props.activeDefinitionIds)
 
     return (
       <Fragment>
         <Transition in={!lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
-          {(status) => (
+          {status => (
             <NavControlManager
               isEnabled={!lastActiveDefinitionId && !lastActiveFallacyId}
               onPrev={() => this.toPreviousPage()}
@@ -252,7 +255,7 @@ class Home extends PureComponent<Props, State> {
         <FallacyStackModal/>
         <DefinitionStackModal/>
       </Fragment>
-    );
+    )
   }
 }
 
@@ -281,7 +284,7 @@ export default connect(
     presentDefinitionById,
     presentFallacyById,
   }, dispatch),
-)(Home);
+)(Home)
 
 const StyledHeader = styled.header`
   ${container.fhcl}
@@ -292,24 +295,24 @@ const StyledHeader = styled.header`
   ${selectors.eblc} {
     margin-right: 2rem;
   }
-`;
+`
 
 const StyledRoot = styled.div<{
-  transitionStatus: TransitionStatus;
+  transitionStatus: TransitionStatus
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
   ${container.fvtl}
-  background: ${(props) => props.theme.colors.black};
+  background: ${props => props.theme.colors.black};
   min-height: 100%;
-  opacity: ${(props) => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
+  opacity: ${props => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
   padding: 5rem 2rem 3rem;
   perspective: 80rem;
-  pointer-events: ${(props) => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
+  pointer-events: ${props => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
   transform-origin: center;
-  transform: ${(props) => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'], props.transitionStatus)};
+  transform: ${props => valueByTransitionStatus(['translate3d(0, 0, 0) scale(.9)', 'translate3d(0, 0, 0) scale(1)'], props.transitionStatus)};
   width: 100%;
 
   @media ${media.gtw(500)} {
     padding: 5rem 5rem 3rem;
   }
-`;
+`

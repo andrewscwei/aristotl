@@ -10,15 +10,15 @@ export const colors = {
   darkBlue: '#0b0c86',
   pink: '#deb19a',
   darkPink: '#d09475',
-};
+}
 
 export const fonts = {
-};
+}
 
 export const layout = {
-};
+}
 
 export const z = {
   foreground: 1,
   overlays: 10,
-};
+}

@@ -1,85 +1,85 @@
-import _ from 'lodash';
-import { Document } from 'prismic-javascript/types/documents';
-import { animations, container, selectors } from 'promptu';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors';
-import { AppState } from '../store';
-import { changeFallaciesFilters, FallaciesFilters } from '../store/fallacies';
-import { colors } from '../styles/theme';
-import Pixel from './Pixel';
+import _ from 'lodash'
+import { Document } from 'prismic-javascript/types/documents'
+import { animations, container, selectors } from 'promptu'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors'
+import { AppState } from '../store'
+import { changeFallaciesFilters, FallaciesFilters } from '../store/fallacies'
+import { colors } from '../styles/theme'
+import Pixel from './Pixel'
 
 interface StateProps {
-  filteredFallacies: ReadonlyArray<Document>;
-  filteredFallaciesOnCurrentPage: ReadonlyArray<Document>;
-  filters: FallaciesFilters;
-  maxPages: number;
-  pageIndex: number;
-  pageSize: number;
+  filteredFallacies: readonly Document[]
+  filteredFallaciesOnCurrentPage: readonly Document[]
+  filters: FallaciesFilters
+  maxPages: number
+  pageIndex: number
+  pageSize: number
 }
 
 interface DispatchProps {
-  changeFallaciesFilters: typeof changeFallaciesFilters;
+  changeFallaciesFilters: typeof changeFallaciesFilters
 }
 
 interface Props extends StateProps, DispatchProps {
-  className?: string;
+  className?: string
 }
 
 class Statistics extends PureComponent<Props> {
-  countFormals(docs: ReadonlyArray<Document>): number {
+  countFormals(docs: readonly Document[]): number {
     return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.types');
-      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined;
-      if (match) out += 1;
-      return out;
-    }, 0);
+      const fragments = _.get(curr, 'data.types')
+      const match = _.find(fragments, v => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined
+      if (match) out += 1
+      return out
+    }, 0)
   }
 
-  countInformals(docs: ReadonlyArray<Document>): number {
+  countInformals(docs: readonly Document[]): number {
     return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.types');
-      const match = _.find(fragments, (v) => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined;
-      if (match) out += 1;
-      return out;
-    }, 0);
+      const fragments = _.get(curr, 'data.types')
+      const match = _.find(fragments, v => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined
+      if (match) out += 1
+      return out
+    }, 0)
   }
 
-  countAlphas(docs: ReadonlyArray<Document>): number {
+  countAlphas(docs: readonly Document[]): number {
     return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance');
-      if (!fragments || fragments.length === 0) out += 1;
-      return out;
-    }, 0);
+      const fragments = _.get(curr, 'data.inheritance')
+      if (!fragments || fragments.length === 0) out += 1
+      return out
+    }, 0)
   }
 
-  countBetas(docs: ReadonlyArray<Document>): number {
+  countBetas(docs: readonly Document[]): number {
     return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance');
-      if (fragments && fragments.length === 1) out += 1;
-      return out;
-    }, 0);
+      const fragments = _.get(curr, 'data.inheritance')
+      if (fragments && fragments.length === 1) out += 1
+      return out
+    }, 0)
   }
 
-  countGammas(docs: ReadonlyArray<Document>): number {
+  countGammas(docs: readonly Document[]): number {
     return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance');
-      if (fragments && fragments.length >= 2) out += 1;
-      return out;
-    }, 0);
+      const fragments = _.get(curr, 'data.inheritance')
+      if (fragments && fragments.length >= 2) out += 1
+      return out
+    }, 0)
   }
 
   render() {
-    const numResults = this.props.filteredFallacies.length;
-    const startIndex = this.props.pageSize * this.props.pageIndex + 1;
-    const endIndex = this.props.filteredFallaciesOnCurrentPage.length + startIndex - 1;
-    const numFormals = this.countFormals(this.props.filteredFallaciesOnCurrentPage);
-    const numInformals = this.countInformals(this.props.filteredFallaciesOnCurrentPage);
-    const numAlphas = this.countAlphas(this.props.filteredFallaciesOnCurrentPage);
-    const numBetas = this.countBetas(this.props.filteredFallaciesOnCurrentPage);
-    const numGammas = this.countGammas(this.props.filteredFallaciesOnCurrentPage);
+    const numResults = this.props.filteredFallacies.length
+    const startIndex = this.props.pageSize * this.props.pageIndex + 1
+    const endIndex = this.props.filteredFallaciesOnCurrentPage.length + startIndex - 1
+    const numFormals = this.countFormals(this.props.filteredFallaciesOnCurrentPage)
+    const numInformals = this.countInformals(this.props.filteredFallaciesOnCurrentPage)
+    const numAlphas = this.countAlphas(this.props.filteredFallaciesOnCurrentPage)
+    const numBetas = this.countBetas(this.props.filteredFallaciesOnCurrentPage)
+    const numGammas = this.countGammas(this.props.filteredFallaciesOnCurrentPage)
 
     return (
       <StyledRoot className={this.props.className}>
@@ -111,7 +111,7 @@ class Statistics extends PureComponent<Props> {
           <span>{numGammas === 0 ? '--' : numGammas}</span>
         </StyledFilterButton>
       </StyledRoot>
-    );
+    )
   }
 }
 
@@ -127,21 +127,21 @@ export default connect(
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
     changeFallaciesFilters,
   }, dispatch),
-)(Statistics);
+)(Statistics)
 
 const StyledFormalIcon = styled(Pixel)`
   ${animations.transition('background', 200, 'ease-out')}
-`;
+`
 
 const StyledInformalIcon = styled(Pixel)`
   ${animations.transition('border-color', 200, 'ease-out')}
-`;
+`
 
 const StyledCount = styled.div`
   ${container.fhcl}
   font-size: 1.4rem;
   font-weight: 400;
-  color: ${(props) => props.theme.colors.white};
+  color: ${props => props.theme.colors.white};
 
   > * {
     flex: 0 0 auto;
@@ -150,17 +150,17 @@ const StyledCount = styled.div`
   ${selectors.eblc} {
     margin-right: .6rem;
   }
-`;
+`
 
 const StyledFilterButton = styled.button<{
-  isActive: boolean;
+  isActive: boolean
 }>`
   ${container.fhcl}
   ${animations.transition('opacity', 200, 'ease-out')}
   font-size: 1.4rem;
   font-weight: 400;
-  color: ${(props) => props.theme.colors.white};
-  opacity: ${(props) => props.isActive ? 1.0 : 0.2};
+  color: ${props => props.theme.colors.white};
+  opacity: ${props => props.isActive ? 1.0 : 0.2};
 
   > * {
     flex: 0 0 auto;
@@ -175,17 +175,17 @@ const StyledFilterButton = styled.button<{
   }
 
   ${selectors.hwot} {
-    color: ${(props) => props.theme.colors.red};
+    color: ${props => props.theme.colors.red};
 
     ${StyledFormalIcon} {
-      background: ${(props) => props.theme.colors.red};
+      background: ${props => props.theme.colors.red};
     }
 
     ${StyledInformalIcon} {
-      border-color: ${(props) => props.theme.colors.red};
+      border-color: ${props => props.theme.colors.red};
     }
   }
-`;
+`
 
 const StyledRoot = styled.div`
   ${container.fhcl}
@@ -200,4 +200,4 @@ const StyledRoot = styled.div`
   > * {
     flex: 0 0 auto;
   }
-`;
+`

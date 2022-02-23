@@ -1,20 +1,18 @@
-import _ from 'lodash';
-import { Document } from 'prismic-javascript/types/documents';
-import { align, animations, container, media, selectors, utils } from 'promptu';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import { AppState } from '../store';
-import { I18nState } from '../store/i18n';
-import { colors } from '../styles/theme';
-import { getDocs, getMarkup, getText, getTexts } from '../utils/prismic';
-import Pixel from './Pixel';
-
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:card') : () => {};
+import _ from 'lodash'
+import { Document } from 'prismic-javascript/types/documents'
+import { align, animations, container, media, selectors, utils } from 'promptu'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import { AppState } from '../store'
+import { I18nState } from '../store/i18n'
+import { colors } from '../styles/theme'
+import { getDocs, getMarkup, getText, getTexts } from '../utils/prismic'
+import Pixel from './Pixel'
 
 interface StateProps {
-  i18n: I18nState;
+  i18n: I18nState
 }
 
 interface DispatchProps {
@@ -22,28 +20,28 @@ interface DispatchProps {
 }
 
 interface Props extends StateProps, DispatchProps {
-  className?: string;
-  doc: Document;
-  isSummaryEnabled: boolean;
-  onActivate: () => void;
+  className?: string
+  doc: Document
+  isSummaryEnabled: boolean
+  onActivate: () => void
 }
 
 class Card extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     isSummaryEnabled: false,
     onActivate: () => {},
-  };
+  }
 
   render() {
-    const { ltxt } = this.props.i18n;
-    const abbreviation = getText(this.props.doc, 'data.abbreviation');
-    const name = getText(this.props.doc, 'data.name');
-    const summary = getMarkup(this.props.doc, 'data.summary');
-    const typeDocs = getDocs(this.props.doc, 'data.types', 'type');
+    const { ltxt } = this.props.i18n
+    const abbreviation = getText(this.props.doc, 'data.abbreviation')
+    const name = getText(this.props.doc, 'data.name')
+    const summary = getMarkup(this.props.doc, 'data.summary')
+    const typeDocs = getDocs(this.props.doc, 'data.types', 'type')
 
-    const aliases = _.sortBy(getTexts(this.props.doc, 'data.aliases', 'name')) || [];
-    const firstAliases = _.take(aliases, 3) || [];
-    const remainingAliases = aliases.length - firstAliases.length;
+    const aliases = _.sortBy(getTexts(this.props.doc, 'data.aliases', 'name')) || []
+    const firstAliases = _.take(aliases, 3) || []
+    const remainingAliases = aliases.length - firstAliases.length
 
     return (
       <StyledRoot
@@ -83,7 +81,7 @@ class Card extends PureComponent<Props> {
 
         <StyledDivider isSummaryEnabled={this.props.isSummaryEnabled}/>
       </StyledRoot>
-    );
+    )
   }
 }
 
@@ -94,10 +92,10 @@ export default connect(
   (dispatch: Dispatch<Action>): DispatchProps => bindActionCreators({
 
   }, dispatch),
-)(Card);
+)(Card)
 
 const StyledSummary = styled.div`
-  color: ${(props) => props.theme.colors.grey};
+  color: ${props => props.theme.colors.grey};
   margin-top: 1rem;
   overflow: hidden;
   padding: 0 1rem;
@@ -108,7 +106,7 @@ const StyledSummary = styled.div`
     font-size: 1.4rem;
     font-weight: 400;
   }
-`;
+`
 
 const StyledType = styled.div`
   ${container.fhcl}
@@ -122,17 +120,17 @@ const StyledType = styled.div`
   ${selectors.eblc} {
     margin-right: .4rem;
   }
-`;
+`
 
 const StyledTypes = styled.div`
   ${container.fhcl}
-`;
+`
 
 const StyledAbbreviation = styled.div`
   ${container.fvcl}
-  background: ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
-  border-bottom: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
-  border-top: 1px solid ${(props) => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
+  background: ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
+  border-bottom: 1px solid ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
+  border-top: 1px solid ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
   height: 9rem;
   margin-bottom: 1rem;
   overflow: visible;
@@ -152,11 +150,11 @@ const StyledAbbreviation = styled.div`
       font-size: 6rem;
     }
   }
-`;
+`
 
 const StyledAliases = styled.div`
   ${container.fhtl}
-  color: ${(props) => props.theme.colors.grey};
+  color: ${props => props.theme.colors.grey};
   font-size: 1.2rem;
   font-weight: 400;
   hyphens: auto;
@@ -168,10 +166,10 @@ const StyledAliases = styled.div`
   @media ${media.gtw(660)} {
     font-size: 1.4rem;
   }
-`;
+`
 
 const StyledName = styled.h1`
-  color: ${(props) => props.theme.colors.lightGrey};
+  color: ${props => props.theme.colors.lightGrey};
   font-size: 1.3rem;
   font-weight: 400;
   hyphens: auto;
@@ -181,14 +179,14 @@ const StyledName = styled.h1`
   @media ${media.gtw(500)} {
     font-size: 1.4rem;
   }
-`;
+`
 
 const StyledDivider = styled.div<{
-  isSummaryEnabled: boolean;
+  isSummaryEnabled: boolean
 }>`
   ${align.bl}
   ${animations.transition(['opacity', 'background'], 200, 'ease-out')}
-  background: ${(props) => props.theme.colors.darkGrey};
+  background: ${props => props.theme.colors.darkGrey};
   height: .2rem;
   margin: 2rem;
   opacity: 0;
@@ -197,12 +195,12 @@ const StyledDivider = styled.div<{
   @media ${media.gtw(540)} {
     opacity: 1;
   }
-`;
+`
 
 const StyledRoot = styled.button`
   ${container.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
-  background: ${(props) => props.theme.colors.offBlack};
+  background: ${props => props.theme.colors.offBlack};
   height: inherit;
   overflow: hidden;
   padding: 1rem 1rem 1.5rem;
@@ -215,11 +213,11 @@ const StyledRoot = styled.button`
   }
 
   ${selectors.hwot} {
-    background: ${(props) => props.theme.colors.black};
-    color: ${(props) => props.theme.colors.white};
+    background: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.white};
 
     ${StyledDivider} {
-      background: ${(props) => props.theme.colors.white};
+      background: ${props => props.theme.colors.white};
     }
   }
-`;
+`

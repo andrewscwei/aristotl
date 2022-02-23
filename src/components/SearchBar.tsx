@@ -1,77 +1,77 @@
-import { align, container, selectors } from 'promptu';
-import React, { ChangeEvent, createRef, PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import { AppState } from '../store';
-import { changeFallaciesFilters, changeFallaciesSearchInput } from '../store/fallacies';
-import { I18nState } from '../store/i18n';
-import { colors } from '../styles/theme';
-import ActionButton from './ActionButton';
-import Pixel from './Pixel';
+import { align, container, selectors } from 'promptu'
+import React, { ChangeEvent, createRef, PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import { AppState } from '../store'
+import { changeFallaciesFilters, changeFallaciesSearchInput } from '../store/fallacies'
+import { I18nState } from '../store/i18n'
+import { colors } from '../styles/theme'
+import ActionButton from './ActionButton'
+import Pixel from './Pixel'
 
 interface StateProps {
-  i18n: I18nState;
-  searchInput: string;
+  i18n: I18nState
+  searchInput: string
 }
 
 interface DispatchProps {
-  changeFallaciesFilters: typeof changeFallaciesFilters;
-  changeFallaciesSearchInput: typeof changeFallaciesSearchInput;
+  changeFallaciesFilters: typeof changeFallaciesFilters
+  changeFallaciesSearchInput: typeof changeFallaciesSearchInput
 }
 
 interface Props extends StateProps, DispatchProps {
-  autoFocus: boolean;
-  className?: string;
-  input?: string;
+  autoFocus: boolean
+  className?: string
+  input?: string
 }
 
 class SearchBar extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     autoFocus: true,
-  };
+  }
 
   nodeRefs = {
     input: createRef<HTMLInputElement>(),
-  };
+  }
 
   componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp);
+    window.addEventListener('keyup', this.onKeyUp)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
+    window.removeEventListener('keyup', this.onKeyUp)
   }
 
   onKeyUp = (event: KeyboardEvent) => {
-    if (!this.props.autoFocus) return;
-    if (!this.nodeRefs.input.current) return;
+    if (!this.props.autoFocus) return
+    if (!this.nodeRefs.input.current) return
 
     switch (event.keyCode) {
-      case 37:
-      case 38:
-      case 39:
-      case 40: return;
+    case 37:
+    case 38:
+    case 39:
+    case 40: return
     }
 
-    if (this.nodeRefs.input.current === document.activeElement) return;
+    if (this.nodeRefs.input.current === document.activeElement) return
 
-    this.nodeRefs.input.current.focus();
+    this.nodeRefs.input.current.focus()
   }
 
   onClear() {
-    this.props.changeFallaciesSearchInput('');
+    this.props.changeFallaciesSearchInput('')
     this.props.changeFallaciesFilters({
       formal: true,
       informal: true,
       alpha: true,
       beta: true,
       gamma: true,
-    });
+    })
   }
 
   render() {
-    const { ltxt } = this.props.i18n;
+    const { ltxt } = this.props.i18n
 
     return (
       <StyledRoot className={this.props.className}>
@@ -98,7 +98,7 @@ class SearchBar extends PureComponent<Props> {
           onActivate={() => this.onClear()}
         />
       </StyledRoot>
-    );
+    )
   }
 }
 
@@ -111,7 +111,7 @@ export default connect(
     changeFallaciesFilters,
     changeFallaciesSearchInput,
   }, dispatch),
-)(SearchBar);
+)(SearchBar)
 
 const StyledPixels = styled.div`
   ${container.fvcc}
@@ -122,12 +122,12 @@ const StyledPixels = styled.div`
   ${selectors.eblc} {
     margin-bottom: .4rem;
   }
-`;
+`
 
 const StyledInput = styled.div`
   ${container.fvcl}
-  ${(props) => props.theme.fonts.search}
-  color: ${(props) => props.theme.colors.white};
+  ${props => props.theme.fonts.search}
+  color: ${props => props.theme.colors.white};
   font-size: 2rem;
   height: 5rem;
   width: 100%;
@@ -136,17 +136,17 @@ const StyledInput = styled.div`
     width: 100%;
     background: transparent;
   }
-`;
+`
 
 const StyledActionButton = styled(ActionButton)`
   margin-left: 1rem;
-`;
+`
 
 const StyledRoot = styled.div`
   ${container.fhcl}
-  background: ${(props) => props.theme.colors.offBlack};
+  background: ${props => props.theme.colors.offBlack};
   max-width: 40rem;
   padding: 0 1rem;
   width: 100%;
-  z-index: ${(props) => props.theme.z.foreground};
-`;
+  z-index: ${props => props.theme.z.foreground};
+`

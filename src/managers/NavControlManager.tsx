@@ -1,12 +1,11 @@
-import React, { PureComponent, ReactNode } from 'react';
-import Hammer from 'react-hammerjs';
+import React, { HTMLAttributes, PropsWithChildren, PureComponent } from 'react'
+// import Hammer from 'react-hammerjs'
 
-interface Props {
-  isEnabled: boolean;
-  children?: ReactNode;
-  onPrev: () => void;
-  onNext: () => void;
-  onEscape: () => void;
+type Props = PropsWithChildren<HTMLAttributes<HTMLElement>> & {
+  isEnabled: boolean
+  onPrev: () => void
+  onNext: () => void
+  onEscape: () => void
 }
 
 class NavControlManager extends PureComponent<Props> {
@@ -15,52 +14,52 @@ class NavControlManager extends PureComponent<Props> {
     onPrev: () => {},
     onNext: () => {},
     onEscape: () => {},
-  };
+  }
 
   componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp);
+    window.addEventListener('keyup', this.onKeyUp)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
+    window.removeEventListener('keyup', this.onKeyUp)
   }
 
   onKeyUp = (event: KeyboardEvent) => {
-    if (!this.props.isEnabled) return;
-    if (document.activeElement instanceof HTMLInputElement) return;
+    if (!this.props.isEnabled) return
+    if (document.activeElement instanceof HTMLInputElement) return
 
     switch (event.keyCode) {
-      case 39:
-        this.props.onNext();
-        break;
-      case 37:
-        this.props.onPrev();
-        break;
-      case 27:
-        this.props.onEscape();
-        break;
+    case 39:
+      this.props.onNext()
+      break
+    case 37:
+      this.props.onPrev()
+      break
+    case 27:
+      this.props.onEscape()
+      break
     }
   }
 
   onSwipe = (direction: number) => {
-    if (!this.props.isEnabled) return;
+    if (!this.props.isEnabled) return
 
     switch (direction) {
-      case 2: // Left
-        this.props.onNext();
-        break;
-      case 4: // Right
-        this.props.onPrev();
+    case 2: // Left
+      this.props.onNext()
+      break
+    case 4: // Right
+      this.props.onPrev()
     }
   }
 
   render() {
     return (
-      <Hammer direction='DIRECTION_HORIZONTAL' onSwipe={(event) => this.onSwipe(event.direction)}>
-        {this.props.children}
-      </Hammer>
-    );
+      // <Hammer direction='DIRECTION_HORIZONTAL' onSwipe={event => this.onSwipe(event.direction)}>
+      <>{this.props.children}</>
+      // </Hammer>
+    )
   }
 }
 
-export default NavControlManager;
+export default NavControlManager

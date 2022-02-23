@@ -1,8 +1,8 @@
-import { normalize } from 'promptu';
-import { createGlobalStyle } from 'styled-components';
-import { colors } from './theme';
+import { normalize } from 'promptu'
+import { css } from 'styled-components'
+import { colors } from './theme'
 
-export default createGlobalStyle`
+export default css`
   ${normalize()} /* stylelint-disable-line max-empty-lines */
 
   html,
@@ -12,4 +12,9 @@ export default createGlobalStyle`
     font-family: 'RobotoMono', monospace;
     font-weight: 400;
   }
-`;
+
+  #app {
+    height: 100%;
+    width: 100%;
+  }
+`

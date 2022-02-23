@@ -2,9 +2,9 @@
  * @file Configuration for both client and server environments.
  */
 
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 export default {
   // Version number.
@@ -66,4 +66,4 @@ export default {
 
   // Supported locales. First locale is the default locale.
   locales: ['en'],
-};
+}

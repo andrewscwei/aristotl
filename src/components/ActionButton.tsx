@@ -1,96 +1,85 @@
-import { animations, container, selectors } from 'promptu';
-import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
-import { colors } from '../styles/theme';
-import Pixel from './Pixel';
+import { animations, container, selectors } from 'promptu'
+import React, { HTMLAttributes, useState } from 'react'
+import styled, { css } from 'styled-components'
+import { colors } from '../styles/theme'
+import Pixel from './Pixel'
 
-interface Props {
-  activeTintColor?: string;
-  className?: string;
-  hoverTintColor?: string;
-  isTogglable: boolean;
-  symbol: string;
-  tintColor?: string;
-  onActivate: () => void;
-  onToggleOn: () => void;
-  onToggleOff: () => void;
+type Props = HTMLAttributes<HTMLButtonElement> & {
+  activeTintColor?: string
+  hoverTintColor?: string
+  isTogglable?: boolean
+  symbol: string
+  tintColor?: string
+  onActivate?: () => void
+  onToggleOn?: () => void
+  onToggleOff?: () => void
 }
 
-interface State {
-  isActive: boolean;
-}
+export default function ActionButton({
+  activeTintColor,
+  hoverTintColor,
+  isTogglable = false,
+  symbol,
+  tintColor = colors.white,
+  onActivate,
+  onToggleOff,
+  onToggleOn,
+  ...props
+}: Props) {
+  const [isActive, setIsActive] = useState(false)
 
-class ActionButton extends PureComponent<Props, State> {
-  static defaultProps: Partial<Props> = {
-    isTogglable: false,
-    onActivate: () => {},
-    onToggleOn: () => {},
-    onToggleOff: () => {},
-  };
-
-  state: State = {
-    isActive: false,
-  };
-
-  onClick() {
-    if (this.props.isTogglable) {
-      if (this.state.isActive) {
-        this.setState({ isActive: false });
-        this.setState({ isActive: false });
-        this.props.onToggleOff();
+  const onClick = () => {
+    if (isTogglable) {
+      if (isActive) {
+        setIsActive(false)
+        onToggleOff?.()
       }
       else {
-        this.setState({ isActive: true });
-        this.props.onToggleOn();
+        setIsActive(true)
+        onToggleOn?.()
       }
     }
     else {
-      this.setState({ isActive: false });
+      setIsActive(false)
     }
 
-    this.props.onActivate();
+    onActivate?.()
   }
 
-  render() {
-    const tintColor = this.props.tintColor || colors.white;
-
-    return (
-      <StyledRoot
-        activeTintColor={this.props.activeTintColor}
-        className={this.props.className}
-        hoverTintColor={this.props.hoverTintColor}
-        isActive={this.state.isActive}
-        tintColor={tintColor}
-        onClick={() => this.onClick()}
-      >
-        <StyledPixel size={3} alignment='tl'/>
-        <StyledPixel size={3} alignment='tr'/>
-        <StyledPixel size={3} alignment='bl'/>
-        <StyledPixel size={3} alignment='br'/>
-        <span>{this.props.symbol}</span>
-      </StyledRoot>
-    );
-  }
+  return (
+    <StyledRoot
+      {...props}
+      activeTintColor={activeTintColor}
+      hoverTintColor={hoverTintColor}
+      isActive={isActive}
+      tintColor={tintColor}
+      onClick={() => onClick()}
+    >
+      <StyledPixel size={3} alignment='tl'/>
+      <StyledPixel size={3} alignment='tr'/>
+      <StyledPixel size={3} alignment='bl'/>
+      <StyledPixel size={3} alignment='br'/>
+      <span>{symbol}</span>
+    </StyledRoot>
+  )
 }
-
-export default ActionButton;
 
 const StyledPixel = styled(Pixel)`
   ${animations.transition('background', 200, 'ease-out')}
-`;
+`
 
 const StyledRoot = styled.button<{
-  isActive: boolean;
-  tintColor: string;
-  hoverTintColor?: string;
-  activeTintColor?: string;
+  isActive: boolean
+  tintColor: string
+  hoverTintColor?: string
+  activeTintColor?: string
 }>`
   ${animations.transition(['border-color', 'color'], 200, 'ease-out')}
   ${container.fvcc}
-  border-color: ${(props) => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
+  border-color: ${props => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
   border-style: solid;
   border-width: 1px;
-  color: ${(props) => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
+  color: ${props => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
   height: 2rem;
   width: 2rem;
   padding-bottom: .2rem;
@@ -101,11 +90,11 @@ const StyledRoot = styled.button<{
   }
 
   ${StyledPixel} {
-    background: ${(props) => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
+    background: ${props => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
   }
 
   ${selectors.hwot} {
-    ${(props) => props.hoverTintColor && css`
+    ${props => props.hoverTintColor && css`
       border-color: ${props.hoverTintColor};
       color: ${props.hoverTintColor};
 
@@ -114,4 +103,4 @@ const StyledRoot = styled.button<{
       }
     `}
   }
-`;
+`

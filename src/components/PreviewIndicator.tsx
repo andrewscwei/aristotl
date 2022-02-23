@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { removePreviewToken } from '../utils/prismic';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { removePreviewToken } from '../utils/prismic'
 
 interface Props {
 
@@ -29,16 +29,16 @@ class PreviewIndicator extends PureComponent<Props> {
           </StyledIcon>
         </span>
       </StyledRoot>
-    );
+    )
   }
 
   private exitPreview() {
-    removePreviewToken();
-    location.reload();
+    removePreviewToken()
+    location.reload()
   }
 }
 
-export default PreviewIndicator;
+export default PreviewIndicator
 
 const StyledIcon = styled.svg`
   width: 30px !important;
@@ -53,7 +53,7 @@ const StyledIcon = styled.svg`
   * {
     fill: #fff;
   }
-`;
+`
 
 const StyledRoot = styled.button`
   background: #c61313;
@@ -89,4 +89,4 @@ const StyledRoot = styled.button`
       transform: scale(1);
     }
   }
-`;
+`

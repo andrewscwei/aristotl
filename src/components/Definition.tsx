@@ -1,52 +1,52 @@
-import _ from 'lodash';
-import { Document } from 'prismic-javascript/types/documents';
-import { align, animations, container, selectors } from 'promptu';
-import React, { forwardRef, Fragment, PureComponent, Ref } from 'react';
-import { connect } from 'react-redux';
-import { Action, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-import { getDefinitions } from '../selectors';
-import { AppState } from '../store';
-import { dismissDefinitionById, presentDefinitionById } from '../store/definitions';
-import { colors } from '../styles/theme';
-import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic';
-import ActionButton from './ActionButton';
-import RichText from './RichText';
+import _ from 'lodash'
+import { Document } from 'prismic-javascript/types/documents'
+import { align, animations, container, selectors } from 'promptu'
+import React, { forwardRef, Fragment, PureComponent, Ref } from 'react'
+import { connect } from 'react-redux'
+import { Action, bindActionCreators, Dispatch } from 'redux'
+import styled from 'styled-components'
+import { getDefinitions } from '../selectors'
+import { AppState } from '../store'
+import { dismissDefinitionById, presentDefinitionById } from '../store/definitions'
+import { colors } from '../styles/theme'
+import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
+import ActionButton from './ActionButton'
+import RichText from './RichText'
 
 interface StateProps {
-  definitions: ReadonlyArray<Document>;
+  definitions: readonly Document[]
 }
 
 interface DispatchProps {
-  dismissDefinitionById: typeof dismissDefinitionById;
-  presentDefinitionById: typeof presentDefinitionById;
+  dismissDefinitionById: typeof dismissDefinitionById
+  presentDefinitionById: typeof presentDefinitionById
 }
 
 interface OwnProps {
-  className?: string;
-  docId?: string;
-  scrollTargetRef?: Ref<HTMLDivElement>;
+  className?: string
+  docId?: string
+  scrollTargetRef?: Ref<HTMLDivElement>
 }
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
 class Definition extends PureComponent<Props> {
   get doc(): Document | undefined {
-    if (!this.props.docId) return undefined;
-    return _.find(this.props.definitions, (v) => v.id === this.props.docId);
+    if (!this.props.docId) return undefined
+    return _.find(this.props.definitions, v => v.id === this.props.docId)
   }
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.docId !== this.props.docId) {
-      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0);
+      _.set(this.props, 'scrollTargetRef.current.scrollTop', 0)
     }
   }
 
   render() {
-    const name = getText(this.doc, 'data.name');
-    const descriptionMarkup = getMarkup(this.doc, 'data.description');
-    const aliases = getTexts(this.doc, 'data.aliases', 'name');
-    const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference');
+    const name = getText(this.doc, 'data.name')
+    const descriptionMarkup = getMarkup(this.doc, 'data.description')
+    const aliases = getTexts(this.doc, 'data.aliases', 'name')
+    const referenceMarkups = getMarkups(this.doc, 'data.references', 'reference')
 
     return (
       <StyledRoot className={this.props.className}>
@@ -54,7 +54,7 @@ class Definition extends PureComponent<Props> {
           symbol='-'
           tintColor={colors.darkBlue}
           hoverTintColor={colors.red}
-          onActivate={() => { if (this.props.docId) this.props.dismissDefinitionById(this.props.docId); }}
+          onActivate={() => { if (this.props.docId) this.props.dismissDefinitionById(this.props.docId) }}
         />
         <StyledTitle>{name}</StyledTitle>
         {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}
@@ -72,7 +72,7 @@ class Definition extends PureComponent<Props> {
           }
         </StyledContent>
       </StyledRoot>
-    );
+    )
   }
 }
 
@@ -84,20 +84,20 @@ const ConnectedDefinition = connect(
     presentDefinitionById,
     dismissDefinitionById,
   }, dispatch),
-)(Definition);
+)(Definition)
 
-export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={ref}/>);
+export default forwardRef((props: OwnProps, ref: Ref<HTMLDivElement>) => <ConnectedDefinition {...props} scrollTargetRef={ref}/>)
 
 const StyledCloseButton = styled(ActionButton)`
   ${align.tl}
   margin: 2rem;
-`;
+`
 
 const StyledAliases = styled.div`
   margin-bottom: 1rem;
   padding: 0 2rem;
   width: 100%;
-`;
+`
 
 const StyledTitle = styled.h2`
   font-size: 1.8rem;
@@ -105,7 +105,7 @@ const StyledTitle = styled.h2`
   margin-bottom: 1rem;
   padding: 0 2rem;
   text-transform: uppercase;
-`;
+`
 
 const StyledContent = styled.div`
   -webkit-overflow-scrolling: touch;
@@ -169,8 +169,8 @@ const StyledContent = styled.div`
 
   pre {
     ${container.box}
-    background: ${(props) => props.theme.colors.darkPink};
-    color: ${(props) => props.theme.colors.black};
+    background: ${props => props.theme.colors.darkPink};
+    color: ${props => props.theme.colors.black};
     line-height: 130%;
     margin: 0;
     padding: 1rem;
@@ -181,7 +181,7 @@ const StyledContent = styled.div`
 
   a:not([href]) {
     ${animations.transition('color', 200, 'ease-out')}
-    color: ${(props) => props.theme.colors.red};
+    color: ${props => props.theme.colors.red};
     cursor: pointer;
     font-weight: 700;
 
@@ -203,21 +203,21 @@ const StyledContent = styled.div`
       opacity: .6;
     }
   }
-`;
+`
 
 const StyledDivider = styled.hr`
-  background: ${(props) => props.theme.colors.darkBlue};
+  background: ${props => props.theme.colors.darkBlue};
   border: none;
   height: 1px;
   margin: 2rem 0;
   width: 100%;
-`;
+`
 
 const StyledRoot = styled.div`
-  background: ${(props) => props.theme.colors.pink};
-  color: ${(props) => props.theme.colors.darkBlue};
+  background: ${props => props.theme.colors.pink};
+  color: ${props => props.theme.colors.darkBlue};
   font-size: 1.4rem;
   font-weight: 400;
   padding: 6rem 0 3rem;
   user-select: text;
-`;
+`

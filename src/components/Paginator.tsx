@@ -1,16 +1,16 @@
-import { align, animations, container, selectors } from 'promptu';
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { colors } from '../styles/theme';
-import ActionButton from './ActionButton';
-import Pixel from './Pixel';
+import { align, animations, container, selectors } from 'promptu'
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { colors } from '../styles/theme'
+import ActionButton from './ActionButton'
+import Pixel from './Pixel'
 
 interface Props {
-  className?: string;
-  numPages: number;
-  pageIndex: number;
-  tintColor: string;
-  onActivate: (pageIndex: number) => void;
+  className?: string
+  numPages: number
+  pageIndex: number
+  tintColor: string
+  onActivate: (pageIndex: number) => void
 }
 
 class Paginator extends PureComponent<Props> {
@@ -19,16 +19,16 @@ class Paginator extends PureComponent<Props> {
     pageIndex: 0,
     tintColor: colors.white,
     onActivate: () => {},
-  };
+  }
 
   prev() {
-    const pageIndex = (this.props.pageIndex + this.props.numPages - 1) % this.props.numPages;
-    this.props.onActivate(pageIndex);
+    const pageIndex = (this.props.pageIndex + this.props.numPages - 1) % this.props.numPages
+    this.props.onActivate(pageIndex)
   }
 
   next() {
-    const pageIndex = (this.props.pageIndex + 1) % this.props.numPages;
-    this.props.onActivate(pageIndex);
+    const pageIndex = (this.props.pageIndex + 1) % this.props.numPages
+    this.props.onActivate(pageIndex)
   }
 
   render() {
@@ -63,45 +63,45 @@ class Paginator extends PureComponent<Props> {
           onActivate={() => this.next()}
         /> */}
       </StyledRoot>
-    );
+    )
   }
 }
 
-export default Paginator;
+export default Paginator
 
 const StyledPrevButton = styled(ActionButton)<{
-  isDisabled: boolean;
+  isDisabled: boolean
 }>`
   ${align.cl}
   left: -3rem;
-  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
-  opacity: ${(props) => props.isDisabled ? 0 : 1.0};
-`;
+  pointer-events: ${props => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${props => props.isDisabled ? 0 : 1.0};
+`
 
 const StyledNextButton = styled(ActionButton)<{
-  isDisabled: boolean;
+  isDisabled: boolean
 }>`
   ${align.cr}
   right: -3rem;
-  pointer-events: ${(props) => props.isDisabled ? 'none' : 'auto'};
-  opacity: ${(props) => props.isDisabled ? 0 : 1.0};
-`;
+  pointer-events: ${props => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${props => props.isDisabled ? 0 : 1.0};
+`
 
 const StyledButton = styled.button<{
-  isActive: boolean;
+  isActive: boolean
 }>`
   ${animations.transition('transform', 200, 'ease-out')}
-  pointer-events: ${(props) => props.isActive ? 'none' : 'auto'};
-  transform: translate3d(0, 0, 0) ${(props) => props.isActive ? 'scale(1.5)' : 'scale(1)'};
+  pointer-events: ${props => props.isActive ? 'none' : 'auto'};
+  transform: translate3d(0, 0, 0) ${props => props.isActive ? 'scale(1.5)' : 'scale(1)'};
   margin: 0 .5rem;
 
   ${selectors.hwot} {
     transform: translate3d(0, 0, 0) scale(1.5);
   }
-`;
+`
 
 const StyledRoot = styled.div`
   ${container.fhcc}
   align-self: center;
   margin: 5rem 0 3rem;
-`;
+`
