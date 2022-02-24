@@ -16,9 +16,6 @@ export default {
   // Google Analytics ID (i.e. UA-XXXXXXXX-1)
   ga: 'UA-108117457-5',
 
-  // Enable tokenizing in Fuse.js, makes search much slower though.
-  useTokenizedSearch: true,
-
   // Whether to include matches in Fuse.js search.
   includeMatchesInSearch: false,
 

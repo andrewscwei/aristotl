@@ -48,12 +48,9 @@ export const getFallaciesFuse = createSelector([
     includeMatches: __APP_CONFIG__.includeMatchesInSearch,
     isCaseSensitive: false,
     location: 0,
-    // findAllMatches: false,
-    // maxPatternLength: 24,
     minMatchCharLength: 1,
     shouldSort: true,
     threshold: 0.1,
-    // tokenize: __APP_CONFIG__.useTokenizedSearch,
   })
 })
 
