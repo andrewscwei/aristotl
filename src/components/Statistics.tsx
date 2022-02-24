@@ -23,47 +23,37 @@ export default function Statistics({
   const pageIndex = useSelector((state: AppState) => state.fallacies.pageIndex)
   const pageSize = useSelector((state: AppState) => state.fallacies.pageSize)
 
-  const countFormals = (docs: readonly Document[]): number => {
-    return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.types')
-      const match = _.find(fragments, v => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined
-      if (match) out += 1
-      return out
-    }, 0)
-  }
+  const countFormals = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+    const fragments = _.get(curr, 'data.types')
+    const match = _.find(fragments, v => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined
+    if (match) out += 1
+    return out
+  }, 0)
 
-  const countInformals = (docs: readonly Document[]): number => {
-    return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.types')
-      const match = _.find(fragments, v => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined
-      if (match) out += 1
-      return out
-    }, 0)
-  }
+  const countInformals = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+    const fragments = _.get(curr, 'data.types')
+    const match = _.find(fragments, v => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined
+    if (match) out += 1
+    return out
+  }, 0)
 
-  const countAlphas = (docs: readonly Document[]): number => {
-    return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance')
-      if (!fragments || fragments.length === 0) out += 1
-      return out
-    }, 0)
-  }
+  const countAlphas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+    const fragments = _.get(curr, 'data.inheritance')
+    if (!fragments || fragments.length === 0) out += 1
+    return out
+  }, 0)
 
-  const countBetas = (docs: readonly Document[]): number => {
-    return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance')
-      if (fragments && fragments.length === 1) out += 1
-      return out
-    }, 0)
-  }
+  const countBetas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+    const fragments = _.get(curr, 'data.inheritance')
+    if (fragments && fragments.length === 1) out += 1
+    return out
+  }, 0)
 
-  const countGammas = (docs: readonly Document[]): number => {
-    return docs.reduce((out, curr) => {
-      const fragments = _.get(curr, 'data.inheritance')
-      if (fragments && fragments.length >= 2) out += 1
-      return out
-    }, 0)
-  }
+  const countGammas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+    const fragments = _.get(curr, 'data.inheritance')
+    if (fragments && fragments.length >= 2) out += 1
+    return out
+  }, 0)
 
   const numResults = filteredFallacies.length
   const startIndex = pageSize * pageIndex + 1

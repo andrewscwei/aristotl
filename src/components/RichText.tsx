@@ -14,19 +14,15 @@ export default function RichText({
 }: Props) {
   const dispatch = useDispatch()
 
-  const onActivateDefinition = (docId: string) => {
-    return (event: MouseEvent) => {
-      event.preventDefault()
-      dispatch(presentDefinitionByIdAction(docId))
-    }
+  const onActivateDefinition = (docId: string) => (event: MouseEvent) => {
+    event.preventDefault()
+    dispatch(presentDefinitionByIdAction(docId))
   }
 
-  const onActivateFallacy = (docId: string) => {
-    return (event: MouseEvent) => {
-      event.preventDefault()
-      dispatch(dismissDefinitionsAction())
-      dispatch(presentFallacyByIdAction(docId))
-    }
+  const onActivateFallacy = (docId: string) => (event: MouseEvent) => {
+    event.preventDefault()
+    dispatch(dismissDefinitionsAction())
+    dispatch(presentFallacyByIdAction(docId))
   }
 
   return (

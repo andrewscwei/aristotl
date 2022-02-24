@@ -53,19 +53,15 @@ export default forwardRef<HTMLDivElement, Props>(({
     }
   }
 
-  const onTypeSelect = (docId: string) => {
-    return (event: MouseEvent) => {
-      event.preventDefault()
-      dispatch(presentDefinitionByIdAction(docId))
-    }
+  const onTypeSelect = (docId: string) => (event: MouseEvent) => {
+    event.preventDefault()
+    dispatch(presentDefinitionByIdAction(docId))
   }
 
-  const onFallacySelect = (docId?: string) => {
-    return (event: MouseEvent) => {
-      event.preventDefault()
-      if (!docId) return
-      dispatch(presentFallacyByIdAction(docId))
-    }
+  const onFallacySelect = (docId?: string) => (event: MouseEvent) => {
+    event.preventDefault()
+    if (!docId) return
+    dispatch(presentFallacyByIdAction(docId))
   }
 
   return (
