@@ -39,17 +39,11 @@
     <meta name='msapplication-config' content='/browserconfig.xml'>
     <meta name='msapplication-navbutton-color' content='#000000'>
 
-    <style>
-      @font-face{font-family:RobotoMono;src:url(/fonts/RobotoMono-Regular.ttf) format('truetype');font-style:normal;font-weight:400;font-display:auto}
-      @font-face{font-family:RobotoMono;src:url(/fonts/RobotoMono-RegularItalic.ttf) format('truetype');font-style:italic;font-weight:400;font-display:auto}
-      @font-face{font-family:RobotoMono;src:url(/fonts/RobotoMono-Bold.ttf) format('truetype');font-style:normal;font-weight:700;font-display:auto}
-      @font-face{font-family:RobotoMono;src:url(/fonts/RobotoMono-BoldItalic.ttf) format('truetype');font-style:italic;font-weight:700;font-display:auto}
-      @font-face{font-family:NovaMono;src:url(/fonts/NovaMono-Regular.ttf) format('truetype');font-style:normal;font-weight:400;font-display:auto}
-    </style>
-
-    <% if (htmlWebpackPlugin.options.appConf.ga) { %>
-      <script async src='https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.appConf.ga %>'></script>
-      <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '<%= htmlWebpackPlugin.options.appConf.ga %>');</script>
+    <% if (process.env.NODE_ENV === 'production') { %>
+      <% if (htmlWebpackPlugin.options.appConf.ga) { %>
+        <script async src='https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.appConf.ga %>'></script>
+        <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '<%= htmlWebpackPlugin.options.appConf.ga %>');</script>
+      <% } %>
     <% } %>
   </head>
   <body>
