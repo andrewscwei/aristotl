@@ -33,12 +33,12 @@ export default function Card({
   return (
     <StyledRoot {...props} onClick={() => onActivate?.()}>
       <StyledAbbreviation>
-        <Pixel alignment='tl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-        <Pixel alignment='tc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-        <Pixel alignment='tr' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-        <Pixel alignment='bl' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-        <Pixel alignment='bc' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
-        <Pixel alignment='br' size={4} offset={1} tintColor={`rgba(${utils.toRGBString(colors.white)}, .1)`}/>
+        <Pixel alignment='tl' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
+        <Pixel alignment='tc' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
+        <Pixel alignment='tr' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
+        <Pixel alignment='bl' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
+        <Pixel alignment='bc' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
+        <Pixel alignment='br' size={4} offset={1} tintColor={`${utils.toRGBAString(colors.white, .1)}`}/>
         <h2>{abbreviation}</h2>
       </StyledAbbreviation>
 
@@ -102,9 +102,9 @@ const StyledTypes = styled.div`
 
 const StyledAbbreviation = styled.div`
   ${container.fvcl}
-  background: ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .04)`};
-  border-bottom: 1px solid ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
-  border-top: 1px solid ${props => `rgba(${utils.toRGBString(props.theme.colors.white)}, .1)`};
+  background: ${props => utils.toRGBAString(props.theme.colors.white, .04)}};
+  border-bottom: 1px solid ${props => utils.toRGBAString(props.theme.colors.white, .1)}};
+  border-top: 1px solid ${props => utils.toRGBAString(props.theme.colors.white, .1)}};
   height: 9rem;
   margin-bottom: 1rem;
   overflow: visible;

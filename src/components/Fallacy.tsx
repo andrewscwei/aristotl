@@ -247,6 +247,7 @@ const StyledContent = styled.div`
     padding: 0;
 
     li {
+      list-style: inherit;
       margin-left: 3rem;
       width: calc(100% - 3rem);
     }

@@ -86,7 +86,7 @@
     "node-polyglot": "^2.4.2",
     "prismic-dom": "^2.2.3",
     "prismic-javascript": "^3.0.2",
-    "promptu": "^2.8.0",
+    "promptu": "^5.7.0",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
