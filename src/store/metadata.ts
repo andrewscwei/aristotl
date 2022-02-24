@@ -1,4 +1,4 @@
-import { Document } from 'prismic-javascript/types/documents'
+import { PrismicDocument } from '@prismicio/types'
 import { Action, Dispatch } from 'redux'
 import { fetchDocsByType, localeResolver } from '../utils/prismic'
 
@@ -7,7 +7,7 @@ export enum MetadataActionType {
 }
 
 export type MetadataState = {
-  [locale: string]: Readonly<Document> | undefined
+  [locale: string]: Readonly<PrismicDocument> | undefined
 }
 
 export type MetadataAction = Action<MetadataActionType> & {

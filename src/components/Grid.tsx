@@ -1,4 +1,4 @@
-import { Document } from 'prismic-javascript/types/documents'
+import { PrismicDocument } from '@prismicio/types'
 import { align, animations, container, media } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { Transition } from 'react-transition-group'
@@ -9,7 +9,7 @@ import Card from './Card'
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   id?: string
-  docs?: readonly Document[]
+  docs?: readonly PrismicDocument[]
   isSummaryEnabled: boolean
   onActivate: (docId: string) => void
 }
@@ -30,7 +30,7 @@ export default function Grid({
 
   return (
     <StyledRoot {...props}>
-      {docs.map((doc: Document, i: number) => {
+      {docs.map((doc, i) => {
         const duration = 150
         const delay = i * 20
 

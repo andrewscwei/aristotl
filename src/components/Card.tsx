@@ -1,5 +1,5 @@
+import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, container, media, selectors, utils } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components'
@@ -9,7 +9,7 @@ import { getDocs, getMarkup, getText, getTexts } from '../utils/prismic'
 import Pixel from './Pixel'
 
 type Props = HTMLAttributes<HTMLElement> & {
-  doc: Document
+  doc: PrismicDocument
   isSummaryEnabled?: boolean
   onActivate?: () => void
 }

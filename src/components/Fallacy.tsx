@@ -58,7 +58,7 @@ export default forwardRef<HTMLDivElement, Props>(({
     dispatch(presentDefinitionByIdAction(docId))
   }
 
-  const onFallacySelect = (docId?: string) => (event: MouseEvent) => {
+  const onFallacySelect = (docId?: string | null) => (event: MouseEvent) => {
     event.preventDefault()
     if (!docId) return
     dispatch(presentFallacyByIdAction(docId))

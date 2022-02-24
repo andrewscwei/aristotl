@@ -4,8 +4,7 @@ import qs from 'query-string'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
-import { Transition } from 'react-transition-group'
-import { TransitionStatus } from 'react-transition-group/Transition'
+import { Transition, TransitionStatus } from 'react-transition-group'
 import styled from 'styled-components'
 import ActionButton from '../components/ActionButton'
 import DefinitionStackModal from '../components/DefinitionStackModal'
@@ -172,7 +171,11 @@ export default function Home() {
     <>
       <Transition in={!lastActiveFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
         {status => (
-          <NavControlManager isEnabled={!lastActiveDefinitionId && !lastActiveFallacyId} onPrev={() => toPreviousPage()} onNext={() => toNextPage()}>
+          <NavControlManager
+            isEnabled={!lastActiveDefinitionId && !lastActiveFallacyId}
+            onPrev={() => toPreviousPage()}
+            onNext={() => toNextPage()}
+          >
             <StyledRoot transitionStatus={status}>
               <StyledHeader>
                 <SearchBar autoFocus={!lastActiveFallacyId && !lastActiveDefinitionId}/>
@@ -186,7 +189,12 @@ export default function Home() {
               </StyledHeader>
               <Statistics/>
               <Paginator pageIndex={pageIndex} numPages={maxPages} onActivate={idx => dispatch(changeFallaciesPageAction(idx))}/>
-              <Grid id={`${searchInput}-${pageIndex}`} docs={filteredFallaciesOnCurrentPage} isSummaryEnabled={isSummaryEnabled} onActivate={id => dispatch(presentFallacyByIdAction(id))}/>
+              <Grid
+                id={`${searchInput}-${pageIndex}`}
+                docs={filteredFallaciesOnCurrentPage}
+                isSummaryEnabled={isSummaryEnabled}
+                onActivate={id => dispatch(presentFallacyByIdAction(id))}
+              />
               <Footer/>
             </StyledRoot>
           </NavControlManager>

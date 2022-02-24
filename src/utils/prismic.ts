@@ -1,22 +1,12 @@
+import * as Prismic from '@prismicio/client'
+import * as PrismicHelpers from '@prismicio/helpers'
+import { PrismicDocument } from '@prismicio/types'
 import Cookies from 'js-cookie'
 import _ from 'lodash'
-import PrismicDOM from 'prismic-dom'
-import Prismic from 'prismic-javascript'
-import { Document } from 'prismic-javascript/types/documents'
-import ResolvedApi, { QueryOptions } from 'prismic-javascript/types/ResolvedApi'
 import resolveLinks from '../links.conf'
 import { getLocalizedPath } from './i18n'
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {}
-
-/**
- * Sets the page title, adds the preview tag if currently in preview mode.
- *
- * @param title - The title of the page to set to.
- */
-export function setPageTitle(title: string) {
-  document.title = hasPreviewToken() ? `[PREVIEW] ${title}` : title
-}
 
 /**
  * Maps a Prismic document to its URL in the app. An example of when this is used is when a modified
@@ -26,7 +16,7 @@ export function setPageTitle(title: string) {
  *
  * @returns The corresponding URL.
  */
-export function linkResolver(doc: Document): string {
+const linkResolver: PrismicHelpers.LinkResolverFunction = (doc) => {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en'
   return getLocalizedPath(resolveLinks(doc), locale)
 }
@@ -104,9 +94,9 @@ export function localeResolver(locale: string, reverse = false): string {
  *
  * @returns The Prismic API object.
  */
-export function getAPI(): Promise<ResolvedApi> {
+export function getAPI(): Prismic.Client {
   const { apiEndpoint, accessToken } = __APP_CONFIG__.prismic
-  return Prismic.api(apiEndpoint, { accessToken })
+  return Prismic.createClient(apiEndpoint, { accessToken })
 }
 
 /**
@@ -118,8 +108,14 @@ export function getAPI(): Promise<ResolvedApi> {
  * @returns The preview path.
  */
 export async function getPreviewPath(token: string, documentId: string): Promise<string> {
-  const api = await getAPI()
-  return api.getPreviewResolver(token, documentId).resolve(linkResolver, '/')
+  const api = getAPI()
+
+  return await api.resolvePreviewURL({
+    defaultURL: '/',
+    documentID: documentId,
+    linkResolver,
+    previewToken: token,
+  })
 }
 
 /**
@@ -138,7 +134,7 @@ export function hasPreviewToken(): boolean {
  * @param token - The preview token.
  */
 export function savePreviewToken(token: string) {
-  Cookies.set(Prismic.previewCookie, token, { expires: 1/24, path: '/' })
+  Cookies.set(Prismic.cookie.preview, token, { expires: 1/24, path: '/' })
 
   if (loadPreviewToken()) {
     debug('Saving preview token to cookies...', 'OK')
@@ -154,7 +150,7 @@ export function savePreviewToken(token: string) {
  * @returns The preview token.
  */
 export function loadPreviewToken(): string | undefined {
-  const token = Cookies.get(Prismic.previewCookie)
+  const token = Cookies.get(Prismic.cookie.preview)
   return token
 }
 
@@ -162,7 +158,7 @@ export function loadPreviewToken(): string | undefined {
  * Removes the preview token from browser cookies.
  */
 export function removePreviewToken() {
-  Cookies.remove(Prismic.previewCookie)
+  Cookies.remove(Prismic.cookie.preview)
 }
 
 /**
@@ -171,37 +167,40 @@ export function removePreviewToken() {
  *
  * @param type - Prismic doc type.
  * @param uid - Prismic doc UID.
- * @param options - Customizable options for the API query. @see QueryOptions
+ * @param options - Customizable options for the API query.
  * @param pages - Number of pages to fetch.
  *
  * @returns Fetched documents as fulfilment value.
  */
-export async function fetchDocsByType(type: string, uid?: string, options: Partial<QueryOptions> = {}, pages = 1): Promise<readonly Document[]> {
-  const api = await getAPI()
+export async function fetchDocsByType(type: string, uid?: string, options: Partial<Prismic.QueryParams> = {}, pages = 1): Promise<readonly PrismicDocument[]> {
+  const api = getAPI()
   const previewToken = loadPreviewToken()
-  const opts: any = {
-    lang: localeResolver(__I18N_CONFIG__.defaultLocale),
-    orderings: '[document.first_publication_date desc]',
-    ref: previewToken || api.master(),
-    ...options,
+
+  debug(`${previewToken ? 'Previewing' : 'Fetching'} docs from Prismic for type "${type}"...`)
+
+  let docs: PrismicDocument[] = []
+
+  try {
+    for (let i = 0; i < pages; i++) {
+      const res = await api.get({
+        lang: localeResolver(__I18N_CONFIG__.defaultLocale),
+        orderings: {
+          field: 'document.first_publication_date',
+          direction: 'desc',
+        },
+        page: (options.page ?? 1) + i,
+        ...options,
+        predicates: uid ? Prismic.predicate.at(`my.${type}.uid`, uid) : Prismic.predicate.at('document.type', type),
+        ref: previewToken,
+      })
+
+      docs = docs.concat(res.results)
+    }
+
+    debug(`${previewToken ? 'Previewing' : 'Fetching'} docs from Prismic for type "${type}"...`, 'OK', docs)
   }
-
-  let docs: Document[] = []
-  const startingPage = opts.page || 1
-
-  for (let i = 0; i < pages; i++) {
-    const res = uid
-      ? await api.query(Prismic.Predicates.at(`my.${type}.uid`, uid), { ...opts, page: Number(startingPage) + i })
-      : await api.query(Prismic.Predicates.at('document.type', type), { ...opts, page: Number(startingPage) + i })
-
-    docs = docs.concat(res.results)
-  }
-
-  if (opts.ref === previewToken) {
-    debug(`Previewing docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs)
-  }
-  else {
-    debug(`Fetching docs from Prismic for type "${type}" and language "${opts.lang}"...`, 'OK', docs)
+  catch (err) {
+    debug(`${previewToken ? 'Previewing' : 'Fetching'} docs from Prismic for type "${type}"...`, 'ERR', err)
   }
 
   return docs
@@ -215,13 +214,13 @@ export async function fetchDocsByType(type: string, uid?: string, options: Parti
  *
  * @returns The text if available, `undefined` otherwise.
  */
-export function getText(doc?: Document, path = ''): string | undefined {
+export function getText(doc?: PrismicDocument, path = ''): string | undefined {
   const fragment = _.get(doc, path)
 
   if (!fragment) return undefined
   if (typeof fragment === 'string') return fragment
 
-  return PrismicDOM.RichText.asText(fragment)
+  return PrismicHelpers.asText(fragment) ?? undefined
 }
 
 /**
@@ -235,7 +234,7 @@ export function getText(doc?: Document, path = ''): string | undefined {
  *          subpath contains no text, an empty array is returned. If the target path is not an
  *          array, `undefined` is returned.
  */
-export function getTexts(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+export function getTexts(doc?: PrismicDocument, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
 
   if (!_.isArray(fragments)) return undefined
@@ -248,7 +247,9 @@ export function getTexts(doc?: Document, path = '', subpath = ''): readonly stri
       out.push(text)
     }
     else {
-      out.push(PrismicDOM.RichText.asText(text))
+      const parsed = PrismicHelpers.asText(text)
+      if (!parsed) return out
+      out.push(parsed)
     }
 
     return out
@@ -265,7 +266,7 @@ export function getTexts(doc?: Document, path = '', subpath = ''): readonly stri
  *
  * @returns The number if available, `undefined` otherwise.
  */
-export function getNumber(doc?: Document, path = ''): number | undefined {
+export function getNumber(doc?: PrismicDocument, path = ''): number | undefined {
   const fragment = _.get(doc, path)
 
   if (!fragment) return undefined
@@ -285,7 +286,7 @@ export function getNumber(doc?: Document, path = ''): number | undefined {
  *          subpath contains no number, an empty array is returned. If the target path is not an
  *          array, `undefined` is returned.
  */
-export function getNumbers(doc?: Document, path = '', subpath = ''): readonly number[] | undefined {
+export function getNumbers(doc?: PrismicDocument, path = '', subpath = ''): readonly number[] | undefined {
   const fragments = _.get(doc, path)
 
   if (!_.isArray(fragments)) return undefined
@@ -315,12 +316,14 @@ export function getNumbers(doc?: Document, path = '', subpath = ''): readonly nu
  *
  * @returns The URL if available, `undefined` otherwise.
  */
-export function getUrl(doc?: Document, path = ''): string | undefined {
+export function getUrl(doc?: PrismicDocument, path = ''): string | undefined {
   const fragment = _.get(doc, path)
 
   if (!fragment) return undefined
 
-  return PrismicDOM.Link.url(fragment, linkResolver)
+  const parsed = fragment.dimensions ? PrismicHelpers.asImageSrc(fragment) : PrismicHelpers.asLink(fragment, linkResolver)
+
+  return parsed ?? undefined
 }
 
 /**
@@ -334,7 +337,7 @@ export function getUrl(doc?: Document, path = ''): string | undefined {
  *          subpath contains no URL, an empty array is returned. If the target path is not an array,
  *          `undefined` is returned.
  */
-export function getUrls(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+export function getUrls(doc?: PrismicDocument, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
 
   if (!_.isArray(fragments)) return undefined
@@ -344,7 +347,11 @@ export function getUrls(doc?: Document, path = '', subpath = ''): readonly strin
     if (!url) return out
     if (url.length === 0) return out
 
-    out.push(PrismicDOM.Link.url(url, linkResolver))
+    const parsed = url.dimensions ? PrismicHelpers.asImageSrc(url) : PrismicHelpers.asLink(url, linkResolver)
+
+    if (!parsed) return out
+
+    out.push(parsed)
 
     return out
   }, Array<string>())
@@ -360,12 +367,12 @@ export function getUrls(doc?: Document, path = '', subpath = ''): readonly strin
  *
  * @returns The HTML markup if available, `undefined` otherwise.
  */
-export function getMarkup(doc?: Document, path = ''): string | undefined {
+export function getMarkup(doc?: PrismicDocument, path = ''): string | undefined {
   const fragment = _.get(doc, path)
 
   if (!fragment) return undefined
 
-  return PrismicDOM.RichText.asHtml(fragment, linkResolver)
+  return PrismicHelpers.asHTML(fragment, linkResolver) ?? undefined
 }
 
 /**
@@ -379,7 +386,7 @@ export function getMarkup(doc?: Document, path = ''): string | undefined {
  *          target subpath contains no HTML markup, an empty array is returned. If the target path
  *          is not an array, `undefined` is returned.
  */
-export function getMarkups(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
+export function getMarkups(doc?: PrismicDocument, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
 
   if (!_.isArray(fragments)) return undefined
@@ -389,7 +396,10 @@ export function getMarkups(doc?: Document, path = '', subpath = ''): readonly st
     if (!markup) return out
     if (markup.length === 0) return out
 
-    out.push(PrismicDOM.RichText.asHtml(markup, linkResolver))
+    const parsed = PrismicHelpers.asHTML(markup, linkResolver)
+    if (!parsed) return out
+
+    out.push(parsed)
 
     return out
   }, Array<string>())
@@ -405,7 +415,7 @@ export function getMarkups(doc?: Document, path = '', subpath = ''): readonly st
  *
  * @returns The HTML markup if available, `undefined` otherwise.
  */
-export function getDoc(doc?: Document, path = '', lookupDocs?: readonly Document[]): Document | undefined {
+export function getDoc(doc?: PrismicDocument, path = '', lookupDocs?: readonly PrismicDocument[]): PrismicDocument | undefined {
   const fragment = _.get(doc, path)
 
   if (!fragment) return undefined
@@ -427,7 +437,7 @@ export function getDoc(doc?: Document, path = '', lookupDocs?: readonly Document
  *          target subpath contains no inner document, an empty array is returned. If the target
  *          path is not an array, `undefined` is returned.
  */
-export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: readonly Document[]): readonly Document[] | undefined {
+export function getDocs(doc?: PrismicDocument, path = '', subpath = '', lookupDocs?: readonly PrismicDocument[]): readonly PrismicDocument[] | undefined {
   const fragments = _.get(doc, path)
 
   if (!fragments) return undefined
@@ -436,7 +446,7 @@ export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: re
     const doc = _.get(curr, subpath)
     if (doc && doc.id) out.push(doc)
     return out
-  }, Array<Document>())
+  }, Array<PrismicDocument>())
 
   if (!lookupDocs) return docs
 

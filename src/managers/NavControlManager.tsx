@@ -50,7 +50,7 @@ export default function NavControlManager({
     return () => {
       window.removeEventListener('keyup', onKeyUp)
     }
-  }, [])
+  }, [onNext, onPrev, onEscape])
 
   return (
     // <Hammer direction='DIRECTION_HORIZONTAL' onSwipe={event => this.onSwipe(event.direction)}>

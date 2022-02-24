@@ -1,5 +1,5 @@
+import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { Document } from 'prismic-javascript/types/documents'
 import { align, animations, utils } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,13 +23,13 @@ export default function FallacyStackModal({
   const activeFallacyIds = useSelector((state: AppState) => state.fallacies.activeDocIds)
   const fallacies = useSelector((state: AppState) => getFallacies(state))
 
-  const getPrevDoc = (currDocId: string): Document | undefined => {
+  const getPrevDoc = (currDocId: string): PrismicDocument | undefined => {
     const currIndex = _.findIndex(fallacies, v => v.uid === currDocId)
     if (currIndex < 1) return undefined
     return fallacies[currIndex - 1]
   }
 
-  const getNextDoc = (currDocId: string): Document | undefined => {
+  const getNextDoc = (currDocId: string): PrismicDocument | undefined => {
     const currIndex = _.findIndex(fallacies, v => v.uid === currDocId)
     if (currIndex >= (fallacies.length - 1)) return undefined
     return fallacies[currIndex + 1]

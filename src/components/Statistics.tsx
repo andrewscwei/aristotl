@@ -1,5 +1,5 @@
+import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { Document } from 'prismic-javascript/types/documents'
 import { animations, container, selectors } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,33 +23,33 @@ export default function Statistics({
   const pageIndex = useSelector((state: AppState) => state.fallacies.pageIndex)
   const pageSize = useSelector((state: AppState) => state.fallacies.pageSize)
 
-  const countFormals = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+  const countFormals = (docs: readonly PrismicDocument[]): number => docs.reduce((out, curr) => {
     const fragments = _.get(curr, 'data.types')
     const match = _.find(fragments, v => _.get(v, 'type.slug') === 'formal-fallacy') !== undefined
     if (match) out += 1
     return out
   }, 0)
 
-  const countInformals = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+  const countInformals = (docs: readonly PrismicDocument[]): number => docs.reduce((out, curr) => {
     const fragments = _.get(curr, 'data.types')
     const match = _.find(fragments, v => _.get(v, 'type.slug') === 'informal-fallacy') !== undefined
     if (match) out += 1
     return out
   }, 0)
 
-  const countAlphas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+  const countAlphas = (docs: readonly PrismicDocument[]): number => docs.reduce((out, curr) => {
     const fragments = _.get(curr, 'data.inheritance')
     if (!fragments || fragments.length === 0) out += 1
     return out
   }, 0)
 
-  const countBetas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+  const countBetas = (docs: readonly PrismicDocument[]): number => docs.reduce((out, curr) => {
     const fragments = _.get(curr, 'data.inheritance')
     if (fragments && fragments.length === 1) out += 1
     return out
   }, 0)
 
-  const countGammas = (docs: readonly Document[]): number => docs.reduce((out, curr) => {
+  const countGammas = (docs: readonly PrismicDocument[]): number => docs.reduce((out, curr) => {
     const fragments = _.get(curr, 'data.inheritance')
     if (fragments && fragments.length >= 2) out += 1
     return out

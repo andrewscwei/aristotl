@@ -1,5 +1,5 @@
-import { Document } from 'prismic-javascript/types/documents'
-import { QueryOptions } from 'prismic-javascript/types/ResolvedApi'
+import { QueryParams } from '@prismicio/client'
+import { PrismicDocument } from '@prismicio/types'
 import { Action, Dispatch } from 'redux'
 import { fetchDocsByType, localeResolver } from '../utils/prismic'
 
@@ -25,7 +25,7 @@ export enum FallaciesActionType {
 
 export type FallaciesState = {
   activeDocIds: string[]
-  docs: { [locale: string]: readonly Document[] }
+  docs: { [locale: string]: readonly PrismicDocument[] }
   filters: FallaciesFilters
   pageIndex: number
   pageSize: number
@@ -134,11 +134,13 @@ export default function reducer(state = initialState, action: FallaciesAction): 
   return state
 }
 
-export function fetchFallaciesAction(options: Partial<QueryOptions> = {}, pages = 1) {
+export function fetchFallaciesAction(options: Partial<QueryParams> = {}, pages = 1) {
   return async (dispatch: Dispatch<FallaciesAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
-      orderings: '[my.fallacy.abbreviation]',
+      orderings: {
+        field: 'my.fallacy.abbreviation',
+      },
       pageSize: 100,
       ...options,
     }

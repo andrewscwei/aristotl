@@ -1,5 +1,5 @@
-import { Document } from 'prismic-javascript/types/documents'
-import { QueryOptions } from 'prismic-javascript/types/ResolvedApi'
+import { QueryParams } from '@prismicio/client'
+import { PrismicDocument } from '@prismicio/types'
 import { Action, Dispatch } from 'redux'
 import { fetchDocsByType, localeResolver } from '../utils/prismic'
 
@@ -15,7 +15,7 @@ export enum DefinitionsActionType {
 export type DefinitionsState = {
   activeDocIds: string[]
   docs: {
-    [locale: string]: readonly Document[]
+    [locale: string]: readonly PrismicDocument[]
   }
 }
 
@@ -81,11 +81,13 @@ export default function reducer(state = initialState, action: DefinitionsAction)
   return state
 }
 
-export function fetchDefinitionsAction(options: Partial<QueryOptions> = {}, pages = 1) {
+export function fetchDefinitionsAction(options: Partial<QueryParams> = {}, pages = 1) {
   return async (dispatch: Dispatch<DefinitionsAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
-      orderings: '[my.definition.name]',
+      orderings: {
+        field: 'my.definition.name',
+      },
       pageSize: 100,
       ...options,
     }

@@ -11,7 +11,7 @@ export default {
   version: require('../package.json').version,
 
   // Build number.
-  buildNumber: process.env.BUILD_NUMBER || 0,
+  buildNumber: process.env.BUILD_NUMBER ?? 0,
 
   // Google Analytics ID (i.e. UA-XXXXXXXX-1)
   ga: 'UA-108117457-5',
