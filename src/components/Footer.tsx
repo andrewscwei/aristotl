@@ -3,7 +3,7 @@ import React, { HTMLAttributes } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getMetadata } from '../selectors'
-import { AppState } from '../store'
+import { useLocale } from '../utils/i18n'
 import { getMarkup, getUrls } from '../utils/prismic'
 
 type Props = HTMLAttributes<HTMLDivElement>
@@ -11,7 +11,9 @@ type Props = HTMLAttributes<HTMLDivElement>
 export default function Footer({
   ...props
 }: Props) {
-  const metadataDoc = useSelector((state: AppState) => getMetadata(state))
+  const locale = useLocale()
+
+  const metadataDoc = useSelector(getMetadata(locale))
   const markup = getMarkup(metadataDoc, 'data.copyright')
   const imageUrls = getUrls(metadataDoc, 'data.connect', 'icon')
   const links = getUrls(metadataDoc, 'data.connect', 'url')

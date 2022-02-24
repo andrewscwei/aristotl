@@ -12,6 +12,7 @@ import { getFallacies } from '../selectors'
 import { AppState } from '../store'
 import { dismissFallacyByIdAction, presentFallacyByIdAction } from '../store/fallacies'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
+import { useLocale } from '../utils/i18n'
 
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -19,9 +20,11 @@ export default function FallacyStackModal({
   ...props
 }: Props) {
   const dispatch = useDispatch()
+  const locale = useLocale()
+
   const activeDefinitionIds = useSelector((state: AppState) => state.definitions.activeDocIds)
   const activeFallacyIds = useSelector((state: AppState) => state.fallacies.activeDocIds)
-  const fallacies = useSelector((state: AppState) => getFallacies(state))
+  const fallacies = useSelector(getFallacies(locale))
 
   const getPrevDoc = (currDocId: string): PrismicDocument | undefined => {
     const currIndex = _.findIndex(fallacies, v => v.uid === currDocId)

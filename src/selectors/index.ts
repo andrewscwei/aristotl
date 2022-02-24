@@ -2,61 +2,42 @@ import Fuse from 'fuse.js'
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { AppState } from '../store'
-import { useLocale } from '../utils/i18n'
 
-const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:selectors') : () => {}
+export const getMetadata = (locale: string) => createSelector([
+  (state: AppState) => state.metadata[locale],
+], doc => doc)
 
-export const getMetadata = createSelector([
-  (state: AppState) => state.metadata[useLocale()],
-], doc => {
-  debug('Getting localized metadata...', 'OK')
+export const getDefinitions = (locale: string) => createSelector([
+  (state: AppState) => state.definitions.docs[locale] || [],
+], docs => docs)
 
-  return doc
-})
+export const getFallacies = (locale: string) => createSelector([
+  (state: AppState) => state.fallacies.docs[locale] || [],
+], docs => docs)
 
-export const getDefinitions = createSelector([
-  (state: AppState) => state.definitions.docs[useLocale()] || [],
-], docs => {
-  debug('Getting localized definitions...', 'OK', `${docs.length} results`)
+export const getFallaciesFuse = (locale: string) => createSelector([
+  getFallacies(locale),
+], docs => new Fuse(docs, {
+  distance: 100,
+  keys: [
+    'data.abbreviation',
+    'data.name',
+    'data.aliases.name',
+    'data.summary.text',
+    'data.description.text',
+    'tags',
+  ],
+  includeMatches: __APP_CONFIG__.includeMatchesInSearch,
+  isCaseSensitive: false,
+  location: 0,
+  minMatchCharLength: 1,
+  shouldSort: true,
+  threshold: 0.1,
+}))
 
-  return docs
-})
-
-export const getFallacies = createSelector([
-  (state: AppState) => state.fallacies.docs[useLocale()] || [],
-], docs => {
-  debug('Getting localized fallacies...', 'OK', `${docs.length} results`)
-
-  return docs
-})
-
-export const getFallaciesFuse = createSelector([
-  getFallacies,
-], docs => {
-  debug('Getting localized fallacies fuse...', 'OK')
-
-  return new Fuse(docs, {
-    distance: 100,
-    keys: [
-      'data.abbreviation',
-      'data.name',
-      'data.aliases.name',
-      'data.summary.text',
-      'data.description.text',
-      'tags',
-    ],
-    includeMatches: __APP_CONFIG__.includeMatchesInSearch,
-    isCaseSensitive: false,
-    location: 0,
-    minMatchCharLength: 1,
-    shouldSort: true,
-    threshold: 0.1,
-  })
-})
-
-export const getFilteredFallacies = createSelector([
-  getFallacies,
-  getFallaciesFuse,
+export const getFilteredFallacies = (locale: string) => createSelector([
+  getFallacies(locale),
+  getFallaciesFuse(locale),
   (state: AppState) => state.fallacies.searchInput,
   (state: AppState) => state.fallacies.filters,
 ], (docs, fuse, searchInput, filters) => {
@@ -79,37 +60,19 @@ export const getFilteredFallacies = createSelector([
     return true
   })
 
-  debug('Getting filtered fallacies...', 'OK', `${fres.length} results`)
-
   return fres
 })
 
-export const getFilteredFallaciesInPageChunks = createSelector([
-  getFilteredFallacies,
+export const getFilteredFallaciesInPageChunks = (locale: string) => createSelector([
+  getFilteredFallacies(locale),
   (state: AppState) => state.fallacies.pageSize,
-], (docs, pageSize) => {
-  const chunks = _.chunk(docs, pageSize)
+], (docs, pageSize) => _.chunk(docs, pageSize))
 
-  debug('Getting filtered fallacies in page chunks...', 'OK', `${chunks.length} chunk(s)`)
-
-  return chunks
-})
-
-export const getFilteredFallaciesOnCurrentPage = createSelector([
-  getFilteredFallaciesInPageChunks,
+export const getFilteredFallaciesOnCurrentPage = (locale: string) => createSelector([
+  getFilteredFallaciesInPageChunks(locale),
   (state: AppState) => state.fallacies.pageIndex,
-], (chunks, pageIndex) => {
-  const res = chunks[pageIndex] || []
+], (chunks, pageIndex) => chunks[pageIndex] ?? [])
 
-  debug('Getting filtered fallacies on current page...', 'OK', `${res.length} results`)
-
-  return res
-})
-
-export const getMaxPagesOfFilteredFallacies = createSelector([
-  getFilteredFallaciesInPageChunks,
-], chunks => {
-  debug('Getting max pages of filtered fallacies...', 'OK', chunks.length)
-
-  return chunks.length
-})
+export const getMaxPagesOfFilteredFallacies = (locale: string) => createSelector([
+  getFilteredFallaciesInPageChunks(locale),
+], chunks => chunks.length)

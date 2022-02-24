@@ -16,7 +16,7 @@ const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDe
  *
  * @returns The corresponding URL.
  */
-const linkResolver: PrismicHelpers.LinkResolverFunction = (doc) => {
+const linkResolver: PrismicHelpers.LinkResolverFunction = doc => {
   const locale = doc.lang ? localeResolver(doc.lang, true) : 'en'
   return getLocalizedPath(resolveLinks(doc), locale)
 }
@@ -107,10 +107,10 @@ export function getAPI(): Prismic.Client {
  *
  * @returns The preview path.
  */
-export async function getPreviewPath(token: string, documentId: string): Promise<string> {
+export function getPreviewPath(token: string, documentId: string): Promise<string> {
   const api = getAPI()
 
-  return await api.resolvePreviewURL({
+  return api.resolvePreviewURL({
     defaultURL: '/',
     documentID: documentId,
     linkResolver,
@@ -175,8 +175,6 @@ export function removePreviewToken() {
 export async function fetchDocsByType(type: string, uid?: string, options: Partial<Prismic.QueryParams> = {}, pages = 1): Promise<readonly PrismicDocument[]> {
   const api = getAPI()
   const previewToken = loadPreviewToken()
-
-  debug(`${previewToken ? 'Previewing' : 'Fetching'} docs from Prismic for type "${type}"...`)
 
   let docs: PrismicDocument[] = []
 

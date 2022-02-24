@@ -8,14 +8,14 @@ import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/ut
 import Card from './Card'
 
 type Props = HTMLAttributes<HTMLDivElement> & {
-  id?: string
+  uid?: string
   docs?: readonly PrismicDocument[]
   isSummaryEnabled: boolean
   onActivate: (docId: string) => void
 }
 
 export default function Grid({
-  id,
+  uid,
   docs = [],
   isSummaryEnabled,
   onActivate: _onActivate,
@@ -35,7 +35,7 @@ export default function Grid({
         const delay = i * 20
 
         return (
-          <Transition in={true} key={`${id}-${doc.id}`} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
+          <Transition in={true} key={`${uid}-${doc.id}`} appear={true} timeout={timeoutByTransitionStatus(duration + delay, true)} mountOnEnter={true} unmountOnExit={true}>
             {status => (
               <StyledCard
                 delay={delay}

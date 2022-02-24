@@ -4,11 +4,10 @@ import React, { forwardRef, HTMLAttributes, MouseEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions, getFallacies } from '../selectors'
-import { AppState } from '../store'
 import { presentDefinitionByIdAction } from '../store/definitions'
 import { dismissFallacyByIdAction, presentFallacyByIdAction } from '../store/fallacies'
 import { colors } from '../styles/theme'
-import { useLtxt } from '../utils/i18n'
+import { useLocale, useLtxt } from '../utils/i18n'
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
 import ActionButton from './ActionButton'
 import Pixel from './Pixel'
@@ -28,10 +27,12 @@ export default forwardRef<HTMLDivElement, Props>(({
   onExit: _onExit,
   ...props
 }, ref) => {
-  const ltxt = useLtxt()
   const dispatch = useDispatch()
-  const definitions = useSelector((state: AppState) => getDefinitions(state))
-  const fallacies = useSelector((state: AppState) => getFallacies(state))
+  const ltxt = useLtxt()
+  const locale = useLocale()
+
+  const definitions = useSelector(getDefinitions(locale))
+  const fallacies = useSelector(getFallacies(locale))
   const doc = _.find(fallacies, v => v.uid === docId)
   const abbreviation = getText(doc, 'data.abbreviation')
   const name = getText(doc, 'data.name')

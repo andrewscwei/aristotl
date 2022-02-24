@@ -8,6 +8,7 @@ import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage } from '../sele
 import { AppState } from '../store'
 import { changeFallaciesFiltersAction } from '../store/fallacies'
 import { colors } from '../styles/theme'
+import { useLocale } from '../utils/i18n'
 import Pixel from './Pixel'
 
 type Props = HTMLAttributes<HTMLDivElement>
@@ -16,9 +17,10 @@ export default function Statistics({
   ...props
 }: Props) {
   const dispatch = useDispatch()
+  const locale = useLocale()
 
-  const filteredFallacies = useSelector((state: AppState) => getFilteredFallacies(state))
-  const filteredFallaciesOnCurrentPage = useSelector((state: AppState) => getFilteredFallaciesOnCurrentPage(state))
+  const filteredFallacies = useSelector(getFilteredFallacies(locale))
+  const filteredFallaciesOnCurrentPage = useSelector(getFilteredFallaciesOnCurrentPage(locale))
   const filters = useSelector((state: AppState) => state.fallacies.filters)
   const pageIndex = useSelector((state: AppState) => state.fallacies.pageIndex)
   const pageSize = useSelector((state: AppState) => state.fallacies.pageSize)

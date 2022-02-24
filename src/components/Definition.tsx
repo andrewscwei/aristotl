@@ -4,9 +4,9 @@ import React, { forwardRef, HTMLAttributes, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions } from '../selectors'
-import { AppState } from '../store'
 import { dismissDefinitionByIdAction } from '../store/definitions'
 import { colors } from '../styles/theme'
+import { useLocale } from '../utils/i18n'
 import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
 import ActionButton from './ActionButton'
 import RichText from './RichText'
@@ -20,7 +20,9 @@ export default forwardRef<HTMLDivElement, Props>(({
   ...props
 }, ref) => {
   const dispatch = useDispatch()
-  const docs = useSelector((state: AppState) => getDefinitions(state))
+  const locale = useLocale()
+
+  const docs = useSelector(getDefinitions(locale))
   const doc = _.find(docs, v => v.id === docId)
   const name = getText(doc, 'data.name')
   const descriptionMarkup = getMarkup(doc, 'data.description')
