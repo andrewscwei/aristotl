@@ -28,9 +28,9 @@ export default function reducer(state = initialState, action: MetadataAction): M
       [locale]: newDoc,
     }
   }
+  default:
+    return state
   }
-
-  return state
 }
 
 export function fetchMetadataAction() {

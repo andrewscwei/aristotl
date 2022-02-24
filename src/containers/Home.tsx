@@ -60,11 +60,6 @@ export default function Home() {
       dispatch(changeFallaciesSearchInputAction(searchInput))
     }
 
-    if (__APP_CONFIG__.enableHistoryForPageIndexes) {
-      const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1
-      dispatch(changeFallaciesPageAction(pageIndex))
-    }
-
     if (__APP_CONFIG__.enableHistoryForFilters) {
       dispatch(changeFallaciesFiltersAction({
         formal: formal !== 'no',
@@ -105,6 +100,11 @@ export default function Home() {
           }
         }
       }
+    }
+
+    if (__APP_CONFIG__.enableHistoryForPageIndexes) {
+      const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1
+      dispatch(changeFallaciesPageAction(pageIndex))
     }
   }
 

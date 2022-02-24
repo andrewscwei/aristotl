@@ -76,9 +76,10 @@ export default function reducer(state = initialState, action: DefinitionsAction)
       activeDocIds: [],
     }
   }
-  }
 
-  return state
+  default:
+    return state
+  }
 }
 
 export function fetchDefinitionsAction(options: Partial<QueryParams> = {}, pages = 1) {

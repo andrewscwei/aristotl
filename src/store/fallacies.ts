@@ -129,9 +129,9 @@ export default function reducer(state = initialState, action: FallaciesAction): 
       pageIndex: 0,
     }
   }
+  default:
+    return state
   }
-
-  return state
 }
 
 export function fetchFallaciesAction(options: Partial<QueryParams> = {}, pages = 1) {
