@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { align, animations, container, selectors } from 'promptu'
-import React, { forwardRef, HTMLAttributes, useEffect } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions } from '../selectors'
@@ -28,10 +28,6 @@ export default forwardRef<HTMLDivElement, Props>(({
   const descriptionMarkup = getMarkup(doc, 'data.description')
   const aliases = getTexts(doc, 'data.aliases', 'name')
   const referenceMarkups = getMarkups(doc, 'data.references', 'reference')
-
-  useEffect(() => {
-    _.set((ref as any)?.current as any, 'scrollTop', 0)
-  }, [docId])
 
   return (
     <StyledRoot {...props}>

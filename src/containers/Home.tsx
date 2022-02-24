@@ -10,6 +10,7 @@ import FallacyStackModal from '../components/FallacyStackModal'
 import Footer from '../components/Footer'
 import Grid from '../components/Grid'
 import Paginator from '../components/Paginator'
+import PreviewIndicator from '../components/PreviewIndicator'
 import SearchBar from '../components/SearchBar'
 import Statistics from '../components/Statistics'
 import useLocationState from '../hooks/useLocationState'
@@ -21,6 +22,7 @@ import { changeFallaciesPageAction, presentFallacyByIdAction } from '../store/fa
 import { colors } from '../styles/theme'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 import { useLocale } from '../utils/i18n'
+import { hasPreviewToken } from '../utils/prismic'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -40,6 +42,7 @@ export default function Home() {
 
   return (
     <>
+      {hasPreviewToken() && <PreviewIndicator/>}
       <Transition in={!activeFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
         {status => (
           <NavControlManager

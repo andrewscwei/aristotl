@@ -15,4 +15,4 @@ if (isTouchDevice()) {
   document.documentElement.classList.add('touch')
 }
 
-mount(App as any)
+mount(App)

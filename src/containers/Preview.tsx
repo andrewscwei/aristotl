@@ -1,5 +1,3 @@
-import _ from 'lodash'
-import qs from 'query-string'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
@@ -9,9 +7,9 @@ const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDe
 
 export default function Preview() {
   const navigate = useNavigate()
-  const [params] = useSearchParams()
-  const token = params.get('token')
-  const documentId = params.get('documentId')
+  const [searchParams] = useSearchParams()
+  const token = searchParams.get('token')
+  const documentId = searchParams.get('documentId')
 
   const preview = async () => {
     if (!token || !documentId) return
@@ -21,13 +19,8 @@ export default function Preview() {
     savePreviewToken(token)
 
     const path = await getPreviewPath(token, documentId)
-    const parsed = qs.parseUrl(path, { parseFragmentIdentifier: true })
 
-    navigate({
-      pathname: parsed.url,
-      hash: parsed.fragmentIdentifier,
-      search: _.isEmpty(params) ? undefined : `?${qs.stringify(parsed.query)}`,
-    })
+    navigate(path)
   }
 
   useEffect(() => {
