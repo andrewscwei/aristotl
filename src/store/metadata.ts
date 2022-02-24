@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action: MetadataAction): M
   return state
 }
 
-export function fetchMetadata() {
+export function fetchMetadataAction() {
   return async (dispatch: Dispatch<MetadataAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),

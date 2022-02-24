@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions } from '../selectors'
 import { AppState } from '../store'
-import { dismissDefinitionById } from '../store/definitions'
+import { dismissDefinitionByIdAction } from '../store/definitions'
 import { colors } from '../styles/theme'
 import { getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
 import ActionButton from './ActionButton'
@@ -36,7 +36,7 @@ export default forwardRef<HTMLDivElement, Props>(({
       <StyledCloseButton
         symbol='-'
         tintColor={colors.darkBlue}
-        onActivate={() => { if (docId) dispatch(dismissDefinitionById(docId)) }}
+        onActivate={() => { if (docId) dispatch(dismissDefinitionByIdAction(docId)) }}
       />
       <StyledTitle>{name}</StyledTitle>
       {aliases && <StyledAliases><em>{aliases.join(', ')}</em></StyledAliases>}

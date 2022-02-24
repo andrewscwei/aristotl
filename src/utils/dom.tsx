@@ -13,13 +13,13 @@ import * as theme from '../styles/theme'
 import { I18nRouterProvider } from './i18n'
 
 /**
-  * Factory function for generating base React app markup.
-  *
-  * @param Component - The React component to wrap around.
-  * @param options - @see BrowserRouterProps
-  *
-  * @returns The JSX markup.
-  */
+ * Factory function for generating base React app markup.
+ *
+ * @param Component - The React component to wrap around.
+ * @param options - See {@link BrowserRouterProps}.
+ *
+ * @returns The JSX markup.
+ */
 export function markup(Component: ComponentType, options: BrowserRouterProps = {}) {
   const GlobalStyle = createGlobalStyle`
      ${globalStyle}
@@ -42,11 +42,11 @@ export function markup(Component: ComponentType, options: BrowserRouterProps = {
 }
 
 /**
-  * Mounts a React component to a DOM element.
-  *
-  * @param Component - The React component to mount.
-  * @param elementId - The ID of the DOM element to mount the React component to.
-  */
+ * Mounts a React component to a DOM element.
+ *
+ * @param Component - The React component to mount.
+ * @param elementId - The ID of the DOM element to mount the React component to.
+ */
 export function mount(Component: ComponentType, elementId = 'app') {
   if (process.env.NODE_ENV === 'development') {
     render(markup(Component), document.getElementById(elementId))

@@ -19,8 +19,8 @@ export function setPageTitle(title: string) {
 }
 
 /**
- * Maps a Prismic document to its URL in the app. An example of when this is
- * used is when a modified document on Prismic is being previewed.
+ * Maps a Prismic document to its URL in the app. An example of when this is used is when a modified
+ * document on Prismic is being previewed.
  *
  * @param doc - The Prismic document to map.
  *
@@ -32,16 +32,15 @@ export function linkResolver(doc: Document): string {
 }
 
 /**
- * Maps Prismic locale code to local locale code. Set `reverse` to `true` to
- * reverse the mapping (from local locale code to Prismic locale code instead).
- * Note that only local locale codes listed in `appConf#locales` will be
- * supported. Any unmappable or unsupported locale codes will yield English
- * locale as default.
+ * Maps Prismic locale code to local locale code. Set `reverse` to `true` to reverse the mapping
+ * (from local locale code to Prismic locale code instead). Note that only local locale codes listed
+ * in `appConf#locales` will be supported. Any unmappable or unsupported locale codes will yield
+ * English locale as default.
  *
  * @param locale - Locale code to map.
- * @param reverse - Indicates if the operation is reversed. If `false` a Prismic
- *                  locale code is expected and will be mapped to a local locale
- *                  code. If `true` the mapping will be reversed.
+ * @param reverse - Indicates if the operation is reversed. If `false` a Prismic locale code is
+ *                  expected and will be mapped to a local locale code. If `true` the mapping will
+ *                  be reversed.
  *
  * @returns The mapped locale code.
  */
@@ -167,9 +166,8 @@ export function removePreviewToken() {
 }
 
 /**
- * Fetches Prismic docs by doc type and optional UID. This operation uses the
- * default locale and automatically accounts for existing preview tokens in
- * browser cookies.
+ * Fetches Prismic docs by doc type and optional UID. This operation uses the default locale and
+ * automatically accounts for existing preview tokens in browser cookies.
  *
  * @param type - Prismic doc type.
  * @param uid - Prismic doc UID.
@@ -213,8 +211,7 @@ export async function fetchDocsByType(type: string, uid?: string, options: Parti
  * Convenience method for fetching the text from a document field.
  *
  * @param doc - The document.
- * @param path - The path of the target field relative to the root of the
- *               document object.
+ * @param path - The path of the target field relative to the root of the document object.
  *
  * @returns The text if available, `undefined` otherwise.
  */
@@ -231,14 +228,12 @@ export function getText(doc?: Document, path = ''): string | undefined {
  * Convenience method for fetching multiple texts from a document array field.
  *
  * @param doc - The document.
- * @param path - The path of the array field relative to the root of the
- *               document object.
- * @param subpath - The path of the target field relative the root of each item
- *                  in the array field.
+ * @param path - The path of the array field relative to the root of the document object.
+ * @param subpath - The path of the target field relative the root of each item in the array field.
  *
- * @returns An array of texts if available. If the target path is a valid array
- *          but the target subpath contains no text, an empty array is returned.
- *          If the target path is not an array, `undefined` is returned.
+ * @returns An array of texts if available. If the target path is a valid array but the target
+ *          subpath contains no text, an empty array is returned. If the target path is not an
+ *          array, `undefined` is returned.
  */
 export function getTexts(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
@@ -266,8 +261,7 @@ export function getTexts(doc?: Document, path = '', subpath = ''): readonly stri
  * Convenience method for fetching the number from a document field.
  *
  * @param doc - The document.
- * @param path - The path of the target field relative to the root of the
- *               document object.
+ * @param path - The path of the target field relative to the root of the document object.
  *
  * @returns The number if available, `undefined` otherwise.
  */
@@ -284,15 +278,12 @@ export function getNumber(doc?: Document, path = ''): number | undefined {
  * Convenience method for fetching multiple numbers from a document array field.
  *
  * @param doc - The document.
- * @param path - The path of the array field relative to the root of the
- *               document object.
- * @param subpath - The path of the target field relative the root of each item
- *                  in the array field.
+ * @param path - The path of the array field relative to the root of the document object.
+ * @param subpath - The path of the target field relative the root of each item in the array field.
  *
- * @returns An array of numbers if available. If the target path is a valid
- *          array but the target subpath contains no number, an empty array is
- *          returned. If the target path is not an array, `undefined` is
- *          returned.
+ * @returns An array of numbers if available. If the target path is a valid array but the target
+ *          subpath contains no number, an empty array is returned. If the target path is not an
+ *          array, `undefined` is returned.
  */
 export function getNumbers(doc?: Document, path = '', subpath = ''): readonly number[] | undefined {
   const fragments = _.get(doc, path)
@@ -320,8 +311,7 @@ export function getNumbers(doc?: Document, path = '', subpath = ''): readonly nu
  * Convenience method for fetching the URL from a document field.
  *
  * @param doc - The document.
- * @param path - The path of the target field relative to the root of the
- *               document object.
+ * @param path - The path of the target field relative to the root of the document object.
  *
  * @returns The URL if available, `undefined` otherwise.
  */
@@ -337,14 +327,12 @@ export function getUrl(doc?: Document, path = ''): string | undefined {
  * Convenience method for fetching multiple URLs from a document array field.
  *
  * @param doc - The document.
- * @param path - The path of the array field relative to the root of the
- *               document object.
- * @param subpath - The path of the target field relative the root of each item
- *                  in the array field.
+ * @param path - The path of the array field relative to the root of the document object.
+ * @param subpath - The path of the target field relative the root of each item in the array field.
  *
- * @returns An array of URLs if available. If the target path is a valid array
- *          but the target subpath contains no URL, an empty array is returned.
- *          If the target path is not an array, `undefined` is returned.
+ * @returns An array of URLs if available. If the target path is a valid array but the target
+ *          subpath contains no URL, an empty array is returned. If the target path is not an array,
+ *          `undefined` is returned.
  */
 export function getUrls(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
@@ -368,8 +356,7 @@ export function getUrls(doc?: Document, path = '', subpath = ''): readonly strin
  * Convenience method for fetching the HTML markup from a document field.
  *
  * @param doc - The document.
- * @param path - The path of the target field relative to the root of the
- *               document object.
+ * @param path - The path of the target field relative to the root of the document object.
  *
  * @returns The HTML markup if available, `undefined` otherwise.
  */
@@ -382,19 +369,15 @@ export function getMarkup(doc?: Document, path = ''): string | undefined {
 }
 
 /**
- * Convenience method for fetching multiple HTML markups from a document array
- * field.
+ * Convenience method for fetching multiple HTML markups from a document array field.
  *
  * @param doc - The document.
- * @param path - The path of the array field relative to the root of the
- *               document object.
- * @param subpath - The path of the target field relative the root of each item
- *                  in the array field.
+ * @param path - The path of the array field relative to the root of the document object.
+ * @param subpath - The path of the target field relative the root of each item in the array field.
  *
- * @returns An array of HTML markups if available. If the target path is a valid
- *          array but the target subpath contains no HTML markup, an empty array
- *          is returned. If the target path is not an array, `undefined` is
- *          returned.
+ * @returns An array of HTML markups if available. If the target path is a valid array but the
+ *          target subpath contains no HTML markup, an empty array is returned. If the target path
+ *          is not an array, `undefined` is returned.
  */
 export function getMarkups(doc?: Document, path = '', subpath = ''): readonly string[] | undefined {
   const fragments = _.get(doc, path)
@@ -418,8 +401,7 @@ export function getMarkups(doc?: Document, path = '', subpath = ''): readonly st
  * Convenience method for fetching the inner document from a document field.
  *
  * @param doc - The document.
- * @param path - The path of the target field relative to the root of the
- *               document object.
+ * @param path - The path of the target field relative to the root of the document object.
  *
  * @returns The HTML markup if available, `undefined` otherwise.
  */
@@ -435,19 +417,15 @@ export function getDoc(doc?: Document, path = '', lookupDocs?: readonly Document
 }
 
 /**
- * Convenience method for fetching multiple inner documents from a document
- * array field.
+ * Convenience method for fetching multiple inner documents from a document array field.
  *
  * @param doc - The document.
- * @param path - The path of the array field relative to the root of the
- *               document object.
- * @param subpath - The path of the target field relative the root of each item
- *                  in the array field.
+ * @param path - The path of the array field relative to the root of the document object.
+ * @param subpath - The path of the target field relative the root of each item in the array field.
  *
- * @returns An array of inner documents if available. If the target path is a
- *          valid array but the target subpath contains no inner document, an
- *          empty array is returned. If the target path is not an array,
- *          `undefined` is returned.
+ * @returns An array of inner documents if available. If the target path is a valid array but the
+ *          target subpath contains no inner document, an empty array is returned. If the target
+ *          path is not an array, `undefined` is returned.
  */
 export function getDocs(doc?: Document, path = '', subpath = '', lookupDocs?: readonly Document[]): readonly Document[] | undefined {
   const fragments = _.get(doc, path)

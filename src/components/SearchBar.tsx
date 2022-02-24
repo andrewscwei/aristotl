@@ -3,7 +3,7 @@ import React, { ChangeEvent, HTMLAttributes, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AppState } from '../store'
-import { changeFallaciesFilters, changeFallaciesSearchInput } from '../store/fallacies'
+import { changeFallaciesFiltersAction, changeFallaciesSearchInputAction } from '../store/fallacies'
 import { colors } from '../styles/theme'
 import { useLtxt } from '../utils/i18n'
 import ActionButton from './ActionButton'
@@ -41,8 +41,8 @@ export default function SearchBar({
   }
 
   const onClear = () => {
-    dispatch(changeFallaciesSearchInput(''))
-    dispatch(changeFallaciesFilters({
+    dispatch(changeFallaciesSearchInputAction(''))
+    dispatch(changeFallaciesFiltersAction({
       formal: true,
       informal: true,
       alpha: true,
@@ -73,7 +73,7 @@ export default function SearchBar({
           ref={inputRef}
           placeholder={ltxt('search-placeholder')}
           maxLength={24}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(changeFallaciesSearchInput(event.currentTarget.value))}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(changeFallaciesSearchInputAction(event.currentTarget.value))}
         />
       </StyledInput>
       <StyledActionButton symbol='c' isTogglable={true} onActivate={() => onClear()}/>

@@ -134,7 +134,7 @@ export default function reducer(state = initialState, action: FallaciesAction): 
   return state
 }
 
-export function fetchFallacies(options: Partial<QueryOptions> = {}, pages = 1) {
+export function fetchFallaciesAction(options: Partial<QueryOptions> = {}, pages = 1) {
   return async (dispatch: Dispatch<FallaciesAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
@@ -155,7 +155,7 @@ export function fetchFallacies(options: Partial<QueryOptions> = {}, pages = 1) {
   }
 }
 
-export function presentFallacyById(id: string) {
+export function presentFallacyByIdAction(id: string) {
   debug('Presenting fallacy...', 'OK', id)
 
   return {
@@ -166,7 +166,7 @@ export function presentFallacyById(id: string) {
   }
 }
 
-export function dismissFallacyById(id: string) {
+export function dismissFallacyByIdAction(id: string) {
   debug('Dismissing fallacy...', 'OK', id)
 
   return {
@@ -177,7 +177,7 @@ export function dismissFallacyById(id: string) {
   }
 }
 
-export function dismissAllFallacies() {
+export function dismissAllFallaciesAction() {
   debug('Dismissing all fallacies...', 'OK')
 
   return {
@@ -186,7 +186,7 @@ export function dismissAllFallacies() {
   }
 }
 
-export function changeFallaciesSearchInput(searchInput: string) {
+export function changeFallaciesSearchInputAction(searchInput: string) {
   debug('Searching fallacies...', 'OK', searchInput)
 
   return {
@@ -197,7 +197,7 @@ export function changeFallaciesSearchInput(searchInput: string) {
   }
 }
 
-export function changeFallaciesFilters(filters: FallaciesFilters) {
+export function changeFallaciesFiltersAction(filters: FallaciesFilters) {
   debug('Filtering fallacies...', 'OK', filters)
 
   return {
@@ -208,7 +208,7 @@ export function changeFallaciesFilters(filters: FallaciesFilters) {
   }
 }
 
-export function changeFallaciesPage(pageIndex: number) {
+export function changeFallaciesPageAction(pageIndex: number) {
   debug('Changing page index...', 'OK', pageIndex)
 
   return {

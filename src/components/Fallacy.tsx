@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions, getFallacies } from '../selectors'
 import { AppState } from '../store'
-import { presentDefinitionById } from '../store/definitions'
-import { dismissFallacyById, presentFallacyById } from '../store/fallacies'
+import { presentDefinitionByIdAction } from '../store/definitions'
+import { dismissFallacyByIdAction, presentFallacyByIdAction } from '../store/fallacies'
 import { colors } from '../styles/theme'
 import { useLtxt } from '../utils/i18n'
 import { getDocs, getMarkup, getMarkups, getText, getTexts } from '../utils/prismic'
@@ -49,14 +49,14 @@ export default forwardRef<HTMLDivElement, Props>(({
       _onExit()
     }
     else if (docId) {
-      dispatch(dismissFallacyById(docId))
+      dispatch(dismissFallacyByIdAction(docId))
     }
   }
 
   const onTypeSelect = (docId: string) => {
     return (event: MouseEvent) => {
       event.preventDefault()
-      dispatch(presentDefinitionById(docId))
+      dispatch(presentDefinitionByIdAction(docId))
     }
   }
 
@@ -64,7 +64,7 @@ export default forwardRef<HTMLDivElement, Props>(({
     return (event: MouseEvent) => {
       event.preventDefault()
       if (!docId) return
-      dispatch(presentFallacyById(docId))
+      dispatch(presentFallacyByIdAction(docId))
     }
   }
 
@@ -190,7 +190,7 @@ export default forwardRef<HTMLDivElement, Props>(({
               <ul>
                 {relatedDocs.map((v: any, i) => (
                   <li key={`related-${i}`}>
-                    <a onClick={() => dispatch(presentFallacyById(v.uid))}>{_.get(v, 'data.name')}</a>
+                    <a onClick={() => dispatch(presentFallacyByIdAction(v.uid))}>{_.get(v, 'data.name')}</a>
                   </li>
                 ))}
               </ul>

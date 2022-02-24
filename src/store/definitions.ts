@@ -81,7 +81,7 @@ export default function reducer(state = initialState, action: DefinitionsAction)
   return state
 }
 
-export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages = 1) {
+export function fetchDefinitionsAction(options: Partial<QueryOptions> = {}, pages = 1) {
   return async (dispatch: Dispatch<DefinitionsAction>) => {
     const opts: any = {
       lang: localeResolver(__I18N_CONFIG__.defaultLocale),
@@ -102,7 +102,7 @@ export function fetchDefinitions(options: Partial<QueryOptions> = {}, pages = 1)
   }
 }
 
-export function presentDefinitionById(id: string) {
+export function presentDefinitionByIdAction(id: string) {
   debug('Presenting definition...', 'OK', id)
 
   return {
@@ -113,7 +113,7 @@ export function presentDefinitionById(id: string) {
   }
 }
 
-export function dismissDefinitionById(id: string) {
+export function dismissDefinitionByIdAction(id: string) {
   debug('Dismissing definition...', 'OK', id)
 
   return {
@@ -124,7 +124,7 @@ export function dismissDefinitionById(id: string) {
   }
 }
 
-export function dismissDefinitions() {
+export function dismissDefinitionsAction() {
   debug('Dismissing all definitions...', 'OK')
 
   return {

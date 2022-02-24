@@ -2,11 +2,12 @@ import Fuse from 'fuse.js'
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { AppState } from '../store'
+import { useLocale } from '../utils/i18n'
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:selectors') : () => {}
 
 export const getMetadata = createSelector([
-  (state: AppState) => state.metadata[state.i18n.locale],
+  (state: AppState) => state.metadata[useLocale()],
 ], doc => {
   debug('Getting localized metadata...', 'OK')
 
@@ -14,7 +15,7 @@ export const getMetadata = createSelector([
 })
 
 export const getDefinitions = createSelector([
-  (state: AppState) => state.definitions.docs[state.i18n.locale] || [],
+  (state: AppState) => state.definitions.docs[useLocale()] || [],
 ], docs => {
   debug('Getting localized definitions...', 'OK', `${docs.length} results`)
 
@@ -22,7 +23,7 @@ export const getDefinitions = createSelector([
 })
 
 export const getFallacies = createSelector([
-  (state: AppState) => state.fallacies.docs[state.i18n.locale] || [],
+  (state: AppState) => state.fallacies.docs[useLocale()] || [],
 ], docs => {
   debug('Getting localized fallacies...', 'OK', `${docs.length} results`)
 

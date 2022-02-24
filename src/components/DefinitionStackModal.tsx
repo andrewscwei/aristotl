@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import Definition from '../components/Definition'
 import Modal from '../components/Modal'
 import { AppState } from '../store'
-import { dismissDefinitionById } from '../store/definitions'
+import { dismissDefinitionByIdAction } from '../store/definitions'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 
 type Props = HTMLAttributes<HTMLDivElement>
@@ -31,7 +31,7 @@ export default function DefinitionStackModal({
               <Modal
                 isFocused={i === (activeDefinitionIds.length - 1)}
                 transitionStatus={status}
-                onExit={() => dispatch(dismissDefinitionById(definitionId))}
+                onExit={() => dispatch(dismissDefinitionByIdAction(definitionId))}
               >
                 {scrollTargetRef => (
                   <StyledDefinition

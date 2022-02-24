@@ -2,8 +2,8 @@ import parse, { domToReact } from 'html-react-parser'
 import _ from 'lodash'
 import React, { MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { dismissDefinitions, presentDefinitionById } from '../store/definitions'
-import { presentFallacyById } from '../store/fallacies'
+import { dismissDefinitionsAction, presentDefinitionByIdAction } from '../store/definitions'
+import { presentFallacyByIdAction } from '../store/fallacies'
 
 type Props = {
   markup: string
@@ -17,15 +17,15 @@ export default function RichText({
   const onActivateDefinition = (docId: string) => {
     return (event: MouseEvent) => {
       event.preventDefault()
-      dispatch(presentDefinitionById(docId))
+      dispatch(presentDefinitionByIdAction(docId))
     }
   }
 
   const onActivateFallacy = (docId: string) => {
     return (event: MouseEvent) => {
       event.preventDefault()
-      dispatch(dismissDefinitions())
-      dispatch(presentFallacyById(docId))
+      dispatch(dismissDefinitionsAction())
+      dispatch(presentFallacyByIdAction(docId))
     }
   }
 

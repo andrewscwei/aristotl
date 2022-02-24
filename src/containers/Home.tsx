@@ -18,9 +18,9 @@ import Statistics from '../components/Statistics'
 import NavControlManager from '../managers/NavControlManager'
 import { getDefinitions, getFallacies, getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies, getMetadata } from '../selectors'
 import { AppState } from '../store'
-import { fetchDefinitions, presentDefinitionById } from '../store/definitions'
-import { changeFallaciesFilters, changeFallaciesPage, changeFallaciesSearchInput, fetchFallacies, presentFallacyById } from '../store/fallacies'
-import { fetchMetadata } from '../store/metadata'
+import { fetchDefinitionsAction, presentDefinitionByIdAction } from '../store/definitions'
+import { changeFallaciesFiltersAction, changeFallaciesPageAction, changeFallaciesSearchInputAction, fetchFallaciesAction, presentFallacyByIdAction } from '../store/fallacies'
+import { fetchMetadataAction } from '../store/metadata'
 import { colors } from '../styles/theme'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 import { loadPreviewToken } from '../utils/prismic'
@@ -45,12 +45,12 @@ export default function Home() {
 
   const toNextPage = () => {
     const idx = (pageIndex + 1) % maxPages
-    dispatch(changeFallaciesPage(idx))
+    dispatch(changeFallaciesPageAction(idx))
   }
 
   const toPreviousPage = () => {
     const idx = (pageIndex + maxPages - 1) % maxPages
-    dispatch(changeFallaciesPage(idx))
+    dispatch(changeFallaciesPageAction(idx))
   }
 
   const mapLocationToProps = () => {
@@ -58,16 +58,16 @@ export default function Home() {
 
     if (__APP_CONFIG__.enableHistoryForSearch) {
       const searchInput = (typeof search === 'string' && search !== '') ? search : ''
-      dispatch(changeFallaciesSearchInput(searchInput))
+      dispatch(changeFallaciesSearchInputAction(searchInput))
     }
 
     if (__APP_CONFIG__.enableHistoryForPageIndexes) {
       const pageIndex = ((typeof page === 'string') && parseInt(page, 10) || 1) - 1
-      dispatch(changeFallaciesPage(pageIndex))
+      dispatch(changeFallaciesPageAction(pageIndex))
     }
 
     if (__APP_CONFIG__.enableHistoryForFilters) {
-      dispatch(changeFallaciesFilters({
+      dispatch(changeFallaciesFiltersAction({
         formal: formal !== 'no',
         informal: informal !== 'no',
         alpha: alpha !== 'no',
@@ -81,28 +81,28 @@ export default function Home() {
 
       if (fallacies) {
         if (typeof fallacies === 'string') {
-          dispatch(presentFallacyById(fallacies))
+          dispatch(presentFallacyByIdAction(fallacies))
         }
         else {
           for (const fallacyId of fallacies) {
             if (!fallacyId) continue
-            dispatch(presentFallacyById(fallacyId))
+            dispatch(presentFallacyByIdAction(fallacyId))
           }
         }
       }
 
-      if (activeFallacyId) dispatch(presentFallacyById(activeFallacyId))
+      if (activeFallacyId) dispatch(presentFallacyByIdAction(activeFallacyId))
     }
 
     if (__APP_CONFIG__.enableHistoryForDefinitions) {
       if (definitions) {
         if (typeof definitions === 'string') {
-          dispatch(presentDefinitionById(definitions))
+          dispatch(presentDefinitionByIdAction(definitions))
         }
         else {
           for (const definitionId of definitions) {
             if (!definitionId) continue
-            dispatch(presentDefinitionById(definitionId))
+            dispatch(presentDefinitionByIdAction(definitionId))
           }
         }
       }
@@ -151,9 +151,9 @@ export default function Home() {
   useEffect(() => {
     const previewToken = loadPreviewToken()
 
-    if (!metadataDoc || previewToken) dispatch(fetchMetadata())
-    if ((fallacies.length === 0) || previewToken) dispatch(fetchFallacies())
-    if ((definitions.length === 0) || previewToken) dispatch(fetchDefinitions())
+    if (!metadataDoc || previewToken) dispatch(fetchMetadataAction())
+    if ((fallacies.length === 0) || previewToken) dispatch(fetchFallaciesAction())
+    if ((definitions.length === 0) || previewToken) dispatch(fetchDefinitionsAction())
 
     mapLocationToProps()
   }, [])
@@ -185,8 +185,8 @@ export default function Home() {
                 />
               </StyledHeader>
               <Statistics/>
-              <Paginator pageIndex={pageIndex} numPages={maxPages} onActivate={idx => dispatch(changeFallaciesPage(idx))}/>
-              <Grid id={`${searchInput}-${pageIndex}`} docs={filteredFallaciesOnCurrentPage} isSummaryEnabled={isSummaryEnabled} onActivate={id => dispatch(presentFallacyById(id))}/>
+              <Paginator pageIndex={pageIndex} numPages={maxPages} onActivate={idx => dispatch(changeFallaciesPageAction(idx))}/>
+              <Grid id={`${searchInput}-${pageIndex}`} docs={filteredFallaciesOnCurrentPage} isSummaryEnabled={isSummaryEnabled} onActivate={id => dispatch(presentFallacyByIdAction(id))}/>
               <Footer/>
             </StyledRoot>
           </NavControlManager>

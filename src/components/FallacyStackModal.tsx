@@ -10,7 +10,7 @@ import Fallacy from '../components/Fallacy'
 import Modal from '../components/Modal'
 import { getFallacies } from '../selectors'
 import { AppState } from '../store'
-import { dismissFallacyById, presentFallacyById } from '../store/fallacies'
+import { dismissFallacyByIdAction, presentFallacyByIdAction } from '../store/fallacies'
 import { timeoutByTransitionStatus, valueByTransitionStatus } from '../styles/utils'
 
 type Props = HTMLAttributes<HTMLDivElement>
@@ -38,15 +38,15 @@ export default function FallacyStackModal({
   const onPrev = (currDocId: string) => {
     const doc = getPrevDoc(currDocId)
     if (!doc || !doc.uid) return
-    dispatch(presentFallacyById(doc.uid))
-    dispatch(dismissFallacyById(currDocId))
+    dispatch(presentFallacyByIdAction(doc.uid))
+    dispatch(dismissFallacyByIdAction(currDocId))
   }
 
   const onNext = (currDocId: string) => {
     const doc = getNextDoc(currDocId)
     if (!doc || !doc.uid) return
-    dispatch(presentFallacyById(doc.uid))
-    dispatch(dismissFallacyById(currDocId))
+    dispatch(presentFallacyByIdAction(doc.uid))
+    dispatch(dismissFallacyByIdAction(currDocId))
   }
 
   return (
@@ -60,7 +60,7 @@ export default function FallacyStackModal({
                 transitionStatus={status}
                 onPrev={getPrevDoc(fallacyId) ? () => onPrev(fallacyId) : undefined}
                 onNext={getNextDoc(fallacyId) ? () => onNext(fallacyId) : undefined}
-                onExit={() => dispatch(dismissFallacyById(fallacyId))}
+                onExit={() => dispatch(dismissFallacyByIdAction(fallacyId))}
               >
                 {(scrollTargetRef, onExit, onPrev, onNext) => (
                   <StyledFallacy

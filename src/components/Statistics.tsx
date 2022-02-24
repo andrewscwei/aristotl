@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getFilteredFallacies, getFilteredFallaciesOnCurrentPage } from '../selectors'
 import { AppState } from '../store'
-import { changeFallaciesFilters } from '../store/fallacies'
+import { changeFallaciesFiltersAction } from '../store/fallacies'
 import { colors } from '../styles/theme'
 import Pixel from './Pixel'
 
@@ -83,23 +83,23 @@ export default function Statistics({
           <span>{startIndex}-{endIndex} / {numResults}</span>
         }
       </StyledCount>
-      <StyledFilterButton isActive={filters.formal} onClick={() => dispatch(changeFallaciesFilters({ ...filters, formal: !filters.formal }))}>
+      <StyledFilterButton isActive={filters.formal} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, formal: !filters.formal }))}>
         <StyledFormalIcon size={6} isHollow={false} tintColor={colors.white}/>
         <span>{numFormals === 0 ? '--' : numFormals}</span>
       </StyledFilterButton>
-      <StyledFilterButton isActive={filters.informal} onClick={() => dispatch(changeFallaciesFilters({ ...filters, informal: !filters.informal }))}>
+      <StyledFilterButton isActive={filters.informal} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, informal: !filters.informal }))}>
         <StyledInformalIcon size={6} isHollow={true} tintColor={colors.white}/>
         <span>{numInformals === 0 ? '--' : numInformals}</span>
       </StyledFilterButton>
-      <StyledFilterButton isActive={filters.alpha} onClick={() => dispatch(changeFallaciesFilters({ ...filters, alpha: !filters.alpha }))}>
+      <StyledFilterButton isActive={filters.alpha} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, alpha: !filters.alpha }))}>
         <span>α</span>
         <span>{numAlphas === 0 ? '--' : numAlphas}</span>
       </StyledFilterButton>
-      <StyledFilterButton isActive={filters.beta} onClick={() => dispatch(changeFallaciesFilters({ ...filters, beta: !filters.beta }))}>
+      <StyledFilterButton isActive={filters.beta} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, beta: !filters.beta }))}>
         <span>β</span>
         <span>{numBetas === 0 ? '--' : numBetas}</span>
       </StyledFilterButton>
-      <StyledFilterButton isActive={filters.gamma} onClick={() => dispatch(changeFallaciesFilters({ ...filters, gamma: !filters.gamma }))}>
+      <StyledFilterButton isActive={filters.gamma} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, gamma: !filters.gamma }))}>
         <span>𝛾</span>
         <span>{numGammas === 0 ? '--' : numGammas}</span>
       </StyledFilterButton>
