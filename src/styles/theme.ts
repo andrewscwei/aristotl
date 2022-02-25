@@ -12,12 +12,6 @@ export const colors = {
   darkPink: '#d09475',
 }
 
-export const fonts = {
-}
-
-export const layout = {
-}
-
 export const z = {
   foreground: 1,
   overlays: 10,

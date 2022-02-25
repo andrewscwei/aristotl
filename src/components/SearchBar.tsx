@@ -1,5 +1,6 @@
+import _ from 'lodash'
 import { align, container, selectors } from 'promptu'
-import React, { ChangeEvent, HTMLAttributes, useEffect, useRef } from 'react'
+import React, { ChangeEvent, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AppState } from '../store'
@@ -11,18 +12,17 @@ import Pixel from './Pixel'
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   autoFocus: boolean
-  input?: string
 }
 
 export default function SearchBar({
   autoFocus = true,
-  input,
   ...props
 }: Props) {
   const ltxt = useLtxt()
   const dispatch = useDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
   const searchInput = useSelector((state: AppState) => state.fallacies.searchInput)
+  const [input, setInput] = useState(searchInput)
 
   const onKeyUp = (event: KeyboardEvent) => {
     if (!autoFocus) return
@@ -40,16 +40,12 @@ export default function SearchBar({
     inputRef.current.focus()
   }
 
-  const onClear = () => {
+  const clear = () => {
     dispatch(changeFallaciesSearchInputAction(''))
-    dispatch(changeFallaciesFiltersAction({
-      formal: true,
-      informal: true,
-      alpha: true,
-      beta: true,
-      gamma: true,
-    }))
+    dispatch(changeFallaciesFiltersAction({ formal: true, informal: true, alpha: true, beta: true, gamma: true }))
   }
+
+  const search = useCallback(_.debounce(input => dispatch(changeFallaciesSearchInputAction(input)), __APP_CONFIG__.typeSearchDelay), [])
 
   useEffect(() => {
     window.addEventListener('keyup', onKeyUp)
@@ -58,6 +54,14 @@ export default function SearchBar({
       window.removeEventListener('keyup', onKeyUp)
     }
   }, [])
+
+  useEffect(() => {
+    setInput(searchInput)
+  }, [searchInput])
+
+  useEffect(() => {
+    search(input)
+  }, [input])
 
   return (
     <StyledRoot {...props}>
@@ -69,14 +73,14 @@ export default function SearchBar({
       <StyledInput>
         <input
           type='text'
-          value={searchInput}
+          value={input}
           ref={inputRef}
           placeholder={ltxt('search-placeholder')}
           maxLength={24}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(changeFallaciesSearchInputAction(event.currentTarget.value))}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => setInput(event.currentTarget.value)}
         />
       </StyledInput>
-      <StyledActionButton symbol='c' isTogglable={true} onActivate={() => onClear()}/>
+      <StyledActionButton symbol='c' isTogglable={true} onActivate={() => clear()}/>
     </StyledRoot>
   )
 }
@@ -94,7 +98,6 @@ const StyledPixels = styled.div`
 
 const StyledInput = styled.div`
   ${container.fvcl}
-  ${props => props.theme.fonts.search}
   color: ${props => props.theme.colors.white};
   font-size: 2rem;
   height: 5rem;
