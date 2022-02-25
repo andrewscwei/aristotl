@@ -25,19 +25,21 @@ export default function SearchBar({
   const [input, setInput] = useState(searchInput)
 
   const onKeyUp = (event: KeyboardEvent) => {
-    if (!autoFocus) return
     if (!inputRef.current) return
 
     switch (event.keyCode) {
-    case 37:
+    case 37: // Arrow keys
     case 38:
     case 39:
     case 40: return
+    case 27: // Esc key
+      if (inputRef.current !== document.activeElement) return
+      inputRef.current.blur()
+      break
+    default:
+      if (!autoFocus || inputRef.current === document.activeElement) return
+      inputRef.current.focus()
     }
-
-    if (inputRef.current === document.activeElement) return
-
-    inputRef.current.focus()
   }
 
   const clear = () => {
