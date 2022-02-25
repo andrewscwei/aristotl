@@ -143,6 +143,7 @@ const StyledAliases = styled.div`
 `
 
 const StyledName = styled.h1`
+  ${container.box}
   color: ${props => props.theme.colors.lightGrey};
   font-size: 1.3rem;
   font-weight: 400;
