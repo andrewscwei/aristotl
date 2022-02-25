@@ -3,7 +3,7 @@ import { align, animations, container } from 'promptu'
 import React, { HTMLAttributes, ReactNode, Ref, useEffect, useRef } from 'react'
 import { TransitionStatus } from 'react-transition-group/Transition'
 import styled from 'styled-components'
-import NavControlManager from '../managers/NavControlManager'
+import NavControlContainer from './NavControlContainer'
 import { valueByTransitionStatus } from '../styles/utils'
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -39,20 +39,19 @@ export default function Modal({
   }, [scrollTargetRef])
 
   return (
-    <NavControlManager
+    <StyledRoot {...props}
+      transitionStatus={transitionStatus}
       isEnabled={isFocused}
       onPrev={() => onPrev?.()}
       onNext={() => onNext?.()}
       onEscape={() => onExit?.()}
     >
-      <StyledRoot {...props} transitionStatus={transitionStatus}>
-        <StyledBackground
-          transitionStatus={transitionStatus}
-          onClick={() => onExit?.()}
-        />
-        {children?.(scrollTargetRef, onExit, onPrev, onNext)}
-      </StyledRoot>
-    </NavControlManager>
+      <StyledBackground
+        transitionStatus={transitionStatus}
+        onClick={() => onExit?.()}
+      />
+      {children?.(scrollTargetRef, onExit, onPrev, onNext)}
+    </StyledRoot>
   )
 }
 
@@ -66,7 +65,7 @@ const StyledBackground = styled.div<{
   width: 100%;
 `
 
-const StyledRoot = styled.div<{
+const StyledRoot = styled(NavControlContainer)<{
   transitionStatus?: TransitionStatus
 }>`
   ${align.ftl}

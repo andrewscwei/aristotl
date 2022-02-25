@@ -15,7 +15,7 @@ import SearchBar from '../components/SearchBar'
 import Statistics from '../components/Statistics'
 import useLocationState from '../hooks/useLocationState'
 import useRemoteDocs from '../hooks/useRemoteDocs'
-import NavControlManager from '../managers/NavControlManager'
+import NavControlContainer from '../components/NavControlContainer'
 import { getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors'
 import { AppState } from '../store'
 import { changeFallaciesPageAction, presentFallacyByIdAction } from '../store/fallacies'
@@ -45,33 +45,32 @@ export default function Home() {
       {hasPreviewToken() && <PreviewIndicator/>}
       <Transition in={!activeFallacyId} timeout={timeoutByTransitionStatus(200)} mountOnEnter={false}>
         {status => (
-          <NavControlManager
+          <StyledRoot
+            transitionStatus={status}
             isEnabled={!activeDefinitionId && !activeFallacyId}
             onPrev={() => dispatch(changeFallaciesPageAction((pageIndex + maxPages - 1) % maxPages))}
             onNext={() => dispatch(changeFallaciesPageAction((pageIndex + 1) % maxPages))}
           >
-            <StyledRoot transitionStatus={status}>
-              <StyledHeader>
-                <SearchBar autoFocus={!activeFallacyId && !activeDefinitionId}/>
-                <ActionButton
-                  symbol='i'
-                  isTogglable={true}
-                  onToggleOn={() => setIsSummaryEnabled(true)}
-                  onToggleOff={() => setIsSummaryEnabled(false)}
-                  activeTintColor={colors.red}
-                />
-              </StyledHeader>
-              <Statistics/>
-              <Paginator pageIndex={pageIndex} numPages={maxPages} onActivate={idx => dispatch(changeFallaciesPageAction(idx))}/>
-              <Grid
-                uid={`${searchInput}-${pageIndex}`}
-                docs={fallacies}
-                isSummaryEnabled={isSummaryEnabled}
-                onActivate={id => dispatch(presentFallacyByIdAction(id))}
+            <StyledHeader>
+              <SearchBar autoFocus={!activeFallacyId && !activeDefinitionId}/>
+              <ActionButton
+                symbol='i'
+                isTogglable={true}
+                onToggleOn={() => setIsSummaryEnabled(true)}
+                onToggleOff={() => setIsSummaryEnabled(false)}
+                activeTintColor={colors.red}
               />
-              <Footer/>
-            </StyledRoot>
-          </NavControlManager>
+            </StyledHeader>
+            <Statistics/>
+            <Paginator pageIndex={pageIndex} numPages={maxPages} onActivate={idx => dispatch(changeFallaciesPageAction(idx))}/>
+            <Grid
+              uid={`${searchInput}-${pageIndex}`}
+              docs={fallacies}
+              isSummaryEnabled={isSummaryEnabled}
+              onActivate={id => dispatch(presentFallacyByIdAction(id))}
+            />
+            <Footer/>
+          </StyledRoot>
         )}
       </Transition>
       <FallacyStackModal/>
@@ -91,7 +90,7 @@ const StyledHeader = styled.header`
   }
 `
 
-const StyledRoot = styled.div<{
+const StyledRoot = styled(NavControlContainer)<{
   transitionStatus: TransitionStatus
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
