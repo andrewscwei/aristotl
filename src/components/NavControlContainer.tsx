@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, PropsWithChildren, useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 type Props = HTMLAttributes<HTMLDivElement> & PropsWithChildren<{
   isEnabled?: boolean
@@ -95,7 +96,7 @@ export default function NavControlContainer({
   }, [onNext, onPrev, onEscape])
 
   return (
-    <div
+    <StyledRoot
       {...props}
       onTouchStart={event => onDragStart(event.targetTouches[0].clientX)}
       onTouchMove={event => onDragMove(event.targetTouches[0].clientX)}
@@ -106,6 +107,10 @@ export default function NavControlContainer({
       onMouseLeave={() => onDragCancel()}
     >
       {children}
-    </div>
+    </StyledRoot>
   )
 }
+
+const StyledRoot = styled.div`
+
+`

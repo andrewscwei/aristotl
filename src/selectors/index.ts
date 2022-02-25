@@ -27,6 +27,7 @@ export const getFallaciesFuse = (locale: string) => createSelector([
     'data.description.text',
     'tags',
   ],
+  ignoreLocation: true,
   includeMatches: __APP_CONFIG__.includeMatchesInSearch,
   isCaseSensitive: false,
   location: 0,
