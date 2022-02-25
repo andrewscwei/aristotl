@@ -54,6 +54,7 @@
     <% } %>
   </head>
   <body>
+    <script>window.__VERSION__='<%= htmlWebpackPlugin.options.appConf.version %>';</script>
     <script>window.__BUILD_NUMBER__='<%= htmlWebpackPlugin.options.appConf.buildNumber %>';</script>
     <div id='app'></div>
   </body>
