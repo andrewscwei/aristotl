@@ -103,7 +103,6 @@ const StyledRoot = styled.div`
   flex-wrap: wrap;
   flex: 1 0 auto;
   margin-left: -.5rem;
-  max-width: 120rem;
   transform: translate3d(0, 0, 0);
   width: calc(100% + 1rem);
 
