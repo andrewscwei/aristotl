@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { animations, container, media, selectors } from 'promptu'
+import { animations, classes, media, selectors } from 'promptu'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Transition, TransitionStatus } from 'react-transition-group'
@@ -9,13 +9,13 @@ import DefinitionStackModal from '../components/DefinitionStackModal'
 import FallacyStackModal from '../components/FallacyStackModal'
 import Footer from '../components/Footer'
 import Grid from '../components/Grid'
+import NavControlContainer from '../components/NavControlContainer'
 import Paginator from '../components/Paginator'
 import PreviewIndicator from '../components/PreviewIndicator'
 import SearchBar from '../components/SearchBar'
 import Statistics from '../components/Statistics'
 import useLocationState from '../hooks/useLocationState'
 import useRemoteDocs from '../hooks/useRemoteDocs'
-import NavControlContainer from '../components/NavControlContainer'
 import { getFilteredFallaciesOnCurrentPage, getMaxPagesOfFilteredFallacies } from '../selectors'
 import { AppState } from '../store'
 import { changeFallaciesPageAction, presentFallacyByIdAction } from '../store/fallacies'
@@ -80,7 +80,7 @@ export default function Home() {
 }
 
 const StyledHeader = styled.header`
-  ${container.fhcl}
+  ${classes.fhcl}
   justify-content: space-between;
   margin-bottom: 1rem;
   width: 100%;
@@ -94,7 +94,7 @@ const StyledRoot = styled(NavControlContainer)<{
   transitionStatus: TransitionStatus
 }>`
   ${animations.transition(['opacity', 'transform'], 200, 'ease-in-out')}
-  ${container.fvtl}
+  ${classes.fvtl}
   background: ${props => props.theme.colors.black};
   min-height: 100%;
   opacity: ${props => valueByTransitionStatus([0.4, 1], props.transitionStatus)};

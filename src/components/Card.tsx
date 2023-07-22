@@ -1,6 +1,6 @@
 import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { align, animations, container, media, selectors, utils } from 'promptu'
+import { animations, classes, media, selectors, utils } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { colors } from '../styles/theme'
@@ -83,7 +83,7 @@ const StyledSummary = styled.div`
 `
 
 const StyledType = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   font-size: 1.1rem;
   font-weight: 400;
   height: 2rem;
@@ -97,11 +97,11 @@ const StyledType = styled.div`
 `
 
 const StyledTypes = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
 `
 
 const StyledAbbreviation = styled.div`
-  ${container.fvcl}
+  ${classes.fvcl}
   background: ${props => utils.toRGBAString(props.theme.colors.white, .04)}};
   border-bottom: 1px solid ${props => utils.toRGBAString(props.theme.colors.white, .1)}};
   border-top: 1px solid ${props => utils.toRGBAString(props.theme.colors.white, .1)}};
@@ -127,7 +127,7 @@ const StyledAbbreviation = styled.div`
 `
 
 const StyledAliases = styled.div`
-  ${container.fhtl}
+  ${classes.fhtl}
   color: ${props => props.theme.colors.grey};
   font-size: 1.2rem;
   font-weight: 400;
@@ -143,7 +143,7 @@ const StyledAliases = styled.div`
 `
 
 const StyledName = styled.h1`
-  ${container.box}
+  ${classes.box}
   color: ${props => props.theme.colors.lightGrey};
   font-size: 1.3rem;
   font-weight: 400;
@@ -159,7 +159,7 @@ const StyledName = styled.h1`
 const StyledDivider = styled.div<{
   isSummaryEnabled: boolean
 }>`
-  ${align.bl}
+  ${classes.bl}
   ${animations.transition(['opacity', 'background'], 200, 'ease-out')}
   background: ${props => props.theme.colors.darkGrey};
   height: .2rem;
@@ -173,7 +173,7 @@ const StyledDivider = styled.div<{
 `
 
 const StyledRoot = styled.button`
-  ${container.fvts}
+  ${classes.fvts}
   ${animations.transition(['background', 'color'], 100, 'ease-in-out')}
   background: ${props => props.theme.colors.offBlack};
   height: inherit;

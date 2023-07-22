@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import { align, animations, container, selectors } from 'promptu'
-import React, { forwardRef, HTMLAttributes } from 'react'
+import { animations, classes, selectors } from 'promptu'
+import React, { HTMLAttributes, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions } from '../selectors'
@@ -56,7 +56,7 @@ export default forwardRef<HTMLDivElement, Props>(({
 })
 
 const StyledCloseButton = styled(ActionButton)`
-  ${align.tl}
+  ${classes.tl}
   margin: 2rem;
 `
 
@@ -84,7 +84,7 @@ const StyledContent = styled.div`
 
   ul,
   ol {
-    ${container.fvtl}
+    ${classes.fvtl}
     width: 100%;
     margin: 0;
     padding: 0;
@@ -135,7 +135,7 @@ const StyledContent = styled.div`
   }
 
   pre {
-    ${container.box}
+    ${classes.box}
     background: ${props => props.theme.colors.darkPink};
     color: ${props => props.theme.colors.black};
     line-height: 130%;

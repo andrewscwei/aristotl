@@ -212,7 +212,15 @@
     "no-bitwise": "off",
     "no-caller": "error",
     "no-cond-assign": "warn",
-    "no-console": "warn",
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
     "no-debugger": "error",
     "no-duplicate-case": "error",
     "no-duplicate-imports": "error",

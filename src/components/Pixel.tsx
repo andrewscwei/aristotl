@@ -1,6 +1,6 @@
-import { container } from 'promptu'
+import { classes } from 'promptu'
 import React, { HTMLAttributes } from 'react'
-import styled, { css, CSSProp } from 'styled-components'
+import styled, { CSSProp, css } from 'styled-components'
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   alignment?: 'tl' | 'tc' | 'tr' | 'bl' | 'bc' | 'br' | 'cl' | 'cr'
@@ -37,7 +37,7 @@ const StyledRoot = styled.div<{
   size: number
   tintColor: string
 }>`
-  ${container.box}
+  ${classes.box}
   background: ${props => props.isHollow ? 'transparent' : props.tintColor};
   border: ${props => props.isHollow ? `1px solid ${props.tintColor}` : 'none'};
   height: ${props => props.size}px;
