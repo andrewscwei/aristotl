@@ -1,10 +1,10 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-import { align, animations, container } from 'promptu'
+import { animations, classes } from 'promptu'
 import React, { HTMLAttributes, ReactNode, Ref, useEffect, useRef } from 'react'
 import { TransitionStatus } from 'react-transition-group/Transition'
 import styled from 'styled-components'
-import NavControlContainer from './NavControlContainer'
 import { valueByTransitionStatus } from '../styles/utils'
+import NavControlContainer from './NavControlContainer'
 
 type Props = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   isFocused?: boolean
@@ -58,7 +58,7 @@ export default function Modal({
 const StyledBackground = styled.div<{
   transitionStatus?: TransitionStatus
 }>`
-  ${align.tl}
+  ${classes.tl}
   ${animations.transition('opacity', 200, 'ease-out')}
   height: 100%;
   opacity: 0;
@@ -68,8 +68,8 @@ const StyledBackground = styled.div<{
 const StyledRoot = styled(NavControlContainer)<{
   transitionStatus?: TransitionStatus
 }>`
-  ${align.ftl}
-  ${container.fvcc}
+  ${classes.ftl}
+  ${classes.fvcc}
   height: 100%;
   pointer-events: ${props => valueByTransitionStatus(['none', 'auto'], props.transitionStatus, true)};
   width: 100%;

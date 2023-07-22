@@ -1,6 +1,6 @@
 import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { animations, container, selectors } from 'promptu'
+import { animations, classes, selectors } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -108,7 +108,7 @@ const StyledInformalIcon = styled(Pixel)`
 `
 
 const StyledCount = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   font-size: 1.4rem;
   font-weight: 400;
   color: ${props => props.theme.colors.white};
@@ -125,7 +125,7 @@ const StyledCount = styled.div`
 const StyledFilterButton = styled.button<{
   isActive: boolean
 }>`
-  ${container.fhcl}
+  ${classes.fhcl}
   ${animations.transition('opacity', 200, 'ease-out')}
   font-size: 1.4rem;
   font-weight: 400;
@@ -158,7 +158,7 @@ const StyledFilterButton = styled.button<{
 `
 
 const StyledRoot = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   flex-wrap: wrap;
   margin-left: 1rem;
   user-select: none;

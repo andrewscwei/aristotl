@@ -1,4 +1,4 @@
-import { animations, container, selectors } from 'promptu'
+import { animations, classes, selectors } from 'promptu'
 import React, { HTMLAttributes, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { colors } from '../styles/theme'
@@ -75,7 +75,7 @@ const StyledRoot = styled.button<{
   activeTintColor?: string
 }>`
   ${animations.transition(['border-color', 'color'], 200, 'ease-out')}
-  ${container.fvcc}
+  ${classes.fvcc}
   border-color: ${props => (props.isActive && props.activeTintColor) ? props.activeTintColor : props.tintColor};
   border-style: solid;
   border-width: 1px;

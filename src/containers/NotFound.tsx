@@ -1,4 +1,4 @@
-import { container, media } from 'promptu'
+import { classes, media } from 'promptu'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useLtxt } from '../utils/i18n'
@@ -28,7 +28,7 @@ const StyledTitle = styled.h1`
 `
 
 const StyledRoot = styled.div`
-  ${container.fvcc}
+  ${classes.fvcc}
   background: ${props => props.theme.colors.black};
   height: 100%;
   padding: 5rem 2rem 3rem;

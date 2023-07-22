@@ -1,4 +1,4 @@
-import { animations, container, selectors } from 'promptu'
+import { animations, classes, selectors } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -35,7 +35,7 @@ export default function Footer({
 }
 
 const StyledConnect = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   margin-top: 1rem;
   width: 100%;
 

@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import { animations, container, media, selectors } from 'promptu'
-import React, { forwardRef, HTMLAttributes, MouseEvent } from 'react'
+import { animations, classes, media, selectors } from 'promptu'
+import React, { HTMLAttributes, MouseEvent, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getDefinitions, getFallacies } from '../selectors'
@@ -238,7 +238,7 @@ const StyledContent = styled.div`
 
   ul,
   ol {
-    ${container.fvtl}
+    ${classes.fvtl}
     width: 100%;
     margin: 0;
     padding: 0;
@@ -290,7 +290,7 @@ const StyledContent = styled.div`
   }
 
   pre {
-    ${container.box}
+    ${classes.box}
     background: ${props => props.theme.colors.lightGrey};
     line-height: 130%;
     margin: 0;
@@ -327,7 +327,7 @@ const StyledContent = styled.div`
 `
 
 const StyledLabel = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   background: ${props => props.theme.colors.black};
   color: ${props => props.theme.colors.white};
   font-size: 1.4rem;
@@ -338,12 +338,12 @@ const StyledLabel = styled.div`
 `
 
 const StyledSection = styled.div`
-  ${container.fvtl}
+  ${classes.fvtl}
   margin-top: 2rem;
 `
 
 const StyledAbbreviation = styled.div`
-  ${container.fhcr}
+  ${classes.fhcr}
   background: ${props => props.theme.colors.lightGrey};
   height: 20rem;
   padding: 0 1rem;
@@ -371,13 +371,13 @@ const StyledName = styled.h1`
 `
 
 const StyledHeader = styled.div`
-  ${container.fhcs}
+  ${classes.fhcs}
   margin: 3rem 0;
   padding: 0 1.4rem;
   width: 100%;
 
   > div {
-    ${container.fhcl}
+    ${classes.fhcl}
     ${selectors.eblc} {
       margin-right: 1rem;
     }
@@ -389,7 +389,7 @@ const StyledHeader = styled.div`
 `
 
 const StyledBody = styled.div`
-  ${container.box}
+  ${classes.box}
   -webkit-overflow-scrolling: touch;
   color: ${props => props.theme.colors.black};
   flex: 1 1 auto;
@@ -413,7 +413,7 @@ const StyledBody = styled.div`
 `
 
 const StyledRoot = styled.div`
-  ${container.fvtl}
+  ${classes.fvtl}
   background: ${props => props.theme.colors.white};
   overflow: hidden;
 `

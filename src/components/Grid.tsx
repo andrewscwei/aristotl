@@ -1,5 +1,5 @@
 import { PrismicDocument } from '@prismicio/types'
-import { align, animations, container, media } from 'promptu'
+import { animations, classes, media } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { Transition } from 'react-transition-group'
 import { TransitionStatus } from 'react-transition-group/Transition'
@@ -71,7 +71,7 @@ const StyledCard = styled.div<{
   position: relative;
 
   &::after {
-    ${align.tl}
+    ${classes.tl}
     ${props => animations.transition('transform', props.duration, 'ease-in-out', props.delay)}
     background: ${props => props.theme.colors.offBlack};
     content: '';
@@ -99,7 +99,7 @@ const StyledCard = styled.div<{
 
 const StyledRoot = styled.div`
   ${animations.transition(['transform'], 150, 'ease-out')}
-  ${container.fhtl}
+  ${classes.fhtl}
   flex-wrap: wrap;
   flex: 1 0 auto;
   margin-left: -.5rem;

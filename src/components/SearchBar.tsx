@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { align, container, selectors } from 'promptu'
+import { classes, selectors } from 'promptu'
 import React, { ChangeEvent, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -88,8 +88,8 @@ export default function SearchBar({
 }
 
 const StyledPixels = styled.div`
-  ${container.fvcc}
-  ${align.cl}
+  ${classes.fvcc}
+  ${classes.cl}
   left: -1rem;
   margin-right: .4rem;
 
@@ -99,7 +99,7 @@ const StyledPixels = styled.div`
 `
 
 const StyledInput = styled.div`
-  ${container.fvcl}
+  ${classes.fvcl}
   color: ${props => props.theme.colors.white};
   font-size: 2rem;
   height: 5rem;
@@ -116,7 +116,7 @@ const StyledActionButton = styled(ActionButton)`
 `
 
 const StyledRoot = styled.div`
-  ${container.fhcl}
+  ${classes.fhcl}
   background: ${props => props.theme.colors.offBlack};
   max-width: 40rem;
   padding: 0 1rem;

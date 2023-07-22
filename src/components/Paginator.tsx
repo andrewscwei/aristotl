@@ -1,4 +1,4 @@
-import { animations, container, selectors } from 'promptu'
+import { animations, classes, selectors } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { colors } from '../styles/theme'
@@ -51,7 +51,7 @@ const StyledButton = styled.button<{
 `
 
 const StyledRoot = styled.div`
-  ${container.fhcc}
+  ${classes.fhcc}
   align-self: center;
   margin: 5rem 0 3rem;
 `

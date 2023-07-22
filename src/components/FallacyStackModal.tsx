@@ -1,6 +1,6 @@
 import { PrismicDocument } from '@prismicio/types'
 import _ from 'lodash'
-import { align, animations, utils } from 'promptu'
+import { animations, classes, utils } from 'promptu'
 import React, { HTMLAttributes } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Transition, TransitionGroup } from 'react-transition-group'
@@ -89,7 +89,7 @@ const StyledFallacy = styled(Fallacy)<{
   stackIndex: number
   transitionStatus?: TransitionStatus
 }>`
-  ${align.tr}
+  ${classes.tr}
   ${animations.transition(['opacity', 'transform'], 200, 'ease-out')}
   height: 100%;
   max-width: 60rem;
@@ -102,7 +102,7 @@ const StyledFallacy = styled(Fallacy)<{
 const StyledRoot = styled.div<{
   isFocused: boolean
 }>`
-  ${align.ftl}
+  ${classes.ftl}
   ${animations.transition('background', 200, 'ease-out')}
   background: ${props => utils.toRGBAString(props.theme.colors.black, props.isFocused ? 0.4 : 0)};
   height: 100%;
