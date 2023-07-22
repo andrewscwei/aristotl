@@ -3,10 +3,10 @@
  */
 
 import React, { ComponentType } from 'react'
-import { hydrate, render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter, BrowserRouterProps } from 'react-router-dom'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import createStore from '../store'
 import globalStyle from '../styles/global'
 import * as theme from '../styles/theme'
@@ -48,10 +48,10 @@ export function markup(Component: ComponentType, options: BrowserRouterProps = {
  * @param elementId - The ID of the DOM element to mount the React component to.
  */
 export function mount(Component: ComponentType, elementId = 'app') {
-  if (process.env.NODE_ENV === 'development') {
-    render(markup(Component), document.getElementById(elementId))
-  }
-  else {
-    hydrate(markup(Component), document.getElementById(elementId))
-  }
+  const container = document.getElementById(elementId)
+  if (!container) return console.warn(`No container with ID <${elementId}> found`)
+
+  document.getElementById(elementId)
+
+  createRoot(container).render(markup(Component))
 }

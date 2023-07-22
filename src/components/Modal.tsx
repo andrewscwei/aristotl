@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import NavControlContainer from './NavControlContainer'
 import { valueByTransitionStatus } from '../styles/utils'
 
-type Props = HTMLAttributes<HTMLDivElement> & {
+type Props = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   isFocused?: boolean
   transitionStatus?: TransitionStatus
   children?: (scrollTargetRef: Ref<HTMLDivElement>, onExit?: () => void, onPrev?: () => void, onNext?: () => void) => ReactNode
