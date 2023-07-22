@@ -373,6 +373,7 @@ const StyledName = styled.h1`
 const StyledHeader = styled.div`
   ${classes.fhcs}
   margin: 3rem 0;
+  margin-top: max(3rem, env(safe-area-inset-top));
   padding: 0 1.4rem;
   width: 100%;
 
@@ -396,6 +397,7 @@ const StyledBody = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0 1.4rem;
+  padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
   user-select: text;
 
@@ -409,6 +411,7 @@ const StyledBody = styled.div`
 
   @media ${media.gtmobile} {
     padding: 1rem 3rem 3rem;
+    padding-bottom: max(3rem, env(safe-area-inset-bottom));
   }
 `
 

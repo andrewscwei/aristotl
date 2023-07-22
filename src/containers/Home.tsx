@@ -99,6 +99,8 @@ const StyledRoot = styled(NavControlContainer)<{
   min-height: 100%;
   opacity: ${props => valueByTransitionStatus([0.4, 1], props.transitionStatus)};
   padding: 5rem 2rem 3rem;
+  padding-top: calc(5rem + env(safe-area-inset-top));
+  padding-bottom: calc(3rem + env(safe-area-inset-bottom));
   perspective: 80rem;
   pointer-events: ${props => valueByTransitionStatus(['none', 'auto'], props.transitionStatus)};
   transform-origin: center;
@@ -107,5 +109,7 @@ const StyledRoot = styled(NavControlContainer)<{
 
   @media ${media.gtw(500)} {
     padding: 5rem 5rem 3rem;
+    padding-top: calc(5rem + env(safe-area-inset-top));
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
   }
 `
