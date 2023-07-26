@@ -1,5 +1,5 @@
 {
-  "background_color": "#cccccc",
+  "background_color": "#deb8a6",
   "description": "A logical fallacy lookup tool",
   "display": "standalone",
   "icons": [
@@ -28,6 +28,5 @@
   ],
   "name": "Aristotl",
   "orientation": "portrait",
-  "start_url": "index.html",
-  "theme_color": "#cccccc"
+  "theme_color": "#deb8a6"
 }
