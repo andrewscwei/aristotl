@@ -21,7 +21,6 @@ const localesDir: string = path.join(cwd, 'config/locales')
 const locales = getLocalesFromDir(localesDir, appConf.locales[0], appConf.locales)
 const port = Number(process.env.PORT) || 8080
 const useBundleAnalyzer: boolean = process.env.ANALYZE_BUNDLE === 'true' ? true : false
-const useSpeedMeasurer = process.env.npm_config_speed === 'true' ? true : false
 
 const config: Configuration = {
   devtool: isDev ? 'eval-source-map' : false,
@@ -179,4 +178,4 @@ const config: Configuration = {
   target: 'web',
 }
 
-export default useSpeedMeasurer ? (new (require('speed-measure-webpack-plugin'))()).wrap(config) : config
+export default config
