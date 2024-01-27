@@ -18,8 +18,8 @@ export default function useRemoteDocs() {
   useEffect(() => {
     const isPreviewing = hasPreviewToken()
 
-    if (!metadataDoc || isPreviewing) dispatch(fetchMetadataAction())
-    if ((fallacies.length === 0) || isPreviewing) dispatch(fetchFallaciesAction())
-    if ((definitions.length === 0) || isPreviewing) dispatch(fetchDefinitionsAction())
+    if (!metadataDoc || isPreviewing) dispatch(fetchMetadataAction() as any)
+    if ((fallacies.length === 0) || isPreviewing) dispatch(fetchFallaciesAction() as any)
+    if ((definitions.length === 0) || isPreviewing) dispatch(fetchDefinitionsAction() as any)
   }, [])
 }

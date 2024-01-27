@@ -2,16 +2,39 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Debug (Chrome)",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:8080",
+      "type": "chrome",
+      "url": "http://localhost:8080/",
+      "preLaunchTask": "dev",
       "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
-        "meteor://💻app/*": "${workspaceFolder}/*",
-        "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
-        "webpack://?:*/*": "${workspaceFolder}/*"
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "webpack://?:*/*": "${webRoot}/*"
       }
+    },
+    {
+      "name": "Debug (Firefox)",
+      "request": "launch",
+      "reAttach": true,
+      "type": "firefox",
+      "preLaunchTask": "dev",
+      "url": "http://localhost:8080/",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack://${workspaceFolderBasename}",
+          "path": "${workspaceFolder}"
+        }
+      ]
+    },
+    {
+      "name": "Debug (Edge)",
+      "request": "launch",
+      "type": "msedge",
+      "preLaunchTask": "dev",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

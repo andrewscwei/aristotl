@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
-import thunk from 'redux-thunk'
+import { thunk } from 'redux-thunk'
 import definitions, { DefinitionsState } from './definitions'
 import fallacies, { FallaciesState } from './fallacies'
 import metadata, { MetadataState } from './metadata'
