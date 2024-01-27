@@ -1,6 +1,6 @@
 /**
- * @file This is the Webpack config for compiling client assets in both `development` and
- *       `production` environments.
+ * @file This is the Webpack config for compiling client assets in both
+ *       `development` and `production` environments.
  */
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin'

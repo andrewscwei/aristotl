@@ -1,7 +1,6 @@
 import { PrismicDocument } from '@prismicio/types'
 import { Action, Dispatch } from 'redux'
 import { fetchDocsByType, localeResolver } from '../utils/prismic'
-import { ThunkAction } from 'redux-thunk'
 
 export enum MetadataActionType {
   LOADED = 'metadata/LOADED',

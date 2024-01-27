@@ -61,8 +61,8 @@ const reducer = (state: I18nState = initialState, action: I18nAction): I18nState
   }
 }
 
-// In development, require context for all locale translation files and add them to Polyglot so that
-// they can be watched by Webpack.
+// In development, require context for all locale translation files and add them
+// to Polyglot so that they can be watched by Webpack.
 if (process.env.NODE_ENV === 'development') {
   const localeReq = require.context('../../config/locales', true, /^.*\.json$/)
   localeReq.keys().forEach(path => {
@@ -94,7 +94,7 @@ export function getDefaultLocale(): string {
 /**
  * Infers the current locale from a URL.
  *
- * @param path - The URL path.
+ * @param path The URL path.
  *
  * @returns The inferred locale if it exists.
  */
@@ -114,8 +114,8 @@ export function getLocaleFromPath(path: string): string | null {
 /**
  * Returns the localized version of a URL.
  *
- * @param path - The URL path.
- * @param locale - The locale to use for the conversion.
+ * @param path The URL path.
+ * @param locale The locale to use for the conversion.
  *
  * @returns The localized URL.
  */
@@ -137,7 +137,7 @@ export function getLocalizedPath(path: string, locale: string = defaultLocale): 
 /**
  * Returns the unlocalized version of a URL.
  *
- * @param path - The URL path.
+ * @param path The URL path.
  *
  * @returns The unlocalized path.
  */
@@ -155,7 +155,7 @@ export function getUnlocalizedPath(path: string): string {
 /**
  * Returns the Polyglot instance associated to a locale.
  *
- * @param locale - The locale.
+ * @param locale The locale.
  *
  * @returns The Polyglot instance.
  */
@@ -170,7 +170,7 @@ export function getPolyglotByLocale(locale: string): Polyglot {
 /**
  * Provider of localization features.
  *
- * @param props - @see I18nProviderProps
+ * @param props @see I18nProviderProps
  *
  * @returns The provider.
  */
@@ -185,10 +185,10 @@ export function I18nProvider({ children }: I18nProviderProps) {
 }
 
 /**
- * Provider of localization features that automatically infers the current locale from the router
- * route.
+ * Provider of localization features that automatically infers the current
+ * locale from the router route.
  *
- * @param props - @see I18nRouterProviderProps
+ * @param props @see I18nRouterProviderProps
  *
  * @returns The provider.
  */
@@ -214,7 +214,7 @@ export function I18nRouterProvider({ children }: I18nRouterProviderProps) {
 /**
  * HOC for injecting localization properties into a component.
  *
- * @param Component - The component to inject localization properties into.
+ * @param Component The component to inject localization properties into.
  *
  * @returns The wrapper component.
  */

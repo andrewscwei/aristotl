@@ -15,8 +15,8 @@ import { I18nRouterProvider } from './i18n'
 /**
  * Factory function for generating base React app markup.
  *
- * @param Component - The React component to wrap around.
- * @param options - See {@link BrowserRouterProps}.
+ * @param Component The React component to wrap around.
+ * @param options See {@link BrowserRouterProps}.
  *
  * @returns The JSX markup.
  */
@@ -43,9 +43,9 @@ export function markup(Component: ComponentType, options: BrowserRouterProps = {
 
 /**
  * Mounts a React component to a DOM element.
- *
- * @param Component - The React component to mount.
- * @param elementId - The ID of the DOM element to mount the React component to.
+
+ * @param Component The React component to mount.
+ * @param elementId The ID of the DOM element to mount the React component to.
  */
 export function mount(Component: ComponentType, elementId = 'app') {
   const container = document.getElementById(elementId)
