@@ -12,7 +12,3 @@ $ npm install
 $ npm run dev # Run in dev, served on localhost:8080
 $ npm run build # Build for production
 ```
-
----
-
-© Andrew Wei
