@@ -2,7 +2,7 @@ name: CD
 on:
   push:
     branches: [master]
-    tags-ignore: ['v*']
+    tags-ignore: ["v*"]
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -20,6 +20,7 @@ jobs:
       - name: Deploy to GitHub pages
         uses: andrewscwei/actions/gh-pages-deploy@v2
         with:
+          cname: ${{ vars.CNAME }}
           deploy-path: build
   notify:
     name: Notify
