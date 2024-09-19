@@ -92,7 +92,7 @@ export default function Statistics({
         <span>{numBetas === 0 ? '--' : numBetas}</span>
       </StyledFilterButton>
       <StyledFilterButton isActive={filters.gamma} onClick={() => dispatch(changeFallaciesFiltersAction({ ...filters, gamma: !filters.gamma }))}>
-        <span>𝛾</span>
+        <span>γ</span>
         <span>{numGammas === 0 ? '--' : numGammas}</span>
       </StyledFilterButton>
     </StyledRoot>
