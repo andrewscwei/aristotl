@@ -1,0 +1,250 @@
+{
+  "id": "XYX59hEAACcAetqo",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYX59hEAACcAetqo%22%29+%5D%5D",
+  "tags": [
+    "fallacy-type"
+  ],
+  "first_publication_date": "2019-09-21T10:23:49+0000",
+  "last_publication_date": "2019-09-29T06:33:41+0000",
+  "slugs": [
+    "informal-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Informal Fallacy",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "In contrast to a formal fallacy, an informal fallacy originates in a reasoning error other than a flaw in the logical form of the argument. A deductive argument containing an informal fallacy may be formally valid, but still remain rationally unpersuasive. Nevertheless, informal fallacies apply to both deductive and non-deductive arguments.",
+        "spans": [
+          {
+            "start": 17,
+            "end": 31,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYX6ihEAACYAet06",
+              "type": "definition",
+              "tags": [
+                "fallacy-type"
+              ],
+              "lang": "en-us",
+              "slug": "formal-fallacy",
+              "first_publication_date": "2019-09-21T10:26:13+0000",
+              "last_publication_date": "2019-09-29T06:32:14+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 36,
+            "end": 52,
+            "type": "em"
+          },
+          {
+            "start": 45,
+            "end": 52,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 130,
+            "end": 138,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 142,
+            "end": 160,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 175,
+            "end": 191,
+            "type": "em"
+          },
+          {
+            "start": 183,
+            "end": 184,
+            "type": "strong"
+          },
+          {
+            "start": 184,
+            "end": 191,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 271,
+            "end": 289,
+            "type": "em"
+          },
+          {
+            "start": 280,
+            "end": 289,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 304,
+            "end": 313,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Though the form of the argument may be relevant, fallacies of this type are the \"types of mistakes in reasoning that arise from the mishandling of the content of the propositions constituting the argument\".",
+        "spans": [
+          {
+            "start": 49,
+            "end": 58,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 151,
+            "end": 158,
+            "type": "em"
+          },
+          {
+            "start": 166,
+            "end": 178,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 196,
+            "end": 204,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "aliases": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"Fallacy.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 19 Sep. 2019. Web. 21 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 135,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/Fallacy#Informal_fallacy",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 35,
+                "end": 67,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

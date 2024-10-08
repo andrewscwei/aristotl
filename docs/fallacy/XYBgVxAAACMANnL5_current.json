@@ -1,0 +1,188 @@
+{
+  "id": "XYBgVxAAACMANnL5",
+  "uid": "continuum",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYBgVxAAACMANnL5%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "c",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-17T04:26:01+0000",
+  "last_publication_date": "2019-09-29T09:57:09+0000",
+  "slugs": [
+    "continuum-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Continuum Fallacy",
+    "abbreviation": "Ct",
+    "aliases": [
+      {
+        "name": "Fallacy of the Beard"
+      },
+      {
+        "name": "Argument of the Beard"
+      },
+      {
+        "name": "Line-Drawing Fallacy"
+      },
+      {
+        "name": "Sorites Fallacy"
+      },
+      {
+        "name": "Fallacy of the Heap"
+      },
+      {
+        "name": "Bald Man Fallacy"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Improperly rejecting a claim for being imprecise.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The Continuum Fallacy plays upon the vagueness of the distinction between two terms that lie on a continuum. For instance, \"bald\" is a vague word, and a man who is a borderline case of baldness is a familiar sight: it isn't clear whether he is bald or not, so we say that he is \"balding\".",
+        "spans": [
+          {
+            "start": 4,
+            "end": 21,
+            "type": "em"
+          },
+          {
+            "start": 37,
+            "end": 46,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYsXGBEAACUA8MYR",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "vagueness",
+              "first_publication_date": "2019-09-25T07:28:26+0000",
+              "last_publication_date": "2019-09-29T06:31:37+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "\"Bald\" and \"non-bald\" lie at opposite ends of a spectrum of hairiness, and there is no precise point where baldness turns into non-baldness. We could, of course, decide to count, say, 10,000 hairs or less as the definition of \"bald\", but this would be arbitrary. Why not 10,001 or 9,999? I know of no answer other than the fact that we prefer round numbers.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "So, there is no non-arbitrary line between baldness and hairiness, but it does not follow from this fact that there really is no difference between the two. A difference in degree is still a difference, and a big enough difference in degree can amount to a difference in kind. For instance, according to the theory of evolution, the difference between species is a difference in degree.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "Similarly, the lack of a bright line between contrary concepts does not mean that one of the concepts is a myth―that is, there is nothing to which it refers. For example, some people have argued that there is no such thing as life, since the line between animate and inanimate thing is fuzzy. However, we can all easily identify many living things and nonliving things, and the fact that there are some things which fall into a grey area―viruses, for instance―does not mean that the concept of life is without reference.",
+        "spans": []
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Dwayne can never grow bald. Dwayne isn't bald now. Don't you agree that if he loses one hair, that won't make him go from not bald to bald? And if he loses one hair after that, then this one loss, too, won't make him go from not bald to bald. Therefore, no matter how much hair he loses, he can't become bald.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "link_type": "Document"
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Fallacy of the Heap.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 61,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/fallheap.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 27,
+                "end": 44,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

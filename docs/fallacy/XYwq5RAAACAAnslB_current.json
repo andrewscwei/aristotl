@@ -1,0 +1,300 @@
+{
+  "id": "XYwq5RAAACAAnslB",
+  "uid": "appeal-to-nature",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYwq5RAAACAAnslB%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-26T03:09:01+0000",
+  "last_publication_date": "2019-09-30T05:19:02+0000",
+  "slugs": [
+    "appeal-to-nature",
+    "appeal-to-ignorance"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Appeal to Nature",
+    "abbreviation": "AtN",
+    "aliases": [
+      {
+        "name": "Argumentum ad Naturam"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYxqahAAACIAn-T8",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "l",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "loaded-language",
+          "first_publication_date": "2019-09-26T07:42:48+0000",
+          "last_publication_date": "2019-09-29T07:56:16+0000",
+          "uid": "loaded-language",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwxCRAAACEAnuSM",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "alpha",
+            "b"
+          ],
+          "lang": "en-us",
+          "slug": "begging-the-question",
+          "first_publication_date": "2019-09-26T03:36:18+0000",
+          "last_publication_date": "2019-09-29T08:54:14+0000",
+          "uid": "begging-the-question",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYx7xBAAACEAoDNg",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "i",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "is-ought",
+          "first_publication_date": "2019-09-26T08:53:28+0000",
+          "last_publication_date": "2019-09-29T07:51:34+0000",
+          "uid": "is-ought",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Judgment is based solely on whether the subject of judgment is 'natural' or 'unnatural'.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "preformatted",
+        "text": "N is natural.\nTherefore, N is right or good.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "An argument appeals to nature when it claims that something is good because it's natural, or bad because it's unnatural.",
+        "spans": [
+          {
+            "start": 3,
+            "end": 11,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "One difficulty is that the concept of the natural is vague and ambiguous. For instance, is the human use of fire \"natural\"? Maybe, maybe not. Is it \"natural\" for people to wear clothes? Yes and no. This means that people can pick and choose what they wish to praise as \"natural\" or condemn as \"unnatural\".",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "There are many natural things that are not good, and plenty of unnatural things that are not bad. Riding a bicycle is an unnatural act, and bicycles are manmade objects, but who would condemn the act of riding one? Similarly, poisonous plants and animals are as natural as any other living things, yet who would recommend eating them?",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "Nonetheless, the word \"natural\" is loaded with a positive evaluation, while \"unnatural\" contains a negative evaluation. So, to call something \"natural\" or \"unnatural\" is not simply to describe it, but to praise or condemn it. As with other loaded words, unless such concealed evaluations are backed up by other evidence, they will beg the question.",
+        "spans": []
+      }
+    ],
+    "examples": [],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwq1RAAAB8Ansj2",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-ignorance",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:57:08+0000",
+          "uid": "appeal-to-ignorance",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqvxAAACAAnsiS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-force",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:55:43+0000",
+          "uid": "appeal-to-force",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqNxAAACIAnsYm",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-celebrity",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:56:09+0000",
+          "uid": "appeal-to-celebrity",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwHnxAAACAAniq5",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-authority",
+          "first_publication_date": "2019-09-26T00:35:05+0000",
+          "last_publication_date": "2020-08-20T23:44:33+0000",
+          "uid": "appeal-to-authority",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Appeal to Nature.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 54,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/adnature.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 20,
+                "end": 37,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

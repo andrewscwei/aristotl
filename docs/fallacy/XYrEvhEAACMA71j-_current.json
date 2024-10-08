@@ -1,0 +1,362 @@
+{
+  "id": "XYrEvhEAACMA71j-",
+  "uid": "denying-a-conjunct",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYrEvhEAACMA71j-%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "d",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-25T01:37:06+0000",
+  "last_publication_date": "2019-09-29T10:01:42+0000",
+  "slugs": [
+    "denying-a-conjunct"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Denying a Conjunct",
+    "abbreviation": "DaC",
+    "aliases": [
+      {
+        "name": "The Fallacy of the Disjunctive Syllogism"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYq_iBEAACQA70Gk",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "p",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "propositional-fallacy",
+          "first_publication_date": "2019-09-25T01:14:51+0000",
+          "last_publication_date": "2019-09-29T09:49:09+0000",
+          "uid": "propositional-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "To claim that at least one of the conjuncts is false, but it leaves open the possibility that both may be false.",
+        "spans": [
+          {
+            "start": 94,
+            "end": 99,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A conjunctive statement, or conjunction for short, is a statement of the \"both-and\" form. For example, \"It's both rainy and sunny\" is a conjunction. The conjuncts of a conjunction are its component statements, so the conjuncts of the example are \"It's rainy\" and \"It's sunny\".",
+        "spans": [
+          {
+            "start": 2,
+            "end": 13,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 28,
+            "end": 39,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 136,
+            "end": 147,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 153,
+            "end": 162,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 168,
+            "end": 179,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 217,
+            "end": 226,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "To deny or negate a conjunction is to claim that at least one of the conjuncts is false, but it leaves open the possibility that both may be false. To return to the example, denying it produces: \"It's not both rainy and sunny.\" For this to be true it has to be the case that either it's not rainy, it's not sunny, or both.",
+        "spans": [
+          {
+            "start": 20,
+            "end": 31,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 69,
+            "end": 78,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "preformatted",
+        "text": "Not both p and q.\nNot p.\nTherefore, q.",
+        "spans": []
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "It isn't both sunny and overcast.\nIt isn't sunny.\nTherefore, it's overcast.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYJKNhAAACIAPyTL",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "affirming-a-disjunct",
+          "first_publication_date": "2019-09-18T15:16:22+0000",
+          "last_publication_date": "2019-09-29T06:21:54+0000",
+          "uid": "affirming-a-disjunct",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrGtBEAACUA72HD",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "commutation-of-conditionals",
+          "first_publication_date": "2019-09-25T01:45:31+0000",
+          "last_publication_date": "2019-09-29T09:54:01+0000",
+          "uid": "commutation-of-conditionals",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrFpBEAACQA710C",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "affirming-the-consequent",
+          "first_publication_date": "2019-09-25T01:42:26+0000",
+          "last_publication_date": "2019-09-29T10:15:48+0000",
+          "uid": "affirming-the-consequent",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrF8REAACUA715a",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "d",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "denying-the-antecedent",
+          "first_publication_date": "2019-09-25T01:42:11+0000",
+          "last_publication_date": "2019-09-29T10:03:41+0000",
+          "uid": "denying-the-antecedent",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrHGhEAACUA72OO",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "i",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "improper-transposition",
+          "first_publication_date": "2019-09-25T01:47:08+0000",
+          "last_publication_date": "2019-09-29T09:34:30+0000",
+          "uid": "improper-transposition",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Denying a Conjunct.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 56,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/denyconj.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 22,
+                "end": 39,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

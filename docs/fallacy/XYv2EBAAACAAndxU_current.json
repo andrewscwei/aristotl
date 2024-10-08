@@ -1,0 +1,174 @@
+{
+  "id": "XYv2EBAAACAAndxU",
+  "uid": "special-pleading",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYv2EBAAACAAndxU%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "s",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-25T23:22:09+0000",
+  "last_publication_date": "2019-09-29T09:38:44+0000",
+  "slugs": [
+    "special-pleading",
+    "straw-man"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Special Pleading",
+    "abbreviation": "SP",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A proponent of a position attempts to cite something as an exemption to a generally accepted rule or principle without justifying the exemption.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Special Pleading is a form of inconsistency in which the reasoner doesn't apply his or her principles consistently. It is the fallacy of applying a general principle to various situations but not applying it to a special situation that interests the arguer even though the general principle properly applies to that special situation, too.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 16,
+            "type": "em"
+          },
+          {
+            "start": 126,
+            "end": 133,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "The law requires everyone to follow the speed limit and other traffic regulations, but in Suffolk County, exceptions should be made for cops and their families, police union officials say.\n\nPolice Benevolent Association president Jeff Frayler said Thursday it has been union policy to discourage Suffolk police officers from issuing tickets to fellow officers, regardless of where they work.\n\n\"Police officers have discretion whenever they stop anyone, but they should particularly extend that courtesy in the case of other police officers and their families,\" Frayler said in a brief telephone interview Thursday. \"It is a professional courtesy.\"",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#SpecialPleading",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Special Pleading.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 54,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/specplea.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 20,
+                "end": 37,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

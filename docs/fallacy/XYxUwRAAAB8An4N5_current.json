@@ -1,0 +1,252 @@
+{
+  "id": "XYxUwRAAAB8An4N5",
+  "uid": "tu-quoque",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYxUwRAAAB8An4N5%22%29+%5D%5D",
+  "tags": [
+    "t",
+    "informal",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-26T06:08:19+0000",
+  "last_publication_date": "2019-09-29T08:19:53+0000",
+  "slugs": [
+    "tu-quoque",
+    "gamblers-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Tu Quoque",
+    "abbreviation": "TQ",
+    "aliases": [
+      {
+        "name": "You Too"
+      },
+      {
+        "name": "Appeal to Hypocrisy"
+      },
+      {
+        "name": "Whataboutism"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYxWCBAAACEAn4kw",
+          "type": "fallacy",
+          "tags": [
+            "t",
+            "informal",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "two-wrongs-make-a-right",
+          "first_publication_date": "2019-09-26T06:10:37+0000",
+          "last_publication_date": "2019-09-29T08:18:33+0000",
+          "uid": "two-wrongs-make-right",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "The argument states that a certain position is false or wrong or should be disregarded because its proponent fails to act consistently in accordance with that position.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Tu Quoque is a very common fallacy in which one attempts to defend oneself or another from criticism by turning the critique back against the accuser. This is a classic Red Herring since whether the accuser is guilty of the same, or a similar, wrong is irrelevant to the truth of the original charge. However, as a diversionary tactic, Tu Quoque can be very effective, since the accuser is put on the defensive, and frequently feels compelled to defend against the accusation.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "em"
+          },
+          {
+            "start": 27,
+            "end": 34,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 169,
+            "end": 180,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYq81REAACUA7zWS",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "r",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "red-herring",
+              "first_publication_date": "2019-09-25T01:03:26+0000",
+              "last_publication_date": "2019-09-29T09:31:21+0000",
+              "uid": "red-herring",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 336,
+            "end": 345,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Look who's talking. You say I shouldn't become an alcoholic because it will hurt me and my family, yet you yourself are an alcoholic, so your argument can't be worth listening to.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "Discovering that a speaker is a hypocrite is a reason to be suspicious of the speaker's reasoning, but it is not a sufficient reason to discount it.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#TuQuoque",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Tu Quoque.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 47,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/tuquoque.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 13,
+                "end": 30,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

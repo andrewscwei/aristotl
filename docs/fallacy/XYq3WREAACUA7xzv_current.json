@@ -1,0 +1,419 @@
+{
+  "id": "XYq3WREAACUA7xzv",
+  "uid": "accent",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYq3WREAACUA7xzv%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-25T00:40:02+0000",
+  "last_publication_date": "2019-09-29T10:19:19+0000",
+  "slugs": [
+    "accent"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Accent",
+    "abbreviation": "Ac",
+    "aliases": [
+      {
+        "name": "Accentus"
+      },
+      {
+        "name": "Misleading Accent"
+      },
+      {
+        "name": "Prosody"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYpechEAACUA7Y48",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "ambiguity",
+          "first_publication_date": "2019-09-24T18:23:37+0000",
+          "last_publication_date": "2019-09-30T03:03:58+0000",
+          "uid": "ambiguity",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A fallacy of ambiguity due to the different ways a word or syllable is emphasized or accented.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "As with many named fallacies, Accent has a long and confusing history. It is one of the thirteen fallacies identified by Aristotle in his pioneering work On Sophistical Refutations. Specifically, it is one of the six language-dependent fallacies, of which Aristotle says \"this is the number of ways in which we might fail to mean the same thing by the same names or expressions.\" Thus, according to Aristotle, Accent is a kind of fallacy of Ambiguity.",
+        "spans": [
+          {
+            "start": 19,
+            "end": 28,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 30,
+            "end": 36,
+            "type": "em"
+          },
+          {
+            "start": 97,
+            "end": 106,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 154,
+            "end": 180,
+            "type": "em"
+          },
+          {
+            "start": 236,
+            "end": 245,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 410,
+            "end": 416,
+            "type": "em"
+          },
+          {
+            "start": 430,
+            "end": 437,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 441,
+            "end": 450,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYpechEAACUA7Y48",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "ambiguity",
+              "first_publication_date": "2019-09-24T18:23:37+0000",
+              "last_publication_date": "2019-09-30T03:03:58+0000",
+              "uid": "ambiguity",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "To understand what Aristotle meant by \"accent\", one must know some things about the written Greek of his time. Today, in most printed Greek texts—including those of \"the philosopher\"—three accents are used to indicate pronunciation. In Aristotle's time, the accents were not a part of the written language, but were supplied by the reader's knowledge of spoken Greek, which is something that we lack today. For this reason, some words that were pronounced differently were spelled the same in classical Greek, that is, they were homographs―\"written the same\"―but not homophones―\"sound the same\". So, a written word could be ambiguous in a way that depended on how it was accented in speech.",
+        "spans": [
+          {
+            "start": 39,
+            "end": 45,
+            "type": "em"
+          },
+          {
+            "start": 189,
+            "end": 196,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "It is clear, from what he wrote, that Aristotle was being thorough in including accent in his catalog of types of Ambiguity. It is less clear just how common Ambiguity of this type was in his day, or how often it led to fallacious reasoning.",
+        "spans": [
+          {
+            "start": 114,
+            "end": 123,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYpechEAACUA7Y48",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "ambiguity",
+              "first_publication_date": "2019-09-24T18:23:37+0000",
+              "last_publication_date": "2019-09-30T03:03:58+0000",
+              "uid": "ambiguity",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 158,
+            "end": 167,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYpechEAACUA7Y48",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "ambiguity",
+              "first_publication_date": "2019-09-24T18:23:37+0000",
+              "last_publication_date": "2019-09-30T03:03:58+0000",
+              "uid": "ambiguity",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 220,
+            "end": 230,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Consider the sentence: ",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "I resent that letter.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "This could mean either that one sent the letter again, or that one has a feeling of resentment towards it. So, the sentence could be a boobytrap. If you concluded, falsely, on the basis of the sentence, that the speaker sent the letter again, then you would have committed a fallacy of Accent.",
+            "spans": [
+              {
+                "start": 275,
+                "end": 282,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 286,
+                "end": 292,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYq2mBEAACUA7xmB",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "amphiboly",
+          "first_publication_date": "2019-09-25T00:39:00+0000",
+          "last_publication_date": "2019-09-29T17:11:49+0000",
+          "uid": "amphiboly",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF2CBAAACQAO2Gd",
+          "type": "fallacy",
+          "tags": [
+            "e",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "equivocation",
+          "first_publication_date": "2019-09-18T00:10:50+0000",
+          "last_publication_date": "2019-09-29T09:28:44+0000",
+          "uid": "equivocation",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF9nBAAACIAO4O1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "q",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "quoting-out-of-context",
+          "first_publication_date": "2019-09-18T00:43:12+0000",
+          "last_publication_date": "2019-09-29T10:22:58+0000",
+          "uid": "quoting-out-of-context",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Accent.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 44,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/onaccent.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 10,
+                "end": 27,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Accent",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

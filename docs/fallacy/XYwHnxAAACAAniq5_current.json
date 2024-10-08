@@ -1,0 +1,424 @@
+{
+  "id": "XYwHnxAAACAAniq5",
+  "uid": "appeal-to-authority",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYwHnxAAACAAniq5%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-26T00:35:05+0000",
+  "last_publication_date": "2020-08-20T23:44:33+0000",
+  "slugs": [
+    "appeal-to-authority",
+    "genetic-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Appeal to Authority",
+    "abbreviation": "AtA",
+    "aliases": [
+      {
+        "name": "Misleading Appeal to Authority"
+      },
+      {
+        "name": "Argument from Authority"
+      },
+      {
+        "name": "Argumentum ad Verecundiam"
+      },
+      {
+        "name": "Ipse Dixit"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An assertion is deemed true because of the position or authority of the person asserting it.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "We must often rely upon expert opinion when drawing conclusions about technical matters where we lack the time or expertise to form an informed opinion. For instance, those of us who are not physicians usually rely upon those who are when making medical decisions, and we are not wrong to do so. There are, however, four major ways in which such arguments can go wrong:",
+        "spans": [
+          {
+            "start": 52,
+            "end": 63,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 346,
+            "end": 355,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Inappropriate Appeals: If a question can be answered by observation or calculation, an argument from authority is not needed. Since arguments from authority are weaker than more direct evidence, go look or figure it out for yourself.\nThe Renaissance rebellion against the authority of Aristotle and the Bible played an important role in the scientific revolution. Aristotle was so respected in the Middle Ages that his word was taken on empirical issues which were easily decidable by observation. The scientific revolution moved away from this over-reliance on authority towards the use of observation and experiment.\nSimilarly, the Bible has been invoked as an authority on empirical or mathematical questions. An amusing example is the claim that the value of pi can be determined to be 3 based on certain passages in the Old Testament. The value of pi, however, is a mathematical question which can be answered by calculation, and appeal to authority is irrelevant.\nMoreover, about some issues there simply is no expert opinion, and an appeal to authority is bound to be a mistake. For example, on controversial issues in ethics or politics your own opinion may be as good as anyone else's.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 22,
+            "type": "strong"
+          },
+          {
+            "start": 87,
+            "end": 110,
+            "type": "em"
+          },
+          {
+            "start": 132,
+            "end": 156,
+            "type": "em"
+          },
+          {
+            "start": 763,
+            "end": 765,
+            "type": "em"
+          },
+          {
+            "start": 853,
+            "end": 855,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "No Expertise: The \"authority\" cited is not an expert on the issue, that is, the person who supplies the opinion is not an expert at all, or is one, but in an unrelated area. The now-classic example is the old television commercial which began: \"I'm not a doctor, but I play one on TV.\" The actor then proceeded to recommend a brand of cough medicine.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 13,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Bias: The authority is an expert, but is not disinterested. That is, the expert is biased towards one side of the issue, and his opinion is thereby untrustworthy.\nFor example, suppose that a medical scientist testifies that ambient cigarette smoke does not pose a hazard to the health of non-smokers exposed to it. Suppose, further, that it turns out that the scientist is an employee of a cigarette company. Clearly, the scientist has a powerful bias in favour of the position that he is taking which calls into question his objectivity.\nThere is an old saying: \"A doctor who treats himself has a fool for a patient,\" and a similar version for attorneys: \"A lawyer who defends himself has a fool for a client.\" Why should these be true if the doctor or lawyer is an expert on medicine or the law? The answer is that we are all biased in our own causes. A physician who tries to diagnose his own illness is more likely to make a mistake out of wishful thinking, or out of fear, than another physician would be.\nOf course, the fact that an expert is biased does not automatically mean he is wrong. However, suppose that a doctor were to recommend an expensive medical test at a laboratory which he or she owns. In such a situation one should, at the very least, seek a second opinion from a physician who lacks this conflict of interest.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 5,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Unrepresentativeness: While the authority is an expert, his opinion is unrepresentative of expert opinion on the subject. The sad fact is that if one looks hard enough, it is possible to find an expert who supports virtually any position that one wishes to take. \"Such is Human Perversity\". This is a great boon for debaters, who can easily find expert opinion on their side of a question, whatever that side is, but it is confusing for those of us listening to debates and trying to form an opinion.\nExperts are human beings, after all, and human beings err, even in their area of expertise. This is one reason why it is a good idea to get a second opinion about major medical matters, and even a third if the first two disagree. While most people understand the sense behind seeking a second opinion when their life or health is at stake, they are frequently willing to accept a single, unrepresentative opinion on other matters, especially when that opinion agrees with their own bias.\nBias (problem 3) is one source of unrepresentativeness. For instance, the opinions of cigarette company scientists tend to be unrepresentative of expert opinion on the health consequences of smoking because they are biased to minimize them.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 21,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "To sum up these points in a positive manner, before relying upon expert opinion, go through the following checklist:",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Is this a matter upon which expert opinion is available? If not, then your opinion will be as good as anyone else's. If so, proceed to the next question:",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Is the authority an expert on the matter? If not, then why listen? If so, go on:",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Is the authority biased towards one side? If so, the authority may be untrustworthy. At the very least, before accepting the authority's word seek a second, unbiased opinion. That is, go to the last question:",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Is the authority's opinion representative of expert opinion? If not, then find out what the expert consensus is and rely on that. If so, then you may rationally rely upon the authority's opinion.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "If an argument to authority cannot pass these five tests, then it commits the fallacy of Appeal to Authority.",
+        "spans": [
+          {
+            "start": 6,
+            "end": 27,
+            "type": "em"
+          },
+          {
+            "start": 89,
+            "end": 108,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "The moon is covered with dust because the president of our neighbourhood association said so.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "This is a fallacious Appeal to Authority because, although the president is an authority on many neighbourhood matters, you are given no reason to believe the president is an authority on the composition of the moon. It would be better to appeal to some astronomer or geologist. A TV commercial that gives you a testimonial from a famous film star who wears a Wilson watch and that suggests you, too, should wear that brand of watch is using a fallacious Appeal to Authority. The film star is an authority on how to act, not on which watch is best for you.",
+            "spans": [
+              {
+                "start": 10,
+                "end": 20,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 21,
+                "end": 40,
+                "type": "em"
+              },
+              {
+                "start": 444,
+                "end": 454,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 455,
+                "end": 474,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYvwGBAAACEAncGo",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "ad-hominem",
+          "first_publication_date": "2019-09-25T22:59:38+0000",
+          "last_publication_date": "2019-09-29T09:25:26+0000",
+          "uid": "ad-hominem",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF89hAAACIAO4C7",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "e"
+          ],
+          "lang": "en-us",
+          "slug": "etymological-fallacy",
+          "first_publication_date": "2019-09-18T00:40:25+0000",
+          "last_publication_date": "2019-10-03T06:47:39+0000",
+          "uid": "etymological-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#AppealtoAuthority",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Misleading Appeal to Authority.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 68,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/authorit.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 34,
+                "end": 51,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

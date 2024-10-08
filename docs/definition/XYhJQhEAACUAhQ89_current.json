@@ -1,0 +1,77 @@
+{
+  "id": "XYhJQhEAACUAhQ89",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYhJQhEAACUAhQ89%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T04:35:06+0000",
+  "last_publication_date": "2019-09-23T09:19:17+0000",
+  "slugs": [
+    "argument"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Argument",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A unit of reasoning composed of propositions, namely one or more premises and one conclusion.",
+        "spans": [
+          {
+            "start": 32,
+            "end": 44,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 65,
+            "end": 73,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 82,
+            "end": 92,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "aliases": [],
+    "references": []
+  }
+}

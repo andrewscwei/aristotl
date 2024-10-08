@@ -1,0 +1,114 @@
+{
+  "id": "XYhJTREAACcAhQ90",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYhJTREAACcAhQ90%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T04:35:11+0000",
+  "last_publication_date": "2019-09-29T06:33:54+0000",
+  "slugs": [
+    "inference"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Inference",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Steps in reasoning, the method used to draw a conclusion from a set of premises. Traditionally inference can be divided into three types: deduction, induction and abduction.",
+        "spans": [
+          {
+            "start": 46,
+            "end": 56,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 71,
+            "end": 79,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 95,
+            "end": 104,
+            "type": "em"
+          },
+          {
+            "start": 138,
+            "end": 147,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 149,
+            "end": 158,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 163,
+            "end": 172,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYkQXhIAACUAiish",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "abduction",
+              "first_publication_date": "2019-09-23T18:39:47+0000",
+              "last_publication_date": "2019-09-23T21:41:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "aliases": [],
+    "references": []
+  }
+}

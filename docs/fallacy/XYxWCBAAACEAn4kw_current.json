@@ -1,0 +1,395 @@
+{
+  "id": "XYxWCBAAACEAn4kw",
+  "uid": "two-wrongs-make-right",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYxWCBAAACEAn4kw%22%29+%5D%5D",
+  "tags": [
+    "t",
+    "informal",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-26T06:10:37+0000",
+  "last_publication_date": "2019-09-29T08:18:33+0000",
+  "slugs": [
+    "two-wrongs-make-a-right",
+    "tu-quoque"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Two Wrongs Make a Right",
+    "abbreviation": "TWMR",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYxUwRAAAB8An4N5",
+          "type": "fallacy",
+          "tags": [
+            "t",
+            "informal",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "tu-quoque",
+          "first_publication_date": "2019-09-26T06:08:19+0000",
+          "last_publication_date": "2019-09-29T08:19:53+0000",
+          "uid": "tu-quoque",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Occurs when it is assumed that if one wrong is committed, another wrong will rectify it.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "This fallacy involves the attempt to justify a wrong action by pointing to another wrong action. Often, the other wrong action is of the same type or committed by the accuser, in which case it is the subfallacy Tu Quoque. Attempting to justify committing a wrong on the grounds that someone else is guilty of another wrong is clearly a Red Herring―that is, a fallacy of irrelevance―because if this form of argument were cogent, one could justify anything―assuming that there is another wrong to point to, which is a very safe assumption. Nonetheless, such arguments often succeed as distractions, just as a pickled herring drawn across the trail would distract bloodhounds from the chase. By changing the subject from one wrong action to another, the arguer may manage to throw you off the scent.",
+        "spans": [
+          {
+            "start": 5,
+            "end": 12,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 211,
+            "end": 220,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYxUwRAAAB8An4N5",
+              "type": "fallacy",
+              "tags": [
+                "t",
+                "informal",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "tu-quoque",
+              "first_publication_date": "2019-09-26T06:08:19+0000",
+              "last_publication_date": "2019-09-29T08:19:53+0000",
+              "uid": "tu-quoque",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 336,
+            "end": 347,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYq81REAACUA7zWS",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "r",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "red-herring",
+              "first_publication_date": "2019-09-25T01:03:26+0000",
+              "last_publication_date": "2019-09-29T09:31:21+0000",
+              "uid": "red-herring",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 406,
+            "end": 414,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 420,
+            "end": 426,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 446,
+            "end": 454,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Oops, no paper this morning. Somebody in our apartment building probably stole my newspaper. So, that makes it OK for me to steal one from my neighbour's doormat while nobody else is out here in the hallway.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYv90hAAACIAnf7Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "bandwagon",
+          "first_publication_date": "2019-09-25T23:58:10+0000",
+          "last_publication_date": "2019-09-29T09:26:28+0000",
+          "uid": "bandwagon",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw4UBAAACAAnwT7",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "e"
+          ],
+          "lang": "en-us",
+          "slug": "emotional-appeal",
+          "first_publication_date": "2019-09-26T04:05:54+0000",
+          "last_publication_date": "2019-09-29T08:44:56+0000",
+          "uid": "emotional-appeal",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq7YBEAACQA7y8Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "straw-man",
+          "first_publication_date": "2019-09-25T00:57:23+0000",
+          "last_publication_date": "2019-09-29T09:39:44+0000",
+          "uid": "straw-man",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxSKxAAACAAn3gF",
+          "type": "fallacy",
+          "tags": [
+            "g",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "guilt-by-association",
+          "first_publication_date": "2019-09-26T05:56:11+0000",
+          "last_publication_date": "2019-09-29T08:23:26+0000",
+          "uid": "guilt-by-association",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#TwoWrongsMakeaRight",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Two Wrongs Make a Right.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 61,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/twowrong.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 27,
+                "end": 44,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

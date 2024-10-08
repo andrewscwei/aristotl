@@ -1,0 +1,245 @@
+{
+  "id": "XYJJ8hAAACMAPyN7",
+  "uid": "masked-man-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYJJ8hAAACMAPyN7%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "m",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-18T15:15:19+0000",
+  "last_publication_date": "2019-09-29T09:46:22+0000",
+  "slugs": [
+    "masked-man-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Masked Man Fallacy",
+    "abbreviation": "MM",
+    "aliases": [
+      {
+        "name": "Illicit Substitution of Identicals"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "The substitution of identical designators in a true statement can lead to a false one.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Substitution of Identicals (SI) is a familiar form of reasoning, especially in mathematics. If x is identical to y, then whatever is true of x will also be true of y, so that you can substitute x for y in any statement without changing its truth-value. Therefore, this is a validating form of argument so long as the context in which it occurs is what is called \"extensional\", but in non-extensional contexts―which are called \"intensional\"―SI is non-validating.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 26,
+            "type": "em"
+          },
+          {
+            "start": 28,
+            "end": 30,
+            "type": "em"
+          },
+          {
+            "start": 95,
+            "end": 96,
+            "type": "strong"
+          },
+          {
+            "start": 113,
+            "end": 114,
+            "type": "strong"
+          },
+          {
+            "start": 141,
+            "end": 142,
+            "type": "strong"
+          },
+          {
+            "start": 164,
+            "end": 165,
+            "type": "strong"
+          },
+          {
+            "start": 194,
+            "end": 195,
+            "type": "strong"
+          },
+          {
+            "start": 200,
+            "end": 201,
+            "type": "strong"
+          },
+          {
+            "start": 293,
+            "end": 301,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 440,
+            "end": 442,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "What is an \"intensional\" context? Basically, it's one in which SI does not hold! This is not very helpful, but the distinction can be drawn by examples: given that Mark Twain wrote Huck Finn and that Sam Clemens was the same person as Mark Twain, then Sam Clemens wrote Huck Finn. The context \"x wrote Huck Finn\" is extensional, which means that we can validly substitute identicals within it. In contrast, if Joe said \"Mark Twain wrote Huck Finn\", it does not follow that he said \"Sam Clemens wrote Huck Finn\", for he may have said no such thing.",
+        "spans": [
+          {
+            "start": 63,
+            "end": 65,
+            "type": "em"
+          },
+          {
+            "start": 294,
+            "end": 295,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The fallacy of Illicit Substitution of Identicals—or, more colorfully, the Masked Man Fallacy—is an application of SI within an intensional context.",
+        "spans": [
+          {
+            "start": 4,
+            "end": 11,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 15,
+            "end": 49,
+            "type": "em"
+          },
+          {
+            "start": 75,
+            "end": 93,
+            "type": "em"
+          },
+          {
+            "start": 115,
+            "end": 117,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "The masked man is Mr. Hyde.\nThe witness believes that the masked man committed the crime.\nTherefore, the witness believes that Mr. Hyde committed the crime.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Masked Man Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 60,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/illisubs.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 26,
+                "end": 43,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

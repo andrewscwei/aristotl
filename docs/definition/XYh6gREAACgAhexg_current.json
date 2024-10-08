@@ -1,0 +1,118 @@
+{
+  "id": "XYh6gREAACgAhexg",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYh6gREAACgAhexg%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T07:55:49+0000",
+  "last_publication_date": "2019-09-29T06:32:36+0000",
+  "slugs": [
+    "fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Fallacy",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "An error in reasoning, i.e. an invalid argument in which the presented premises do not provided sufficient support for the conclusion. In general, fallacies can be divided into two types: formal and informal.",
+        "spans": [
+          {
+            "start": 39,
+            "end": 47,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 71,
+            "end": 79,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 123,
+            "end": 133,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 147,
+            "end": 156,
+            "type": "em"
+          },
+          {
+            "start": 188,
+            "end": 194,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYX6ihEAACYAet06",
+              "type": "definition",
+              "tags": [
+                "fallacy-type"
+              ],
+              "lang": "en-us",
+              "slug": "formal-fallacy",
+              "first_publication_date": "2019-09-21T10:26:13+0000",
+              "last_publication_date": "2019-09-29T06:32:14+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 199,
+            "end": 207,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYX59hEAACcAetqo",
+              "type": "definition",
+              "tags": [
+                "fallacy-type"
+              ],
+              "lang": "en-us",
+              "slug": "informal-fallacy",
+              "first_publication_date": "2019-09-21T10:23:49+0000",
+              "last_publication_date": "2019-09-29T06:33:41+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "aliases": [],
+    "references": []
+  }
+}

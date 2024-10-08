@@ -1,0 +1,508 @@
+{
+  "id": "XYxgjBAAACEAn7hF",
+  "uid": "affirmative-conclusion-from-a-negative-premise",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYxgjBAAACEAn7hF%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "beta",
+    "a"
+  ],
+  "first_publication_date": "2019-09-26T06:59:18+0000",
+  "last_publication_date": "2019-09-30T22:28:38+0000",
+  "slugs": [
+    "affirmative-conclusion-from-a-negative-premise",
+    "affirmative-conclusion-from-a-negative-premiss",
+    "negative-conclusion-from-affirmative-premises"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Affirmative Conclusion from a Negative Premise",
+    "abbreviation": "ACNP",
+    "aliases": [
+      {
+        "name": "Illicit Negative"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYsybBEAACIA8UJX",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "s",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "syllogistic-fallacy",
+          "first_publication_date": "2019-09-25T09:36:12+0000",
+          "last_publication_date": "2019-09-29T00:19:12+0000",
+          "uid": "syllogistic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A categorical syllogism has a positive conclusion, but at least one negative premise.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Inferring an affirmative conclusion in a syllogistic argument that has at least one negative premise is a formal fallacy in the logic of categorical syllogisms―for a short introduction to categorical syllogisms, see the entry for Syllogistic Fallacy. This is because all validating forms of categorical syllogism that have at least one negative premise also have a negative conclusion, which can be shown by inspection since there are only 256 different forms of categorical syllogism. However, it's intuitive that a negation in the premises should lead a validly drawn conclusion to also be negative.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 25,
+            "end": 35,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 41,
+            "end": 52,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 53,
+            "end": 61,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 93,
+            "end": 100,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 106,
+            "end": 120,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYX6ihEAACYAet06",
+              "type": "definition",
+              "tags": [
+                "fallacy-type"
+              ],
+              "lang": "en-us",
+              "slug": "formal-fallacy",
+              "first_publication_date": "2019-09-21T10:26:13+0000",
+              "last_publication_date": "2019-09-29T06:32:14+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 137,
+            "end": 159,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 188,
+            "end": 210,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 230,
+            "end": 249,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYsybBEAACIA8UJX",
+              "type": "fallacy",
+              "tags": [
+                "formal",
+                "s",
+                "alpha"
+              ],
+              "lang": "en-us",
+              "slug": "syllogistic-fallacy",
+              "first_publication_date": "2019-09-25T09:36:12+0000",
+              "last_publication_date": "2019-09-29T00:19:12+0000",
+              "uid": "syllogistic-fallacy",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 291,
+            "end": 312,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 345,
+            "end": 352,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 374,
+            "end": 384,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 463,
+            "end": 484,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 533,
+            "end": 541,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 570,
+            "end": 580,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "No cats are marsupials.\nSome mammals are not cats.\nTherefore, some mammals are marsupials.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYxdoRAAACAAn6sJ",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "n",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "negative-conclusion-from-affirmative-premises",
+          "first_publication_date": "2019-09-26T06:54:00+0000",
+          "last_publication_date": "2019-09-29T06:55:54+0000",
+          "uid": "negative-conclusion-from-affirmative-premises",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF3CBAAACQAO2Yb",
+          "type": "fallacy",
+          "tags": [
+            "f",
+            "formal",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "four-terms",
+          "first_publication_date": "2019-09-18T00:30:47+0000",
+          "last_publication_date": "2019-09-29T06:59:32+0000",
+          "uid": "four-terms",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwKfxAAACIAnje4",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "i",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "illicit-minor",
+          "first_publication_date": "2019-09-26T00:49:44+0000",
+          "last_publication_date": "2019-09-29T06:42:18+0000",
+          "uid": "illicit-minor",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwJoxAAACEAnjPf",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "i",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "illicit-major",
+          "first_publication_date": "2019-09-26T00:46:45+0000",
+          "last_publication_date": "2019-09-29T07:00:53+0000",
+          "uid": "illicit-major",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxYHRAAACEAn5Jz",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "u",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "undistributed-middle",
+          "first_publication_date": "2019-09-26T06:22:29+0000",
+          "last_publication_date": "2019-09-29T17:12:40+0000",
+          "uid": "undistributed-middle",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw5QxAAACEAnwkj",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "e"
+          ],
+          "lang": "en-us",
+          "slug": "exclusive-premises",
+          "first_publication_date": "2019-09-26T04:09:37+0000",
+          "last_publication_date": "2021-08-24T22:09:21+0000",
+          "uid": "exclusive-premises",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Affirmative Conclusion from a Negative Premiss.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 84,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/afromneg.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 50,
+                "end": 67,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

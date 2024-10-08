@@ -1,0 +1,329 @@
+{
+  "id": "XYw2gRAAACAAnvzp",
+  "uid": "texas-sharpshooter",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYw2gRAAACAAnvzp%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "beta",
+    "t"
+  ],
+  "first_publication_date": "2019-09-26T03:57:32+0000",
+  "last_publication_date": "2019-09-29T08:48:15+0000",
+  "slugs": [
+    "texas-sharpshooter",
+    "regression"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Texas Sharpshooter",
+    "abbreviation": "TS",
+    "aliases": [
+      {
+        "name": "The Texas Sharpshooter Effect"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwzJRAAACIAnu3s",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "alpha",
+            "f"
+          ],
+          "lang": "en-us",
+          "slug": "false-cause",
+          "first_publication_date": "2019-09-26T03:45:44+0000",
+          "last_publication_date": "2019-09-29T08:53:28+0000",
+          "uid": "false-cause",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Improperly asserting a cause to explain a cluster of data.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "This fallacy occurs when someone jumps to the conclusion that a cluster in some data must be the result of a cause, usually one that it is clustered around. There are two reasons why this is fallacious:",
+        "spans": [
+          {
+            "start": 5,
+            "end": 12,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 46,
+            "end": 56,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 191,
+            "end": 201,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "The cluster may well be the result of chance, in which case it was not caused by anything.",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Even if the cluster is not the result of chance, there are other possible reasons for the clustering, other than the cause chosen. For instance, if a disease is contagious, it may be clustered around a carrier.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "At best, the occurrence of a cluster in the data is the basis not for a causal conclusion, but for the formation of a causal hypothesis which needs to be tested. Patterns in data can be useful for forming hypotheses, but they are not themselves sufficient evidence of a causal connection. In short, correlation is not causation.",
+        "spans": [
+          {
+            "start": 79,
+            "end": 89,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Psychic Sarah makes twenty-six predictions about what will happen next year. When one, but only one, of the predictions comes true, she says, \"Aha! I can see into the future.\"",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwyUxAAACAAnuo9",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "cum-hoc-ergo-propter-hoc",
+          "first_publication_date": "2019-09-26T03:49:04+0000",
+          "last_publication_date": "2019-09-29T08:45:33+0000",
+          "uid": "cum-hoc",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw0lRAAACAAnvRQ",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "p"
+          ],
+          "lang": "en-us",
+          "slug": "post-hoc-ergo-propter-hoc",
+          "first_publication_date": "2019-09-26T03:49:04+0000",
+          "last_publication_date": "2019-09-29T08:46:06+0000",
+          "uid": "post-hoc",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw1rhAAACIAnvk8",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "r"
+          ],
+          "lang": "en-us",
+          "slug": "regression",
+          "first_publication_date": "2019-09-26T03:53:50+0000",
+          "last_publication_date": "2019-09-29T08:46:45+0000",
+          "uid": "regresiion",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYGHpBAAACIAO7DS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "slippery-slope",
+          "first_publication_date": "2019-09-18T01:25:58+0000",
+          "last_publication_date": "2019-09-29T06:39:01+0000",
+          "uid": "slippery-slope",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Sharpshooters",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Texas Sharpshooter Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 68,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/texsharp.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 34,
+                "end": 51,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

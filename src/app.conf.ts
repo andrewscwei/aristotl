@@ -84,4 +84,9 @@ export default {
    * Supported locales (first locale is the default locale).
    */
   locales: ['en'],
+
+  /**
+   * Specifies if local docs should be used instead of fetching from Prismic.
+   */
+  useLocalDocs: true,
 }

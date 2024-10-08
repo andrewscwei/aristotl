@@ -7,6 +7,9 @@ import resolveLinks from '../links.conf'
 import { getLocalizedPath } from './i18n'
 
 const debug = (process.env.NODE_ENV === 'development' || __APP_CONFIG__.enableDebugInProduction === true) ? require('debug')('app:prismic') : () => {}
+const docsReq = require.context('../../docs', true, /\.json$/)
+const docs = _.orderBy(docsReq.keys().map(docsReq), ['data.abbreviation'], 'asc') as PrismicDocument[]
+const docsByType =_.groupBy(docs, 'type')
 
 /**
  * Maps a Prismic document to its URL in the app. An example of when this is
@@ -175,6 +178,10 @@ export function removePreviewToken() {
  * @returns Fetched documents as fulfilment value.
  */
 export async function fetchDocsByType(type: string, uid?: string, options: Partial<Prismic.QueryParams> = {}, pages = 1): Promise<readonly PrismicDocument[]> {
+  if (__APP_CONFIG__.useLocalDocs) {
+    return docsByType[type] ?? []
+  }
+
   const api = getAPI()
   const previewToken = loadPreviewToken()
 

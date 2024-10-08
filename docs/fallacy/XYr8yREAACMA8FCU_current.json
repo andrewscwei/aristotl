@@ -1,0 +1,267 @@
+{
+  "id": "XYr8yREAACMA8FCU",
+  "uid": "probabilistic-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYr8yREAACMA8FCU%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "p",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-25T05:39:37+0000",
+  "last_publication_date": "2019-09-30T22:24:37+0000",
+  "slugs": [
+    "probabilistic-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Probabilistic Fallacy",
+    "abbreviation": "Pb",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYJJVBAAACMAPyCA",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "base-rate-fallacy",
+          "first_publication_date": "2019-09-18T15:12:27+0000",
+          "last_publication_date": "2019-09-29T10:35:16+0000",
+          "uid": "base-rate-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYJJtxAAACQAPyJT",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "conjunction-fallacy",
+          "first_publication_date": "2019-09-18T15:14:03+0000",
+          "last_publication_date": "2019-09-29T10:34:59+0000",
+          "uid": "conjunction-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxQaxAAACIAn3A5",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "gamblers-fallacy",
+          "first_publication_date": "2019-09-26T05:48:28+0000",
+          "last_publication_date": "2019-09-29T10:34:32+0000",
+          "uid": "gamblers",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxRPBAAACAAn3Pb",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "beta",
+            "h"
+          ],
+          "lang": "en-us",
+          "slug": "hot-hand-fallacy",
+          "first_publication_date": "2019-09-26T05:52:06+0000",
+          "last_publication_date": "2019-09-29T10:34:17+0000",
+          "uid": "hot-hand",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "When the inference from the premises to the conclusion violates the laws of probability.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A probabilistic argument is one which concludes that something has some probability based upon information about probabilities given in its premises. Such an argument is invalid when the inference from the premises to the conclusion violates the laws of probability. Probabilistic Fallacies are formal ones because they involve reasoning which violates the formal rules of probability theory. Thus, understanding Probabilistic Fallacies requires a knowledge of probability theory.",
+        "spans": [
+          {
+            "start": 16,
+            "end": 24,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 140,
+            "end": 148,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 158,
+            "end": 166,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 187,
+            "end": 196,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 206,
+            "end": 214,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 222,
+            "end": 232,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 267,
+            "end": 290,
+            "type": "em"
+          },
+          {
+            "start": 413,
+            "end": 436,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Probabilistic Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 59,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/probfall.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 25,
+                "end": 42,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "XYyExBAAACAAoF26",
+  "uid": "misplaced-burden-of-proof",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYyExBAAACAAoF26%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "m",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-26T09:29:44+0000",
+  "last_publication_date": "2019-09-29T07:37:44+0000",
+  "slugs": [
+    "misplaced-burden-of-proof",
+    "willed-ignorance"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Misplaced Burden of Proof",
+    "abbreviation": "MBP",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Committing the error of trying to get someone else to prove you are wrong, when it is your responsibility to prove you are correct.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Committing the error of trying to get someone else to prove you are wrong, when it is your responsibility to prove you are correct, hence shifting the burden of proof onto someone else.",
+        "spans": [
+          {
+            "start": 151,
+            "end": 166,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvuoxAAACAAnbsd",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "burden-of-proof",
+              "first_publication_date": "2019-09-25T22:48:27+0000",
+              "last_publication_date": "2019-09-29T06:27:52+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Person A: I saw a green alien from outer space.\nPerson B: What!? Can you prove it?\nPerson A: You can't prove I didn't.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "If someone says, “I saw a green alien from outer space,” you properly should ask for some proof. If the person responds with no more than something like, “Prove I didn’t,” then they are not accepting their burden of proof and are improperly trying to place it on your shoulders.",
+            "spans": [
+              {
+                "start": 206,
+                "end": 221,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYvuoxAAACAAnbsd",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "burden-of-proof",
+                  "first_publication_date": "2019-09-25T22:48:27+0000",
+                  "last_publication_date": "2019-09-29T06:27:52+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#MisplacedBurden",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

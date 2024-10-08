@@ -1,0 +1,266 @@
+{
+  "id": "XYq7YBEAACQA7y8Q",
+  "uid": "straw-man",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYq7YBEAACQA7y8Q%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "s",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-25T00:57:23+0000",
+  "last_publication_date": "2019-09-29T09:39:44+0000",
+  "slugs": [
+    "straw-man"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Straw Man",
+    "abbreviation": "SM",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An argument based on misrepresentation of an opponent's position.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Straw Man is one of the best-named fallacies, because it is memorable and vividly illustrates the nature of the fallacy. Imagine a fight in which one of the combatants sets up a man of straw, attacks it, then proclaims victory. All the while, the real opponent stands by untouched.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "em"
+          },
+          {
+            "start": 35,
+            "end": 44,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 112,
+            "end": 119,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Your reasoning contains the Straw Man fallacy whenever you attribute an easily refuted position to your opponent, one that the opponent wouldn't endorse, and then proceed to attack the easily refuted position (the straw man) believing you have thereby undermined the opponent's actual position. If the misrepresentation is on purpose, then the Straw Man fallacy is caused by lying.",
+        "spans": [
+          {
+            "start": 28,
+            "end": 37,
+            "type": "em"
+          },
+          {
+            "start": 38,
+            "end": 45,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 214,
+            "end": 223,
+            "type": "em"
+          },
+          {
+            "start": 344,
+            "end": 353,
+            "type": "em"
+          },
+          {
+            "start": 354,
+            "end": 361,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example (a debate before the city council):",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Opponent: Because of the killing and suffering of Indians that followed Columbus's discovery of America, the City of Berkeley should declare that Columbus Day will no longer be observed in our city.\nSpeaker: This is ridiculous, fellow members of the city council. It's not true that everybody who ever came to America from another country somehow oppressed the Indians. I say we should continue to observe Columbus Day, and vote down this resolution that will make the City of Berkeley the laughing stock of the nation.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "The speaker has twisted what his opponent said; the opponent never said, nor even indirectly suggested, that everybody who ever came to America from another country somehow oppressed the Indians.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#StrawMan",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Straw Man.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 47,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/strawman.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 13,
+                "end": 30,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "id": "XYx7xBAAACEAoDNg",
+  "uid": "is-ought",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYx7xBAAACEAoDNg%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "i",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-26T08:53:28+0000",
+  "last_publication_date": "2019-09-29T07:51:34+0000",
+  "slugs": [
+    "is-ought",
+    "naturalistic"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Is-Ought",
+    "abbreviation": "IO",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwq5RAAACAAnslB",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-nature",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-30T05:19:02+0000",
+          "uid": "appeal-to-nature",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Statements about what is, on the basis of claims about what ought to be.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The Is-Ought fallacy occurs when a conclusion expressing what ought to be so is inferred from premises expressing only what is so, in which it is supposed that no implicit or explicit ought-premises are need. There is controversy in the philosophical literature regarding whether this type of inference is always fallacious.",
+        "spans": [
+          {
+            "start": 4,
+            "end": 12,
+            "type": "em"
+          },
+          {
+            "start": 13,
+            "end": 20,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 35,
+            "end": 45,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 80,
+            "end": 88,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 94,
+            "end": 102,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 190,
+            "end": 198,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 293,
+            "end": 302,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 313,
+            "end": 323,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "He's torturing the cat.\nSo, he shouldn't do that.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "This argument would not use the fallacy if there were an implicit premise indicating that he is a person and persons shouldn't torture other beings.",
+            "spans": [
+              {
+                "start": 5,
+                "end": 13,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 32,
+                "end": 39,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 66,
+                "end": 73,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhK7BEAACUAhRat",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "premise",
+                  "first_publication_date": "2019-09-23T04:35:02+0000",
+                  "last_publication_date": "2019-09-23T09:12:24+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Is-Ought",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

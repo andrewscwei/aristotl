@@ -1,0 +1,410 @@
+{
+  "id": "XYwq1RAAAB8Ansj2",
+  "uid": "appeal-to-ignorance",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYwq1RAAAB8Ansj2%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-26T03:09:01+0000",
+  "last_publication_date": "2019-09-29T08:57:08+0000",
+  "slugs": [
+    "appeal-to-ignorance",
+    "appeal-to-force"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Appeal to Ignorance",
+    "abbreviation": "AtI",
+    "aliases": [
+      {
+        "name": "Argument from Ignorance"
+      },
+      {
+        "name": "Argument to Ignorance"
+      },
+      {
+        "name": "Argumentum ad Ignorantiam"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Assuming that a claim is true because it has not been or cannot be proven false, or vice versa.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "An appeal to ignorance is an argument for a conclusion based on a lack of evidence. There are two forms of the argument depending on whether the argument is affirmative or negative:",
+        "spans": [
+          {
+            "start": 3,
+            "end": 22,
+            "type": "em"
+          },
+          {
+            "start": 29,
+            "end": 37,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 44,
+            "end": 54,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 111,
+            "end": 119,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 145,
+            "end": 153,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Affirmative: The conclusion is true because there is no evidence against it.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 12,
+            "type": "strong"
+          },
+          {
+            "start": 17,
+            "end": 27,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Negative: The conclusion is false because there is no evidence for it.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "strong"
+          },
+          {
+            "start": 14,
+            "end": 24,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "preformatted",
+            "text": "Nobody has ever proved to me there's a God, so I know there is no God.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "This kind of reasoning is generally fallacious. It would be proper reasoning only if the proof attempts were quite thorough, and it were the case that, if the being or object were to exist, then there would be a discoverable proof of this. Another common example of the fallacy involves ignorance of a future event: You people have been complaining about the danger of Xs ever since they were invented, but there's never been any big problem with Xs, so there's nothing to worry about.",
+            "spans": [
+              {
+                "start": 36,
+                "end": 46,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 270,
+                "end": 277,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwqvxAAACAAnsiS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-force",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:55:43+0000",
+          "uid": "appeal-to-force",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqNxAAACIAnsYm",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-celebrity",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:56:09+0000",
+          "uid": "appeal-to-celebrity",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwq5RAAACAAnslB",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-nature",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-30T05:19:02+0000",
+          "uid": "appeal-to-nature",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwHnxAAACAAniq5",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-authority",
+          "first_publication_date": "2019-09-26T00:35:05+0000",
+          "last_publication_date": "2020-08-20T23:44:33+0000",
+          "uid": "appeal-to-authority",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#AppealtoIgnorance",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Appeal to Ignorance.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 57,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/ignorant.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 23,
+                "end": 40,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

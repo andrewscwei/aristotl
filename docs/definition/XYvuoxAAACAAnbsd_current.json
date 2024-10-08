@@ -1,0 +1,128 @@
+{
+  "id": "XYvuoxAAACAAnbsd",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYvuoxAAACAAnbsd%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-25T22:48:27+0000",
+  "last_publication_date": "2019-09-29T06:27:52+0000",
+  "slugs": [
+    "burden-of-proof"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Burden of Proof",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The obligation on a party in a dispute to provide sufficient warrant for their position. ",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "When two parties are in a discussion and one makes a claim that the other disputes, the one who makes the claim typically has a burden of proof to justify or substantiate that claim especially when it challenges a perceived status quo.",
+        "spans": [
+          {
+            "start": 128,
+            "end": 143,
+            "type": "em"
+          },
+          {
+            "start": 224,
+            "end": 234,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "While certain kinds of arguments, such as logical syllogisms, require mathematical or strictly logical proofs, the standard for evidence to meet the burden of proof is usually determined by context and community standards and conventions.",
+        "spans": [
+          {
+            "start": 23,
+            "end": 32,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 50,
+            "end": 60,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 149,
+            "end": 164,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Philosophical debate can devolve into arguing about who has the burden of proof about a particular claim. This has been described as \"burden tennis\" or the \"onus game\".",
+        "spans": [
+          {
+            "start": 64,
+            "end": 79,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      {
+        "name": "Onus Probandi"
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"Burden of proof (philosophy).\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 16 Sep. 2019. Web. 25 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 156,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/Burden_of_proof_(philosophy)",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 56,
+                "end": 88,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

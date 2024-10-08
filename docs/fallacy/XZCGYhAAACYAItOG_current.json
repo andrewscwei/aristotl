@@ -1,0 +1,372 @@
+{
+  "id": "XZCGYhAAACYAItOG",
+  "uid": "multiple-comparisons",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XZCGYhAAACYAItOG%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "m",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-29T10:33:56+0000",
+  "last_publication_date": "2019-09-29T10:37:59+0000",
+  "slugs": [
+    "multiple-comparisons",
+    "quoting-out-of-context"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Multiple Comparisons",
+    "abbreviation": "MC",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYr8yREAACMA8FCU",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "p",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "probabilistic-fallacy",
+          "first_publication_date": "2019-09-25T05:39:37+0000",
+          "last_publication_date": "2019-09-30T22:24:37+0000",
+          "uid": "probabilistic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Multiple comparisons are done in epidemiology at an insufficient confidence level to arrive at a conclusion.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Though recognition of the Multiple Comparisons fallacy seems to have come from epidemiology, it's a danger in any statistical study that compares groups of things. The kind of reasoning used to draw conclusions from such studies is called \"inductive\". In inductive reasoning, there is always some chance that the conclusion will be false even if the evidence is true. In other words, the connection between the premises and conclusion is never 100%―that's only for deductive reasoning. So, the question arises: what level of probability―called a \"confidence level\"―are we willing to accept in our reasoning? In scientific contexts, the confidence level is usually set at 95%, and when a result occurs with a probability less than or equal to 5% it is said to be \"statistically significant\" at the 95% confidence level.",
+        "spans": [
+          {
+            "start": 26,
+            "end": 46,
+            "type": "em"
+          },
+          {
+            "start": 47,
+            "end": 54,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 199,
+            "end": 210,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 240,
+            "end": 249,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 255,
+            "end": 274,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 313,
+            "end": 323,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 411,
+            "end": 419,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 424,
+            "end": 434,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 465,
+            "end": 484,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "When the confidence level is set at 95%, there is a probability of one in twenty―that is, 5%―that a misleading result will occur simply by chance. This has an important consequence that when overlooked leads to the Multiple Comparisons fallacy. For instance, when comparisons are done in epidemiology, there is a one in twenty chance that such a comparison will show a statistically significant difference. So, if twenty or more comparisons are made in a single study, it will likely get at least one statistically significant result just by chance. Thus, it's necessary to use a higher confidence level in cases of multiple comparisons.",
+        "spans": [
+          {
+            "start": 215,
+            "end": 235,
+            "type": "em"
+          },
+          {
+            "start": 236,
+            "end": 243,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 616,
+            "end": 636,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Actually, the situation is worse still: if the things being compared are statistically independent, then it takes only fourteen comparisons for it to be more likely than not to get a statistically significant result by chance. This is a result of the multiplication rule of probability theory.",
+        "spans": [
+          {
+            "start": 251,
+            "end": 292,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "...[I]n 1992, a landmark study appeared from Sweden. A huge investigation, it enrolled everyone living within 300 meters of Sweden's high-voltage transmission line system over a 25-year period. They went far beyond all previous studies in their efforts to measure magnetic fields, calculating the fields that the children were exposed to at the time of their cancer diagnosis and before. This study reported an apparently clear association between magnetic field exposure and childhood leukemia, with a risk ratio for the most highly exposed of nearly 4.\n\n...Surely, here was the proof that power lines were dangerous, the proof that even the physicists and biological naysayers would have to accept. But three years after the study was published, the Swedish research no longer looks so unassailable. ...[T]he original contractor's report...reveals the remarkable thoroughness of the Swedish team. Unlike the published article, which just summarizes part of the data, the report shows everything they did in great detail, all the things they measured and all the comparisons they made. ...[N]early 800 risk ratios are in the report....",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYJJVBAAACMAPyCA",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "base-rate-fallacy",
+          "first_publication_date": "2019-09-18T15:12:27+0000",
+          "last_publication_date": "2019-09-29T10:35:16+0000",
+          "uid": "base-rate-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYJJtxAAACQAPyJT",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "conjunction-fallacy",
+          "first_publication_date": "2019-09-18T15:14:03+0000",
+          "last_publication_date": "2019-09-29T10:34:59+0000",
+          "uid": "conjunction-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxQaxAAACIAn3A5",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "gamblers-fallacy",
+          "first_publication_date": "2019-09-26T05:48:28+0000",
+          "last_publication_date": "2019-09-29T10:34:32+0000",
+          "uid": "gamblers",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxRPBAAACAAn3Pb",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "beta",
+            "h"
+          ],
+          "lang": "en-us",
+          "slug": "hot-hand-fallacy",
+          "first_publication_date": "2019-09-26T05:52:06+0000",
+          "last_publication_date": "2019-09-29T10:34:17+0000",
+          "uid": "hot-hand",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Multiple Comparisons Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 70,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/multcomp.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 36,
+                "end": 55,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

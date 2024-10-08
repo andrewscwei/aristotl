@@ -1,0 +1,355 @@
+{
+  "id": "XYw4UBAAACAAnwT7",
+  "uid": "emotional-appeal",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYw4UBAAACAAnwT7%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "beta",
+    "e"
+  ],
+  "first_publication_date": "2019-09-26T04:05:54+0000",
+  "last_publication_date": "2019-09-29T08:44:56+0000",
+  "slugs": [
+    "emotional-appeal",
+    "cum-hoc-ergo-propter-hoc"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Emotional Appeal",
+    "abbreviation": "EA",
+    "aliases": [
+      {
+        "name": "Irrelevant Emotional Appeal"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An argument is made due to the manipulation of emotions, rather than the use of valid reasoning.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "An appeal to emotion is a type of argument or rhetorical technique that attempts to arouse the emotions of its audience in order to gain acceptance of a conclusion or bring about a change in behaviour. Such an appeal is fallacious when emotion bypasses or overwhelms the audience's reason, leading to irrational beliefs or behaviour.",
+        "spans": [
+          {
+            "start": 34,
+            "end": 42,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 153,
+            "end": 163,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 220,
+            "end": 230,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "[The speaker knows he is talking to an aggrieved person whose house is worth much more than $100,000.] You had a great job and didn't deserve to lose it. I wish I could help somehow. I do have one idea. Now your family needs financial security even more. You need cash. I can help you. Here is a check for $100,000. Just sign this standard sales agreement, and we can skip the realtors and all the headaches they would create at this critical time in your life.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "There is nothing wrong with using emotions when you argue, but it's a mistake to use emotions as the key premises or as tools to downplay relevant information.",
+            "spans": [
+              {
+                "start": 105,
+                "end": 113,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhK7BEAACUAhRat",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "premise",
+                  "first_publication_date": "2019-09-23T04:35:02+0000",
+                  "last_publication_date": "2019-09-23T09:12:24+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq7YBEAACQA7y8Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "straw-man",
+          "first_publication_date": "2019-09-25T00:57:23+0000",
+          "last_publication_date": "2019-09-29T09:39:44+0000",
+          "uid": "straw-man",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxWCBAAACEAn4kw",
+          "type": "fallacy",
+          "tags": [
+            "t",
+            "informal",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "two-wrongs-make-a-right",
+          "first_publication_date": "2019-09-26T06:10:37+0000",
+          "last_publication_date": "2019-09-29T08:18:33+0000",
+          "uid": "two-wrongs-make-right",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYv90hAAACIAnf7Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "bandwagon",
+          "first_publication_date": "2019-09-25T23:58:10+0000",
+          "last_publication_date": "2019-09-29T09:26:28+0000",
+          "uid": "bandwagon",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxSKxAAACAAn3gF",
+          "type": "fallacy",
+          "tags": [
+            "g",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "guilt-by-association",
+          "first_publication_date": "2019-09-26T05:56:11+0000",
+          "last_publication_date": "2019-09-29T08:23:26+0000",
+          "uid": "guilt-by-association",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#AppealtoEmotions",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Emotional Appeal.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 54,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/emotiona.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 20,
+                "end": 37,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

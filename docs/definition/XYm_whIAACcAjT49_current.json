@@ -1,0 +1,54 @@
+{
+  "id": "XYm_whIAACcAjT49",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYm_whIAACcAjT49%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-24T07:03:51+0000",
+  "last_publication_date": "2019-09-24T07:03:51+0000",
+  "slugs": [
+    "contextomy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Contextomy",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A quote taken out of context in such a way as to distort the speaker or author's intended meaning.",
+        "spans": []
+      }
+    ],
+    "aliases": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Glossary.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 46,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/glossary.html#Contextomy",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 12,
+                "end": 31,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

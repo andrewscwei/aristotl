@@ -1,0 +1,163 @@
+{
+  "id": "XYnRiBIAACcAjY-f",
+  "uid": "false-equivalence",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYnRiBIAACcAjY-f%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "f",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-24T08:26:53+0000",
+  "last_publication_date": "2019-09-29T10:24:11+0000",
+  "slugs": [
+    "false-equivalence"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "False Equivalence",
+    "abbreviation": "FEq",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Two completely opposing arguments appear to be logically equivalent when in fact they are not.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The fallacy of False Equivalence is committed when someone implies falsely (and usually indirectly) that the two sides on some issue have basically equivalent evidence, while knowingly covering up the fact that one side’s evidence is much weaker.",
+        "spans": [
+          {
+            "start": 4,
+            "end": 11,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 15,
+            "end": 32,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "A popular science article suggests there is no consensus about the Earth's age, by quoting one geologist who says she believes the Earth is billions of years old, and then by quoting Bible expert James Ussher who says he calculated from the Bible that the world began on Friday, October 28, 4,004 B.C.E. The article suppresses the evidence that geologists (who are the relevant experts on this issue) have reached a consensus that the Earth is billions of years old.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYnTlxIAACYAjZk0",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "suppressed-evidence",
+          "first_publication_date": "2019-09-24T08:36:41+0000",
+          "last_publication_date": "2019-10-01T21:28:08+0000",
+          "uid": "suppressed-evidence",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#False-Equivalence",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"False equivalence.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 13 Sep. 2019. Web. 24 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/False_equivalence",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

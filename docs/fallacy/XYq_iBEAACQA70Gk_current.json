@@ -1,0 +1,583 @@
+{
+  "id": "XYq_iBEAACQA70Gk",
+  "uid": "propositional-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYq_iBEAACQA70Gk%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "p",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-25T01:14:51+0000",
+  "last_publication_date": "2019-09-29T09:49:09+0000",
+  "slugs": [
+    "propositional-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Propositional Fallacy",
+    "abbreviation": "Pp",
+    "aliases": [
+      {
+        "name": "Fallacy of Propositional Logic"
+      },
+      {
+        "name": "Fallacy of Sentential Logic"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYJKNhAAACIAPyTL",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "affirming-a-disjunct",
+          "first_publication_date": "2019-09-18T15:16:22+0000",
+          "last_publication_date": "2019-09-29T06:21:54+0000",
+          "uid": "affirming-a-disjunct",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrFpBEAACQA710C",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "affirming-the-consequent",
+          "first_publication_date": "2019-09-25T01:42:26+0000",
+          "last_publication_date": "2019-09-29T10:15:48+0000",
+          "uid": "affirming-the-consequent",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrGtBEAACUA72HD",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "commutation-of-conditionals",
+          "first_publication_date": "2019-09-25T01:45:31+0000",
+          "last_publication_date": "2019-09-29T09:54:01+0000",
+          "uid": "commutation-of-conditionals",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrEvhEAACMA71j-",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "d",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "denying-a-conjunct",
+          "first_publication_date": "2019-09-25T01:37:06+0000",
+          "last_publication_date": "2019-09-29T10:01:42+0000",
+          "uid": "denying-a-conjunct",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrF8REAACUA715a",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "d",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "denying-the-antecedent",
+          "first_publication_date": "2019-09-25T01:42:11+0000",
+          "last_publication_date": "2019-09-29T10:03:41+0000",
+          "uid": "denying-the-antecedent",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYrHGhEAACUA72OO",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "i",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "improper-transposition",
+          "first_publication_date": "2019-09-25T01:47:08+0000",
+          "last_publication_date": "2019-09-29T09:34:30+0000",
+          "uid": "improper-transposition",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An error in logic that concerns compound propositions.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "In logic, a proposition―or, \"statement\"―is a sentence that is either true or false. For instance, \"it is raining\" is a proposition. Some propositions contain other propositions as components, for example: \"it is not raining\" is a proposition as a whole which contains \"it is raining.\" A proposition that contains one or more simpler propositions as components is called a \"compound\" proposition. So, \"it is not raining\" is a compound proposition. A proposition that is not compound, such as \"it is raining\", is called \"simple\".",
+        "spans": [
+          {
+            "start": 12,
+            "end": 23,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 119,
+            "end": 130,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 137,
+            "end": 149,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 164,
+            "end": 176,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 230,
+            "end": 241,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 287,
+            "end": 298,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 333,
+            "end": 345,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 383,
+            "end": 394,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 434,
+            "end": 445,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 449,
+            "end": 460,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Propositional logic is a system of formal logic that deals with the logical relations holding between propositions taken as a whole, and those compound propositions which are constructed from simpler ones with truth-functional connectives. For instance, consider the following proposition:",
+        "spans": [
+          {
+            "start": 102,
+            "end": 114,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 152,
+            "end": 164,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 277,
+            "end": 288,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "preformatted",
+        "text": "Today is Sunday and it's raining.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "This is a compound proposition containing the simpler propositions:",
+        "spans": [
+          {
+            "start": 19,
+            "end": 30,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 54,
+            "end": 66,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "preformatted",
+        "text": "Today is Sunday.\nIt's raining.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "The word \"and\" which joins the two simpler sentences to make the compound one is a truth-functional connective, that is, the truth-value of the compound proposition is a function of the truth-values of its components. In other words, whether the whole sentence is true or false is determined by whether the simpler sentences that compose it are true or false. The truth-value of a conjunction―a compound proposition formed with \"and\"―is true if both of its components are true, and false otherwise. So, the compound sentence is true if \"today is Sunday\" and \"it's raining\" are both true, and false if one or both are false.",
+        "spans": [
+          {
+            "start": 153,
+            "end": 164,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 381,
+            "end": 392,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 404,
+            "end": 415,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Propositional logic studies the logical relations which hold between propositions as a result of truth-functional combinations, for instance, the example conjunction logically implies that today is Sunday. In other words, if the whole sentence is true then it must also be true that today is Sunday.",
+        "spans": [
+          {
+            "start": 69,
+            "end": 81,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 154,
+            "end": 165,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 23 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Fallacy of Propositional Logic.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 68,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/propfall.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 34,
+                "end": 53,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

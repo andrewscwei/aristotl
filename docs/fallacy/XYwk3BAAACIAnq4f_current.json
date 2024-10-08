@@ -1,0 +1,425 @@
+{
+  "id": "XYwk3BAAACIAnq4f",
+  "uid": "hasty-generalization",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYwk3BAAACIAnq4f%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "gamma",
+    "h"
+  ],
+  "first_publication_date": "2019-09-26T02:46:50+0000",
+  "last_publication_date": "2019-09-29T07:47:20+0000",
+  "slugs": [
+    "hasty-generalization",
+    "weak-analogy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Hasty Generalization",
+    "abbreviation": "HG",
+    "aliases": [
+      {
+        "name": "Converse Fallacy of the Accident"
+      },
+      {
+        "name": "Converse Accident"
+      },
+      {
+        "name": "Fallacy of Insufficient Statistics"
+      },
+      {
+        "name": "Fallacy of Insufficient Sample"
+      },
+      {
+        "name": "Fallacy of the Lonely Fact"
+      },
+      {
+        "name": "Hasty Induction"
+      },
+      {
+        "name": "Secundum Quid"
+      },
+      {
+        "name": "Jumping to Conclusions"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYx_lhAAACIAoEUs",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "j",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "jumping-to-conclusions",
+          "first_publication_date": "2019-09-26T09:10:18+0000",
+          "last_publication_date": "2019-09-29T07:42:49+0000",
+          "uid": "jumping-to-conclusions",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwi3hAAACIAnqUo",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "biased-sample",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T07:45:24+0000",
+          "uid": "biased-sample",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwjdBAAACAAnqfH",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "w",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "weak-analogy",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T08:59:44+0000",
+          "uid": "weak-analogy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Basing a broad conclusion on a small sample or the making of a determination without all of the information required to do so.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "In logic, \"generalization\" refers to the reasoning process by which a general conclusion is inferred from a particular premise or premises. There is more than one kind of generalization, but the one relevant to this fallacy is statistical generalization. In a statistical generalization, one infers something about a whole group based on a part of that group. In statistics, the group that we're interested in is called \"the population\" and the part that we examine is called \"the sample\". In order for such an inference to be cogent, the sample must be representative of the whole population. However, one way in which a sample can fail to be representative is for it to be too small. A \"hasty\" generalization is too quick, that is, it jumps to a conclusion before acquiring sufficient evidence to justify it.",
+        "spans": [
+          {
+            "start": 78,
+            "end": 88,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 119,
+            "end": 126,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 130,
+            "end": 138,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 216,
+            "end": 223,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 527,
+            "end": 533,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 748,
+            "end": 758,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "I've met two people in Nicaragua so far, and they were both nice to me. So, all people I will meet in Nicaragua will be nice to me.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "In any Hasty Generalization the key error is to overestimate the strength of an argument that is based on too small a sample for the implied confidence level or error margin. In this argument about Nicaragua, using the word \"all\" in the conclusion implies zero error margin. With zero error margin you'd need to sample every single person in Nicaragua, not just two people.",
+            "spans": [
+              {
+                "start": 7,
+                "end": 27,
+                "type": "em"
+              },
+              {
+                "start": 80,
+                "end": 88,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 183,
+                "end": 191,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 237,
+                "end": 247,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhK9xEAACgAhRbi",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "conclusion",
+                  "first_publication_date": "2019-09-23T04:34:58+0000",
+                  "last_publication_date": "2019-09-23T09:21:34+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwicxAAAB8AnqNF",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "anecdotal-fallacy",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T07:02:55+0000",
+          "uid": "anecdotal-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYx-VBAAACAAoD8z",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "m",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "misleading-vividness",
+          "first_publication_date": "2019-09-26T09:06:15+0000",
+          "last_publication_date": "2019-09-29T07:41:53+0000",
+          "uid": "misleading-vividness",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#HastyGeneralization",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Hasty Generalization.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 58,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/hastygen.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 24,
+                "end": 41,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

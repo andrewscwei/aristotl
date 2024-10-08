@@ -1,0 +1,249 @@
+{
+  "id": "XYwqNxAAACIAnsYm",
+  "uid": "appeal-to-celebrity",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYwqNxAAACIAnsYm%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-26T03:09:01+0000",
+  "last_publication_date": "2019-09-29T08:56:09+0000",
+  "slugs": [
+    "appeal-to-celebrity",
+    "poisoning-the-well"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Appeal to Celebrity",
+    "abbreviation": "AtCy",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwHnxAAACAAniq5",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-authority",
+          "first_publication_date": "2019-09-26T00:35:05+0000",
+          "last_publication_date": "2020-08-20T23:44:33+0000",
+          "uid": "appeal-to-authority",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An assertion is deemed true because a celebrity endorses it.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "preformatted",
+        "text": "Celebrity C endorses Brand X (or Candidate Y, or Cause Z).\nTherefore, Brand X(or Candidate Y, or Cause Z) is good.",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "Appeal to Celebrity is one of the most common forms of fallacious Appeal to Authority. Celebrity endorsement of products is so common that we hardly notice it or wonder why Michael Jordan is trying to sell us underwear. Moreover, in addition to products, celebrities often endorse political candidates, and during every presidential election year each candidate rounds up his own stable of famous supporters. In addition, celebrities publicly espouse every political, religious, and charitable cause, and some has-beens build second careers in the public eye as spokespeople for causes.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 19,
+            "type": "em"
+          },
+          {
+            "start": 55,
+            "end": 65,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 66,
+            "end": 85,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYwHnxAAACAAniq5",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "appeal-to-authority",
+              "first_publication_date": "2019-09-26T00:35:05+0000",
+              "last_publication_date": "2020-08-20T23:44:33+0000",
+              "uid": "appeal-to-authority",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "What is wrong with appealing to celebrity? There are two problems:",
+        "spans": [
+          {
+            "start": 19,
+            "end": 41,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Since most celebrities are actors or sports stars, they are seldom experts on the products or causes that they endorse. Sometimes the advertisers even attempt to exploit confusion between fantasy and reality by selecting actors to endorse products based on the fictional characters they play. Infamously, one old television commercial for cough syrup began with an actor saying: \"I'm not a doctor, but I play one on TV.\" Similarly, the actor Robert Young, who was best known for his television role as \"Marcus Welby, M.D.\", was a spokesman for decaffeinated coffee. These were not real doctors, but make-believe ones, who did not have real medical expertise, just make-believe expertise.\nOf course, sports celebrities often endorse athletic shoes and other equipment, and it is at least plausible that they have expertise with these products. However, they raise the second problem with celebrity appeals:",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "Most celebrities who endorse products are paid to do so, and thus the endorsement is not a disinterested one. Celebrities who endorse charities or political candidates probably are not paid money, but they often benefit from the association with a good cause or the publicity that comes from controversy.",
+        "spans": []
+      }
+    ],
+    "examples": [],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwq1RAAAB8Ansj2",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-ignorance",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:57:08+0000",
+          "uid": "appeal-to-ignorance",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqvxAAACAAnsiS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-force",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T08:55:43+0000",
+          "uid": "appeal-to-force",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwq5RAAACAAnslB",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-nature",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-30T05:19:02+0000",
+          "uid": "appeal-to-nature",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Appeal to Celebrity.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 57,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/apcelebs.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 23,
+                "end": 40,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "id": "XYxRPBAAACAAn3Pb",
+  "uid": "hot-hand",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYxRPBAAACAAn3Pb%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "beta",
+    "h"
+  ],
+  "first_publication_date": "2019-09-26T05:52:06+0000",
+  "last_publication_date": "2019-09-29T10:34:17+0000",
+  "slugs": [
+    "hot-hand-fallacy",
+    "gamblers-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Hot Hand Fallacy",
+    "abbreviation": "HH",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYr8yREAACMA8FCU",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "p",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "probabilistic-fallacy",
+          "first_publication_date": "2019-09-25T05:39:37+0000",
+          "last_publication_date": "2019-09-30T22:24:37+0000",
+          "uid": "probabilistic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A gambler has had a streak of good luck. Therefore, the gambler is \"hot\" and the good luck will continue at a probability greater than chance.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "This fallacy is committed every day in casinos around the world, whenever a gambler thinks he's \"hot\". When gamblers are on winning streaks, and keep betting or increasing their wagers to take advantage of their good luck, they commit this fallacy. Despite its name, gamblers also commit this fallacy when they think that they're \"cold\", and stop betting or decrease their wagers because they're on a losing streak. This is still the \"hot hand\" fallacy, because the logical mistake is the same.",
+        "spans": [
+          {
+            "start": 5,
+            "end": 12,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 240,
+            "end": 247,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 293,
+            "end": 300,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 445,
+            "end": 452,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The fundamental error is the same as in the Gambler's Fallacy, that is, the failure to appreciate statistical independence. Just as a fair gambling device does not remember its own past, it also does not remember a gambler's past. So, a gambler's odds of winning a current bet are not affected by whether the gambler has won or lost previous ones. Roulette wheels and dice do not have memories.",
+        "spans": [
+          {
+            "start": 44,
+            "end": 61,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYxRPBAAACAAn3Pb",
+              "type": "fallacy",
+              "tags": [
+                "formal",
+                "beta",
+                "h"
+              ],
+              "lang": "en-us",
+              "slug": "hot-hand-fallacy",
+              "first_publication_date": "2019-09-26T05:52:06+0000",
+              "last_publication_date": "2019-09-29T10:34:17+0000",
+              "uid": "hot-hand",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYxQaxAAACIAn3A5",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "gamblers-fallacy",
+          "first_publication_date": "2019-09-26T05:48:28+0000",
+          "last_publication_date": "2019-09-29T10:34:32+0000",
+          "uid": "gamblers",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYJJVBAAACMAPyCA",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "base-rate-fallacy",
+          "first_publication_date": "2019-09-18T15:12:27+0000",
+          "last_publication_date": "2019-09-29T10:35:16+0000",
+          "uid": "base-rate-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYJJtxAAACQAPyJT",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "conjunction-fallacy",
+          "first_publication_date": "2019-09-18T15:14:03+0000",
+          "last_publication_date": "2019-09-29T10:34:59+0000",
+          "uid": "conjunction-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XZCGYhAAACYAItOG",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "m",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "multiple-comparisons",
+          "first_publication_date": "2019-09-29T10:33:56+0000",
+          "last_publication_date": "2019-09-29T10:37:59+0000",
+          "uid": "multiple-comparisons",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Hot Hand Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 58,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/hothandf.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 24,
+                "end": 41,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

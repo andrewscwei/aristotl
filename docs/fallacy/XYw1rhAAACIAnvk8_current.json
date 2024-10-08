@@ -1,0 +1,285 @@
+{
+  "id": "XYw1rhAAACIAnvk8",
+  "uid": "regresiion",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYw1rhAAACIAnvk8%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "beta",
+    "r"
+  ],
+  "first_publication_date": "2019-09-26T03:53:50+0000",
+  "last_publication_date": "2019-09-29T08:46:45+0000",
+  "slugs": [
+    "regression",
+    "post-hoc-ergo-propter-hoc"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Regression",
+    "abbreviation": "Rg",
+    "aliases": [
+      {
+        "name": "The Regressive Fallacy"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwzJRAAACIAnu3s",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "alpha",
+            "f"
+          ],
+          "lang": "en-us",
+          "slug": "false-cause",
+          "first_publication_date": "2019-09-26T03:45:44+0000",
+          "last_publication_date": "2019-09-29T08:53:28+0000",
+          "uid": "false-cause",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Ascribes cause where none exists. The flaw is failing to account for natural fluctuations.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The Regression fallacy is the result of a statistical phenomenon known as \"regression to the mean\". The \"mean\" refers to the arithmetical average of some variable in a population, that is, the \"mean\" is what we usually mean by \"average\". \"Regression\" refers to the value of the variable tending to move closer to the mean, away from extreme values. So, \"regression to the mean\" refers to the tendency of a variable characteristic in a population to move away from the extreme values towards the average value.",
+        "spans": [
+          {
+            "start": 4,
+            "end": 14,
+            "type": "em"
+          },
+          {
+            "start": 15,
+            "end": 22,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 239,
+            "end": 249,
+            "type": "em"
+          },
+          {
+            "start": 354,
+            "end": 364,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "You are investigating the average heights of groups of people living in the United States. You sample some people living in Columbus, Ohio and determine their average height. You have the numerical figure for the mean height of people living in the U.S., and you notice that members of your sample from Columbus have an average height that differs from this mean. Your second sample of the same size is from people living in Dayton, Ohio. When you find that this group's average height is closer to the U.S. mean height [as it is very likely to be due to common statistical regression to the mean], you falsely conclude that there must be something causing people living in Dayton to be more like the average U.S. resident than people living in Columbus.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "There is most probably nothing causing people from Dayton to be more like the average resident of the U.S.; but rather what is happening is that averages are regressing to the mean.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYwyUxAAACAAnuo9",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "c",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "cum-hoc-ergo-propter-hoc",
+          "first_publication_date": "2019-09-26T03:49:04+0000",
+          "last_publication_date": "2019-09-29T08:45:33+0000",
+          "uid": "cum-hoc",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw0lRAAACAAnvRQ",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "p"
+          ],
+          "lang": "en-us",
+          "slug": "post-hoc-ergo-propter-hoc",
+          "first_publication_date": "2019-09-26T03:49:04+0000",
+          "last_publication_date": "2019-09-29T08:46:06+0000",
+          "uid": "post-hoc",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYGHpBAAACIAO7DS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "slippery-slope",
+          "first_publication_date": "2019-09-18T01:25:58+0000",
+          "last_publication_date": "2019-09-29T06:39:01+0000",
+          "uid": "slippery-slope",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw2gRAAACAAnvzp",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "t"
+          ],
+          "lang": "en-us",
+          "slug": "texas-sharpshooter",
+          "first_publication_date": "2019-09-26T03:57:32+0000",
+          "last_publication_date": "2019-09-29T08:48:15+0000",
+          "uid": "texas-sharpshooter",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Regression",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"The Regression Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 60,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/regressf.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 26,
+                "end": 43,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

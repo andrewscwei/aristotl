@@ -1,0 +1,86 @@
+{
+  "id": "XYiCphEAACgAhhEW",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYiCphEAACgAhhEW%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T08:30:33+0000",
+  "last_publication_date": "2019-09-26T10:29:29+0000",
+  "slugs": [
+    "syllogism"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Syllogism",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A type of deductive argument that arrives at a conclusion based on two or more premises. For example:",
+        "spans": [
+          {
+            "start": 10,
+            "end": 28,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 47,
+            "end": 57,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 79,
+            "end": 87,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "preformatted",
+        "text": "All men are mortal.\nSocrates is a man.\nTherefore, Socrates is mortal.",
+        "spans": []
+      }
+    ],
+    "aliases": [
+      {
+        "name": "Categorical Syllogism"
+      }
+    ],
+    "references": []
+  }
+}

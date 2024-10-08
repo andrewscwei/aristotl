@@ -1,0 +1,103 @@
+{
+  "id": "XYyFTxAAACIAoGAs",
+  "uid": "confusing-an-explanation-with-an-excuse",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYyFTxAAACIAoGAs%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "alpha",
+    "c"
+  ],
+  "first_publication_date": "2019-09-26T09:32:41+0000",
+  "last_publication_date": "2019-09-29T07:36:23+0000",
+  "slugs": [
+    "confusing-an-explanation-with-an-excuse",
+    "misplaced-burden-of-proof"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Confusing an Explanation with an Excuse",
+    "abbreviation": "CEE",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Treating someone's explanation of a fact as if it were a justification of the fact.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Treating someone's explanation of a fact as if it were a justification of the fact. Explaining a crime should not be confused with excusing the crime, but it too often is.",
+        "spans": []
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Speaker: The German atrocities committed against the French and Belgians during World War I were in part due to the anger of German soldiers who learned that French and Belgian soldiers were ambushing German soldiers, shooting them in the back, or even poisoning, blinding and castrating them.\nRespondent: I don't understand how you can be so insensitive as to condone those German atrocities.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#ConfusinganExplanationwithanExcuse",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

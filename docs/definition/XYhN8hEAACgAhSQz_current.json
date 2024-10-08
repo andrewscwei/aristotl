@@ -1,0 +1,158 @@
+{
+  "id": "XYhN8hEAACgAhSQz",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYhN8hEAACgAhSQz%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T04:45:41+0000",
+  "last_publication_date": "2019-09-23T18:27:58+0000",
+  "slugs": [
+    "induction",
+    "inductive-argument"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Induction",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A form of logical inference where the premises provide some degree of support (as opposed to complete support in deduction) for the conclusion (\"bottom-up logic\"). An argument that is upheld by inductive reasoning is described as strong or cogent. Induction used in logic is not the same as induction used in mathematics, which is actually a form of deduction.",
+        "spans": [
+          {
+            "start": 18,
+            "end": 27,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 38,
+            "end": 46,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 113,
+            "end": 122,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 132,
+            "end": 142,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 144,
+            "end": 161,
+            "type": "em"
+          },
+          {
+            "start": 167,
+            "end": 175,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 230,
+            "end": 236,
+            "type": "strong"
+          },
+          {
+            "start": 240,
+            "end": 246,
+            "type": "strong"
+          },
+          {
+            "start": 248,
+            "end": 257,
+            "type": "strong"
+          },
+          {
+            "start": 291,
+            "end": 300,
+            "type": "strong"
+          },
+          {
+            "start": 350,
+            "end": 359,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      {
+        "name": "Inductive Reasoning"
+      },
+      {
+        "name": "Inductive Inference"
+      }
+    ],
+    "references": []
+  }
+}

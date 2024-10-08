@@ -1,0 +1,519 @@
+{
+  "id": "XYq81REAACUA7zWS",
+  "uid": "red-herring",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYq81REAACUA7zWS%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "r",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-25T01:03:26+0000",
+  "last_publication_date": "2019-09-29T09:31:21+0000",
+  "slugs": [
+    "red-herring"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Red Herring",
+    "abbreviation": "RH",
+    "aliases": [
+      {
+        "name": "Befogging the Issue"
+      },
+      {
+        "name": "Diversion"
+      },
+      {
+        "name": "Ignoratio Elenchi"
+      },
+      {
+        "name": "Ignoring the Issue"
+      },
+      {
+        "name": "Irrelevant Conclusion"
+      },
+      {
+        "name": "Irrelevant Thesis"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYq7YBEAACQA7y8Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "s",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "straw-man",
+          "first_publication_date": "2019-09-25T00:57:23+0000",
+          "last_publication_date": "2019-09-29T09:39:44+0000",
+          "uid": "straw-man",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxWCBAAACEAn4kw",
+          "type": "fallacy",
+          "tags": [
+            "t",
+            "informal",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "two-wrongs-make-a-right",
+          "first_publication_date": "2019-09-26T06:10:37+0000",
+          "last_publication_date": "2019-09-29T08:18:33+0000",
+          "uid": "two-wrongs-make-right",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwqjxAAAB8Anse1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-consequences",
+          "first_publication_date": "2019-09-26T03:09:01+0000",
+          "last_publication_date": "2019-09-29T07:04:31+0000",
+          "uid": "appeal-to-consequences",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYv90hAAACIAnf7Q",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "bandwagon",
+          "first_publication_date": "2019-09-25T23:58:10+0000",
+          "last_publication_date": "2019-09-29T09:26:28+0000",
+          "uid": "bandwagon",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw4UBAAACAAnwT7",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "e"
+          ],
+          "lang": "en-us",
+          "slug": "emotional-appeal",
+          "first_publication_date": "2019-09-26T04:05:54+0000",
+          "last_publication_date": "2019-09-29T08:44:56+0000",
+          "uid": "emotional-appeal",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxSKxAAACAAn3gF",
+          "type": "fallacy",
+          "tags": [
+            "g",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "guilt-by-association",
+          "first_publication_date": "2019-09-26T05:56:11+0000",
+          "last_publication_date": "2019-09-29T08:23:26+0000",
+          "uid": "guilt-by-association",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A digression that leads the reasoner off the track of considering only relevant information.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The name of this fallacy comes from the sport of fox hunting. According to one story, dragging a dried, smoked herring, which is red in colour, across the trail of the fox would throw the hounds off the scent. Thus, in general, a \"red herring\" is anything that can be used to distract attention. In the context of argumentation, a Red Herring is something which distracts the audience from the issue in question. This frequently occurs during debates when there is an at least implicit topic, yet it can be easy to lose track of it. By extension, it applies to any argument in which the premises are logically irrelevant to the conclusion.",
+        "spans": [
+          {
+            "start": 17,
+            "end": 24,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 231,
+            "end": 242,
+            "type": "em"
+          },
+          {
+            "start": 314,
+            "end": 327,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 331,
+            "end": 342,
+            "type": "em"
+          },
+          {
+            "start": 565,
+            "end": 573,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 587,
+            "end": 595,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 628,
+            "end": 638,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Red Herring is the most general fallacy of irrelevance. Any argument in which the premises are logically unrelated to the conclusion commits this fallacy. A set of premises is logically irrelevant to a conclusion if their truth does not make it more likely that the conclusion is true.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 11,
+            "type": "em"
+          },
+          {
+            "start": 32,
+            "end": 39,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 60,
+            "end": 68,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 82,
+            "end": 90,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 122,
+            "end": 132,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 146,
+            "end": 153,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 164,
+            "end": 172,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 202,
+            "end": 212,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 266,
+            "end": 276,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Will the new tax in Senate Bill 47 unfairly hurt business? I notice that the main provision of the bill is that the tax is higher for large employers (fifty or more employees) as opposed to small employers (six to forty-nine employees). To decide on the fairness of the bill, we must first determine whether employees who work for large employers have better working conditions than employees who work for small employers. I am ready to volunteer for a new committee to study this question. How do you suppose the committee should go about collecting the data we need?",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "Bringing up the issue of working conditions and the committee is the Red Herring diverting us from the main issue of whether Senate Bill 47 unfairly hurts business. An intentional false lead in a criminal investigation is another example of a Red Herring.",
+            "spans": [
+              {
+                "start": 69,
+                "end": 80,
+                "type": "em"
+              },
+              {
+                "start": 243,
+                "end": 254,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#RedHerring",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Red Herring.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 49,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/redherrf.html#Note1",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 15,
+                "end": 32,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

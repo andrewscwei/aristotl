@@ -1,0 +1,86 @@
+{
+  "id": "XYvioxAAACIAnYXR",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYvioxAAACIAnYXR%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-25T21:56:54+0000",
+  "last_publication_date": "2019-09-25T21:56:54+0000",
+  "slugs": [
+    "consequent"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Consequent",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The propositional component of a conditional proposition whose truth is conditional. In \"if p then q\", \"q\" is the consequent.",
+        "spans": [
+          {
+            "start": 45,
+            "end": 56,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 92,
+            "end": 94,
+            "type": "strong"
+          },
+          {
+            "start": 99,
+            "end": 100,
+            "type": "strong"
+          },
+          {
+            "start": 104,
+            "end": 105,
+            "type": "strong"
+          }
+        ]
+      }
+    ],
+    "aliases": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Glossary.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 46,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/glossary.html#Consequent",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 12,
+                "end": 29,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

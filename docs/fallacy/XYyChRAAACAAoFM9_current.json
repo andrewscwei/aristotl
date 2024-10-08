@@ -1,0 +1,195 @@
+{
+  "id": "XYyChRAAACAAoFM9",
+  "uid": "traditional-wisdom",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYyChRAAACAAoFM9%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "t",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-26T09:23:16+0000",
+  "last_publication_date": "2019-09-29T07:40:39+0000",
+  "slugs": [
+    "traditional-wisdom",
+    "willed-ignorance"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Traditional Wisdom",
+    "abbreviation": "TW",
+    "aliases": [
+      {
+        "name": "Appeal to the Common Practice"
+      },
+      {
+        "name": "Appeal to Gallery"
+      },
+      {
+        "name": "Appeal to Masses"
+      },
+      {
+        "name": "Appeal to Mob"
+      },
+      {
+        "name": "Appeal to Past Practice"
+      },
+      {
+        "name": "Argumentum Consensus Gentium"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYyChRAAACAAoFM9",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "t",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "traditional-wisdom",
+          "first_publication_date": "2019-09-26T09:23:16+0000",
+          "last_publication_date": "2019-09-29T07:40:39+0000",
+          "uid": "traditional-wisdom",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "An assertion is deemed true simply because it has been the apparently wise practice in the past.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "If you say or imply that a practice must be OK today simply because it has been the apparently wise practice in the past, then your reasoning contains the fallacy of Traditional Wisdom. Procedures that are being practiced and that have a tradition of being practiced might or might not be able to be given a good justification, but merely saying that they have been practiced in the past is not always good enough, in which case the fallacy is present.",
+        "spans": [
+          {
+            "start": 166,
+            "end": 184,
+            "type": "em"
+          },
+          {
+            "start": 433,
+            "end": 440,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Of course we should buy IBM's computer whenever we need new computers. We have been buying IBM as far back as anyone can remember.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "The \"of course\" is the problem. The traditional wisdom of IBM being the right buy is some reason to buy IBM next time, but it's not a good enough reason in a climate of changing products, so the \"of course\" indicates that the fallacy of Traditional Wisdom has occurred.",
+            "spans": [
+              {
+                "start": 36,
+                "end": 54,
+                "type": "em"
+              },
+              {
+                "start": 226,
+                "end": 233,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 237,
+                "end": 255,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Willed%20ignorance",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

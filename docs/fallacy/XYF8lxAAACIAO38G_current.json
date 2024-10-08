@@ -1,0 +1,226 @@
+{
+  "id": "XYF8lxAAACIAO38G",
+  "uid": "persuasive-definition",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYF8lxAAACIAO38G%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "p",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-18T00:38:57+0000",
+  "last_publication_date": "2019-09-29T09:43:16+0000",
+  "slugs": [
+    "persuasive-definition"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Persuasive Definition",
+    "abbreviation": "PD",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYF2CBAAACQAO2Gd",
+          "type": "fallacy",
+          "tags": [
+            "e",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "equivocation",
+          "first_publication_date": "2019-09-18T00:10:50+0000",
+          "last_publication_date": "2019-09-29T09:28:44+0000",
+          "uid": "equivocation",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A form of stipulative definition which purports to describe the \"true\" or \"commonly accepted\" meaning of a term, while in reality stipulating an uncommon or altered use.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Some people try to win their arguments by getting you to accept their faulty definition. If you buy into their definition, they've practically persuaded you already. Poisoning the Well when presenting a definition would be an example of a using Persuasive Definition.",
+        "spans": [
+          {
+            "start": 29,
+            "end": 38,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 166,
+            "end": 184,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvvqBAAACIAnb-2",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "p",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "poisoning-the-well",
+              "first_publication_date": "2019-09-25T22:52:26+0000",
+              "last_publication_date": "2019-09-29T09:33:03+0000",
+              "uid": "poisoning-the-well",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 245,
+            "end": 266,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Let's define a Democrat as a leftist who desires to overtax the corporations and abolish freedom in the economic sphere.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYvvqBAAACIAnb-2",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "p",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "poisoning-the-well",
+          "first_publication_date": "2019-09-25T22:52:26+0000",
+          "last_publication_date": "2019-09-29T09:33:03+0000",
+          "uid": "poisoning-the-well",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYs21hEAACIA8Vbd",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "formal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "ambiguous-middle",
+          "first_publication_date": "2019-09-25T09:44:01+0000",
+          "last_publication_date": "2019-09-29T17:12:20+0000",
+          "uid": "ambiguous-middle",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#RedHerring",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

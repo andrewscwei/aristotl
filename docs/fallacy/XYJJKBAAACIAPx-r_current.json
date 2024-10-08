@@ -1,0 +1,458 @@
+{
+  "id": "XYJJKBAAACIAPx-r",
+  "uid": "fallacy-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYJJKBAAACIAPx-r%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "f",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-18T15:11:38+0000",
+  "last_publication_date": "2019-09-29T09:50:50+0000",
+  "slugs": [
+    "fallacy-fallacy",
+    "argument-from-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Fallacy Fallacy",
+    "abbreviation": "FF",
+    "aliases": [
+      {
+        "name": "Argument from Fallacy"
+      },
+      {
+        "name": "Fallacist's Fallacy"
+      },
+      {
+        "name": "Argumentum ad Logicam"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Assumption that if an argument for some conclusion is fallacious, then the conclusion is false.",
+        "spans": [
+          {
+            "start": 22,
+            "end": 31,
+            "type": "em"
+          },
+          {
+            "start": 75,
+            "end": 86,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Like anything else, the concept of logical fallacy can be misunderstood and misused, and can even become a source of fallacious reasoning. To say that an argument is fallacious is, among other things, to claim that there is not a sufficiently strong logical connection between the premises and the conclusion. This says nothing about the truth or falsity of the conclusion, so it is unwarranted to conclude that it's false simply because some argument for it is fallacious.",
+        "spans": [
+          {
+            "start": 43,
+            "end": 50,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 117,
+            "end": 127,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 154,
+            "end": 162,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 166,
+            "end": 176,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 281,
+            "end": 289,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 298,
+            "end": 308,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 362,
+            "end": 372,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 443,
+            "end": 451,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 462,
+            "end": 472,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "It's easy to come up with fallacious arguments for a proposition, whether true or false. What can be hard is to find a cogent argument for it, even when it's true. For example, it's now believed by mathematicians that the proposition known as \"Fermat's last theorem\" is true, yet it took over three centuries for anyone to prove it. In the meantime, many invalid arguments were presented for it.",
+        "spans": [
+          {
+            "start": 37,
+            "end": 46,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 126,
+            "end": 134,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 222,
+            "end": 233,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhLZhEAACcAhRjY",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "proposition",
+              "first_publication_date": "2019-09-23T04:34:53+0000",
+              "last_publication_date": "2019-09-30T22:26:06+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 363,
+            "end": 372,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Tom: All cats are animals. Ginger is an animal. Therefore, Ginger is a cat. \nBill: You have just fallaciously affirmed the consequent. You are incorrect. Therefore, Ginger is not a cat. \nTom: I speak English. Therefore, I am English. \nBill: Americans and Canadians, among others, speak English too. By assuming that speaking English and being English always go together, you have just committed the package-deal fallacy. You are incorrect. Therefore, you are not English.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "Both of Bill's rebuttals are arguments from fallacy. Ginger may or may not be a cat, and Tom may or may not be English. The fact that Tom's argument was fallacious is not, in itself, a proof that his conclusion is false.",
+            "spans": [
+              {
+                "start": 29,
+                "end": 38,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 140,
+                "end": 148,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 153,
+                "end": 163,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 200,
+                "end": 210,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhK9xEAACgAhRbi",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "conclusion",
+                  "first_publication_date": "2019-09-23T04:34:58+0000",
+                  "last_publication_date": "2019-09-23T09:21:34+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Fallacy Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 53,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/fallfall.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 19,
+                "end": 36,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"Argument from fallacy.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Jun. 2019. Web. 25 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 149,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/Argument_from_fallacy",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 49,
+                "end": 81,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

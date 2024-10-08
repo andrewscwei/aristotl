@@ -1,0 +1,317 @@
+{
+  "id": "XYF89hAAACIAO4C7",
+  "uid": "etymological-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYF89hAAACIAO4C7%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "e"
+  ],
+  "first_publication_date": "2019-09-18T00:40:25+0000",
+  "last_publication_date": "2019-10-03T06:47:39+0000",
+  "slugs": [
+    "etymological-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Etymological Fallacy",
+    "abbreviation": "Et",
+    "aliases": [
+      {
+        "name": "Abuse of Etymology"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Reasoning that the original or historical meaning of a word or phrase is necessarily similar to its actual present-day usage.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The etymology of a word is an account of its historical derivation from older words often from a different language. An older, usually archaic, word from which a current word is historically derived is called its \"etymon\". The term Etymological Fallacy is applied to two types of error:",
+        "spans": [
+          {
+            "start": 232,
+            "end": 252,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Semantic: The Etymological Fallacy as a semantic error is the mistake of confusing the current meaning of a word with the meaning of one of its etymons, or of considering the meaning of the etymon to be the \"real\" or \"true\" meaning of the current word. If one's goal is to communicate, then the \"real\" or \"true\" meaning of a word is its current meaning. Since the meanings of words change over time, often considerably, the meaning of an etymon may be very different from the current meaning of the word derived from it. The fact that a word historically derives from an etymon may be interesting, but it cannot tell us the current meaning of the word.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "strong"
+          },
+          {
+            "start": 14,
+            "end": 34,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "Logical: The Etymological Fallacy as a logical mistake results when one reasons about the etymon as if the conclusion applied to the current word. This is a logical error similar to Equivocation, which involves confusing two meanings of the same word; but it differs from Equivocation in that the Etymological Fallacy involves the meanings of two different words, though those words are historically connected.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 8,
+            "type": "strong"
+          },
+          {
+            "start": 13,
+            "end": 33,
+            "type": "em"
+          },
+          {
+            "start": 107,
+            "end": 117,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 182,
+            "end": 194,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYF2CBAAACQAO2Gd",
+              "type": "fallacy",
+              "tags": [
+                "e",
+                "beta",
+                "informal"
+              ],
+              "lang": "en-us",
+              "slug": "equivocation",
+              "first_publication_date": "2019-09-18T00:10:50+0000",
+              "last_publication_date": "2019-09-29T09:28:44+0000",
+              "uid": "equivocation",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 272,
+            "end": 284,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYF2CBAAACQAO2Gd",
+              "type": "fallacy",
+              "tags": [
+                "e",
+                "beta",
+                "informal"
+              ],
+              "lang": "en-us",
+              "slug": "equivocation",
+              "first_publication_date": "2019-09-18T00:10:50+0000",
+              "last_publication_date": "2019-09-29T09:28:44+0000",
+              "uid": "equivocation",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 297,
+            "end": 317,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Formal logic fails us because of its assumptions. The postulates from which the mechanism springs are normally abstractions of a high order, words rather than things. The finest of automobiles will not run on a road of air; it must have solid ground under the wheels. The Greeks, with their assumption that words were real things, naturally enough soared into rarefied regions. Human thinking has been short of oxygen ever since. ... \"Logos\" is Greek for \"word\"; \"logic\" is the manipulation of words.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYF2CBAAACQAO2Gd",
+          "type": "fallacy",
+          "tags": [
+            "e",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "equivocation",
+          "first_publication_date": "2019-09-18T00:10:50+0000",
+          "last_publication_date": "2019-09-29T09:28:44+0000",
+          "uid": "equivocation",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYvwGBAAACEAncGo",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "ad-hominem",
+          "first_publication_date": "2019-09-25T22:59:38+0000",
+          "last_publication_date": "2019-09-29T09:25:26+0000",
+          "uid": "ad-hominem",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwHnxAAACAAniq5",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "appeal-to-authority",
+          "first_publication_date": "2019-09-26T00:35:05+0000",
+          "last_publication_date": "2020-08-20T23:44:33+0000",
+          "uid": "appeal-to-authority",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Etymological Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 58,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/etymolog.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 24,
+                "end": 43,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

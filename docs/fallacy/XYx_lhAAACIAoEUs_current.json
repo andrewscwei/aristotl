@@ -1,0 +1,220 @@
+{
+  "id": "XYx_lhAAACIAoEUs",
+  "uid": "jumping-to-conclusions",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYx_lhAAACIAoEUs%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "j",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-26T09:10:18+0000",
+  "last_publication_date": "2019-09-29T07:42:49+0000",
+  "slugs": [
+    "jumping-to-conclusions",
+    "misleading-vividness"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Jumping to Conclusions",
+    "abbreviation": "JtC",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYwi3hAAACIAnqUo",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "biased-sample",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T07:45:24+0000",
+          "uid": "biased-sample",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwjdBAAACAAnqfH",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "w",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "weak-analogy",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T08:59:44+0000",
+          "uid": "weak-analogy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYwk3BAAACIAnq4f",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "gamma",
+            "h"
+          ],
+          "lang": "en-us",
+          "slug": "hasty-generalization",
+          "first_publication_date": "2019-09-26T02:46:50+0000",
+          "last_publication_date": "2019-09-29T07:47:20+0000",
+          "uid": "hasty-generalization",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYx-VBAAACAAoD8z",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "m",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "misleading-vividness",
+          "first_publication_date": "2019-09-26T09:06:15+0000",
+          "last_publication_date": "2019-09-29T07:41:53+0000",
+          "uid": "misleading-vividness",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Drawing a conclusion too quickly without acquiring enough of the relevant evidence.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "It is not always a mistake to make a quick decision, but when we draw a conclusion without taking the trouble to acquire enough of the relevant evidence, our reasoning uses the fallacy of Jumping to Conclusions, provided there was sufficient time to acquire and assess that extra evidence, and provided that the extra effort it takes to get the evidence isn't prohibitive.",
+        "spans": [
+          {
+            "start": 72,
+            "end": 82,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 177,
+            "end": 184,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 188,
+            "end": 210,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "Yes, I read the side of the cigarette pack about smoking being harmful to your health. That's the Surgeon General's opinion, him and all his statistics. But let me tell you about my uncle. Uncle Harry has smoked cigarettes for forty years now and he's never been sick a day in his life. He even won a ski race at Lake Tahoe in his age group last year. You should have seen him zip down the mountain. He smoked a cigarette during the award ceremony, and he had a broad smile on his face. I was really proud. I can still remember the cheering. Cigarette smoking can't be as harmful as people say.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "The vivid anecdote is the story about Uncle Harry. Too much emphasis is placed on it and not enough on the statistics from the Surgeon General.",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#JumpingtoConclusions",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

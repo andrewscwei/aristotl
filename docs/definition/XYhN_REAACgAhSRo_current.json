@@ -1,0 +1,143 @@
+{
+  "id": "XYhN_REAACgAhSRo",
+  "uid": null,
+  "url": null,
+  "type": "definition",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYhN_REAACgAhSRo%22%29+%5D%5D",
+  "tags": [],
+  "first_publication_date": "2019-09-23T04:45:51+0000",
+  "last_publication_date": "2019-09-23T18:31:21+0000",
+  "slugs": [
+    "deduction",
+    "deductive-argument"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Deduction",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A form of logical inference where the premises provide full support for the conclusion. In deduction, if all premises are true, the conclusion is therefore necessarily true. The contrast is induction. A valid deductive argument is described as sound.",
+        "spans": [
+          {
+            "start": 18,
+            "end": 27,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJTREAACcAhQ90",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "inference",
+              "first_publication_date": "2019-09-23T04:35:11+0000",
+              "last_publication_date": "2019-09-29T06:33:54+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 38,
+            "end": 46,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 76,
+            "end": 86,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 91,
+            "end": 100,
+            "type": "strong"
+          },
+          {
+            "start": 109,
+            "end": 117,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 132,
+            "end": 142,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 190,
+            "end": 199,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN8hEAACgAhSQz",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "induction",
+              "first_publication_date": "2019-09-23T04:45:41+0000",
+              "last_publication_date": "2019-09-23T18:27:58+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 244,
+            "end": 249,
+            "type": "strong"
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      {
+        "name": "Deductive Reasoning"
+      },
+      {
+        "name": "Deducive Inference"
+      }
+    ],
+    "references": []
+  }
+}

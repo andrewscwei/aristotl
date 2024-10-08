@@ -1,0 +1,322 @@
+{
+  "id": "XYvvqBAAACIAnb-2",
+  "uid": "poisoning-the-well",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYvvqBAAACIAnb-2%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "p",
+    "gamma"
+  ],
+  "first_publication_date": "2019-09-25T22:52:26+0000",
+  "last_publication_date": "2019-09-29T09:33:03+0000",
+  "slugs": [
+    "poisoning-the-well"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Poisoning the Well",
+    "abbreviation": "PtW",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYvwGBAAACEAncGo",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "ad-hominem",
+          "first_publication_date": "2019-09-25T22:59:38+0000",
+          "last_publication_date": "2019-09-29T09:25:26+0000",
+          "uid": "ad-hominem",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwGcRAAACAAniVz",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "genetic-fallacy",
+          "first_publication_date": "2019-09-26T00:34:32+0000",
+          "last_publication_date": "2019-09-29T09:21:14+0000",
+          "uid": "genetic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq81REAACUA7zWS",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "red-herring",
+          "first_publication_date": "2019-09-25T01:03:26+0000",
+          "last_publication_date": "2019-09-29T09:31:21+0000",
+          "uid": "red-herring",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Presenting adverse information about a target person with the intention of discrediting everything that the target person says.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "To poison the well is to commit a pre-emptive Ad Hominem strike against an argumentative opponent. As with regular Ad Hominems, the well may be poisoned in either an abusive or circumstantial way. For instance:",
+        "spans": [
+          {
+            "start": 3,
+            "end": 18,
+            "type": "em"
+          },
+          {
+            "start": 46,
+            "end": 56,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvwGBAAACEAncGo",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "ad-hominem",
+              "first_publication_date": "2019-09-25T22:59:38+0000",
+              "last_publication_date": "2019-09-29T09:25:26+0000",
+              "uid": "ad-hominem",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 115,
+            "end": 126,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvwGBAAACEAncGo",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "ad-hominem",
+              "first_publication_date": "2019-09-25T22:59:38+0000",
+              "last_publication_date": "2019-09-29T09:25:26+0000",
+              "uid": "ad-hominem",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "o-list-item",
+        "text": "\"Only an ignoramus would disagree with fluoridating water.\" (Abusive)",
+        "spans": []
+      },
+      {
+        "type": "o-list-item",
+        "text": "\"My opponent is a dentist, so of course he will oppose the fluoridating of water, since he will lose business.\" (Circumstantial)",
+        "spans": []
+      },
+      {
+        "type": "paragraph",
+        "text": "Anyone bold enough to enter a debate which begins with a well-poisoning either steps into an insult, or an attack upon one's personal integrity. As with standard Ad Hominems, the debate is likely to cease to be about its nominal topic and become a debate about the arguer. However, what sets Poisoning the Well apart from the standard Ad Hominem is the fact that the poisoning is done before the opponent has a chance to make a case.",
+        "spans": [
+          {
+            "start": 162,
+            "end": 173,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvwGBAAACEAncGo",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "ad-hominem",
+              "first_publication_date": "2019-09-25T22:59:38+0000",
+              "last_publication_date": "2019-09-29T09:25:26+0000",
+              "uid": "ad-hominem",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 292,
+            "end": 310,
+            "type": "em"
+          },
+          {
+            "start": 335,
+            "end": 345,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYvwGBAAACEAncGo",
+              "type": "fallacy",
+              "tags": [
+                "informal",
+                "a",
+                "gamma"
+              ],
+              "lang": "en-us",
+              "slug": "ad-hominem",
+              "first_publication_date": "2019-09-25T22:59:38+0000",
+              "last_publication_date": "2019-09-29T09:25:26+0000",
+              "uid": "ad-hominem",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 385,
+            "end": 391,
+            "type": "em"
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "[Prosecuting attorney in court] When is the defence attorney planning to call that twice-convicted child molester, David Barnington, to the stand? OK, I'll rephrase that. When is the defence attorney planning to call David Barnington to the stand?",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#PoisoningtheWell",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Poisoning the Well.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 56,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/poiswell.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 22,
+                "end": 39,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

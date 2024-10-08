@@ -1,0 +1,750 @@
+{
+  "id": "XYsybBEAACIA8UJX",
+  "uid": "syllogistic-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYsybBEAACIA8UJX%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "s",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-25T09:36:12+0000",
+  "last_publication_date": "2019-09-29T00:19:12+0000",
+  "slugs": [
+    "syllogistic-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Syllogistic Fallacy",
+    "abbreviation": "S",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYF3CBAAACQAO2Yb",
+          "type": "fallacy",
+          "tags": [
+            "f",
+            "formal",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "four-terms",
+          "first_publication_date": "2019-09-18T00:30:47+0000",
+          "last_publication_date": "2019-09-29T06:59:32+0000",
+          "uid": "four-terms",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxgjBAAACEAn7hF",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "beta",
+            "a"
+          ],
+          "lang": "en-us",
+          "slug": "affirmative-conclusion-from-a-negative-premise",
+          "first_publication_date": "2019-09-26T06:59:18+0000",
+          "last_publication_date": "2019-09-30T22:28:38+0000",
+          "uid": "affirmative-conclusion-from-a-negative-premise",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYw5QxAAACEAnwkj",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "beta",
+            "e"
+          ],
+          "lang": "en-us",
+          "slug": "exclusive-premises",
+          "first_publication_date": "2019-09-26T04:09:37+0000",
+          "last_publication_date": "2021-08-24T22:09:21+0000",
+          "uid": "exclusive-premises",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwKfxAAACIAnje4",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "i",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "illicit-minor",
+          "first_publication_date": "2019-09-26T00:49:44+0000",
+          "last_publication_date": "2019-09-29T06:42:18+0000",
+          "uid": "illicit-minor",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYwJoxAAACEAnjPf",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "i",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "illicit-major",
+          "first_publication_date": "2019-09-26T00:46:45+0000",
+          "last_publication_date": "2019-09-29T07:00:53+0000",
+          "uid": "illicit-major",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxdoRAAACAAn6sJ",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "n",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "negative-conclusion-from-affirmative-premises",
+          "first_publication_date": "2019-09-26T06:54:00+0000",
+          "last_publication_date": "2019-09-29T06:55:54+0000",
+          "uid": "negative-conclusion-from-affirmative-premises",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxYHRAAACEAn5Jz",
+          "type": "fallacy",
+          "tags": [
+            "beta",
+            "u",
+            "formal"
+          ],
+          "lang": "en-us",
+          "slug": "undistributed-middle",
+          "first_publication_date": "2019-09-26T06:22:29+0000",
+          "last_publication_date": "2019-09-29T17:12:40+0000",
+          "uid": "undistributed-middle",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Logical fallacies that occur in syllogisms.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "\"Categorical syllogisms\" are so called because they are made up of categorical statements. A statement is a sentence that is either true or false, and a categorical one is a statement that relates two types or categories of thing. There are four types of categorical statement:",
+        "spans": [
+          {
+            "start": 1,
+            "end": 23,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 93,
+            "end": 102,
+            "type": "em"
+          },
+          {
+            "start": 210,
+            "end": 220,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Type A: All S are P. Example: All whales are mammals.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 8,
+            "type": "strong"
+          },
+          {
+            "start": 12,
+            "end": 13,
+            "type": "strong"
+          },
+          {
+            "start": 18,
+            "end": 19,
+            "type": "em"
+          },
+          {
+            "start": 21,
+            "end": 29,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Type E: No S are P. Example: No whales are fish.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 8,
+            "type": "strong"
+          },
+          {
+            "start": 11,
+            "end": 12,
+            "type": "strong"
+          },
+          {
+            "start": 17,
+            "end": 18,
+            "type": "strong"
+          },
+          {
+            "start": 20,
+            "end": 28,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Type I: Some S are P. Example: Some logicians are philosophers.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 8,
+            "type": "strong"
+          },
+          {
+            "start": 13,
+            "end": 14,
+            "type": "em"
+          },
+          {
+            "start": 19,
+            "end": 20,
+            "type": "em"
+          },
+          {
+            "start": 22,
+            "end": 30,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "text": "Type O: Some S are not P. Example: Some philosophers are not logicians.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 8,
+            "type": "strong"
+          },
+          {
+            "start": 13,
+            "end": 14,
+            "type": "em"
+          },
+          {
+            "start": 23,
+            "end": 24,
+            "type": "strong"
+          },
+          {
+            "start": 26,
+            "end": 35,
+            "type": "em"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "A syllogism is a type of argument, that is, a type of reasoning with statements, specifically, one that has two premises and one conclusion. Thus, a categorical syllogisms is a type of two-premised argument constructed from categorical statements.",
+        "spans": [
+          {
+            "start": 2,
+            "end": 11,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 25,
+            "end": 33,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 112,
+            "end": 120,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 129,
+            "end": 139,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 149,
+            "end": 171,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 198,
+            "end": 206,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "These four types of statement are called A, E, I, and O type statements, as indicated. The variables, S and P, are place-holders for terms which pick out a category of thing. As you can see, each type of categorical statement asserts a different logical relation between two categories.",
+        "spans": [
+          {
+            "start": 41,
+            "end": 42,
+            "type": "strong"
+          },
+          {
+            "start": 44,
+            "end": 45,
+            "type": "strong"
+          },
+          {
+            "start": 47,
+            "end": 48,
+            "type": "strong"
+          },
+          {
+            "start": 54,
+            "end": 55,
+            "type": "strong"
+          },
+          {
+            "start": 102,
+            "end": 103,
+            "type": "strong"
+          },
+          {
+            "start": 108,
+            "end": 109,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Additionally, in a categorical syllogisms there are three terms, two in each premise, and two occurrences of each term in the entire argument, for a total of six occurrences. The S and P which occur in its conclusion—the Subject and Predicate terms—are also called the \"minor\" and \"major\" terms, respectively. The major term occurs once in one of the premises, which is therefore called the \"major\" premise. The minor term also occurs once in the other premise, which is thus called the \"minor\" premise. The third term occurs once in each premise, but not in the conclusion, and is called the \"middle\" term.",
+        "spans": [
+          {
+            "start": 19,
+            "end": 41,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYiCphEAACgAhhEW",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "syllogism",
+              "first_publication_date": "2019-09-23T08:30:33+0000",
+              "last_publication_date": "2019-09-26T10:29:29+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 77,
+            "end": 84,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 179,
+            "end": 180,
+            "type": "strong"
+          },
+          {
+            "start": 185,
+            "end": 186,
+            "type": "strong"
+          },
+          {
+            "start": 206,
+            "end": 216,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 221,
+            "end": 222,
+            "type": "strong"
+          },
+          {
+            "start": 233,
+            "end": 234,
+            "type": "strong"
+          },
+          {
+            "start": 351,
+            "end": 359,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 399,
+            "end": 406,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 453,
+            "end": 460,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 495,
+            "end": 502,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 539,
+            "end": 546,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK7BEAACUAhRat",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "premise",
+              "first_publication_date": "2019-09-23T04:35:02+0000",
+              "last_publication_date": "2019-09-23T09:12:24+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 563,
+            "end": 573,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhK9xEAACgAhRbi",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conclusion",
+              "first_publication_date": "2019-09-23T04:34:58+0000",
+              "last_publication_date": "2019-09-23T09:21:34+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The notion of distribution plays a role in some of the syllogistic fallacies: the terms in a categorical statement are said to be \"distributed\" or \"undistributed\" in that statement, depending on what type of statement it is, and whether the term is the subject or predicate term. Specifically, the subject term is distributed in the A and E type statements, and the predicate term is distributed in the E and O type statements. The other terms are undistributed.",
+        "spans": [
+          {
+            "start": 14,
+            "end": 26,
+            "type": "em"
+          },
+          {
+            "start": 67,
+            "end": 76,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 333,
+            "end": 334,
+            "type": "strong"
+          },
+          {
+            "start": 339,
+            "end": 340,
+            "type": "strong"
+          },
+          {
+            "start": 403,
+            "end": 404,
+            "type": "strong"
+          },
+          {
+            "start": 409,
+            "end": 410,
+            "type": "strong"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Finally, the A and I type statements are called \"affirmative\", while the E and O type are \"negative\".",
+        "spans": [
+          {
+            "start": 13,
+            "end": 14,
+            "type": "strong"
+          },
+          {
+            "start": 19,
+            "end": 20,
+            "type": "strong"
+          },
+          {
+            "start": 73,
+            "end": 74,
+            "type": "strong"
+          },
+          {
+            "start": 79,
+            "end": 80,
+            "type": "strong"
+          }
+        ]
+      }
+    ],
+    "examples": [],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Syllogistic Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 57,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/syllfall.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 23,
+                "end": 40,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

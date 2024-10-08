@@ -1,0 +1,164 @@
+{
+  "id": "XYyP6RAAACIAoJDm",
+  "uid": "self-fulfilling-prophecy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYyP6RAAACIAoJDm%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "alpha",
+    "s"
+  ],
+  "first_publication_date": "2019-09-26T10:18:20+0000",
+  "last_publication_date": "2019-09-29T06:58:02+0000",
+  "slugs": [
+    "self-fulfilling-prophecy",
+    "hyperbolic-discounting"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Self-Fulfilling Prophecy",
+    "abbreviation": "SFP",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "When the act of prophesying will itself produce the effect that is prophesied.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The fallacy occurs when the act of prophesying will itself produce the effect that is prophesied, but the reasoner doesn't recognize this and believes the prophesy is a significant insight.",
+        "spans": [
+          {
+            "start": 4,
+            "end": 11,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "This fallacy can be dangerous in an atmosphere of potential war between nations when the leader of a nation predicts that their nation will go to war against their enemy. This prediction could very well precipitate an enemy attack because the enemy calculates that if war is inevitable then it is to their military advantage not to get caught by surprise.",
+        "spans": [
+          {
+            "start": 5,
+            "end": 12,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Example:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "A group of students are selected to be interviewed individually by the teacher. Each selected student is told that the teacher has predicted they will do significantly better in their future school work. Actually, though, the teacher has no special information about the students and has picked the group at random. If the students believe this prediction about themselves, then, given human psychology, it is likely that they will do better merely because of the teacher's making the prediction.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "The prediction will fulfill itself, so to speak, and the students' reasoning contains the fallacy.",
+            "spans": [
+              {
+                "start": 90,
+                "end": 97,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#Self-FulfillingProphecy",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

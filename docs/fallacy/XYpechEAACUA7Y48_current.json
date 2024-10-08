@@ -1,0 +1,321 @@
+{
+  "id": "XYpechEAACUA7Y48",
+  "uid": "ambiguity",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYpechEAACUA7Y48%22%29+%5D%5D",
+  "tags": [
+    "informal",
+    "a",
+    "alpha"
+  ],
+  "first_publication_date": "2019-09-24T18:23:37+0000",
+  "last_publication_date": "2019-09-30T03:03:58+0000",
+  "slugs": [
+    "ambiguity"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Ambiguity",
+    "abbreviation": "A",
+    "aliases": [],
+    "types": [
+      {
+        "type": {
+          "id": "XYX59hEAACcAetqo",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "informal-fallacy",
+          "first_publication_date": "2019-09-21T10:23:49+0000",
+          "last_publication_date": "2019-09-29T06:33:41+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [],
+    "subtypes": [
+      {
+        "fallacy": {
+          "id": "XYq3WREAACUA7xzv",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "accent",
+          "first_publication_date": "2019-09-25T00:40:02+0000",
+          "last_publication_date": "2019-09-29T10:19:19+0000",
+          "uid": "accent",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYq2mBEAACUA7xmB",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "a",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "amphiboly",
+          "first_publication_date": "2019-09-25T00:39:00+0000",
+          "last_publication_date": "2019-09-29T17:11:49+0000",
+          "uid": "amphiboly",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF2CBAAACQAO2Gd",
+          "type": "fallacy",
+          "tags": [
+            "e",
+            "beta",
+            "informal"
+          ],
+          "lang": "en-us",
+          "slug": "equivocation",
+          "first_publication_date": "2019-09-18T00:10:50+0000",
+          "last_publication_date": "2019-09-29T09:28:44+0000",
+          "uid": "equivocation",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYF9nBAAACIAO4O1",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "q",
+            "gamma"
+          ],
+          "lang": "en-us",
+          "slug": "quoting-out-of-context",
+          "first_publication_date": "2019-09-18T00:43:12+0000",
+          "last_publication_date": "2019-09-29T10:22:58+0000",
+          "uid": "quoting-out-of-context",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYGHFxAAACIAO65e",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "r",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "reification",
+          "first_publication_date": "2019-09-18T01:23:38+0000",
+          "last_publication_date": "2019-09-29T09:27:58+0000",
+          "uid": "reification",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "A feature of language that occurs when a word or phrase has more than one meaning.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Ambiguity is a feature of language that occurs when a word or phrase has more than one meaning. As a logical fallacy, Ambiguity occurs when linguistic ambiguity causes an argument to appear cogent when it is not. This can happen when an ambiguous word or phrase occurs more than once in an argument and has different meanings in two or more occurrences.",
+        "spans": [
+          {
+            "start": 0,
+            "end": 9,
+            "type": "em"
+          },
+          {
+            "start": 109,
+            "end": 116,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYh6gREAACgAhexg",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "fallacy",
+              "first_publication_date": "2019-09-23T07:55:49+0000",
+              "last_publication_date": "2019-09-29T06:32:36+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 118,
+            "end": 127,
+            "type": "em"
+          },
+          {
+            "start": 171,
+            "end": 179,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 190,
+            "end": 196,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhN_REAACgAhSRo",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "deduction",
+              "first_publication_date": "2019-09-23T04:45:51+0000",
+              "last_publication_date": "2019-09-23T18:31:21+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 290,
+            "end": 298,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYhJQhEAACUAhQ89",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "argument",
+              "first_publication_date": "2019-09-23T04:35:06+0000",
+              "last_publication_date": "2019-09-23T09:19:17+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Publicized statement by President Clinton:",
+            "spans": []
+          },
+          {
+            "type": "preformatted",
+            "text": "I did not have sexual relations with that woman, Miss Lewinsky.",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "This was testimony, rather than argument, so it cannot be fallacious. However, it is now clear that it was intended to snare the listener into concluding, falsely, that there was no sexual relationship between the President and Miss Lewinsky. In other words, Clinton's words were a logical boobytrap. The ambiguity came from the phrase \"sexual relations\", which has a broad and narrow meaning:",
+            "spans": [
+              {
+                "start": 32,
+                "end": 40,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYhJQhEAACUAhQ89",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "argument",
+                  "first_publication_date": "2019-09-23T04:35:06+0000",
+                  "last_publication_date": "2019-09-23T09:19:17+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              },
+              {
+                "start": 58,
+                "end": 68,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          },
+          {
+            "type": "o-list-item",
+            "text": "A sexual relationship",
+            "spans": []
+          },
+          {
+            "type": "o-list-item",
+            "text": "Sexual intercourse",
+            "spans": []
+          },
+          {
+            "type": "paragraph",
+            "text": "As he later admitted, President Clinton had had \"sexual relations\" with Miss Lewinsky in the broad sense (1), and he was denying it only in the narrow sense (2).",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "related": [],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Ambiguity.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 47,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/ambiguit.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 13,
+                "end": 30,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

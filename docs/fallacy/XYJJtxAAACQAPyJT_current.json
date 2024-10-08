@@ -1,0 +1,393 @@
+{
+  "id": "XYJJtxAAACQAPyJT",
+  "uid": "conjunction-fallacy",
+  "url": null,
+  "type": "fallacy",
+  "href": "https://aristotl.cdn.prismic.io/api/v2/documents/search?ref=YSVuERIAACEAKP1X&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22XYJJtxAAACQAPyJT%22%29+%5D%5D",
+  "tags": [
+    "formal",
+    "c",
+    "beta"
+  ],
+  "first_publication_date": "2019-09-18T15:14:03+0000",
+  "last_publication_date": "2019-09-29T10:34:59+0000",
+  "slugs": [
+    "conjunction-fallacy"
+  ],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "name": "Conjunction Fallacy",
+    "abbreviation": "Cj",
+    "aliases": [
+      {
+        "name": "Conjunction Effect"
+      }
+    ],
+    "types": [
+      {
+        "type": {
+          "id": "XYX6ihEAACYAet06",
+          "type": "definition",
+          "tags": [
+            "fallacy-type"
+          ],
+          "lang": "en-us",
+          "slug": "formal-fallacy",
+          "first_publication_date": "2019-09-21T10:26:13+0000",
+          "last_publication_date": "2019-09-29T06:32:14+0000",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "inheritance": [
+      {
+        "fallacy": {
+          "id": "XYr8yREAACMA8FCU",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "p",
+            "alpha"
+          ],
+          "lang": "en-us",
+          "slug": "probabilistic-fallacy",
+          "first_publication_date": "2019-09-25T05:39:37+0000",
+          "last_publication_date": "2019-09-30T22:24:37+0000",
+          "uid": "probabilistic-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "subtypes": [],
+    "summary": [
+      {
+        "type": "paragraph",
+        "text": "Assumption that an outcome simultaneously satisfying multiple conditions is more probable than an outcome satisfying a single one of them.",
+        "spans": []
+      }
+    ],
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "The probability of a conjunction is never greater than the probability of its conjuncts. In other words, the probability of two things being true can never be greater than the probability of one of them being true, since in order for both to be true, each must be true. However, when people are asked to compare the probabilities of a conjunction and one of its conjuncts, they sometimes judge that the conjunction is more likely than one of its conjuncts. This seems to happen when the conjunction suggests a scenario that is more easily imagined than the conjunct conjunct.",
+        "spans": [
+          {
+            "start": 21,
+            "end": 32,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 78,
+            "end": 87,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 335,
+            "end": 346,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 362,
+            "end": 371,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 403,
+            "end": 414,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 446,
+            "end": 455,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 487,
+            "end": 498,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          },
+          {
+            "start": 566,
+            "end": 574,
+            "type": "hyperlink",
+            "data": {
+              "id": "XYs61xEAACQA8WmP",
+              "type": "definition",
+              "tags": [],
+              "lang": "en-us",
+              "slug": "conjunction",
+              "first_publication_date": "2019-09-25T10:01:43+0000",
+              "last_publication_date": "2019-09-25T10:01:43+0000",
+              "link_type": "Document",
+              "isBroken": false
+            }
+          }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "example": [
+          {
+            "type": "paragraph",
+            "text": "Suppose you know that Linda is 31 years old, single, outspoken, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice. Then you are asked to choose which is more likely: (A) Linda is a bank teller or (B) Linda is a bank teller and active in the feminist movement. If you choose (B) you commit the Conjunction fallacy.",
+            "spans": [
+              {
+                "start": 375,
+                "end": 386,
+                "type": "em"
+              },
+              {
+                "start": 387,
+                "end": 394,
+                "type": "hyperlink",
+                "data": {
+                  "id": "XYh6gREAACgAhexg",
+                  "type": "definition",
+                  "tags": [],
+                  "lang": "en-us",
+                  "slug": "fallacy",
+                  "first_publication_date": "2019-09-23T07:55:49+0000",
+                  "last_publication_date": "2019-09-29T06:32:36+0000",
+                  "link_type": "Document",
+                  "isBroken": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "fallacy": {
+          "id": "XYJJVBAAACMAPyCA",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "b",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "base-rate-fallacy",
+          "first_publication_date": "2019-09-18T15:12:27+0000",
+          "last_publication_date": "2019-09-29T10:35:16+0000",
+          "uid": "base-rate-fallacy",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxQaxAAACIAn3A5",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "g",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "gamblers-fallacy",
+          "first_publication_date": "2019-09-26T05:48:28+0000",
+          "last_publication_date": "2019-09-29T10:34:32+0000",
+          "uid": "gamblers",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XYxRPBAAACAAn3Pb",
+          "type": "fallacy",
+          "tags": [
+            "formal",
+            "beta",
+            "h"
+          ],
+          "lang": "en-us",
+          "slug": "hot-hand-fallacy",
+          "first_publication_date": "2019-09-26T05:52:06+0000",
+          "last_publication_date": "2019-09-29T10:34:17+0000",
+          "uid": "hot-hand",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      },
+      {
+        "fallacy": {
+          "id": "XZCGYhAAACYAItOG",
+          "type": "fallacy",
+          "tags": [
+            "informal",
+            "m",
+            "beta"
+          ],
+          "lang": "en-us",
+          "slug": "multiple-comparisons",
+          "first_publication_date": "2019-09-29T10:33:56+0000",
+          "last_publication_date": "2019-09-29T10:37:59+0000",
+          "uid": "multiple-comparisons",
+          "link_type": "Document",
+          "isBroken": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "\"Conjunction Fallacy.\" The Fallacy Files, Gary N. Curtis.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 57,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "http://www.fallacyfiles.org/conjunct.html",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 23,
+                "end": 40,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Dowden, Bradley. \"Fallacies.\" Internet Encyclopedia of Philosophy.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 66,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://www.iep.utm.edu/fallacy/#RedHerring",
+                  "target": "_blank"
+                }
+              },
+              {
+                "start": 30,
+                "end": 65,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "reference": [
+          {
+            "type": "paragraph",
+            "text": "Wikipedia contributors. \"List of fallacies.\" Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 20 Sep. 2019. Web. 20 Sep. 2019.",
+            "spans": [
+              {
+                "start": 0,
+                "end": 145,
+                "type": "hyperlink",
+                "data": {
+                  "link_type": "Web",
+                  "url": "https://en.wikipedia.org/wiki/List_of_fallacies"
+                }
+              },
+              {
+                "start": 45,
+                "end": 77,
+                "type": "em"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
